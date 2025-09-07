@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --body-font: "Open Sans", sans-serif;
+    --heading-font: "Nunito", sans-serif;
+}
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+  --bs-gutter-x: 3rem;
+}
+
+.container-fluid {
+  max-width: 1600px;
+}
