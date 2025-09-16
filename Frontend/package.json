@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "name": "Agro Genie-React",
+  "name": "It's Demo-React",
   "version": "1.0.0",
-  "descrption": "Agro Genie-React",
+  "descrption": "It's Demo-React",
   "scripts": {
     "build": "vite build",
     "dev": "vite --host --port 5000",

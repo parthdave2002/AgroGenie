@@ -1,16 +1,15 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { MdKeyboardArrowRight, MdReport } from "react-icons/md";
-import  userimage from "../../img/group.jpg"
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { FaAngleDown, FaRegClock, FaRupeeSign, FaUser } from "react-icons/fa";
 import SalesFarmerDashboard from "./salesFarmerDashboard";
 import { DarkThemeToggle,  Button, Table, Modal } from "flowbite-react";
-import userphoto from "../../img/profile-picture-3.jpg";
+import userphoto from "/images/users/roberta-casas.png";
 import { FiLogOut } from "react-icons/fi";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import ExamplePagination from '../../components/pagination';
+import ExamplePagination from '../../components/common/pagination/pagination';
 import { getleadlist, getsalesDashboard, getSalesExecutiveOrderlist, MarkasReadLeadlist, resetinsertlogin } from "../../Store/actions";
 import moment from "moment";
 import { HiOutlineExclamationCircle } from "react-icons/hi";

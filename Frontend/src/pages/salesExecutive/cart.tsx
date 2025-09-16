@@ -3,8 +3,6 @@ import { Button, Table } from "flowbite-react";
 import { FaGhost, FaPhoneVolume, FaUserAlt, FaWindowClose } from 'react-icons/fa'
 import { HiTrash } from 'react-icons/hi';
 import { FaCartShopping } from 'react-icons/fa6';
-import SuccessErrorModalPage from '../../components/modal/successErrorModal';
-import ConfirmationModalPage from '../../components/modal/confirmationModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from 'reactstrap';
 import { AddOrderlist, getUpdateOrderlist, ResetOrderlist, getCouponlist, ResetCouponlist } from '../../Store/actions';
@@ -12,6 +10,8 @@ import { toast } from 'react-toastify';
 import { BsCartXFill } from 'react-icons/bs';
 import Cookies from 'js-cookie';
 import moment from 'moment';
+import SuccessErrorModalPage from '../../components/common/modal/successErrorModal';
+import ConfirmationModalPage from '../../components/common/modal/confirmationModal';
 
 interface Cartprops{
   setCartOpen : (value : boolean) => void;

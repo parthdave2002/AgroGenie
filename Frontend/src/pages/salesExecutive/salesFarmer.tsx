@@ -3,8 +3,8 @@ import  farmerimage from "/images/users/farmer-2.png"
 import { FaArrowLeft } from "react-icons/fa";
 import SalesFarmerDashboard from "./salesFarmerDashboard";
 import { toast } from "react-toastify";
-import ToastMessage from "../../components/ToastMessage";
-import SalesMobileInput from "../../components/input/salesMobileInput";
+import ToastMessage from "../../components/common/toastmessage/ToastMessage";
+import SalesMobileInput from "../../components/common/inputComponent/salesMobileInput";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckCustomerExist, getCallbackdata } from "../../Store/actions";
 import moment from "moment";

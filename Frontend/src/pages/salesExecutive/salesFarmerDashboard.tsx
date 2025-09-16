@@ -1,16 +1,16 @@
 import React, { FC, useEffect, useState } from 'react'
 import {  FaPencilAlt, FaPowerOff } from 'react-icons/fa'
 import SalesAddFarmer from './salesAddFarmer';
-import LogoutModal from '../../components/modal/logoutModal';
+import LogoutModal from '../../components/common/modal/logoutModal';
 import FarmerHistory from './farmerHistory';
 import FarmeDashboard from './farmeDashboard';
 import { TiShoppingCart } from "react-icons/ti";
 import Salesproductlist from '../../components/productdetails/salesproductlist';
 import ProductDetailData from '../../components/productdetails/salesproductDetails';
-import SalesMobileInput from '../../components/input/salesMobileInput';
+import SalesMobileInput from '../../components/common/inputComponent/salesMobileInput';
 import {  useSelector } from 'react-redux';
 import CartList from './cart';
-import LoaderPage from "../../components/loader";
+import LoaderPage from "../../components/common/loader/loader";
 import OrderDetails from '../../components/salesComponent/orderDetails';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
