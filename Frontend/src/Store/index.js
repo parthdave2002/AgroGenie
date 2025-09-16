@@ -17,19 +17,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// export function configureStore(initialState) {
-
-//   const store = createStore(
-//     rootReducer,
-//       initialState,
-//       composeEnhancers(
-//           applyMiddleware(...middlewares)
-//       ),
-//   );
-//   sagaMiddleware.run(rootSaga);
-//   return store;
-// }
-
 export function configureStore(initialState) {
   const store = createStore(
     persistedReducer, // Use persisted reducer

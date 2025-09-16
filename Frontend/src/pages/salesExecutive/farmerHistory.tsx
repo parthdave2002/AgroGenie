@@ -5,7 +5,7 @@ import { FaRegClock } from 'react-icons/fa';
 import { MdReport } from 'react-icons/md';
 import moment from 'moment';
 import ComplainDetails from '../../components/salesComponent/complainDetails';
-import ExamplePagination from '../../components/pagination';
+import ExamplePagination from '../../components/common/pagination/pagination';
 import { getCustomerTagloglist, getFarmerComplainlist, getFarmerOrderlist } from '../../Store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';

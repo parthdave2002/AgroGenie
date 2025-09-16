@@ -4,8 +4,8 @@ const IMG_URL = import.meta.env["VITE_API_URL"];
 import { getProductlist } from '../../Store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaCartArrowDown } from 'react-icons/fa';
-import ExamplePagination from '../../components/pagination';
-import LoaderPage from '../../components/loader';
+import ExamplePagination from '../common/pagination/pagination';
+import LoaderPage from '../common/loader/loader';
 
 interface PorductData  {
     searchData ?: string;

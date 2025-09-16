@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa';
 import ProductDetailData from '../../components/productdetails/salesproductDetails';
-import SalesMobileInput from '../../components/input/salesMobileInput';
+import SalesMobileInput from '../../components/common/inputComponent/salesMobileInput';
 import Salesproductlist from '../../components/productdetails/salesproductlist';
 interface PropsData{
     setDatactive :any;

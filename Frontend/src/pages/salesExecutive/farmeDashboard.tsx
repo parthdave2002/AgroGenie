@@ -54,7 +54,7 @@ const FarmeDashboard : FC <DashboardProps> = ({classData, viewButton}) => {
               <div className="dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem] ">  <div className="w-[10rem]" >Irrigation type </div>  <div> : {data?.irrigation_type ? data?.irrigation_type.charAt(0).toUpperCase() + data?.irrigation_type.slice(1).toLowerCase() : "-"}</div>    </div>
               <div className="dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem] ">  <div className="w-[10rem]" >Smart phone user</div>  <div> : {data?.smart_phone == true ? "Yes" : "No"}</div>   </div>
               <div className="dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem] ">  <div className="w-[10rem]"  >Crops </div>  <div>: {data?.crops ? data?.crops?.map((crop:any) => crop?.name_eng).join(', ') : "-"}</div>   </div>
-              {/* <div className="dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem] ">  <div className="w-[10rem]" >Heard about us </div> <div>: {data?.heard_about_agribharat ? data?.heard_about_agribharat.charAt(0).toUpperCase() + data?.heard_about_agribharat.slice(1).toLowerCase() : "-"} </div>   </div> */}
+              <div className="dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem] ">  <div className="w-[10rem]" >Heard about us </div> <div>: {data?.heard_about_agribharat ? data?.heard_about_agribharat.charAt(0).toUpperCase() + data?.heard_about_agribharat.slice(1).toLowerCase() : "-"} </div>   </div>
               <div className="dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem] ">  <div className="w-[10rem]" >Ref. No </div> <div>: {data?.ref_name ? data?.ref_name :  "-"} </div>   </div>
             </>
           )}

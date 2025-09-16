@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Button, Card, Checkbox, Label, Modal } from "flowbite-react";
 import type { FC } from "react";
-import LOGO from "../../img/logo.webp";
+import LOGO from "/images/authentication/logo.webp";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -10,10 +10,10 @@ import { Form, Input, FormFeedback } from "reactstrap";
 import { CheckUserdatalist, forgotpasswordData, insertlogin, resetinsertlogin} from "../../Store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import ToastMessage from "../../components/ToastMessage";
+import ToastMessage from "../../components/common/toastmessage/ToastMessage";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import LoaderPage from "../../components/loader";
+import LoaderPage from "../../components/common/loader/loader";
 
 const SignInPage: FC = function () {
   const navigation = useNavigate();
@@ -152,7 +152,7 @@ const SignInPage: FC = function () {
       <div className="flex flex-col items-center justify-center px-6 lg:h-screen lg:gap-y-6">
         <div className="my-6 flex items-center gap-x-1 lg:my-0"> <img alt="logo" src={LOGO} className="mr-3 h-12" /> </div>
 
-        <Card horizontal imgSrc="/images/authentication/login_3.png" imgAlt=""  className="w-full lg:max-w-screen-lg md:max-w-screen-md [&>img]:hidden md:[&>img]:w-[31rem] md:[&>img]:p-0 md:[&>*]:w-full md:[&>*]:p-16 lg:[&>img]:block" >
+        <Card horizontal imgSrc="/images/authentication/login_6.png" imgAlt=""  className="w-full lg:max-w-screen-lg md:max-w-screen-md [&>img]:hidden md:[&>img]:w-[31rem] md:[&>img]:p-0 md:[&>*]:w-full md:[&>*]:p-16 lg:[&>img]:block" >
           <h1 className="mb-3 text-2xl font-bold dark:text-white md:text-3xl"> Sign in </h1>
 
           <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >

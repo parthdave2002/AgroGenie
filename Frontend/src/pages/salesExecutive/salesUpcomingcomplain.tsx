@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import SalesFarmerDashboard from "./salesFarmerDashboard";
-import SalesMobileInput from "../../components/input/salesMobileInput";
+import SalesMobileInput from "../../components/common/inputComponent/salesMobileInput";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckCustomerExist, getSalesComplainlist, ResetComplainlist } from "../../Store/actions";
 import moment from "moment";
 import { toast } from "react-toastify";
-import LoaderPage from "../../components/loader";
-import ToastMessage from "../../components/ToastMessage";
+import LoaderPage from "../../components/common/loader/loader";
+import ToastMessage from "../../components/common/toastmessage/ToastMessage";
 
 interface PropsData{
     setDatactive :any;

@@ -311,7 +311,7 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
         land_type : selectedlandtypeid,
         irrigation_source : selectedirrigationsourceid,
         irrigation_type : selectedirrigationtypeid,
-        // heard_about_agribharat : selectedheaderaboutid,
+        heard_about_agribharat : selectedheaderaboutid,
         smart_phone: true,
         crops:selectedcropid,
         ref_name : values?.ref_name
