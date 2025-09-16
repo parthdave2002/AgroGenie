@@ -11,7 +11,7 @@ const loginLogSchema = new schema({
   browser_info: { type: String },
   is_active: { type: Boolean, required: true, default: true },
   token: { type: String, required: true },
-  user_id: { type: schema.Types.ObjectId, required: true, ref: 'agents' },
+  user_id: { type: schema.Types.ObjectId, required: true, ref: 'users' },
   Login_duration: { type: String }
 });
 

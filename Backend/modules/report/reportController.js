@@ -55,7 +55,7 @@ reportController.getAllReportList = async (req, res, next) => {
             select: 'customer_name firstname middlename lastname address alternate_number mobile_number pincode post_office village vaillage_name taluka taluka_name district district_name',
             populate: [{ path: 'state', model: 'State', select: 'name' }],
           },
-          { path: 'advisor_name', model: 'agents', select: 'name' },
+          { path: 'advisor_name', model: 'users', select: 'name' },
           { path: 'coupon', model: 'coupon' },
         ]);
 
@@ -110,7 +110,7 @@ reportController.getAllReportList = async (req, res, next) => {
       case 'farmer': {
         const farmers = await customerSch.find(filter).populate([
           { path: 'crops', model: 'crop', select: 'name_eng name_guj' },
-          { path: 'created_by', model: 'agents', select: 'name' },
+          { path: 'created_by', model: 'users', select: 'name' },
           { path: 'state', model: 'State', select: 'name' },
         ]);
         finalData = await Promise.all(

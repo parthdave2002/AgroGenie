@@ -7,7 +7,7 @@ const taglogCustomerSchema = new schema({
   subtaglog_id: { type: schema.Types.ObjectId, ref: 'taglog', required: true },
   is_active: { type:  Boolean, default: true, required: true},
   comment: { type: String },
-  added_by :{ type: schema.Types.ObjectId, ref: 'agents' },
+  added_by :{ type: schema.Types.ObjectId, ref: 'users' },
   created_at: { type: Date, default: new Date() },
 });
 

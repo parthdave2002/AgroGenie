@@ -11,10 +11,10 @@ const roleAccessSchema = new schema({
         delete: { type: Boolean, default: false }
   },
   added_at: { type: Date, default: Date.now },
-  added_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  added_by: { type: schema.Types.ObjectId, ref: 'users' },
   updated_at: { type: Date, default: Date.now },
-  updated_by: { type: schema.Types.ObjectId, ref: 'agents' }
+  updated_by: { type: schema.Types.ObjectId, ref: 'users' }
 });
 
-module.exports = mongoose.model('role_access', roleAccessSchema);
+module.exports = mongoose.model('role_accesses', roleAccessSchema);
 

@@ -22,12 +22,12 @@ const customerSchema = new schema({
   pincode: { type: String },
   post_office: { type: String },
   added_at: { type: Date },
-  created_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  created_by: { type: schema.Types.ObjectId, ref: 'users' },
   updated_at: { type: Date },
   ref_name : {type:  Number, ref: 'customer'},
-  updated_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  updated_by: { type: schema.Types.ObjectId, ref: 'users' },
   is_deleted: { type: Boolean, default: false, required: true },
-  deleted_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  deleted_by: { type: schema.Types.ObjectId, ref: 'users' },
   deleted_at: { type: Date },
 });
 

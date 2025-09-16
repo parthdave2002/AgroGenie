@@ -5,7 +5,7 @@
   "descrption": "Agro Genie-React",
   "scripts": {
     "build": "vite build",
-    "dev": "vite --host --port 5001",
+    "dev": "vite --host --port 5000",
     "format": "prettier --check --ignore-path .gitignore --write .",
     "lint": "eslint --ignore-path .gitignore .",
     "preview": "vite preview --host",

@@ -12,9 +12,9 @@ const settingSchema = new schema({
   is_deleted: { type: Boolean, default: false },
   is_removable: { type: Boolean, default: false },
   admin: { type: Boolean, default: false },
-  added_by: { type: schema.Types.ObjectId, required: true, ref: 'agents' },
+  added_by: { type: schema.Types.ObjectId, required: true, ref: 'users' },
   added_date: { type: Date, default: Date.now },
-  updated_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  updated_by: { type: schema.Types.ObjectId, ref: 'users' },
   updated_at: { type: Date, default: Date.now },
 });
 module.exports = Setting = mongoose.model('setting', settingSchema);

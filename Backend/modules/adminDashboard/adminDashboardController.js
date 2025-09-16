@@ -136,7 +136,7 @@ adminDashboardController.getDashboardData = async (req, res, next) => {
       .select('order_id customer advisor_name total_amount status added_at')
       .populate([
         { path: 'customer', model: 'customer', select: 'customer_name firstname middlename lastname' },
-        { path: 'advisor_name', model: 'agents', select: 'name' },
+        { path: 'advisor_name', model: 'users', select: 'name' },
       ]);
     const complainDetails = await complainSch
       .find()
@@ -155,7 +155,7 @@ adminDashboardController.getDashboardData = async (req, res, next) => {
       .select('order_id customer advisor_name total_amount status added_at')
       .populate([
         { path: 'customer', model: 'customer', select: 'customer_name firstname middlename lastname' },
-        { path: 'advisor_name', model: 'agents', select: 'name' },
+        { path: 'advisor_name', model: 'users', select: 'name' },
       ]);
     const getTotalForPeriod = async (model, dateField, periods, getRevenue, searchQuery) => {
       const totals = {};
@@ -403,7 +403,7 @@ const getDataByType = async (startDate, endDate, type) => {
           })
           .sort({ added_at: -1 }).populate([
             { path: 'customer', model: 'customer', select: 'customer_name  firstname middlename lastname' },
-            { path: 'advisor_name', model: 'agents', select: 'name' },
+            { path: 'advisor_name', model: 'users', select: 'name' },
           ]);
         break;
 
@@ -412,7 +412,7 @@ const getDataByType = async (startDate, endDate, type) => {
           .find({
             added_at: { $gte: start, $lte: end },
           })
-          .sort({ added_at: -1 }).populate([{ path: 'crops', model: 'crop', select: 'name' },{ path: 'created_by', model: 'agents', select: 'name' }]);
+          .sort({ added_at: -1 }).populate([{ path: 'crops', model: 'crop', select: 'name' },{ path: 'created_by', model: 'users', select: 'name' }]);
         break;
 
       default:

@@ -7,7 +7,7 @@ const rolesSchema = new schema({
   is_active: { type: Boolean, required: true, default: true },
   is_deleted: { type: Boolean, required: true, default: false },
   added_at: { type: Date, default: Date.now },
-  added_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  added_by: { type: schema.Types.ObjectId, ref: 'users' },
 });
 
 module.exports = roles = mongoose.model('roles', rolesSchema);

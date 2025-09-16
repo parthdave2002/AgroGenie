@@ -20,10 +20,10 @@ const userSchema = new schema({
   is_active: { type: Boolean, required: true, default: false },
   updated_at: { type: Date, default: Date.now },
   added_at: { type: Date, default: Date.now},
-  added_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  added_by: { type: schema.Types.ObjectId, ref: 'users' },
   is_deleted: { type: Boolean, default: false},
   deleted_by: { type: schema.Types.ObjectId},
   deleted_at: {type: Date},
 });
 
-module.exports = User = mongoose.model('agents', userSchema);
+module.exports = User = mongoose.model('users', userSchema);

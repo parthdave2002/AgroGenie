@@ -14,9 +14,9 @@ const taglogSchema = new schema({
   is_active: { type:  Boolean, default: true, required: true},
   added_at: { type: Date, default: new Date()},
   updated_at: { type: Date },
-  added_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  added_by: { type: schema.Types.ObjectId, ref: 'users' },
   is_deleted: { type: Boolean, default: false },
-  deleted_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  deleted_by: { type: schema.Types.ObjectId, ref: 'users' },
   deleted_at: { type: Date },
 });
 

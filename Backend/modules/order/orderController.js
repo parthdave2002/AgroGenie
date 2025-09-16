@@ -19,7 +19,7 @@ orderController.getAllOrderList = async (req, res, next) => {
         select: 'customer_name firstname middlename lastname address alternate_number mobile_number pincode village vaillage_name taluka taluka_name district district_name',
         populate: [{ path: 'state', model: 'State', select: 'name' }],
       },
-      { path: 'advisor_name', model: 'agents', select: 'name' },
+      { path: 'advisor_name', model: 'users', select: 'name' },
       { path: 'coupon', model: 'coupon' },
     ];
 
@@ -54,7 +54,7 @@ orderController.getAllOrderList = async (req, res, next) => {
       selectQuery = 'order_id order_type  customer advisor_name total_amount status added_at';
       populate = [
         { path: 'customer', model: 'customer', select: 'customer_name firstname middlename lastname address alternate_number mobile_number pincode post_office village vaillage_name  state taluka taluka_name district district_name' },
-        { path: 'advisor_name', model: 'agents', select: 'name' },
+        { path: 'advisor_name', model: 'users', select: 'name' },
           { path: 'coupon', model: 'coupon' },
       ];
     }
@@ -457,7 +457,7 @@ orderController.getFilteredOrderList = async (req, res, next) => {
     const populate = [
       { path: 'products.id', model: 'product' },
       { path: 'customer', model: 'customer',  select: 'customer_name firstname middlename lastname address alternate_number mobile_number pincode village vaillage_name taluka taluka_name district district_name',},
-      { path: 'advisor_name', model: 'agents',   select: 'name'},
+      { path: 'advisor_name', model: 'users',   select: 'name'},
     ];
 
     const selectQuery = 'order_id order_type products customer advisor_name total_amount status added_at updated_at';

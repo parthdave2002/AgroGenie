@@ -9,7 +9,7 @@ const bugSchema = new schema({
   path: { type: String },
   method: { type: String },
   last_added_at: { type: Date },
-  added_by: { type: schema.Types.ObjectId, ref: 'agents' },
+  added_by: { type: schema.Types.ObjectId, ref: 'users' },
   is_deleted: { type: Boolean, default: false },
   device: { type: schema.Types.Mixed },
   ip: { type: schema.Types.Mixed },

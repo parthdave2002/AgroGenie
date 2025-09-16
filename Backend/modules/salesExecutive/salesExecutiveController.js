@@ -12,7 +12,7 @@ salesExecutiveController.GetSalesExecutiveDashboard = async (req, res, next) => 
     populate = [
       { path: 'products.id', model: 'product', select: 'name  hsn_code discount batch_no price c_gst s_gst ' },
       { path: 'customer_id', model: 'customer', select: 'customer_name  firstname middlename lastname  mobile_number ' },
-      { path: 'advisor_name', model: 'agents', select: 'name' },
+      { path: 'advisor_name', model: 'users', select: 'name' },
     ];
 
     const loggedInUserId = req.user.id;

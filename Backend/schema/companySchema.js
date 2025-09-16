@@ -8,7 +8,7 @@ const companySchema = new schema({
     is_active: { type: Boolean, required: true,  default: true,},
     added_at: { type: Date,  default: Date.now},
     is_deleted: { type: Boolean, default: false },
-    added_by: { type: schema.Types.ObjectId, ref: 'agents' },
+    added_by: { type: schema.Types.ObjectId, ref: 'users' },
 });
 
 module.exports = Company = mongoose.model('company', companySchema);

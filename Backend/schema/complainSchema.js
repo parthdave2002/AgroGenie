@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const complainSchema = new Schema({
   complain_id: { type: String },
-  created_by: { type: Schema.Types.ObjectId, ref: 'agents' },
+  created_by: { type: Schema.Types.ObjectId, ref: 'users' },
   created_at: { type: Date, default: Date.now },
   product_id: [{ type: Schema.Types.ObjectId, ref: 'product', required: true }], 
   order_id: {  type: String, required: true  },      
@@ -13,7 +13,7 @@ const complainSchema = new Schema({
   date: { type: Date, default: Date.now },
   Comment: [
     {
-      name: { type: Schema.Types.ObjectId, ref: 'agents' },
+      name: { type: Schema.Types.ObjectId, ref: 'users' },
       comment: { type: String, required: true },
       comment_date: { type: Date, required: true },
     }

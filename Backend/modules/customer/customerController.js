@@ -54,7 +54,7 @@ if (req.query.search && req.query.search !== 'null') {
       return otherHelper.paginationSendResponse(res, httpStatus.OK, true, enrichedData, ' Search Data found', page, size, searchResults.totalData);
     }
 
-    populate = [{ path: 'crops', model: 'crop', select: 'name_eng name_guj'},{ path: 'created_by', model: 'agents', select: 'name' }];
+    populate = [{ path: 'crops', model: 'crop', select: 'name_eng name_guj'},{ path: 'created_by', model: 'users', select: 'name' }];
     selectQuery = 'customer_name  firstname middlename lastname  mobile_number alternate_number smart_phone land_area land_type irrigation_source irrigation_type crops heard_about_agribharat address district taluka village pincode added_at is_deleted created_by';
     if (req.query.id) {
       searchQuery = { _id: req.query.id };
@@ -175,7 +175,7 @@ customerController.updateCustomerData = async (req, res, next) => {
     }
     const  populate = [
       { path: 'crops', model: 'crop', select: 'name_eng name_guj' },
-      { path: 'created_by', model: 'agents', select: 'name' },
+      { path: 'created_by', model: 'users', select: 'name' },
       { path: 'state', model: 'State', select: 'name district' },
     ];
     const customer = await customerSch.findById(id);
@@ -231,9 +231,9 @@ customerController.matchNumber = async (req, res, next) => {
     
     populate = [
       { path: 'crops', model: 'crop', select: 'name_eng name_guj' },
-      { path: 'created_by', model: 'agents', select: 'name' },
+      { path: 'created_by', model: 'users', select: 'name' },
       { path: 'state', model: 'State', select: 'name district' },
-      // { path: 'ref_name', model: 'agents', select: 'name', strictPopulate: false },
+      // { path: 'ref_name', model: 'users', select: 'name', strictPopulate: false },
     ];
     if (!number && !order_id && !complain_id) {
       return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'At least one identifier (number, order_id, or complain_id) is required', null);
