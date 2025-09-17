@@ -61,7 +61,4 @@ router.use('/location', Statedata);
 const Reportdata = require('./api/report');
 router.use('/report', Reportdata);
 
-const Testimonialdata = require('./api/testimonial');
-router.use('/testimonial', Testimonialdata);
-
 module.exports = router;
