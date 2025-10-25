@@ -136,45 +136,47 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
 
   return (
     <div className="hidden lg:block">
-      <Sidebar>
-        <Sidebar.Items className="pb-[6rem]">
-          <Sidebar.ItemGroup>
-            {filteredSidebarData.map((item, k) => (
-              <NavLink to={item.to} key={k}>
-                <Sidebar.Item icon={item.icon}  className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
-              </NavLink>
-            ))}
-          </Sidebar.ItemGroup>
-
-          {filteredSubMasterMenu.length > 0 &&
-            <Sidebar.ItemGroup>
-              <h4 className="dark:text-gray-400"> Master:</h4>
-              <Sidebar.Collapse icon={HiShoppingBag} label="Master">
-                {filteredSubMasterMenu.map((item, k) => (
+        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-r-xl text-gray-800"> 
+          <Sidebar className="bg-gray-500 dark:bg-gray-800 text-gray-800 w-[15rem] ">
+            <Sidebar.Items className="pb-[6rem]">
+              <Sidebar.ItemGroup>
+                {filteredSidebarData.map((item, k) => (
                   <NavLink to={item.to} key={k}>
-                    <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                    <Sidebar.Item icon={item.icon}  className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
                   </NavLink>
                 ))}
-              </Sidebar.Collapse>
-            </Sidebar.ItemGroup>
-          }
-         
-          
-          {/* <Sidebar.ItemGroup>
-            <h4 className={"dark:text-white"}>Design View only:</h4>
-            <NavLink to="/e-commerce/products">
-              <Sidebar.Item
-                icon={HiShoppingBag}
-                className={
-                  "/e-commerce/products" === currentPage ? "dark:bg-gray-700" : ""
-                }
-              >
-                Products
-              </Sidebar.Item>
-            </NavLink>
-          </Sidebar.ItemGroup> */}
-        </Sidebar.Items>
-      </Sidebar>
+              </Sidebar.ItemGroup>
+
+              {filteredSubMasterMenu.length > 0 &&
+                <Sidebar.ItemGroup>
+                  <h4 className="dark:text-gray-400"> Master:</h4>
+                  <Sidebar.Collapse icon={HiShoppingBag} label="Master">
+                    {filteredSubMasterMenu.map((item, k) => (
+                      <NavLink to={item.to} key={k}>
+                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                      </NavLink>
+                    ))}
+                  </Sidebar.Collapse>
+                </Sidebar.ItemGroup>
+              }
+            
+              
+              {/* <Sidebar.ItemGroup>
+                <h4 className={"dark:text-white"}>Design View only:</h4>
+                <NavLink to="/e-commerce/products">
+                  <Sidebar.Item
+                    icon={HiShoppingBag}
+                    className={
+                      "/e-commerce/products" === currentPage ? "dark:bg-gray-700" : ""
+                    }
+                  >
+                    Products
+                  </Sidebar.Item>
+                </NavLink>
+              </Sidebar.ItemGroup> */}
+            </Sidebar.Items>
+          </Sidebar>
+          </div>
     </div>
   );
 };

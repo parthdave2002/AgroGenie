@@ -13,7 +13,7 @@ const NavbarSidebarLayout: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
           {isNavbar == true ? <Navbar isNavbar={isNavbar} /> :  null}
           <div className="flex">
               {isSidebar == true ?  <Sidebar  /> : null}
-              <main  className="relative h-full w-full overflow-y-auto lg:ml-64 bg-Cultured dark:bg-gray-900 px-4 pt-6 "  > {children}</main>
+              <main  className="relative h-full w-full overflow-y-auto bg-Cultured dark:bg-gray-900 px-4 pt-6 "  > {children}</main>
           </div>
       </>
     );

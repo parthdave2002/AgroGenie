@@ -7,9 +7,7 @@ const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const loginLogs = require('./loginlogs/loginlogController').internal;
 const { getSetting } = require('../../helper/settings.helper');
-const sendEmail = require('../../helper/comman-email.helper');
 const userController = {};
-const tokenSchema = require("../../schema/tokenSchema");
 
 userController.GetCheckUser = async (req, res, next) => {
   try {
