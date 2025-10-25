@@ -107,6 +107,9 @@ const CompanyListPage: FC = function () {
 
   let Name = "Company List";
   let Searchplaceholder = "Search For Company (Name)";
+
+  console.log("accessList", accessList) ;
+  
   let AddAccess = accessList?.add;
 
     const companyColumns =useMemo( () => [

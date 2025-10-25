@@ -11,9 +11,27 @@ import { LeadList } from "../../../types/types";
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
-// Define columns for each status type
-const columnsOrder = [
-  { key: "name", label: "Name" },
+
+
+
+const LeadListPage: FC = function () {
+  const dispatch = useDispatch();
+  const [PageNo, setPageNo] = useState<number>(1);
+  const [RoePerPage, setRoePerPage] = useState<number>(5);
+  const RowPerPage = (value: number) => setRoePerPage(value);
+  const PageDataList = (data: number) => setPageNo(data);
+
+  const [searchData, setSearchData] = useState<string | null>(null);
+  const Changename = (data: string) => setSearchData(data);
+
+  const Leaddatalist: LeadList = useSelector((state: any) => state.Lead.Leaddatalist) || {};
+  const UserDataList = Leaddatalist.data || [];
+  const TotalListData = Leaddatalist.totalData || 0;
+  const CurrentPageNo = Leaddatalist.page || 1;
+
+  // Define columns for each status type
+  const columnsOrder = [
+  { key: "name", label: "Name", render: (row: any) => <span className="text-blue-600 cursor-pointer " onClick={() => OpenOrderModal(row?.products)}> {row.name} </span>  },
   { key: "mobile_number", label: "Phone number" },
   { key: "added_at", label: "Created Date", render: (row: any) => moment(row.added_at).format("DD-MM-YYYY hh:ss:mm") },
   { key: "status", label: "Status" },
@@ -37,21 +55,15 @@ const columnsContactUs = [
   { key: "status", label: "Status" },
 ];
 
-const LeadListPage: FC = function () {
-  const dispatch = useDispatch();
-  const [PageNo, setPageNo] = useState<number>(1);
-  const [RoePerPage, setRoePerPage] = useState<number>(5);
-  const RowPerPage = (value: number) => setRoePerPage(value);
-  const PageDataList = (data: number) => setPageNo(data);
-
-  const [searchData, setSearchData] = useState<string | null>(null);
-  const Changename = (data: string) => setSearchData(data);
-
-  const Leaddatalist: LeadList = useSelector((state: any) => state.Lead.Leaddatalist) || {};
-  const UserDataList = Leaddatalist.data || [];
-  const TotalListData = Leaddatalist.totalData || 0;
-  const CurrentPageNo = Leaddatalist.page || 1;
-
+  // -------- order open modal -------------
+      const [ProductModal, setProductModal] = useState(false);
+      const [ProductItemModal, setProductItemModal] = useState({});
+  
+      const OpenOrderModal = (item: any) =>{
+        setProductModal(true)
+        setProductItemModal(item)
+      }
+    // ------------ order open modal --------------
 
   // Status option state
   const [selectedStatusOption, setSelectedStatusOption] = useState<{ label: string; value: string } | null>(null);
@@ -173,6 +185,54 @@ const LeadListPage: FC = function () {
           </div>
         </Modal.Body>
       </Modal>
+
+         {ProductModal == true ?
+                      <Modal
+                        onClose={() => setProductModal(false)}
+                        show={ProductModal}
+                        size="2xl"
+                        className="font-sans"
+                      >
+      {/* Header */}
+                        <Modal.Header className="px-6 pt-6 pb-2 border-b border-gray-200 dark:border-gray-700">
+                          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                            Product Details
+                          </h2>
+                        </Modal.Header>
+
+                        {/* Body */}
+                        <Modal.Body className="px-6 py-4 space-y-4 bg-gray-50 dark:bg-gray-900">
+                          {Array.isArray(ProductItemModal) && ProductItemModal.length > 0 ? (
+                            <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                              {ProductItemModal.map((item, k) => (
+                                <div
+                                  key={k}
+                                  className="py-3 grid grid-cols-2 md:grid-cols-4 gap-3 items-center"
+                                >
+                                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    {item?._id?.name?.englishname || "-"}
+                                  </p>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    {item?._id?.categories?.name_eng || "-"}
+                                  </p>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    {item?._id?.packaging || "-"}  {item?._id?.packagingtype?.type_eng || "-"}
+                                  </p>
+                                  <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    Qty: {item?.quantity || 0}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
+                              No product details available.
+                            </p>
+                          )}
+                        </Modal.Body>
+
+                      </Modal>
+            : null}
     </>
   );
 }
