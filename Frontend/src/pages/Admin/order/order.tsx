@@ -107,6 +107,29 @@ const OrderListPage : FC = function () {
       pdf.save("COD_Parcel.pdf");
     };
 
+          const printPDF = async () => {
+        if (!invoiceRef.current) return;
+    
+        const input = invoiceRef.current;
+    
+        // Capture the div as image
+        const canvas = await html2canvas(input, {
+          scale: 2, // improves quality
+          useCORS: true,
+        });
+    
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "px", "a4"); // px is better for html2canvas
+    
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        const blob = pdf.output("blob");
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, "_blank");
+      }
+
+
   const userColumns = useMemo(() => [
     {
       key: "order_id",
@@ -169,6 +192,7 @@ const OrderListPage : FC = function () {
             <div className="flex items-center gap-4">
               <h2 className="text-lg font-semibold">COD Parcel Invoice</h2>
               <button onClick={Downloadcall} className="inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-3 py-1.5 rounded hover:bg-blue-700 transition" >   Download  </button>
+              <button onClick={printPDF} className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-medium px-6 py-1.5 rounded hover:bg-green-700 transition" >   Print  </button>
             </div>
           </Modal.Header>
 

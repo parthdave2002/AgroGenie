@@ -34,7 +34,6 @@ const LeadData = (state = INIT_STATE, action) => {
     case GET_LEAD_LIST_SUCCESS:
       switch (action.payload.actionType) {
         case GET_LEAD_LIST:
-        console.log("setTotalLeadListData", action.payload.data);
           return {
             ...state,
             Leaddatalist: action.payload.data,
