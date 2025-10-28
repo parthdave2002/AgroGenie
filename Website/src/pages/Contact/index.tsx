@@ -75,11 +75,37 @@ const ContactusSection = () => {
         {is_loader ?  <GlobalLoader />
           : 
           <div className="min-h-screen md:flex ">
-            <div className="w-full md:w-1/2  text-white px-10 py-0 flex flex-col justify-between">
+            {/* <div className="w-full md:w-1/2  text-white px-10 py-0 flex flex-col justify-between">
               <img src="/images/contact-us.webp" className="transform" />
+            </div> */}
+
+            <div className="bg-gradient-to-b from-green-700 to-lime-500  text-white p-10 md:w-1/3 flex flex-col justify-between">
+              <div>
+                <h2 className="text-3xl font-semibold mb-4">Contact Information</h2>
+                <p className="mb-8 text-sm opacity-90">
+                  Fill up the form and our Team will get back to you within 24 hours.
+                </p>
+
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <span className="text-pink-400 text-xl">📞</span>
+                    <span>+0123 4567 8910</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-pink-400 text-xl">✉️</span>
+                    <span>hello@flowbase.com</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-pink-400 text-xl">📍</span>
+                    <span>102 Street 2714 Don</span>
+                  </div>
+                </div>
+              </div>
+
+              
             </div>
 
-            <div className="w-full md:w-1/2 bg-white p-10">
+            <div className="w-full  bg-white p-10">
               <h2 className="text-2xl font-semibold mb-8 font-heading">{t("Contact Us")}</h2>
 
               <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >

@@ -68,15 +68,15 @@ const RolesPage: FC = function () {
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
           {accessList?.add && (
-            <Button color="primary" className="whitespace-nowrap text-base font-normal text-gray-900 dark:text-dark" onClick={() => ModuleListFuncall(row?._id)}> <div className="flex items-center gap-x-2"> <HiKey className="text-lg" /> Role Access List </div>  </Button>
+            <Button gradientDuoTone="greenToBlue" className="whitespace-nowrap text-base font-normal text-gray-900 dark:text-dark" onClick={() => ModuleListFuncall(row?._id)}> <div className="flex items-center gap-x-2"> <HiKey className="text-lg" /> Role Access List </div>  </Button>
           )}
         </div>
       ),
     },
-    {
-      key: "actions",
-      label: "Actions",
-    },
+    // {
+    //   key: "actions",
+    //   label: "Actions",
+    // },
   ], [accessList, DeleteFuncall]);
 
 

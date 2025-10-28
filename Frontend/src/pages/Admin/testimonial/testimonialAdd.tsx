@@ -1,8 +1,8 @@
 import { FC, lazy, useEffect, useState } from "react";
-import { Label, Button } from "flowbite-react";
+import {  Button } from "flowbite-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Form, Input, FormFeedback } from "reactstrap";
+import { Form } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AddTagloglist, ResetTagloglist } from "../../../Store/actions";
@@ -16,12 +16,14 @@ const TestimonialAddPage : FC = function () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [file, setFile] = useState<File | null |  string>(null);
-    const [UserDataList, setUserDataList] = useState<any>();
 
     const [initialValues, setinitialValues] = useState({
-        name: "",
-        village: "",
-        body : "",
+        name_eng: "",
+        name_guj: "",
+        village_eng: "",
+        village_guj: "",
+        body_guj : "",
+        body_eng : "",
         rating : 1,
     });
 
@@ -38,7 +40,8 @@ const TestimonialAddPage : FC = function () {
         
         onSubmit: (values) => {
           let requserdata = {
-            name: values?.name,
+            name_eng: values?.name_eng,
+            name_guj : values?.name_guj,
             image : "sdfsdv" ,
             village : "Ahmedabad" ,
             body : "dddd", 
@@ -74,17 +77,17 @@ const TestimonialAddPage : FC = function () {
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
 
                         <div className="my-3">  
-                            <ImageUploadPreview onFileSelect={setFile}  defaultImage={UserDataList?.user_pic ? UserDataList?.user_pic : ""}/>
+                            <ImageUploadPreview onFileSelect={setFile}  />
                         </div> 
 
                         <div className="flex gap-x-3">
                             <div className="mb-3 flex-1 ">
                                 <Inputbox
-                                    id="name"
-                                    name="name"
-                                    label="Testimonial name"
+                                    id="name_eng"
+                                    name="name_eng"
+                                    label="Testimonial name Eng"
                                     required={true}
-                                    placeholder="Testimonial name"
+                                    placeholder="Testimonial name Eng"
                                     type="text"
                                     validation={validation}
                                 />
@@ -92,11 +95,37 @@ const TestimonialAddPage : FC = function () {
 
                             <div className="mb-3 flex-1 ">
                                 <Inputbox
-                                    id="village"
-                                    name="village"
-                                    label="Testimonial village"
+                                    id="name_guj"
+                                    name="name_guj"
+                                    label="Testimonial name Guj"
                                     required={true}
-                                    placeholder="Testimonial village"
+                                    placeholder="Testimonial name Guj"
+                                    type="text"
+                                    validation={validation}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="md:flex gap-x-3">
+                                <div className="mb-3 flex-1 ">
+                                    <Inputbox
+                                        id="village_eng"
+                                        name="village_eng"
+                                        label="Testimonial village Eng"
+                                        required={true}
+                                        placeholder="Testimonial village Eng"
+                                        type="text"
+                                        validation={validation}
+                                    />
+                            </div>
+
+                            <div className="mb-3 flex-1 ">
+                                <Inputbox
+                                    id="village_guj"
+                                    name="village_guj"
+                                    label="Testimonial village Guj"
+                                    required={true}
+                                    placeholder="Testimonial village Guj"
                                     type="text"
                                     validation={validation}
                                 />
@@ -105,19 +134,31 @@ const TestimonialAddPage : FC = function () {
 
                         <div className="md:flex gap-x-3">
                             <div className="mb-3 flex-1 ">
-
                                 <Inputbox
-                                    id="body"
-                                    name="body"
-                                    label="Testimonial Description"
+                                    id="body_eng"
+                                    name="body_eng"
+                                    label="Testimonial Description Eng"
                                     required={true}
-                                    placeholder="Testimonial Description"
+                                    placeholder="Testimonial Description Eng"
                                     type="text"
                                     validation={validation}
                                 />
                             </div>
 
-                            <div className="mb-3 flex-1 ">
+                             <div className="mb-3 flex-1 ">
+                                <Inputbox
+                                    id="body_guj"
+                                    name="body_guj"
+                                    label="Testimonial Description Guj"
+                                    required={true}
+                                    placeholder="Testimonial Description Guj"
+                                    type="text"
+                                    validation={validation}
+                                />
+                            </div>  
+                        </div>
+
+                         <div className="mb-3 flex-1 ">
                                  <Inputbox
                                     id="rating"
                                     name="rating"
@@ -128,7 +169,6 @@ const TestimonialAddPage : FC = function () {
                                     validation={validation}
                                 />
                             </div>
-                        </div>
 
                         <div className="flex gap-x-3 justify-end mt-[1rem]">
                             <Button className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton" type="submit" > Add Testimonial </Button>

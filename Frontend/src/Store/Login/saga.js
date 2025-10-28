@@ -44,7 +44,7 @@ function* onInsertLogin({ payload: requstuser }) {
       Cookies.set('username',reponse?.data?.name, { expires: 7 });
       Cookies.set('access',reponse?.data?.rolePermissions, { expires: 7 });
       Cookies.set('role',reponse?.data?.roles, { expires: 7 });
-      Cookies.set('userType',reponse?.data?.userType, { expires: 7 });
+      Cookies.set('userType',reponse?.data?.user_type, { expires: 7 });
     }
   } catch (error) {
     toast.error(error?.msg)

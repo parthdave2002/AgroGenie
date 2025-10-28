@@ -7,7 +7,8 @@ import { Form, FormFeedback } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AddCompanylist, ResetCompanylist } from "../../../Store/actions"
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";import Inputbox from "components/common/inputComponent/inputbox";
+import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import Inputbox from "../../../components/common/inputComponent/inputbox";
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 

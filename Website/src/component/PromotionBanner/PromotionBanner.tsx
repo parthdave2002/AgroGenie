@@ -2,7 +2,7 @@ import React from 'react';
 
 const PromoBannerSection: React.FC = () => {
   return (
-    <section className="py-5">
+    <section className="py-10">
       <div className="max-w-1600 mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-5">
           {/* Left Banner */}

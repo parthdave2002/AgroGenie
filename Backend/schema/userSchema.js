@@ -24,6 +24,7 @@ const userSchema = new schema({
   is_deleted: { type: Boolean, default: false},
   deleted_by: { type: schema.Types.ObjectId},
   deleted_at: {type: Date},
+  user_type: { type: String, default: 'subadmin' }
 });
 
 module.exports = User = mongoose.model('users', userSchema);

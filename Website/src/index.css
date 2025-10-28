@@ -15,3 +15,8 @@
 .container-fluid {
   max-width: 1600px;
 }
+
+
+::-webkit-scrollbar{
+  display: none;
+}

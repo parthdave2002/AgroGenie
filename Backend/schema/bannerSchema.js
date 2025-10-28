@@ -9,8 +9,7 @@ const bannerTypeSchema = new Schema({
     name: {  type: String,  required: true },
     description : {  type: String },
     is_active: { type: Boolean, required: true,  default: true},
-    is_promotion : { type: Boolean, required: true,  default: false},
-    added_at: { type: Date,  default: Date.now },
-});
+    is_promotion : { type: Boolean, required: true,  default: false}
+}, { timestamps : true});
 
 module.exports = Banner = mongoose.model('banner', bannerTypeSchema);

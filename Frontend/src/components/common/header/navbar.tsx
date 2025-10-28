@@ -34,6 +34,7 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
       Cookies.remove("username");
       Cookies.remove("access");
       Cookies.remove("role");
+      Cookies.remove("userType");
       navigate("/login");
       dispatch(resetinsertlogin());
     };

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaQuoteLeft, FaQuoteRight, FaRegStar, FaStar } from 'react-icons/fa';
+import { FaRegStar, FaStar } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { useTranslation } from 'react-i18next';
@@ -88,10 +88,10 @@ const TestimonailSection = () => {
   ];
 
   return (
-    <section className="py-5">
+    <section className="py-10">
       <div className="max-w-1600 mx-auto px-4">
-        <h2 className="md:text-[2rem] text-[1.5rem]  font-heading font-semibold my-5"> {t("Farmer Testimonial")}</h2>
-
+        <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center "> Farmer <span className="text-lime-500"> Testimonial </span> </h2>
+        
          <div className="max-w-7xl mx-auto md:px-4 pt-6">
             <Swiper
               modules={[Autoplay]}
@@ -103,11 +103,11 @@ const TestimonailSection = () => {
             >
               {testimonials.map((testimonial: any, index: number) => (
                 <SwiperSlide key={index}>
-                  <div className="bg-[#e2f7e5] h-full flex flex-col justify-between p-6 transition-transform duration-300 hover:scale-105 rounded-2xl min-h-[18rem] max-h-[18rem]">
-                    <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-[#e2f7e5] h-full flex flex-col justify-between p-6 transition-transform duration-300 hover:scale-105 hover:shadow-xl rounded-2xl min-h-[18rem] max-h-[18rem] shadow-md shadow-green-100 font-body">
+                    <div className="flex items-center gap-4 mb-4 ">
                       <LazyLoadImage   effect="blur"  src={testimonial?.image} alt={testimonial?.name} className="w-14 h-14 rounded-full object-cover border border-green-500"   />
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-900">{t(testimonial?.name)}</h4>
+                        <h4 className="text-lg  text-gray-900">{t(testimonial?.name)}</h4>
                         <p className="text-sm text-gray-500">{t(testimonial?.position)}</p>
                       </div>
                     </div>

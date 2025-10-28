@@ -28,7 +28,7 @@ userController.GetAllUser = async (req, res, next) => {
   try {
    
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
-    searchQuery = { ...searchQuery, is_deleted: false, role: { $ne: '67b388a7d593423df0e24295' }  };
+    searchQuery = { ...searchQuery, is_deleted: false, user_type: 'subadmin' };
     selectQuery = 'name email password gender mobile_no date_of_joining date_of_birth address emergency_mobile_no emergency_contact_person added_at role pan_card bank_passbook aadhar_card user_id is_active user_pic';
     populate = [{ path: 'role',  model: 'roles', select: 'role_title' }];
 
@@ -38,7 +38,7 @@ userController.GetAllUser = async (req, res, next) => {
     }
 
     if (req.query.search && req.query.search !== "null"){
-      const searchResults = await userSch.find({ $or: [{ name: { $regex: req.query.search, $options: "i" } }]}) .select(selectQuery).populate(populate);
+      const searchResults = await userSch.find({   is_deleted: false, user_type:"subadmin" , $or: [{ name: { $regex: req.query.search, $options: "i" } }]}) .select(selectQuery).populate(populate);
       if (searchResults.length === 0)   return otherHelper.sendResponse(res, httpStatus.OK, true, null, [],'Data not found', null);
       return otherHelper.paginationSendResponse(res, httpStatus.OK, true, searchResults , " Search Data found", page, size, searchResults.length);
     }
@@ -216,6 +216,7 @@ userController.Login = async (req, res, next) => {
     const { token, payload } = await userController.validLoginResponse(req, user, next);
     payload.rolePermissions = rolePermissions;
     payload.user_img = user_img;
+    payload.user_type = user.user_type;
     return otherHelper.sendResponse(res, httpStatus.OK, true, payload, null, "Login Successful", token);
   } catch (err) {
     console.error("Error in Login API:", err);

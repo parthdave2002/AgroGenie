@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useTranslation } from "react-i18next";
 import Marquee from "react-fast-marquee";
-
-
 
 const BrandCarouselSection: React.FC = () => {
 
@@ -61,20 +58,19 @@ const BrandCarouselSection: React.FC = () => {
   { img: 'images/company/51_result.webp', subtitle: 'Gem One'},
   { img: 'images/company/52_result.webp', subtitle: 'Gem One'},
 ], []);
-  
-  const { t } = useTranslation();
-  return (
-    <section className="py-5  overflow-hidden">
 
+  return (
+    <section className="py-10 overflow-hidden">
       <div className="max-w-1600 mx-auto px-4">
+        <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center "> Our <span className="text-lime-500"> Seeds </span> </h2>
         <div className="flex flex-wrap justify-between items-center ">
-          <h2 className="text-2xl md:text-3xl font-semibold">{t("Our Seeds")}</h2>
+
           <div className="w-full overflow-hidden bg-white py-4">
             <Marquee loop={0} speed={50} pauseOnClick={true} autoFill={true}>
               {brandData.map((item, index) => (
-                <div key={index} className="flex-shrink-0   w-24 md:w-36 mx-5 flex items-center text-center justify-center">
+                <div key={index} className="flex-shrink-0 w-32 md:w-48 mx-5 flex items-center text-center justify-center">
                   <div className='flex flex-col '>
-                    <LazyLoadImage effect="blur" src={item.img}  className="h-[15rem] w-[15rem] object-contain "   />
+                    <LazyLoadImage effect="blur" src={item.img} className="h-[15rem] w-[32rem] object-contain " />
                     <h3 className="text-base font-semibold text-gray-900 mt-2 leading-tight">{item.subtitle}</h3>
                   </div>
                 </div>

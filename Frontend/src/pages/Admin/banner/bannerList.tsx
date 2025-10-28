@@ -8,6 +8,7 @@ import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { DeleteBannerlist,  getBannerlist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 import CommonTable from "../../../components/common/table/commonTable";
+import moment from "moment";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
@@ -93,30 +94,11 @@ const BannerListPage: FC = function () {
   let AddAccess = accessList?.add;
 
   const bannerColumns = useMemo(() => [
-    {
-      key: "banner_pic",
-      label: "Image",
-      render: (row: any) => (
-        <img
-          src={`${IMG_URL}/public/banner/${row?.banner_pic}`}
-          alt="Banner"
-          className="h-16 w-32 object-cover rounded"
-        />
-      )
-    },
-    {
-      key: "name",
-      label: "Name",
-    },
-    {
-      key: "is_active",
-      label: "Status",
-      render: (row: any) => row.is_active ? <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> : <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div>
-    },
-    {
-      key: "createdAt",
-      label: "Created At",
-    },
+    {  key: "name", label: "Name" },
+    {  key : 'banner_type', label : "Banner Type",  render : ( row : any) => row.banner_type.charAt(0).toUpperCase() + row.banner_type.slice(1).toLowerCase() },
+    {  key : 'is_promotion', label : "Promotion Banner", render : ( row : any) => row.is_promotion ? <div className="flex items-center">  Yes </div> : <div className="flex items-center">  No </div>  },
+    {  key: "is_active",  label: "Status",  render: (row: any) => row.is_active ? <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> : <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div> },
+    {  key: "createdAt", label: "Created At",  render : (row :any) => ( <div> {moment(row?.createdAt).format("DD-MM-YYYY hh:mm:ss")} </div>) },
     {
       key: "actions",
       label: "Actions",

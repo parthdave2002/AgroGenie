@@ -28,11 +28,11 @@ const CategoryCarouselSection: React.FC = () => {
       }
 
   return (
-    <section className="py-5 overflow-hidden">
+    <section className="py-10 overflow-hidden">
       <div className=" max-w-1600 mx-auto px-4">
-        <div className="flex flex-wrap justify-between items-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-semibold">{t("Crops")}</h2>
-        </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center "> List of <span className="text-lime-500"> Crops </span> </h2>
+
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 max-w-1600">
           {categoryData.map((item:any, idx:number) => (
             <div key={idx} className="flex flex-col items-center text-center group cursor-pointer" onClick={() => RedictCall(item?.title)}>

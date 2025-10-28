@@ -84,13 +84,16 @@ const PopularProductSection: React.FC = () => {
     navigate(`/product-detail/${id}`)
   }
   return (
-    <section className="py-5 overflow-hidden">
+    <section className="py-10 overflow-hidden">
       <div className="max-w-1600 mx-auto px-4">
-        <div className=" md:flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-heading md:text-3xl font-semibold">{t("Most popular products")}</h2>
-          <div className="flex items-center gap-4  mt-[2rem] md:mt-0">
+        <div className=" md:flex justify-center items-center mb-6">
+          {/* <h2 className="text-2xl font-heading md:text-3xl font-semibold">{t("  products")}</h2> */}
+          <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center gap-x-3"> Our Most <span className="text-lime-500">  Popular Product</span> </h2>
+
+
+          {/* <div className="flex items-center gap-4  mt-[2rem] md:mt-0">
             <div onClick={() => RedirectCall("/product")} className="cursor-pointer text-green-600 hover:text-green-500 text-md font-medium self-center"> {t("View All")} </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="md:grid  md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-1600">

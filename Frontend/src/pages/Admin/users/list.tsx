@@ -5,13 +5,11 @@ import { HiOutlinePencilAlt, HiTrash} from "react-icons/hi";
 import { FaExclamationCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-
 import { getUserlist, DeleteUserlist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 import LoaderPage from "../../../components/common/loader/loader";
 import CommonTable from "../../../components/common/table/commonTable";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
@@ -113,51 +111,18 @@ const UserListPage: FC = function () {
   let AddAccess = accessList?.add;
 
   const userColumns =useMemo( () => [
-    {
-      key: "name",
-      label: "Advisor Name",
-    },
-    {
-      key: "email",
-      label: "Email",
-    },
-    {
-      key: "role",
-      label: "Role",
-      render: (row: any) => row?.role?.role_title || "-",
-    },
-    {
-      key: "gender",
-      label: "Gender",
-    },
-
-    {
-      key: "mobile_no",
-      label: "Mobile No",
-    },
-
-    {
-      key: "date_of_joining",
-      label: "Date of joining",
-    },
-    {
-      key: "is_active",
-      label: "Status",
-      render: (row: any) => row.is_active ?  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> :  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div>
-    },
-    {
-      key: "actions",
-      label: "Actions",
+    { key: "name", label: "Advisor Name", },
+    { key: "email", label: "Email" },
+    { key: "role",   label: "Role", render: (row: any) => row?.role?.role_title || "-"},
+    { key: "gender", label: "Gender", render: (row: any) => row?.gender.charAt(0).toUpperCase() + row?.gender.slice(1).toLowerCase() || "-" },
+    { key: "mobile_no",  label: "Mobile No" },
+    { key: "date_of_joining", label: "Date of joining" },
+    { key: "is_active",  label: "Status",  render: (row: any) => row.is_active ?  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> :  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div>},
+    { key: "actions",  label: "Actions",
        render: (row: any) => (
       <div className="flex items-center gap-x-3">
-        {accessList?.edit && (
-          <Button gradientDuoTone="greenToBlue" onClick={() => getUserData(row._id)}> <div className="flex items-center gap-x-2"> <HiOutlinePencilAlt className="text-lg" /> Edit Advisor </div> </Button>
-        )}
-
-        {accessList?.delete && (
-          <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Advisor </div> </Button>
-        )}
-
+        {accessList?.edit && ( <Button gradientDuoTone="greenToBlue" onClick={() => getUserData(row._id)}> <div className="flex items-center gap-x-2"> <HiOutlinePencilAlt className="text-lg" /> Edit Advisor </div> </Button>  )}
+        {accessList?.delete && ( <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Advisor </div> </Button>  )}
         <Button gradientDuoTone="purpleToBlue" onClick={() => DetailsUserCall(row._id)} > <div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Advisor </div> </Button>
       </div>
     ),

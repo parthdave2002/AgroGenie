@@ -66,28 +66,28 @@ uploaderHelper.uploadFiles = (destinationPath, uploadType, fieldData) => {
           return otherHelper.sendResponse(res, httpStatus.NOT_ACCEPTABLE, false, error, null, `${error}`, null);
         }
       } else {
-        if (req.file) {
-          try {
-            const fileExtension = mimeType[req.file.mimetype] || 'jpg';
-            const fileName = `${folderName}/${Date.now()}-${req.file.originalname}`;
+        // if (req.file) {
+        //   try {
+        //     const fileExtension = mimeType[req.file.mimetype] || 'jpg';
+        //     const fileName = `${folderName}/${Date.now()}-${req.file.originalname}`;
 
-            const uploadParams = {
-              Bucket: process.env.AWS_S3_BUCKET_NAME,
-              Key: fileName,
-              Body: req.file.buffer,
-              ContentType: req.file.mimetype,
-              ACL: 'public-read', // Optional: make file public
-            };
+        //     const uploadParams = {
+        //       Bucket: process.env.AWS_S3_BUCKET_NAME,
+        //       Key: fileName,
+        //       Body: req.file.buffer,
+        //       ContentType: req.file.mimetype,
+        //       ACL: 'public-read', // Optional: make file public
+        //     };
 
-            const command = new PutObjectCommand(uploadParams);
-            await s3.send(command);
+        //     const command = new PutObjectCommand(uploadParams);
+        //     await s3.send(command);
 
-            // Add file URL to request object
-            req.file.location = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
-          } catch (err) {
-            return otherHelper.sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, false, err, null, 'S3 upload failed', null);
-          }
-        }
+        //     // Add file URL to request object
+        //     req.file.location = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
+        //   } catch (err) {
+        //     return otherHelper.sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, false, err, null, 'S3 upload failed', null);
+        //   }
+        // }
         next();
       }
     });

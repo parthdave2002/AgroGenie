@@ -11,6 +11,7 @@ import BannerSection from '../../component/Banner/Banner'
 import TestimonailSection from '../../component/Testimonial/Testimonail'
 import FAQSection from '../../component/FAQ/FAQ'
 import GlobalLoader from '../../component/Loader/Loader'
+import About from '../../component/About/About'
 
 const HomeSection = () => {
 
@@ -27,7 +28,8 @@ const HomeSection = () => {
         {is_loader ?  <GlobalLoader />
           : 
           <div className=''>
-            <BannerSection />
+            <BannerSection /> 
+            <About />
             <CategoryCarouselSection />
             <BestSellingProductSection />
             <DiscountBannerSection />
@@ -35,8 +37,8 @@ const HomeSection = () => {
             <PopularProductSection />
             <PromoBannerSection />
             <TestimonailSection />
-            <LookingForSection />
-            {/* <FAQSection /> */}
+            {/* <LookingForSection /> */}
+            <FAQSection />
           </div>
         }
       </div>

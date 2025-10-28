@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay   } from 'swiper/modules';
+import { Pagination, Scrollbar, A11y, Autoplay   } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import {getBannerlist} from "../../Store/actions";
-// const IMG_URL = import.meta.env["VITE_API_URL"];
 const IMG_URL = import.meta.env.VITE_API_URL; 
 
 
@@ -26,7 +25,7 @@ const BannerSection: React.FC = () => {
      <section className=" bg-[url('/images/background-pattern.jpg')] bg-no-repeat bg-cover ">
       <div className="max-w-7xl mx-auto  grid grid-cols-1 ">
         <div className="z-6">
-          <Swiper   modules={[ Pagination, Scrollbar, A11y, Autoplay ]}  spaceBetween={50}   autoplay={{ delay: 5000, disableOnInteraction: false }}   loop className="rounded-xl overflow-hidden" >
+          <Swiper   modules={[ Pagination, Scrollbar, A11y, Autoplay ]}  spaceBetween={50} autoplay={{ delay: 5000, disableOnInteraction: false }}   loop className="rounded-xl overflow-hidden" >
             {bannerSlides.map((item:any, i:number) => (
                 <SwiperSlide>
                     {/* <div className="flex flex-col md:flex-row items-center bg-[#eaf5f7] rounded-xl p-6 md:p-10  z-1">
@@ -40,7 +39,7 @@ const BannerSection: React.FC = () => {
                             <img src={item.img} alt="Smoothie Bottle" className="h-[30rem] object-contain" />
                         </div>
                     </div> */}
-                       <img src={  `${IMG_URL}/public/banner/${item?.banner_pic}`}  key={i} alt={item?.banner_pic} className="object-contain z-6" />
+                       <img src={ `${IMG_URL}/public/banner/${item?.banner_pic}`}  key={i} alt={item?.banner_pic} className="object-contain z-6" />
                 </SwiperSlide>
             ))}
           </Swiper>

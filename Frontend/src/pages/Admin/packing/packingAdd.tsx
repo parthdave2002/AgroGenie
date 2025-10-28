@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AddPackinglist, ResetPackinglist,  } from "../../../Store/actions";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "components/common/inputComponent/inputbox";
+import Inputbox from "../../../components/common/inputComponent/inputbox";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const AddpackingPage : FC = function () {
@@ -95,7 +95,7 @@ const AddpackingPage : FC = function () {
                                 label="Packing Weight"
                                 required={true}
                                 placeholder="Packing Type"
-                                type="text"
+                                type="number"
                                 validation={validation}
                             />
                         </div>
