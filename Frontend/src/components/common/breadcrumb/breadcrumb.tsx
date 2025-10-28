@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC ,type PropsWithChildren } from "react";
+import { useRef, useState, type FC ,type PropsWithChildren } from "react";
 import {  Breadcrumb,  Button,} from "flowbite-react";
 import { Input } from "reactstrap";
 import {  HiCog, HiDotsVertical, HiExclamationCircle, HiHome,  HiPlus, HiTrash} from "react-icons/hi";
@@ -19,18 +19,33 @@ interface NavbarSidebarLayoutProps {
 const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ({Name, Searchplaceholder, searchData, Changename, AcccessData, isOpenAddModel, AddAccess, ParentName, ParentLink }) {
 
   const navigate = useNavigate();
- const [inputValue, setInputValue] = useState(searchData);
+  const [localSearch, setLocalSearch] = useState(searchData || "");
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      Changename(inputValue);
-    }, 3000); // 3s delay
+  const setInputRef = (el: any) => {
+    if (el && el instanceof HTMLElement) {
+      inputRef.current = el as HTMLInputElement;
+    } else if (el && el.inputRef && el.inputRef instanceof HTMLElement) {
+      inputRef.current = el.inputRef as HTMLInputElement;
+    } else if (el && el.inputRef && el.inputRef.current instanceof HTMLElement) {
+      inputRef.current = el.inputRef.current as HTMLInputElement;
+    }
+  };
 
-    return () => {
-      clearTimeout(handler); // Clear timeout on cleanup
-    };
-  }, [inputValue, Changename]);
+   const DataChange = (e: any) => {
+    const value = e.target.value;
+    setLocalSearch(value);
 
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      Changename(value);
+    }, 3000);
+  };
+  
   const OpenAddModel = () =>{
     isOpenAddModel(true)
   }
@@ -83,8 +98,9 @@ const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = funct
                       className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
                       placeholder={Searchplaceholder}
                       type="text"
-                      onChange={(e) => setInputValue(e.target.value)}
-                      value={searchData}
+                      onChange={DataChange}
+                      value={localSearch}
+                       ref={setInputRef}
                     />
                   </div>
                 </form>
@@ -122,9 +138,9 @@ const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = funct
               }
               
               <div className="ml-auto flex items-center space-x-2 sm:space-x-3">
-                {/* {AddAccess  ?  */}
-                  <Button color="primary" onClick={() => OpenAddModel()} ><div className="flex items-center gap-x-3"> <HiPlus className="text-xl " />  Add {Name}  </div> </Button>
-                {/* : null }  */}
+                {AddAccess  ? 
+                  <Button gradientDuoTone="purpleToPink"  onClick={() => OpenAddModel()} ><div className="flex items-center gap-x-3"> <HiPlus className="text-xl " />  Add {Name}  </div> </Button>
+                : null }
               </div>
             </div>
           </div>

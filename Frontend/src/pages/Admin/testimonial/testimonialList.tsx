@@ -31,8 +31,6 @@ const TestimonialListPage: FC = function () {
     
   const accessList = UseAccessList(permissionsdata, "Testimonial");
 
-  console.log("accessList", accessList);
-  
   // ----------- next Button  Code Start -------------
     const [TotalListData, setTotalListData] = useState(0);
     const [CurrentPageNo, setCurrentPageNo] = useState(0);
@@ -101,16 +99,16 @@ const TestimonialListPage: FC = function () {
 
   const testimonialColumns = useMemo(() => [
     {
-      key: "name",
-      label: "Image",
-    },
-    {
       key: "taglog_name",
       label: "Name",
     },
     {
       key: "desctiption",
       label: "Desctiption",
+    },
+       {
+      key: "desctiption",
+      label: "Village",
     },
     {
       key: "created_at",
@@ -122,9 +120,7 @@ const TestimonialListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.delete && (
-            <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Testimonial </div> </Button>
-          )}
+          {accessList?.delete && ( <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Testimonial </div> </Button> )}
         </div>
       ),
     },

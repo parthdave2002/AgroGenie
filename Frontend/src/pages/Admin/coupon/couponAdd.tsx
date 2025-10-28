@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddCouponlist, ResetCouponlist } from "../../../Store/actions";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "components/common/inputComponent/inputbox";
+import Inputbox from "../../../components/common/inputComponent/inputbox";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const AddCouponPage : FC = function () {
@@ -115,7 +115,7 @@ const AddCouponPage : FC = function () {
                                     label="Coupon Amount"
                                     required={true}
                                     placeholder="Enter coupon amount"
-                                    type="text"
+                                    type="number"
                                     validation={validation}
                                 />
                             </div>

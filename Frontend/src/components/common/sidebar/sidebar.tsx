@@ -1,5 +1,5 @@
-import { Sidebar } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Sidebar } from "flowbite-react";
 import { HiShoppingBag, HiCube, HiPuzzle, HiUsers, HiChartPie, HiLibrary } from "react-icons/hi";
 import { FaWarehouse } from "react-icons/fa";
 import { MdLeaderboard } from "react-icons/md"; 
@@ -29,9 +29,9 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
   const [AccessList, setAccessList] = useState<string[]>([]);
   const  permissionsdata = useSelector((state: any) =>  state.Login.permissionsdata );
 
-  const user = Cookies.get("role");
+  const user = Cookies.get("userType");
   useEffect(() => {
-    if (user !== "67b388a7d593423df0e24295" && permissionsdata) {
+    if (user == "subadmin" && permissionsdata) {
       const userPermissions = permissionsdata.filter((item: any) => item.permissions.view === true).map((item: any) => item.module_name);
       setAccessList(userPermissions);
     } else {
@@ -52,7 +52,7 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       to: "/warehouse",
     },
     {
-      name: "User",
+      name: "Advisor",
       icon: HiUsers,
       to: "/users/list",
     },
@@ -119,6 +119,11 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       icon:  FaTags,
       to: "/taglog/list",
     },
+     {
+      name: "Testimonial",
+      icon:  FaTags,
+      to: "/testimonial/list",
+    },
     {
       name: "Crop",
       icon:  GiWheat,
@@ -131,50 +136,38 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
     },
   ]
 
-  const filteredSidebarData = user === "67b388a7d593423df0e24295" ? SidebarData : SidebarData.filter((item:any) => AccessList.includes(item.name));
-  const filteredSubMasterMenu = user === "67b388a7d593423df0e24295" ? SubMasterMenu : SubMasterMenu.filter((item:any) => AccessList.includes(item.name));
+  const filteredSidebarData = user === "admin" ? SidebarData : SidebarData.filter((item:any) => AccessList.includes(item.name));
+  const filteredSubMasterMenu = user === "admin" ? SubMasterMenu : SubMasterMenu.filter((item:any) => AccessList.includes(item.name));
 
   return (
     <div className="hidden lg:block">
-      <Sidebar>
-        <Sidebar.Items className="pb-[6rem]">
-          <Sidebar.ItemGroup>
-            {filteredSidebarData.map((item, k) => (
-              <NavLink to={item.to} key={k}>
-                <Sidebar.Item icon={item.icon}  className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
-              </NavLink>
-            ))}
-          </Sidebar.ItemGroup>
-
-          {filteredSubMasterMenu.length > 0 &&
-            <Sidebar.ItemGroup>
-              <h4 className="dark:text-gray-400"> Master:</h4>
-              <Sidebar.Collapse icon={HiShoppingBag} label="Master">
-                {filteredSubMasterMenu.map((item, k) => (
+        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-r-xl text-gray-800"> 
+          <Sidebar className="bg-gray-500 dark:bg-gray-800 text-gray-800 w-[15rem] ">
+            <Sidebar.Items className="pb-[6rem]">
+              <Sidebar.ItemGroup className="p-0">
+                {filteredSidebarData.map((item, k) => (
                   <NavLink to={item.to} key={k}>
-                    <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                    <Sidebar.Item icon={item.icon}  className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
                   </NavLink>
                 ))}
-              </Sidebar.Collapse>
-            </Sidebar.ItemGroup>
-          }
-         
+              </Sidebar.ItemGroup>
+
+              {filteredSubMasterMenu.length > 0 &&
+                <Sidebar.ItemGroup>
+                  <h4 className="dark:text-gray-400"> Master:</h4>
+                  <Sidebar.Collapse icon={HiShoppingBag} label="Master">
+                    {filteredSubMasterMenu.map((item, k) => (
+                      <NavLink to={item.to} key={k}>
+                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                      </NavLink>
+                    ))}
+                  </Sidebar.Collapse>
+                </Sidebar.ItemGroup>
+              }
           
-          {/* <Sidebar.ItemGroup>
-            <h4 className={"dark:text-white"}>Design View only:</h4>
-            <NavLink to="/e-commerce/products">
-              <Sidebar.Item
-                icon={HiShoppingBag}
-                className={
-                  "/e-commerce/products" === currentPage ? "dark:bg-gray-700" : ""
-                }
-              >
-                Products
-              </Sidebar.Item>
-            </NavLink>
-          </Sidebar.ItemGroup> */}
-        </Sidebar.Items>
-      </Sidebar>
+            </Sidebar.Items>
+          </Sidebar>
+          </div>
     </div>
   );
 };

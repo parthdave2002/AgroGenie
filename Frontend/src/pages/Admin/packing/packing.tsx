@@ -119,7 +119,8 @@ const PackingListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete </div> </Button> : null}<Button gradientDuoTone="pinkToOrange" onClick={() => DetailsPageCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Details </div> </Button>
+          {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Packing </div> </Button> : null}
+          {/* <Button gradientDuoTone="pinkToOrange" onClick={() => DetailsPageCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Details </div> </Button> */}
         </div>
       ),
     },

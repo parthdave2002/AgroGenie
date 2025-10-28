@@ -2,18 +2,15 @@ const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const roleSch = require('../../schema/roleSchema');
 const roleAccessModel = require('../../schema/role_accessschema');
-const { getAccessData } = require('../../helper/Access.helper');
 const roleConfig = require('./roleConfig');
 
 const roleController = {};
 
-// Role API Code End
 roleController.GetRoles = async (req, res, next) => {
   try {
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10, false);
     selectQuery = 'role_title description is_active is_deleted';
-    searchQuery = { ...searchQuery, role_title: { $ne: 'Super Admin' } };
-    
+
     if (req.query.id) {
       const user = await roleSch.findById(req.query.id);
       return otherHelper.sendResponse(res, httpStatus.OK, true, user, null, 'Role Data found', null);
@@ -22,7 +19,6 @@ roleController.GetRoles = async (req, res, next) => {
     if (req.query.search && req.query.search !== 'null') {
       const searchResults = await roleSch.find({
          is_deleted: false,
-         role_title: { $ne: 'Super Admin' },
         $or: [{ role_title: { $regex: req.query.search, $options: 'i' } }],
       });
       if (searchResults.length === 0) return otherHelper.sendResponse(res, httpStatus.OK, true, null, [], 'Data not found', null);
@@ -37,18 +33,14 @@ roleController.GetRoles = async (req, res, next) => {
 };
 
 roleController.AddRoles = async (req, res, next) => {
-
   try {
     const role = req.body;
     if (role.id) {
       const update = await roleSch.findByIdAndUpdate(role.id, { $set: role }, { new: true });
       return otherHelper.sendResponse(res, httpStatus.OK, true, update, null, roleConfig.roleSave, null);
     } else {
-      // role.added_by = req.user.id;
       const newRole = new roleSch(role);
       await newRole.save();
-      //create new access with every module
-      // const all_modules = await moduleSchema.find().select('_id').lean();
       return otherHelper.sendResponse(res, httpStatus.OK, true, newRole, null, roleConfig.roleSave, null);
     }
   } catch (err) {
@@ -60,10 +52,7 @@ roleController.DeleteRole = async (req, res, next) => {
   try {
     const id = req.query.id;
     const theme = await roleSch.findByIdAndUpdate(id, {
-      $set: {
-        is_deleted: true,
-        deleted_at: new Date(),
-      },
+      $set: { is_deleted: true, deleted_at: new Date() },
     });
     return otherHelper.sendResponse(res, httpStatus.OK, true, theme, null, 'Role deleted successfully', null);
   } catch (err) {

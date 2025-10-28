@@ -1,0 +1,188 @@
+{
+  "call_us": " Call us",
+  "9100029429 / 9100029329": "9100029429 / 9100029329",
+
+  "Home": "Home",
+  "About": "About",
+  "Products": "Products",
+  "Contact Us": "Contact Us",
+
+  "Category": "Category",
+  "Brands": "Brands",
+  "Best selling products": "Best selling products",
+  "Most popular products": "Most popular products",
+  "Just Arrived": "Just Arrived",
+  "Farmer Testimonial": "Farmer Testimonial",
+  "People are also looking for": "People are also looking for",
+  "Frequently Asked Questions": "Frequently Asked Questions",
+
+  
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "list": [
+      {
+        "question": "Are all products on AgriBharat original?",
+        "answer": "Yes, we sell only 100% original and branded agricultural products."
+      },
+      {
+        "question": "Do you provide a bill with the purchase?",
+        "answer": "Yes, every order comes with a proper GST invoice."
+      },
+      {
+        "question": "Can I pay after receiving the order at home?",
+        "answer": "We offer both secure online payment and Cash on Delivery (COD) options."
+      },
+      {
+        "question": "Can I get expert farming advice?",
+        "answer": "Yes, we have Agri experts available who provide instant guidance for your farming needs."
+      },
+      {
+        "question": "What if I receive the wrong product or damaged material?",
+        "answer": "You can call our Agri expert helpline and register your complaint. We will resolve it promptly."
+      },
+      {
+        "question": "What is your helpline number?",
+        "answer": "You can reach us at: 9100029429 / 9100029329"
+      }
+    ]
+  },
+
+  "testimonial1": {
+    "name": "Prashant Jogiya",
+    "village" : "Adityana, Porbandar",
+    "message": "Healthy wines, bright yellow flowers, round fruits on every leaf, lots of sweet melons, easy storage for transportation, and good market price; what else can a farmer expect? Thank You AgroGenie"
+  },
+  "testimonial2": {
+    "name": "Rahul Mangroliya",
+    "village" : "Chhelanka, Visavadar",
+    "message": "First time tried Gem One Watermelon, it also grows trust in their other products like Tomato, Capsicum, and Chilli. Avval quality and good response in the market with the fruits"
+  },
+    "testimonial3": {
+    "name": "Pankaj Bhesaniya",
+    "village" : "Lunghiya, Bagasara",
+    "message": "AgroGenie has made a huge contribution to my success. Perfect blend of quality seeds, perfect package of practices and quick response; acts as a true friend of farmers"
+  },
+   "testimonial4": {
+    "name": "Alkeshbhai Makani",
+    "village" : "Govindpur, Dhari",
+    "message": "Castor Seeds germinated quickly, and the plants grew strong against pests and diseases. There was no incidence of pod shattering, and the spikes were 4-5 feet long"
+  },
+    "testimonial5": {
+    "name": "Pareshbhai Lakhani",
+    "village" : "Ravni Kuba, Visavadar",
+    "message": "As per the name, they are actually doing magic in their seeds. Coriander seeds are packed with a seed treatment, which gives a boost in germination time and percentage, and seeds grow magically"
+  },
+    "testimonial6": {
+    "name": "Karshanbhai",
+    "village" : "Mota Barman, Khambha",
+    "message": "Saw Soybean variety Sardaar, limited growth, full flowering, more than 100 pods, matured seeds in every pod, leads to the best yield. I was at the top for higher production due to AgroGenie"
+  },
+
+  "testimonial7": {
+    "name": "Jentibhai Zalavadiya",
+    "village" : "Moti Monpari, Visavadar",
+    "message": "Sales after service is the best part I liked about AgroGenie. Supporting with the technical knowledge makes the farmer win the game of high yield and better quality"
+  },
+    "testimonial8": {
+    "name": "Bhautik Hidad",
+    "village" : "Moniya, Visavadar",
+    "message": "Happy to see the plants full of pods with two and three seeds in it. The resistance power against pest-disease is impressive and give very good yield in the adverse weather"
+  },
+    "testimonial9": {
+    "name": "Bhavesh Gadhiya",
+    "village" : "Chhelanka, Visavadar",
+    "message": "As a progressive farmer, I used to try new seeds and share experiance to fellow farmers. After accepting this seeds, even more farmers asking from where I'm getting the quality seeds"
+  },
+  "testimonial10": {
+    "name": "Gordhanbhai Savaliya",
+    "village" : "Kadaya, Amreli",
+    "message": "This season, I used AgroGenie seeds and could clearly see the difference, from strong germination to green plant, and early flowering to good harvest."
+  },
+ 
+
+  "category": {
+    "plant_protection": "Crop Protection",
+    "plant_nutrition": "Crop Nutrition",
+    "fertilizer": "Fertilizer",
+    "seed": "Seeds",
+    "hardware": "Hardware",
+    "animal_husbandry": "Animal Husbandry",
+    "select_category":"Select Category"
+  },
+
+  "discount": {
+    "brands": "Brands",
+    "happy_farmers": "Happy Farmers",
+    "products": "Products",
+    "pincodes_delivery": "Pincodes Delivery"
+  },
+
+  "popularSearch": {
+    "farm_gold_humic": "Farm gold humic",
+    "tata_bahaar": "Tata bahaar",
+    "farm_grow_plus": "Farm grow+",
+    "roket": "Roket",
+    "saaf": "Saaf",
+    "areva": "Areva",
+    "em1": "Em-1",
+    "tata_gateway": "Tata gateway",
+    "goldzyme_crop_plus": "Goldzyme crop+",
+    "tata_tafgor": "Tata tafgor",
+    "upl_ulala": "Upl ulala",
+    "tata_manik": "Tata manik",
+    "tata_solubor": "Tata solubor",
+    "fertis_90_sulphar_mills": "Fertis 90% Sulphar mills",
+    "lancer_gold": "Lancer gold",
+    "gelops_bg_cotton": "Gelops Bg cotton",
+    "spraywell_pump_12x12": "12x12 spraywell pump",
+    "tadpatri_18x24": "18x24 Tadpatri",
+    "osian_megha_torch": "Osian megha torch",
+    "amul_fighter_torch": "Amul fighter torch"
+  },
+
+  "First name" : "Name",
+  "Reason" : "Reason",
+
+  "Need Help": "Need Help",
+  "View All": "View All",
+
+  "Terms & condition": "Terms & condition",
+  "Privacy policy": "Privacy policy",
+  "Returns & Refunds": "Returns & Refunds",
+  "All Rights Reserved": " All Rights Reserved",
+  "Office Address": "Office Address",
+  "Quick Links": "Quick Links",
+  "legal policies" :  "Legal policies",
+  "Phone": "Phone",
+  "Email": "Email",
+  "Message" : "Message",
+  "Submit" : "Submit",
+
+  "Product Details": "Product Details",
+  "Relevant Category Products": "Relevant Category Products",
+  "welcome": "Welcome",
+  "description": "description",
+
+  "English": "English",
+  "Gujarati": "Gujarati",
+
+  "Free delivery": "Free delivery",
+  "100% secure payment": "100% secure payment",
+  "Quality guarantee": " Quality guarantee",
+  "Guaranteed savings": "Guaranteed savings",
+  "Daily offers": "Daily offers",
+
+  "enter_name": "Enter your name",
+  "enter_email": "Enter your email",
+  "enter_contect" :"Enter phone number",
+  "enter_message" : "Enter message",
+  "enter_product_name" : "Enter product name",
+  "search" : "Search",
+  "select_reason": "Select reason",
+  "farmer": "Farmer",
+  "job_application": "Job Application",
+  "dealer": "Dealer",
+  "add_to_cart" : "Add to Cart",
+  "remove_from_cart" : "Remove from cart",
+  "advisor_contact_success": "Our Advisor will contact you soon."
+}
