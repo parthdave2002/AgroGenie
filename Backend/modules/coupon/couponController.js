@@ -58,7 +58,8 @@ couponController.AddCoupon = async (req, res, next) => {
       return otherHelper.sendResponse(res, httpStatus.OK, true, updated, null, 'Coupon updated successfully', null);
     } else {
       const existingCoupon = await couponSch.findOne({ name: Coupon.name, is_deleted: false });
-      if (existingCoupon) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'coupon name already exists', null);
+      if (existingCoupon) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'English coupon name already exists', null);
+
       const newCoupon = new couponSch(Coupon);
       await newCoupon.save();
       return otherHelper.sendResponse(res, httpStatus.OK, true, newCoupon, null, 'Coupon created successfully', null);
