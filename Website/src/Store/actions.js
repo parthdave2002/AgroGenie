@@ -1,4 +1,5 @@
 export * from "./Banner/action";
+export * from "./Testimonial/action";
 export * from "./Category/action";
 export * from "./Company/action";
 export * from "./Coupon/action";

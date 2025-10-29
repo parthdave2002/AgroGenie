@@ -90,6 +90,9 @@ export const DetailProductlistApi = (requserdata) => api.get(url.GET_PRODUCT_LIS
 
 export const BannerlistApi = (requserdata) => api.get(url.GET_BANNER_LIST, requserdata); // Banner API
 
+export const TestimoniallistApi = (requserdata) => api.get(url.GET_TESTIMONIAL_LIST, requserdata); // Testimonial API
+
+
 export const CroplistApi = (requserdata) => api.get(url.GET_CROP_LIST, requserdata);   // Crops API
 
 export const CouponlistApi = (requserdata) => api.get(url.GET_COUPON_LIST, requserdata); // Coupon API

@@ -64,4 +64,7 @@ router.use('/report', Reportdata);
 const Leavedata = require('./api/leave');
 router.use('/leave', Leavedata);
 
+const Testimonialdata = require('./api/testimonial');
+router.use('/testimonial', Testimonialdata);
+
 module.exports = router;
