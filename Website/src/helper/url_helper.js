@@ -7,6 +7,9 @@ export const GET_RELATED_PRODUCT_LIST = "/api/product/product-related"; // Produ
 
 export const GET_BANNER_LIST = "/api/banner/get-banner"; // Banner
 
+export const GET_TESTIMONIAL_LIST = "/api/testimonial/get-testimonial"; // Testimonial
+
+
 export const GET_CROP_LIST = "/api/crop/get-crop"; // Crop
 
 export const GET_COUPON_LIST = "/api/coupon/get-coupon";  // Coupon
