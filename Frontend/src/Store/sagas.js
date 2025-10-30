@@ -21,6 +21,7 @@ import CouponSaga from "./Coupon/saga";
 import LeadSaga from "./Lead/saga";
 import ComplainSaga from "./Complain/saga";
 import LocationSaga from "./Location/saga";
+import LeaveSaga from "./Leave/saga";
 import SalesDashboardSaga from "./SalesExecutive/dashboard/saga";
 
 export default function* rootSaga() {
@@ -44,6 +45,7 @@ export default function* rootSaga() {
     fork(CropSaga),
     fork(CouponSaga),
     fork(LeadSaga),
+    fork(LeaveSaga),
     fork(ComplainSaga),
     fork(SalesDashboardSaga),
     fork(LocationSaga)

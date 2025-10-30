@@ -61,7 +61,7 @@ const SignInPage: FC = function () {
   useEffect(() => {
     setisLoading(false)
     setLogin(login ? login.success : null);
-    setLoginRols(login ? login?.data?.roles : null);
+    setLoginRols(login ? login?.data?.user_type : null);
   }, [login]);
 
   useEffect(() =>{      
@@ -77,14 +77,11 @@ const SignInPage: FC = function () {
     setisLoading(false)
     if (Login == true) {  
       validation.resetForm();
-      if( LoginRols == "67b1195be442284118ab89bf" || LoginRols == "68331b9e271c0b706832de91"){
+      if( LoginRols == "csr" || LoginRols == "sales_executive" || LoginRols == "lead_manager"){
         navigation("/sales-crm");
         location.reload();
-      }else if(LoginRols == "685c305069eaa1084c92c5fe"){
-         navigation("/warehouse");
-         location.reload();
       }
-      else{
+      else if( LoginRols == "admin" || LoginRols == "subadmin"){
         navigation("/dashboard");
         location.reload();
       }
@@ -114,14 +111,12 @@ const SignInPage: FC = function () {
     // },[])
 
     useEffect(()=>{
-      const role = Cookies.get("role");
+      const role = Cookies.get("userType");
       const token = Cookies.get("token");
-      if(token  && role  != "67b1195be442284118ab89bf" || token  && role  != "68331b9e271c0b706832de91" ){
+      if(token  && role  == "admin" || token  && role == "subadmin"){
           navigation("/dashboard");
-      }else if(token  && role == "67b1195be442284118ab89bf" || token  && role == "68331b9e271c0b706832de91"){
+      }else if(token  && role == "csr" || token  && role == "sales_executive" || token  && role == "lead_manager"){
         navigation("/sales-crm");
-      }else if(token  && role == "685c305069eaa1084c92c5fe" ){
-        navigation("/warehouse");
       }
     },[])
   //--------------  if User Alredy login redirect to their page code end --------------

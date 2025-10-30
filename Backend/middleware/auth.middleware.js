@@ -38,14 +38,14 @@ authMiddleware.authorization = (module) => async (req, res, next) => {
   };
 
   try {
-    const type = req.user.type;
+    const {type, roles } = req.user;
     if(type != "admin"){
 
       const { method } = req;
       const requiredPermission = methodPermissionMap[method];
 
-      if (!role || !role.length)  return otherHelper.sendResponse(res, 401, false, null, null, 'Role Not Found', null);
-      const roleAccesses = await roleAccessModel.findOne({ role_id: role, module_name: module }).select('permissions');
+      if (!roles || !roles.length)  return otherHelper.sendResponse(res, 401, false, null, null, 'Role Not Found', null);
+      const roleAccesses = await roleAccessModel.findOne({ role_id: roles, module_name: module }).select('permissions');
       if (!roleAccesses)  return otherHelper.sendResponse(res, 401, false, null, null, 'Module Access Restricted', null);
 
       const userModulePermission = roleAccesses?.permissions;

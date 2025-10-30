@@ -135,3 +135,7 @@ export const GET_STATE_DATA_LIST = "/api/location/get-state";
 export const GET_DISTRICT_DATA_LIST = "/api/location/get-district";
 export const GET_TALUKA_DATA_LIST = "/api/location/get-taluka";
 export const GET_VILLAGE_DATA_LIST = "/api/location/get-village";
+
+export const GET_LEAVE_LIST = "/api/leave/get-leave";
+export const ADD_LEAVE_LIST = "/api/leave/add-leave";
+export const GET_CHANGE_LEAVE_STATUS = "/api/leave/approve-leave";

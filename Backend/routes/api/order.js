@@ -9,8 +9,8 @@ router.get('/add-return-product', authentication, OrderController.ReturnProductA
 router.post('/add-order',authentication,authorization("Order"), OrderController.AddOrUpdateOrderData);
 router.put('/update-order',authentication,authorization("Order"), OrderController.UpdateOrder);
 router.delete('/remove-order',authentication,authorization("Order"), OrderController.DeleteOrderData);
-router.get('/get-callbacks', authentication, authorization('Order'), OrderController.GetCallBacks);
+router.get('/get-callbacks', authentication,  OrderController.GetCallBacks);
 router.patch('/update-future-order',authentication, OrderController.UpdateFutureOrder);
-router.get('/get-order-sales-executive',authentication,authorization("Order"), OrderController.getFilteredOrderList);
+router.get('/get-order-sales-executive',authentication, OrderController.getFilteredOrderList);
 
 module.exports = router
