@@ -223,3 +223,7 @@ export const StatelistApi = (requserdata) => api.get(url.GET_STATE_DATA_LIST, re
 export const DistrictlistApi = (requserdata) => api.get(url.GET_DISTRICT_DATA_LIST, requserdata);
 export const TalukalistApi = (requserdata) => api.get(url.GET_TALUKA_DATA_LIST, requserdata);
 export const VillagelistApi = (requserdata) => api.get(url.GET_VILLAGE_DATA_LIST, requserdata);
+
+export const LeavelistApi = (requserdata) => api.get(url.GET_LEAVE_LIST, requserdata);
+export const AdddLeavelistApi = (requserdata) => api.create(url.ADD_LEAVE_LIST, requserdata);
+export const ChangeLeavelistApi = (requserdata) => api.create(url.GET_CHANGE_LEAVE_STATUS, requserdata);

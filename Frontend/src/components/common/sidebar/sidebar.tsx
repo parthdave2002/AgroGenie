@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import { HiShoppingBag, HiCube, HiPuzzle, HiUsers, HiChartPie, HiLibrary } from "react-icons/hi";
 import { FaWarehouse } from "react-icons/fa";
-import { MdLeaderboard } from "react-icons/md"; 
+import { MdFlight, MdLeaderboard } from "react-icons/md"; 
 import { TbReportSearch } from "react-icons/tb";
 import { GiWheat } from "react-icons/gi";
 import { FaUser, FaTags  } from "react-icons/fa";
@@ -134,6 +134,12 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       icon:  BiSolidCoupon,
       to: "/coupon/list",
     },
+
+    {
+      name: "User Leaves",
+      icon:  MdFlight,
+      to: "/leave/list",
+    },
   ]
 
   const filteredSidebarData = user === "admin" ? SidebarData : SidebarData.filter((item:any) => AccessList.includes(item.name));
@@ -150,7 +156,7 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
                     <Sidebar.Item icon={item.icon}  className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
                   </NavLink>
                 ))}
-              </Sidebar.ItemGroup>
+              </Sidebar.ItemGroup> 
 
               {filteredSubMasterMenu.length > 0 &&
                 <Sidebar.ItemGroup>

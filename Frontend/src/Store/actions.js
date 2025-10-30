@@ -20,6 +20,7 @@ export * from "./Coupon/action";
 export * from "./Lead/action";
 export * from "./Complain/action";
 export * from "./Location/action";
+export * from "./Leave/action";
 
 //  ==========   sales exective =========================
 export * from "./SalesExecutive/dashboard/action";

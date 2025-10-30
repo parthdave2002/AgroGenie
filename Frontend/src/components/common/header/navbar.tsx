@@ -44,13 +44,7 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
     }
 
     const handleNavigationdashboard = () =>{
-      const role = Cookies.get("role");
-      if(role === "685c305069eaa1084c92c5fe"){
-        navigate("/warehouse");
-      }else{
         navigate("/dashboard");
-      }
-
     }
 
      const [LoginUserimg, setLoginUserimg] = useState<UserImage>();
