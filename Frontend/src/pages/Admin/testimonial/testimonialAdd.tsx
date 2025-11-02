@@ -2,10 +2,10 @@ import { FC, lazy, useEffect, useState } from "react";
 import {  Button } from "flowbite-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Form } from "reactstrap";
+import { Form, FormFeedback } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { AddTagloglist, ResetTagloglist } from "../../../Store/actions";
+import {  AddTestimoniallist, ResetTestimoniallist } from "../../../Store/actions";
 import { toast } from "react-toastify";
 import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
@@ -15,7 +15,17 @@ const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcru
 const TestimonialAddPage : FC = function () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [file, setFile] = useState<File | null |  string>(null);
+    const [file, setFile] = useState<File | null >(null);
+    const [validateImage, setValidateImage] = useState(0);
+
+       useEffect(() => {
+            if (file) {
+                setValidateImage(0)
+            } else {
+                setValidateImage(1)
+            }
+        }, [file])
+    
 
     const [initialValues, setinitialValues] = useState({
         name_eng: "",
@@ -24,7 +34,7 @@ const TestimonialAddPage : FC = function () {
         village_guj: "",
         body_guj : "",
         body_eng : "",
-        rating : 1,
+        rating : 5,
     });
 
     const validation = useFormik({
@@ -32,37 +42,43 @@ const TestimonialAddPage : FC = function () {
         initialValues: initialValues,
     
         validationSchema: Yup.object({
-          name: Yup.string().required("Please enter testimonial name"),
-          village: Yup.string().required("Please enter village"),
-          body: Yup.string().required("Please enter desctiption"),
-          rating: Yup.string().required("Please enter desctiption"),
+          name_eng: Yup.string().required("Please enter testimonial name"),
+          village_eng: Yup.string().required("Please enter village"),
+          body_eng: Yup.string().required("Please enter desctiption"),
         }),
         
         onSubmit: (values) => {
-          let requserdata = {
-            name_eng: values?.name_eng,
-            name_guj : values?.name_guj,
-            image : "sdfsdv" ,
-            village : "Ahmedabad" ,
-            body : "dddd", 
-            rating : 1
-          };
-          dispatch(AddTagloglist(requserdata));
+
+            if (!file) return setValidateImage(1)
+            const formData = new FormData();
+                       formData.append("name_eng", values?.name_eng);
+                      formData.append("name_guj", values.name_guj);
+                      formData.append("village_eng", values?.village_eng);
+                      formData.append("village_guj", values.village_guj);
+
+                      formData.append("body_eng", values?.body_eng);
+                      formData.append("body_guj", values?.body_guj);
+                      formData.append("rating", "5");
+                      if (file) {
+                          formData.append("testimonial_pic", file);
+                      }
+
+          dispatch(AddTestimoniallist(formData));
         },
     });
 
 
     // ------------- Get  Data From Reducer Code Start --------------
-        const AddTagloglistData = useSelector((state: any) => state.Taglog.AddTagloglist)
+        const AddTestimoniallistData = useSelector((state: any) => state.Testimonial.AddTestimonialdatalist)
 
         useEffect(() => {  
-            if(AddTagloglistData?.success == true){
-                dispatch(ResetTagloglist())
-                toast.success(AddTagloglistData?.msg);
+            if(AddTestimoniallistData?.success == true){
+                dispatch(ResetTestimoniallist())
+                toast.success(AddTestimoniallistData?.msg);
                 navigate(ParentLink)
                 validation.resetForm();
             }
-        }, [AddTagloglistData ]);
+        }, [AddTestimoniallistData ]);
     //  ------------- Get Data From Reducer Code end --------------
 
     let Name = "Testimonial Add";
@@ -78,6 +94,7 @@ const TestimonialAddPage : FC = function () {
 
                         <div className="my-3">  
                             <ImageUploadPreview onFileSelect={setFile}  />
+                            {validateImage == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please select Farmer image </FormFeedback> : null}
                         </div> 
 
                         <div className="flex gap-x-3">
@@ -165,7 +182,7 @@ const TestimonialAddPage : FC = function () {
                                     label="Testimonial rating"
                                     required={true}
                                     placeholder="Testimonial rating"
-                                    type="text"
+                                    type="number"
                                     validation={validation}
                                 />
                             </div>

@@ -32,8 +32,9 @@ bannerController.getAllBannerList = async (req, res, next) => {
 bannerController.AddBanner = async (req, res, next) => {
   try {
     const Banner = req.body;
-    if (req.file) {
-      Banner.banner_pic = req.file.filename; 
+    
+    if (req.file && req.file.location) {
+      Banner.banner_pic = req.file.location;
     }
 
     if (Banner._id) {

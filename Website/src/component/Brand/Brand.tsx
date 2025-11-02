@@ -60,8 +60,14 @@ const BrandCarouselSection: React.FC = () => {
 ], []);
 
   return (
-    <section className="py-10 overflow-hidden">
-      <div className="max-w-1600 mx-auto px-4">
+    <section className="relative py-10 overflow-hidden  bg-cover bg-center"  style={{ 
+       backgroundImage: "url('/images/service_bg_1.png')",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+     }}>
+      <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px]"></div>
+      <div className="relative max-w-1600 mx-auto px-4"  >
         <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center "> Our <span className="text-lime-500"> Seeds </span> </h2>
         <div className="flex flex-wrap justify-between items-center ">
 
@@ -71,7 +77,7 @@ const BrandCarouselSection: React.FC = () => {
                 <div key={index} className="flex-shrink-0 w-32 md:w-48 mx-5 flex items-center text-center justify-center">
                   <div className='flex flex-col '>
                     <LazyLoadImage effect="blur" src={item.img} className="h-[15rem] w-[32rem] object-contain " />
-                    <h3 className="text-base font-semibold text-gray-900 mt-2 leading-tight">{item.subtitle}</h3>
+                    {/* <h3 className="text-base font-semibold text-gray-900 mt-2 leading-tight">{item.subtitle}</h3> */}
                   </div>
                 </div>
               ))}

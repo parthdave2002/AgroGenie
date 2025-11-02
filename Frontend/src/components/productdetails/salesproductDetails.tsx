@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { GetProductViewlist } from '../../Store/actions';
 import { IoArrowRedoSharp } from "react-icons/io5";
-const IMG_URL = import.meta.env["VITE_API_URL"];
 import { SiBattledotnet } from "react-icons/si";
 import { FaWindowClose } from 'react-icons/fa';
 
@@ -95,7 +94,7 @@ const SalesProductDetailData : FC<PropsData> = ({ProductDetails, ProductCLoseCal
                           {Product_data?.product_pics && Product_data?.product_pics.map((src:any, index:number) => (
                               <img
                                   key={index}
-                                  src= {  `${IMG_URL}/public/product/${src}`}
+                                  src= {src}
                                   alt={`Slide ${index + 1}`}
                                   className={`absolute top-1/2 left-1/2 
               -translate-x-1/2 -translate-y-1/2 

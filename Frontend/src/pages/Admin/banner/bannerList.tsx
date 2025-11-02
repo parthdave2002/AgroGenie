@@ -3,7 +3,6 @@ import { Button } from "flowbite-react";
 import { HiTrash} from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-const IMG_URL = import.meta.env["VITE_API_URL"];
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { DeleteBannerlist,  getBannerlist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";

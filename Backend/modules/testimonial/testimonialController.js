@@ -38,7 +38,7 @@ testimonialController.AddTestimonial = async (req, res, next) => {
     const testimonialData = req.body;
     const fileUrl = req.file?.location || null;
     if (fileUrl) {
-      testimonialData.testimonial_pics = fileUrl;
+      testimonialData.testimonial_pic = fileUrl;
     }
 
     const existingTestimonial = await testimonialSch.findOne({ name_eng : testimonialData.name_eng });

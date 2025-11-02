@@ -26,6 +26,12 @@ const BannerSection: React.FC = () => {
     return match ? `https://www.youtube.com/embed/${match[1]}` : url;
   };
 
+  const Itemcall = (data: string) =>{
+      if (data) {
+        window.open(data, "_blank");
+      }
+  }
+
   return (
    <section className="bg-[url('/images/background-pattern.jpg')] bg-no-repeat bg-cover">
       <div className="max-w-7xl mx-auto grid grid-cols-1">
@@ -35,18 +41,18 @@ const BannerSection: React.FC = () => {
             {allBanners.map((item: any, i: number) => (
               <SwiperSlide key={item._id || i} data-swiper-autoplay={item.banner_duration || 5000} >
                 {item.banner_type === 'image' && (
-                  <img src={`${IMG_URL}/public/banner/${item?.banner_pic || item?.banner_URL}`} alt={item?.name} className="object-contain w-full h-[450px]" />
+                  <img src={item?.banner_pic} alt={item?.name} className="object-contain w-full h-[450px]" onClick={() => Itemcall(item?.banner_URL) } />
                 )}
 
                 {item.banner_type === 'video' && (
                   <video className="w-full h-[450px]" autoPlay loop muted playsInline controls={false} >
-                    <source src={`${IMG_URL}/public/banner/${item.banner_pic || item?.banner_URL}`} type="video/mp4" />
+                    <source src={item.banner_pic} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 )}
 
                 {item.banner_type === 'youtube' && (
-                  <iframe className="w-full h-[450px]" src={convertYoutubeURL(item?.banner_URL)} title={item?.name} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen ></iframe>
+                  <iframe className="w-full h-[450px]" src={convertYoutubeURL(item?.banner_URL)} title={item?.name} allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen ></iframe>
                 )}
               </SwiperSlide>
             ))}

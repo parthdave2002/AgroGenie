@@ -227,3 +227,7 @@ export const VillagelistApi = (requserdata) => api.get(url.GET_VILLAGE_DATA_LIST
 export const LeavelistApi = (requserdata) => api.get(url.GET_LEAVE_LIST, requserdata);
 export const AdddLeavelistApi = (requserdata) => api.create(url.ADD_LEAVE_LIST, requserdata);
 export const ChangeLeavelistApi = (requserdata) => api.create(url.GET_CHANGE_LEAVE_STATUS, requserdata);
+
+export const TestimoniallistApi = (requserdata) => api.get(url.GET_TESTIMONIAL_LIST, requserdata);
+export const AddTestimoniallistApi = (requserdata) => api.postMultipart(url.ADD_TESTIMONIAL_LIST, requserdata);
+export const DelTestimoniallistApi = (requserdata) => api.delete(url.DELETE_TESTIMONIAL_LIST, requserdata);

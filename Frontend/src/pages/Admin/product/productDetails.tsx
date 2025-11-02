@@ -6,7 +6,6 @@ import LoaderPage from "../../../components/common/loader/loader";
 import { ProductDetails } from "../../../types/types";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { GetProductViewlist } from "../../../Store/actions";
-const IMG_URL = import.meta.env["VITE_API_URL"];
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const ProductDetailsPage: FC = function () {
@@ -46,7 +45,7 @@ const ProductDetailsPage: FC = function () {
               <div>
                 <div className="flex gap-x-5">
                   {ProductDatalist && ProductDatalist?.product_pics.map((item: any, k: number) => (
-                    <img key={k} className="w-28 h-28 rounded-full" src={`${IMG_URL}/public/product/${item}`} alt="product photo" />
+                    <img key={k} className="w-28 h-28 rounded-full" src={item} alt="product photo" />
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-3 mt-[3rem]">

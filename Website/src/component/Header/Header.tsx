@@ -99,8 +99,8 @@ const Header: React.FC = () => {
 
         <div className="container border-b border-gray-100 mx-auto  py-3">
           <div className="md:flex flex-wrap items-center justify-between gap-4">
-            {/* <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}>   <LazyLoadImage effect="blur" src="/images/logo.webp" alt="logo" className="h-[3.5rem] mx-auto sm:mx-0" /> </div> </div> */}
-            <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}> Logo </div> </div>
+            <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}>   <LazyLoadImage effect="blur" src="/images/logo.webp" alt="logo" className="h-[3.5rem] mx-auto sm:mx-0" /> </div> </div>
+            {/* <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}> Logo </div> </div> */}
 
             <div className="flex flex-row gap-x-[3rem] justify-center my-6 md:my-0">
               <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/")}> {t("Home")}</div>
@@ -110,10 +110,19 @@ const Header: React.FC = () => {
               <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/contactus")}> {t("Contact")} </div>
             </div>
 
-            <button onClick={OpenBrochure} className="flex items-center gap-2 bg-gradient-to-r from-green-700 to-lime-500 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
-              <span className="text-lg font-chilanka">Download Brochure</span>
-              <FaArrowRightLong size={18} className="text-white transition-transform duration-200 group-hover:translate-x-1" />
-            </button>
+            <div className="flex gap-x-4">
+              <li  className="relative flex gap-x-3 rounded-full bg-green-600 hover:bg-green-500 p-2.5 mx-1 cursor-pointer text-gray-50"  onClick={() => CartCall()}> 
+                  <MdOutlineShoppingCart size={24} />
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"> {cartCount}</span>
+                </li>
+              <button onClick={OpenBrochure} className="flex items-center gap-2 bg-gradient-to-r from-green-700 to-lime-500 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
+                <span className="text-lg font-chilanka">Download Brochure</span>
+                <FaArrowRightLong size={18} className="text-white transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
+            </div>
+
+             
+
 
           </div>
         </div>

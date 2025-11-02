@@ -35,7 +35,7 @@ const TestimonailSection = () => {
                 <SwiperSlide key={index}>
                   <div className="bg-[#e2f7e5] h-full flex flex-col justify-between p-6 transition-transform duration-300 hover:scale-105 hover:shadow-xl rounded-2xl min-h-[18rem] max-h-[18rem] shadow-md shadow-green-100 font-body">
                     <div className="flex items-center gap-4 mb-4 ">
-                      <LazyLoadImage effect="blur" src= {`${IMG_URL}/public/testimonial/${testimonial?.testimonial_pics}`} alt={testimonial?.name} className="w-14 h-14 rounded-full object-cover border border-green-500"   />
+                      <LazyLoadImage effect="blur" src= {testimonial?.testimonial_pic} alt={testimonial?.name} className="w-14 h-14 rounded-full object-cover border border-green-500"   />
                       <div>
                         <h4 className="text-lg  text-gray-900">{t(testimonial?.name_eng)}</h4>
                         <p className="text-sm text-gray-500">{t(testimonial?.village_eng)}</p>
