@@ -40,7 +40,6 @@ authMiddleware.authorization = (module) => async (req, res, next) => {
   try {
     const {type, roles } = req.user;
     if(type != "admin"){
-
       const { method } = req;
       const requiredPermission = methodPermissionMap[method];
 

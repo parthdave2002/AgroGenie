@@ -211,19 +211,19 @@ const BannerAddPage: FC = function () {
                         </div>
                         }
 
-                        { selectedBannerTypeid === "youtube"  &&
+                        {/* { selectedBannerTypeid === "youtube" ||  && */}
                             <div className="mt-[1rem]">
                                                         <Inputbox
                                                             id="youtube_url"
                                                             name="youtube_url"
-                                                            label="Youtube URL"
+                                                            label="Banner URL"
                                                             required={true}
                                                             placeholder="Banner URL"
                                                             type="text"
                                                             validation={validation}
                                                         />
                             </div>
-                        }
+                        {/* } */}
 
                         <div className="mt-[1rem]">
                             <Inputbox

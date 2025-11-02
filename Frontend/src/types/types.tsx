@@ -131,6 +131,9 @@ export interface ProductDetails {
   product_pics: [];
   rating: any;
   s_gst: number;
+  isShowonsite : boolean;
+  isMostpopular : boolean;
+  isBestSelling : boolean;
   tech_name: TechName;
   _id: string;
   crops ?: any;

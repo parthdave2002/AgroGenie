@@ -38,9 +38,10 @@ cropController.getAllcrop = async (req, res, next) => {
 cropController.addcrop = async (req, res, next) => {
   try {
     const Crop = req.body;
-    if (req.files) {
-      Crop.crop_pics = req.files.map((file) => file.filename);
+    if (req.file && req.file.location) {
+      Crop.crop_pics =  req.file.location;
     }
+
     const existingCrop = await cropSch.findOne({ name_guj: Crop.name_guj, is_deleted: false });
     if (existingCrop)  return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, "Gujarati Crop already exist ", null);
 

@@ -9,7 +9,7 @@ const testimonialSchema = new schema({
   body_eng: { type: String},
   body_guj: { type: String},
   rating : { type: Number, min: 1, max: 5 },
-  testimonial_pics: { type: String, default: null },
+  testimonial_pic : { type: String, default: null },
 }, { timestamps : true});
 
 module.exports = testimonial = mongoose.model('testimonial', testimonialSchema);

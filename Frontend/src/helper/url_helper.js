@@ -139,3 +139,7 @@ export const GET_VILLAGE_DATA_LIST = "/api/location/get-village";
 export const GET_LEAVE_LIST = "/api/leave/get-leave";
 export const ADD_LEAVE_LIST = "/api/leave/add-leave";
 export const GET_CHANGE_LEAVE_STATUS = "/api/leave/approve-leave";
+
+export const GET_TESTIMONIAL_LIST = "/api/testimonial/get-testimonial";
+export const ADD_TESTIMONIAL_LIST = "/api/testimonial/add-testimonial";
+export const DELETE_TESTIMONIAL_LIST = "/api/testimonial/remove-testimonial";
