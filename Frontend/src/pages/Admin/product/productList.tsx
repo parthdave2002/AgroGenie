@@ -116,14 +116,16 @@ const ProductListPage: FC = function () {
         <span className="whitespace-nowrap max-w-[35rem] truncate text-ellipsis text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer" onClick={() => DetailsPageCall(row?._id)}> {row?.name?.englishname || "-"} </span>
       )
     },
-    // {
-    //   key: "description",
-    //   label: "Description",
-    // },
+
     {
       key: "categories",
       label: "Category",
       render: (row: any) => row?.categories?.name_eng || "-",
+    },
+    {
+      key: "warehouse",
+      label: "warehouse",
+      render: (row: any) => row?.warehouse?.name || "-",
     },
     {
       key: "avl_qty",

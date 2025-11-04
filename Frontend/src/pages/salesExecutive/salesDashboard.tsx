@@ -15,7 +15,6 @@ import moment from "moment";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { BsCartCheckFill } from "react-icons/bs";
 import SalesProfile from "./salesProfile";
-const IMG_URL = import.meta.env["VITE_API_URL"];
 
   interface PropsData {
     setDatactive: any;
@@ -48,7 +47,7 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
   const [TotalOrder, setTotalOrder] = useState<DashboardCount>()
   const [TotalFutureOrder, setTotalFutureOrder] = useState<DashboardCount>()
   const [TotalReturnOrder, setTotalReturnOrder] = useState<DashboardCount>()
-  const [LoginUserimg, setLoginUserimg] = useState<UserImage>();
+  const [LoginUserimg, setLoginUserimg] = useState("");
   const login = useSelector((state:any) => state.Login.Logincode);
   const DashboardDataList = useSelector((state: any) => state.SalesDashboard.DashboardDataList?.data);
   const OrderDataList = useSelector((state: any) => state.Order.SalesExeOrderlist);
@@ -317,7 +316,7 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
 
               <div className="relative flex ">
                 <button onClick={() => setIsOpen(!isOpen)} className="flex items-center text-sm px-3 py-0.5 font-medium text-gray-900 hover:text-blue-600 md:me-0  dark:text-white  dark:hover:text-gray-100" type="button"  >
-                  <img className="w-8 h-8 me-2 rounded-full" src={ LoginUserimg ? `${IMG_URL}/public/user/${LoginUserimg}` : userphoto} alt="user photo" />
+                  <img className="w-8 h-8 me-2 rounded-full" src={LoginUserimg ? LoginUserimg : userphoto} alt="user photo" />
                   <span> {data ? data : ""}  </span>
                   <FaAngleDown className="w-4 h-4 ms-3" />
                 </button>

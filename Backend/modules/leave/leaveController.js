@@ -7,6 +7,9 @@ leaveController.getAllleave = async (req, res, next) => {
   try {
     
     const { id : userid, type } = req.user
+
+    console.log("type", type);
+    
     let { page, size, populate, selectQuery, sortQuery } = otherHelper.parseFilters(req);
   
     const userPopulate = [
@@ -25,15 +28,14 @@ leaveController.getAllleave = async (req, res, next) => {
       const currentDate = new Date();
       const currentMonthYear = `${String(currentDate.getMonth() + 1).padStart(2, "0")}-${currentDate.getFullYear()}`;
 
-      const allLeaves = await leaveSch
-        .find()
-        .populate(userPopulate)
-        .sort(sortQuery || { createdAt: -1 });
+      const allLeaves = await leaveSch.find().populate(userPopulate).sort(sortQuery || { createdAt: -1 });
+      console.log("🚀 ~ allLeaves:", allLeaves)
 
       const leavesThisMonth = allLeaves.filter((leave) => {
         if (!leave.request_date) return false;
         return leave.request_date.slice(3) === currentMonthYear;
       });
+      console.log("🚀 ~ leavesThisMonth:", leavesThisMonth)
 
       const groupedData = {};
 

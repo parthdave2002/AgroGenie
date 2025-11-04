@@ -77,11 +77,11 @@ const SignInPage: FC = function () {
     setisLoading(false)
     if (Login == true) {  
       validation.resetForm();
-      if( LoginRols == "csr" || LoginRols == "sales_executive" || LoginRols == "lead_manager"){
+      if(LoginRols !== "admin" ){
         navigation("/sales-crm");
         location.reload();
       }
-      else if( LoginRols == "admin" || LoginRols == "subadmin"){
+      else if( LoginRols == "admin"){
         navigation("/dashboard");
         location.reload();
       }

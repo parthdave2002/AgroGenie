@@ -1,5 +1,4 @@
 import { FC, lazy, useEffect, useState } from "react";
-const IMG_URL = import.meta.env["VITE_API_URL"];
 import { useDispatch, useSelector } from "react-redux";
 import { UserData } from "types/types";
 import { useFormik } from "formik";
@@ -78,7 +77,7 @@ const ProfilePage : FC = function () {
                 <ExampleBreadcrumb  Name={Name}  />
                 <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
                     <div className="flex flex-col ">
-                        <ImageUploadPreview onFileSelect={setFile1}  defaultImage={userData?.user_pic ? `${IMG_URL}/public/user/${userData?.user_pic}` : ""}  />
+                        <ImageUploadPreview onFileSelect={setFile1}  defaultImage={userData?.user_pic ? `${userData?.user_pic}` : ""}  />
 
                         <div>
                             <div className="flex flex-col gap-y-3 dark:text-gray-50 w-full mt-[3rem]">

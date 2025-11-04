@@ -5,6 +5,11 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
+export interface Location{
+  name : string;
+  _id :string;
+}
+
 export interface ProfileInfo {
   crops: [];
   is_deleted: boolean;
@@ -20,11 +25,11 @@ export interface ProfileInfo {
   irrigation_type: string;
   heard_about_agribharat: string;
   address: string;
-  district: string;
+  district: Location;
   district_name: string;
-  taluka: string;
+  taluka: Location;
   taluka_name: string;
-  village: string;
+  village: Location;
   village_name: string;
   pincode: number;
   post_office: string;

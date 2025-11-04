@@ -48,10 +48,8 @@ const AddUserPage : FC = function () {
     },[id])
 
       const [UserDataList, setUserDataList] = useState<UserData>();
-      const { UserView } = useSelector((state: any) => ({
-        UserView: state.User.UserView,
-      }));
-    
+      const  UserView  = useSelector((state: any) => state.User.UserView)
+      
       useEffect(() => {
         setUserDataList(UserView ? UserView.data  : null);
       }, [UserView]);
@@ -316,7 +314,7 @@ const AddUserPage : FC = function () {
             setFile: UserDataList?.user_pic ? new File([], UserDataList.user_pic) : null
         }));
  
-        setSelectedRoleOption({ label: UserDataList?.role.role_title,  value: UserDataList?.role._id });
+        setSelectedRoleOption({ label: UserDataList?.role?.role_title,  value: UserDataList?.role._id });
         setSelectedRoleid(UserDataList?.role?._id ? UserDataList?.role?._id : null);
         if (UserDataList?.gender && genderoption.length > 0) {
             const selectedGender = genderoption.find((gender:any) => gender.value === UserDataList.gender);

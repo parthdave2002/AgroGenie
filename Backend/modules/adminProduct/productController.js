@@ -96,6 +96,7 @@ productController.getAllProductList = async (req, res, next) => {
       { path: 'company', model: 'company', select: 'name_eng name_guj' },
       { path: 'packagingtype', model: 'packing-type', select: 'type_eng type_guj' },
       { path: 'crops', model: 'crop', select: 'name_eng name_guj' },
+      { path: 'warehouse', model: 'warehouse', select: 'name' },
     ];
 
     if (req.query.id) {

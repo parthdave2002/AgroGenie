@@ -11,16 +11,10 @@ import { IoIosSearch } from "react-icons/io";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { resetinsertlogin } from "../../../Store/actions";
-const IMG_URL = import.meta.env["VITE_API_URL"];
 
 interface NavbarSidebarLayoutProps {
   isNavbar?: boolean;
   isAppbar?: boolean;
-}
-
-interface UserImage{
-  user_pic: string;
-  _id: string;
 }
 
 const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
@@ -47,9 +41,12 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
         navigate("/dashboard");
     }
 
-     const [LoginUserimg, setLoginUserimg] = useState<UserImage>();
+     const [LoginUserimg, setLoginUserimg] = useState("");
      const login = useSelector((state:any) => state.Login.Logincode);
      const Profileuserdata = useSelector((state:any) =>  state.User.Profileuserdata);
+
+     console.log("LoginUserimg", LoginUserimg);
+     
    
      useEffect(() => {
        setLoginUserimg( Profileuserdata?.data?.user_pic ? Profileuserdata?.data?.user_pic  :  login?.data?.user_img?.user_pic ? login?.data?.user_img?.user_pic : userphoto);
@@ -79,7 +76,7 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
                         type="button"
                       >
                         <span className="sr-only">Open user menu</span>
-                        <img  className="w-8 h-8 rounded-full"  src={`${IMG_URL}/public/user/${LoginUserimg}`}  alt="user photo"  />
+                        <img  className="w-8 h-8 rounded-full"  src={LoginUserimg}  alt="user photo"  />
                       </button>
                     </Menu.Button>
                   </div>

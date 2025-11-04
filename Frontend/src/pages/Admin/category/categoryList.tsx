@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import moment from "moment";
 import { FaExchangeAlt } from "react-icons/fa";
-const IMG_URL = import.meta.env["VITE_API_URL"];
 import { ChangeStatusCategorylist, DeleteCategorylist,  getCategorylist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 import LoaderPage from "../../../components/common/loader/loader";
@@ -117,7 +116,7 @@ const CategoryListPage: FC = function () {
         key: "category_pic",
         label: "Image",
         render : ( row : any) => (
-          <img  src={`${IMG_URL}/public/category/${row?.category_pic}`}   alt="Category" className="h-16 w-16 object-cover rounded-full"  /> 
+          <img  src={row?.category_pic}   alt="Category" className="h-16 w-16 object-cover rounded-full"  /> 
         )
       },
       {

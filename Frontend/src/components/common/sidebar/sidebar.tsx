@@ -46,11 +46,11 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       icon: HiChartPie, // Reference the actual icon component
       to: "/dashboard",
     },
-     {
-      name: "Warehouse",
-      icon: FaWarehouse, // Reference the actual icon component
-      to: "/warehouse",
-    },
+    //  {
+    //   name: "Warehouse",
+    //   icon: FaWarehouse, // Reference the actual icon component
+    //   to: "/warehouse",
+    // },
     {
       name: "Advisor",
       icon: HiUsers,

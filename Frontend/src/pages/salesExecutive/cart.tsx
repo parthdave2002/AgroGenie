@@ -12,6 +12,7 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 import SuccessErrorModalPage from '../../components/common/modal/successErrorModal';
 import ConfirmationModalPage from '../../components/common/modal/confirmationModal';
+import { ProfileInfo } from 'types/types';
 
 interface Cartprops{
   setCartOpen : (value : boolean) => void;
@@ -21,35 +22,6 @@ interface Cartprops{
   cartOrderid ?: any;
   setCartOrderid: (value : any) => void;
   future_date ?:any;
-}
-
-interface ProfileInfo{
-  crops: [];
-  is_deleted:  boolean;
-  _id: string;
-  customer_name : string; 
-  firstname: string;
-  middlename: string;
-  lastname: string;
-  mobile_number:  number;
-  land_area: number;
-  land_type: string;
-  irrigation_source: string;
-  irrigation_type:  string;
-  heard_about_agribharat:  string;
-  address: string;
-  district:  string;
-  district_name:  string;
-  taluka:  string;
-  taluka_name:  string;
-  village:  string;
-  village_name:  string;
-  pincode:  number;
-  created_by:  string;
-  __v: number;
-  alternate_number: number;
-  added_at:  string;
-  smart_phone: boolean;
 }
 
 const CartList : FC<Cartprops> = ({setCartOpen,CartData, handleRemoveCall, setCartItem, cartOrderid, setCartOrderid, future_date}) => {
@@ -360,9 +332,9 @@ const CartList : FC<Cartprops> = ({setCartOpen,CartData, handleRemoveCall, setCa
             <div className="border dark:border-gray-600 dark:bg-gray-800 p-3 rounded-xl w-full flex flex-col gap-y-3">
               <div className='dark:text-gray-300 text-[1.2rem] font-semibold'>Shipping Address</div>
               <div className='dark:text-gray-300 '>  {data?.address} </div>
-              <div className='dark:text-gray-300'> District :   {data?.district_name} </div>
-              <div className='dark:text-gray-300'> Taluka :  {data?.taluka_name} </div>
-              <div className='dark:text-gray-300'> Village :  {data?.village_name} </div>
+              <div className='dark:text-gray-300'> District :   {data?.district?.name} </div>
+              <div className='dark:text-gray-300'> Taluka :  {data?.taluka?.name} </div>
+              <div className='dark:text-gray-300'> Village :  {data?.village?.name} </div>
               <div className='dark:text-gray-300'> Pincode : {data?.pincode} </div>
             </div>
             </div> 

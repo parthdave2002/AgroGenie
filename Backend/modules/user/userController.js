@@ -28,7 +28,7 @@ userController.GetAllUser = async (req, res, next) => {
   try {
    
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
-    searchQuery = { ...searchQuery, is_deleted: false, user_type: 'subadmin' };
+    searchQuery = { ...searchQuery, is_deleted: false, user_type: { $ne: 'admin' }  };
     selectQuery = 'name email password gender mobile_no date_of_joining date_of_birth address emergency_mobile_no emergency_contact_person added_at role pan_card bank_passbook aadhar_card user_id is_active user_pic';
     populate = [{ path: 'role',  model: 'roles', select: 'role_title' }];
 
@@ -89,9 +89,8 @@ userController.PostUser = async (req, res, next) => {
   try {
     const user = req.body;
 
-    let profilePic = null;
-    if (req?.file) {
-      profilePic = req.file.filename;
+     if (req.file && req.file.location) {
+      user.user_pic = req.file.location;
     }
 
     const existingUserName = await userSch.findOne({ name: req.body.name })
@@ -109,8 +108,8 @@ userController.PostUser = async (req, res, next) => {
 
     const data = await userSch.create({
       ...req.body,
-      password: hashPwd,
-      user_pic: profilePic,
+      user_pic : user.user_pic,
+      password: hashPwd
     });
 
     // const newUser = new userSch(user);
@@ -132,9 +131,10 @@ userController.UpdateUserImage = async (req, res, next) => {
       $set: { ...user, updated_at: new Date() },
     };
 
-    if (req?.file) {
-      updateData.$set.user_pic = req.file.filename;
+    if (req.file && req.file.location) {
+      updateData.$set.user_pic = req.file.location;
     }
+
 
     const updatedUser = await userSch.findByIdAndUpdate( userId, updateData, { new: true } );
     return otherHelper.sendResponse(res, httpStatus.OK, true, updatedUser, null, 'user updated successfully', null);
@@ -176,7 +176,7 @@ userController.validLoginResponse = async (req, user, next) => {
     let token = await jwt.sign(payload, secretOrKey, {
       expiresIn: "5d",
     });
-    loginLogs.addloginlog(req, token, next);
+    // loginLogs.addloginlog(req, token, next);
     token = `${token}`;
     return { token, payload };
   } catch (err) {
@@ -239,12 +239,12 @@ userController.updateUserProfileImage = async (req, res, next) => {
   try {
     const userId = req.user.id;
     if (!userId)  return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'User ID is required', null);
-    if (!req?.file?.filename)    return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Profile image file is required', null);
-    
+    if (!req?.file?.location)    return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Profile image file is required', null);
+
     const user = await userSch.findById(userId);
     if (!user)  return otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'User not found', null);
     
-    const updateData = {$set: {  user_pic: req.file.filename,  updated_at: new Date()  } };
+    const updateData = {$set: {  user_pic: req.file.location,  updated_at: new Date()  } };
     const updatedUser = await userSch.findByIdAndUpdate(userId, updateData, { new: true });
     return otherHelper.sendResponse(res, httpStatus.OK, true, updatedUser, null, 'User profile image updated successfully!', null);
   } catch (err) {
