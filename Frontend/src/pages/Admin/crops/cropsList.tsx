@@ -111,6 +111,13 @@ const CropsListPage: FC = function () {
 
   const cropColumns = useMemo(() => [
     {
+      key: "crop_pics",
+      label: "Image",
+      render: (row: any) => (
+        <img src={row?.crop_pics[0]} alt="Crop" className="h-16 w-16 object-cover rounded-full" />
+      )
+    },
+    {
       key: "name_eng",
       label: "Name (Eng)",
     },

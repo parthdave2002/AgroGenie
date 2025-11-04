@@ -33,7 +33,9 @@ adminCategoryController.getAllCategoryList = async (req, res, next) => {
 adminCategoryController.AddCategory = async (req, res, next) => {
   try {
     const Category = req.body;
-    if (req.file) Category.category_pic = req.file.filename; 
+    if (req.file && req.file.location) {
+      Category.category_pic = req.file.location;
+    }
 
     const existingCompany = await categorySch.findOne({ name_eng: Category.name_eng, is_deleted: false });
     if (existingCompany)  return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, "English Category name already exist ", null);

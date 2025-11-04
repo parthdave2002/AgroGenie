@@ -54,7 +54,7 @@ class APIClient {
         Cookies.remove("role");
         Cookies.remove("userType");
 
-        window.location.replace("/login");
+        // window.location.replace("/login");
         toast.error("Module Access Restricted.");
       }
 

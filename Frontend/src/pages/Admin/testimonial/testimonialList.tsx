@@ -6,9 +6,10 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react
 import { useNavigate } from "react-router";
 import LoaderPage from "../../../components/common/loader/loader";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import { DeleteTagloglist, getTagloglist } from "../../../Store/actions";
+import { DeleteTagloglist, getTestimoniallist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 import CommonTable from "../../../components/common/table/commonTable";
+import moment from "moment";
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
@@ -18,14 +19,14 @@ const TestimonialListPage: FC = function () {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpenDelteModel, setisOpenDelteModel] = useState(false);
-  const [TaglogList, setTaglogList] = useState([]);
+  const [TaglogList, setTestimonialList] = useState([]);
   const [loader, setLoader] = useState(false);
   
-    const { Tagloglist,  TagloglistSize, TotalTaglogData, CurrentPage, permissionsdata } = useSelector((state: any) => ({
-      Tagloglist: state.Taglog.Tagloglist,
-      TagloglistSize: state.Taglog.TagloglistSize,
-      TotalTaglogData: state.Taglog.TotalTaglogData,
-      CurrentPage: state.Taglog.CurrentPage,
+    const { Testimonialdatalist,  TestimoniallistSize, TotalTestimonialData, CurrentPage, permissionsdata } = useSelector((state: any) => ({
+      Testimonialdatalist: state.Testimonial.Testimonialdatalist,
+      TestimoniallistSize: state.Testimonial.TestimoniallistSize,
+      TotalTestimonialData: state.Testimonial.TotalTestimonialData,
+      CurrentPage: state.Testimonial.CurrentPage,
       permissionsdata: state.Login.permissionsdata
     }));
     
@@ -63,16 +64,16 @@ const TestimonialListPage: FC = function () {
         size: RoePerPage
       };
       if (searchData)  requserdata.search = searchData;
-      dispatch(getTagloglist(requserdata));
+      dispatch(getTestimoniallist(requserdata));
       setLoader(true)
     }, [dispatch, PageNo, RoePerPage, searchData]);
 
     useEffect(() => {        
-      setTaglogList(Tagloglist? Tagloglist : []);
-      setTotalListData(TotalTaglogData ? TotalTaglogData : 0);
+      setTestimonialList(Testimonialdatalist? Testimonialdatalist : []);
+      setTotalListData(TotalTestimonialData ? TotalTestimonialData : 0);
       setCurrentPageNo(CurrentPage ? CurrentPage : 1);
       setLoader(false)
-    }, [Tagloglist,  TagloglistSize, TotalTaglogData, CurrentPage]);
+    }, [Testimonialdatalist,  TestimoniallistSize, TotalTestimonialData, CurrentPage]);
   //  ------------- Get Data From Reducer Code end --------------
 
   // ------------  Delete Code Start ------------
@@ -99,21 +100,46 @@ const TestimonialListPage: FC = function () {
 
   const testimonialColumns = useMemo(() => [
     {
-      key: "taglog_name",
-      label: "Name",
+      key: "testimonial_pic",
+      label: "Famer Image",
+      render : ( row : any) => (
+        <img  src={row?.testimonial_pic}   alt="farmer" className="h-16 w-16 object-cover rounded-full"  /> 
+      )
     },
     {
-      key: "desctiption",
+      key: "name_eng",
+      label: "Name (Eng)",
+    },
+    {
+      key: "name_guj",
+      label: "Name (Guj)",
+    },
+    {
+      key: "body_eng",
       label: "Desctiption",
-    },
-       {
-      key: "desctiption",
-      label: "Village",
+      render : (row:any) => <div className="max-w-[10rem] truncate"> {row?.body_eng} </div>
     },
     {
-      key: "created_at",
+      key: "body_guj",
+      label: "Desctiption (Guj)",
+      render : (row:any) => <div className="max-w-[10rem] truncate"> {row?.body_guj} </div>
+    },
+    {
+      key: "village_eng",
+      label: "Village (Eng)",
+    },
+    {
+      key: "village_guj",
+      label: "Village (Guj)",
+    },
+    {
+      key: "rating",
+      label: "Rating",
+    }, 
+    {
+      key: "createdAt",
       label: "Created At",
-
+      render : (row:any) => <div > {moment(row?.createdAt).format("DD-MM-YYYY hh:mm:ss")} </div>
     },
     {
       key: "actions",

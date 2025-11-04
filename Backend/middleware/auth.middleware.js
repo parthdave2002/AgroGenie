@@ -49,7 +49,6 @@ authMiddleware.authorization = (module) => async (req, res, next) => {
 
       const userModulePermission = roleAccesses?.permissions;
       if (!userModulePermission || !userModulePermission[requiredPermission])  return otherHelper.sendResponse(res, 401, false, null, null, 'Module Access Restricted', null);
-      
     }
 
     next();

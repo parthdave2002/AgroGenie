@@ -139,6 +139,7 @@ otherHelper.paginationSendResponse = (res, status, success, data, msg, pageNo, p
   if (typeof totalData === 'number') response.totalData = totalData;
   return res.status(status).json(response);
 };
+
 otherHelper.getQuerySendResponse = async (model, page, size, sortQuery, searchQuery, selectQuery, next, populate) => {
   let pulledData = {};
   try {
@@ -155,6 +156,7 @@ otherHelper.getQuerySendResponse = async (model, page, size, sortQuery, searchQu
     next(err);
   }
 };
+
 otherHelper.returnIdIfSlug = async (slug_url, slug_key, schema) => {
   if (Validator.isMongoId(slug_url)) {
     return slug_url;

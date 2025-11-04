@@ -100,7 +100,7 @@ export const UserlistApi = (requserdata) => api.get(url.GET_USER_LIST, requserda
 export const UserlistViewApi = (requserdata) => api.get(url.GET_USER_VIEW, requserdata);
 export const AddUserlistApi = async (requserdata) => await api.postMultipart(url.ADD_USER_LIST, requserdata);
 export const DelUserlistApi = async (requserdata) => await api.get(url.DELETE_USER_LIST, requserdata);
-export const UpdateUserdatalistApi = async (requserdata) => await api.create(url.UPDATE_USER_DATA_LIST, requserdata);
+export const UpdateUserdatalistApi = async (requserdata) => await api.postMultipart(url.UPDATE_USER_DATA_LIST, requserdata);
 export const CheckUserdatalistApi = async (requserdata) => await api.get(url.CHECK_USER_LIST, requserdata);
 export const profileUserdatalistApi = async (requserdata) => await api.get(url.GET_PROFILE_DATA_LIST, requserdata);
 export const updateprofileUserdatalistApi = async (requserdata) => await api.postMultipart(url.UPDATE_PROFILE_DATA_LIST, requserdata);
