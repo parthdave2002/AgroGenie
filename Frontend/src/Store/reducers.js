@@ -22,6 +22,7 @@ import Complain from "./Complain/reducer";
 import Location from "./Location/reducer";
 import Leave from "./Leave/reducer";
 import Testimonial from "./Testimonial/reducer";
+import NoticeBoard from "./NoticeBoard/reducer";
 import SalesDashboard from "./SalesExecutive/dashboard/reducer";
 
 const rootReducer = combineReducers({
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
     Lead,
     Leave,
     Testimonial,
+    NoticeBoard,
     Complain,
     SalesDashboard,
     Location

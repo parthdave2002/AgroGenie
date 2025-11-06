@@ -207,6 +207,11 @@ export const AddCouponlistApi = async (requserdata) => await api.create(url.ADD_
 export const DelCouponlistApi = async (requserdata) => await api.delete(url.DELETE_COUPON_LIST, requserdata);
 export const StatusCouponlistApi = async (requserdata) => await api.delete(url.CHANGE_STATUS_COUPON_LIST, requserdata);
 
+// NoticeBoard API
+export const NoticeBoardlistApi = (requserdata) => api.get(url.GET_NOTICE_BOARD_LIST, requserdata);
+export const AddNoticeBoardlistApi = async (requserdata) => await api.postMultipart(url.ADD_NOTICE_BOARD_LIST, requserdata);
+export const DelNoticeBoardlistApi = async (requserdata) => await api.delete(url.DELETE_NOTICE_BOARD_LIST, requserdata);
+
 // Lead API
 export const LeadlistApi = (requserdata) => api.get(url.GET_LEAD_LIST, requserdata);
 export const AddLeadlistApi = async (requserdata) => await api.create(url.ADD_LEAD_LIST, requserdata);

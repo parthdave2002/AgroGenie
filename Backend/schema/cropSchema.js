@@ -7,6 +7,7 @@ const cropSchema = new schema({
   description_eng: { type: String },
   description_guj: { type: String },
   crop_pics: [{ type: String, default: null }],
+  crop_drive: { type: String, default: null },
   is_active: { type: Boolean, default: true},
   added_at: { type: Date, default: Date.now },
   updated_at: { type: Date},

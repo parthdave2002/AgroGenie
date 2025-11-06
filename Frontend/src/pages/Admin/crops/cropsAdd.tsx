@@ -53,6 +53,7 @@ const AddCropsPage : FC = function () {
         name_guj: "",
         description_eng:"",
         description_guj:"",
+        crop_drive: "",
         status: "",
         crop_pics: [],
     });
@@ -76,6 +77,7 @@ const AddCropsPage : FC = function () {
             formData.append("name_guj", values?.name_guj);
             formData.append("description_guj",  values?.description_guj);
             formData.append("description_eng", values?.description_eng);
+            formData.append("crop_drive", values?.crop_drive);
             formData.append("is_active", JSON.stringify(selectedactiveid));
             if (file) {
                 file.forEach((data) => {
@@ -119,7 +121,7 @@ const AddCropsPage : FC = function () {
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
 
                     <div className="mb-4">
-                            <label className="dark:text-gray-100 text-[1.2rem]"> Product Image <span className='text-red-500'>*</span> </label>
+                            <label className="dark:text-gray-100 text-[1.2rem]"> Crop Image <span className='text-red-500'>*</span> </label>
                             <MultiImageUploadPreview onFileSelect={setFile} defaultImage={cropImage} onDefaultImageChange={setcropImage} />
                             {validateCrop == 1 ? ( <FormFeedback type="invalid" className="text-Red text-sm"> Please select Crop photo </FormFeedback> ) : null}
                     </div>
@@ -177,6 +179,18 @@ const AddCropsPage : FC = function () {
                             </div>
                         </div>
                        
+
+                        <div className="flex-1">
+                            <Inputbox
+                                id="crop_drive"
+                                name="crop_drive"
+                                label="Drive URL"
+                                required={false}
+                                placeholder="Enter crop Drive Data"
+                                type="text"
+                                validation={validation}
+                            />
+                        </div>
 
                         <div className="my-[1rem]">
                             <Label htmlFor="Status">Status <span className='text-red-500'>*</span> </Label>

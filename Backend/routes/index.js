@@ -69,4 +69,7 @@ router.use('/testimonial', Testimonialdata);
 const Warehousedata = require('./api/warehouse');
 router.use('/warehouse', Warehousedata);
 
+const NoticeBoarddata = require('./api/noticeBoard');
+router.use('/notice-board', NoticeBoarddata);
+
 module.exports = router;

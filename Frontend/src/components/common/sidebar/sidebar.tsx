@@ -140,6 +140,11 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       icon:  MdFlight,
       to: "/leave/list",
     },
+    {
+      name: "Notice Board",
+      icon:  MdFlight,
+      to: "/notice-board/list",
+    },
   ]
 
   const filteredSidebarData = user === "admin" ? SidebarData : SidebarData.filter((item:any) => AccessList.includes(item.name));

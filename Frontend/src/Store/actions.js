@@ -22,6 +22,7 @@ export * from "./Complain/action";
 export * from "./Location/action";
 export * from "./Leave/action";
 export * from "./Testimonial/action";
+export * from "./NoticeBoard/action";
 
 //  ==========   sales exective =========================
 export * from "./SalesExecutive/dashboard/action";
