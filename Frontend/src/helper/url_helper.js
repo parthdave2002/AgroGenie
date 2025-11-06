@@ -115,6 +115,10 @@ export const ADD_CROP_LIST = "/api/crop/add-crop";
 export const DELETE_CROP_LIST = "/api/crop/remove-crop";
 export const CHANGE_STATUS_CROP_LIST = "/api/crop/status-crop";
 
+export const GET_NOTICE_BOARD_LIST = "/api/notice-board/get-notice-board";
+export const ADD_NOTICE_BOARD_LIST = "/api/notice-board/add-notice-board";
+export const DELETE_NOTICE_BOARD_LIST = "/api/notice-board/delete-notice-board";
+
 export const GET_COUPON_LIST = "/api/coupon/get-coupon";
 export const ADD_COUPON_LIST = "/api/coupon/add-coupon";
 export const DELETE_COUPON_LIST = "/api/coupon/remove-coupon";
