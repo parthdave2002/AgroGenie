@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTestimoniallist } from '../../Store/actions';
-const IMG_URL = import.meta.env.VITE_API_URL; 
 
 const TestimonailSection = () => {
 
@@ -31,7 +30,7 @@ const TestimonailSection = () => {
         
          <div className="max-w-7xl mx-auto md:px-4 pt-6">
             <Swiper modules={[Autoplay]} autoplay={{ delay: 5000, disableOnInteraction: false }} loop spaceBetween={30} slidesPerView={1} breakpoints={{ 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}>
-              {testimonials.map((testimonial: any, index: number) => (
+              {testimonials && testimonials.map((testimonial: any, index: number) => (
                 <SwiperSlide key={index}>
                   <div className="bg-[#e2f7e5] h-full flex flex-col justify-between p-6 transition-transform duration-300 hover:scale-105 hover:shadow-xl rounded-2xl min-h-[18rem] max-h-[18rem] shadow-md shadow-green-100 font-body">
                     <div className="flex items-center gap-4 mb-4 ">

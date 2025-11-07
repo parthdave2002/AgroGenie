@@ -150,7 +150,7 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
                       <div className="w-16 h-16 flex items-center justify-center rounded-lg border bg-gray-50">
                         <LazyLoadImage
                           effect="blur"
-                          src={`${IMG_URL}/public/product/${item?.product_pics[0]}`}
+                          src={item?.product_pics[0]}
                           alt={item?.title}
                           className="w-[3rem] h-[3rem] object-contain"
                         />

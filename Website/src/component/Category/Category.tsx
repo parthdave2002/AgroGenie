@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCroplist } from '../../Store/actions';
-const IMG_URL = import.meta.env.VITE_API_URL; 
-
 
 const CategoryCarouselSection: React.FC = () => {
       const { t } = useTranslation();

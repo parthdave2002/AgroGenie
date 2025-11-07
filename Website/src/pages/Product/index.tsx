@@ -94,9 +94,12 @@ const ProductSection = () => {
   }
   // ------------ Details page end --------
 
-  const [products, setProductsList] = useState<any>([]);
+  const [products, setProductsList] = useState<any[]>([]);
   const [TotalListData, setTotalListData] = useState(0);
   const [CurrentPageNo, setCurrentPageNo] = useState(0);
+
+  console.log("products", products);
+  
 
   const { Productlist, ProductlistSize, TotalProductData, CurrentPage } = useSelector((state: any) => ({
     Productlist: state.Product.Productlist,

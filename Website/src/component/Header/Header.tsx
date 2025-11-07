@@ -102,11 +102,12 @@ const Header: React.FC = () => {
             <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}>   <LazyLoadImage effect="blur" src="/images/logo.webp" alt="logo" className="h-[3.5rem] mx-auto sm:mx-0" /> </div> </div>
             {/* <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}> Logo </div> </div> */}
 
-            <div className="flex flex-row gap-x-[3rem] justify-center my-6 md:my-0">
+            <div className="flex flex-row gap-x-[2rem] justify-center my-6 md:my-0">
               <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/")}> {t("Home")}</div>
               <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/about")}> {t("About")}</div>
               <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/research")}> {t("Research")}</div>
               <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/product")}> {t("Seeds/Products")} </div>
+              <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/gallery")}> {t("Gallery")} </div>
               <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/contactus")}> {t("Contact")} </div>
             </div>
 
@@ -117,7 +118,7 @@ const Header: React.FC = () => {
                 </li>
               <button onClick={OpenBrochure} className="flex items-center gap-2 bg-gradient-to-r from-green-700 to-lime-500 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
                 <span className="text-lg font-chilanka">Download Brochure</span>
-                <FaArrowRightLong size={18} className="text-white transition-transform duration-200 group-hover:translate-x-1" />
+                {/* <FaArrowRightLong size={18} className="text-white transition-transform duration-200 group-hover:translate-x-1" /> */}
               </button>
             </div>
 
