@@ -14,7 +14,7 @@ const BannerSection: React.FC = () => {
   const bannerdetail: any = useSelector((state: any) => state.Banner.Bannerlist);
 
   const allBanners = useMemo(() => {
-    return bannerdetail
+    return bannerdetail && bannerdetail
       .filter((item: any) => item.is_active)
       .sort((a: any, b: any) => (a.order || 0) - (b.order || 0)); // optional sorting by order if you have one
   }, [bannerdetail]);
@@ -37,8 +37,8 @@ const BannerSection: React.FC = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1">
         <div className="z-6">
           <Swiper modules={[A11y, Autoplay]} spaceBetween={50} pagination={{ clickable: true }} scrollbar={{ draggable: true }}
-            autoplay={{ delay: 5000, disableOnInteraction: false }} loop={allBanners.length > 1} className="rounded-xl overflow-hidden" >
-            {allBanners.map((item: any, i: number) => (
+            autoplay={{ delay: 5000, disableOnInteraction: false }} loop={allBanners && allBanners.length > 1} className="rounded-xl overflow-hidden" >
+            {allBanners && allBanners.map((item: any, i: number) => (
               <SwiperSlide key={item._id || i} data-swiper-autoplay={item.banner_duration || 5000} >
                 {item.banner_type === 'image' && (
                   <img src={item?.banner_pic} alt={item?.name} className="object-contain w-full h-[450px]" onClick={() => Itemcall(item?.banner_URL) } />

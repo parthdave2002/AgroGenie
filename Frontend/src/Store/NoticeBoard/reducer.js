@@ -21,7 +21,7 @@ const INIT_STATE = {
   CroplistSize:0,
   TotalCropData:0,
   CurrentPage:1,
-  AddCropdatalist: [],
+  AddNoticedatalist: [],
   error: {},
 };
 
@@ -55,7 +55,7 @@ const NoticeBoard = (state = INIT_STATE, action) => {
         case ADD_NOTICE_BOARD_LIST:
           return {
             ...state,
-            AddCropdatalist: action.payload.data,
+            AddNoticedatalist: action.payload.data,
           };
       }
     case ADD_NOTICE_BOARD_LIST_ERROR:
@@ -98,7 +98,7 @@ const NoticeBoard = (state = INIT_STATE, action) => {
               CroplistSize:0,
               TotalCropData:0,
               CurrentPage:1,
-              AddCropdatalist: [],
+              AddNoticedatalist: [],
               error: {},
             };
         }

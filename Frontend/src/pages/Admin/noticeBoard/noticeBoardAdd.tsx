@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import Inputbox from "../../../components/common/inputComponent/inputbox";
-import { AddBannerlist, ResetBannerlist } from "../../../Store/actions";
+import { AddNoticeBoardlist, ResetNoticeBoardlist } from "../../../Store/actions";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const NoticeBoardAddPage: FC = function () {
@@ -46,47 +46,86 @@ const NoticeBoardAddPage: FC = function () {
     };
     // ------ status code end ------
 
-    // ------ Banner type code start ------
-    const [selectedBannerTypeOption, setSelectedBannerTypeOption] = useState(null);
-    const [selectedBannerTypeid, setSelectedBannerTypeid] = useState<string | null>(null);
-    const [validatebannerType, setValidatebannerType] = useState(0);
+    // ------ Send to code start ------
+    const [selectedSendToOption, setSelectedSendToOption] = useState(null);
+    const [selectedSendToid, setSelectedSenid] = useState<string | null>(null);
+    const [validateSendTo, setValidateSendTo] = useState(0);
 
-    const IsActiveBannerdata = (data: any) => {
+    const IsSendTodata = (data: any | null) => {
         if (!data) {
-            setSelectedBannerTypeid(null);
-            setSelectedBannerTypeOption(null);
-            setValidatebannerType(1)
+            setSelectedSenid(null);
+            setSelectedSendToOption(null);
+            setValidateSendTo(1)
         } else {
-            setSelectedBannerTypeid(data.value);
-            setSelectedBannerTypeOption(data);
-            setValidatebannerType(0)
+            setSelectedSenid(data.value);
+            setSelectedSendToOption(data);
+            setValidateSendTo(0)
         }
     };
-    // ------  Banner type code end ------
+    // ------ Send to code end ------
 
-    // ------ Is Promotional code start ------
-    const [selectedisPromotionalOption, setSelectedisPromotionalOption] = useState(null);
-    const [selectedisPromotionalid, setSelectedisPromotionalid] = useState<boolean | null>(null);
-    const [validateisPromotional, setValidateisPromotional] = useState(0);
+    // ------ Employee code start ------
+    const [selectedEmployeeOption, setSelectedEmployeeOption] = useState(null);
+    const [selectedEmployeeid, setSelectedEmployeeid] = useState<boolean | null>(null);
+    const [validateEmployee, setValidateEmployee] = useState(0);
 
-    const IsPromotionaldata = (data: any | null) => {
+    const IsEmployeedata = (data: any | null) => {
         if (!data) {
-            setSelectedisPromotionalid(false);
-            setSelectedisPromotionalOption(null);
-            setValidateisPromotional(1)
+            setSelectedEmployeeid(false);
+            setSelectedEmployeeOption(null);
+            setValidateEmployee(1)
         } else {
-            setSelectedisPromotionalid(data.value);
-            setSelectedisPromotionalOption(data);
-            setValidateisPromotional(0)
+            setSelectedEmployeeid(data.value);
+            setSelectedEmployeeOption(data);
+            setValidateEmployee(0)
         }
     };
-    // ------  Is Promotional code end ------
+    // ------ Employee code end ------
+
+    // ------ Document Type code start ------
+    const [selectedDocTypeOption, setSelectedDocOption] = useState(null);
+    const [selectedDocTypeid, setSelectedDocTypeid] = useState<string | null>(null);
+    const [validateDocType, setValidateDocType] = useState(0);
+
+    const IsDocTypedata = (data: any | null) => {
+        if (!data) {
+            setSelectedDocTypeid(null);
+            setSelectedDocOption(null);
+            setValidateDocType(1)
+        } else {
+            setSelectedDocTypeid(data.value);
+            setSelectedDocOption(data);
+            setValidateDocType(0)
+        }
+    };
+    // ------ Document Type code end ------
+
+    // ------ Duration code start ------
+    const [selectedDurationOption, setSelectedDurationOption] = useState(null);
+    const [selectedDurationid, setSelectedDurationid] = useState<string | null>(null);
+    const [validateDuration, setValidateDuration] = useState(0);
+
+    const IsDurationdata = (data: any | null) => {
+        if (!data) {
+            setSelectedDurationid("");
+            setSelectedDurationOption(null);
+            setValidateDuration(1)
+        } else {
+            setSelectedDurationid(data.value);
+            setSelectedDurationOption(data);
+            setValidateDuration(0)
+        }
+    };
+    // ------ Duration code end ------
+
 
     const [initialValues, setinitialValues] = useState({
         name: "",
-        description: "",
-        youtube_url: "",
         duration: "",
+        type_document:"",
+        document_text : "",
+        start_date :"",
+        end_date : "",
         status: "",
     });
 
@@ -95,30 +134,29 @@ const NoticeBoardAddPage: FC = function () {
         initialValues: initialValues,
 
         validationSchema: Yup.object({
-            name: Yup.string().required("Please enter banner name"),
-            description: Yup.string().required("Please enter banner description")
+            name: Yup.string().required("Please enter Notice name")
         }),
 
         onSubmit: (values) => {
 
             if (selectedactiveid == null) return setValidateactive(1)
-            if (selectedBannerTypeid == null) return setValidatebannerType(1)
-            if (selectedBannerTypeid === "image" || selectedBannerTypeid === "video") {
-                if (!file) return setValidateImage(1)
-            }
-
+        
             const formData = new FormData();
-            formData.append("banner_type", selectedBannerTypeid);
-            formData.append("banner_URL", values.youtube_url);
-            formData.append("banner_duration", values.duration);
             formData.append("name", values.name);
-            formData.append("description", values.description);
+            formData.append("send_to", String(selectedSendToid));
+            formData.append("employee", String(selectedEmployeeid));
+            formData.append("type_document", String(selectedDocTypeid));
+            formData.append("duration", String(selectedDurationid));
+            formData.append("duration", String(selectedDurationid));
+            formData.append("start_date", values?.start_date);
+            formData.append("end_date", values?.end_date);
+
             formData.append("is_active", JSON.stringify(selectedactiveid));
-            formData.append("is_promotion", String(selectedisPromotionalid));
+
             if (file) {
-                formData.append("banner_pic", file);
+                formData.append("document_pics", file);
             }
-            dispatch(AddBannerlist(formData));
+            dispatch(AddNoticeBoardlist(formData));
         },
     });
 
@@ -127,38 +165,47 @@ const NoticeBoardAddPage: FC = function () {
         { label: "Inactive", value: false }
     ]
 
-    const isbanneroption = [
-        { label: "Image", value: "image" },
-        { label: "Video", value: "video" },
-        { label: "Youtube", value: "youtube" },
+    const isSendTooption = [
+        { label: "All", value: "all" },
+        { label: "Selected", value: "selected" }
     ]
 
-    const isPromotionoption = [
-        { label: "Yes", value: true },
-        { label: "No", value: false }
+    const isemployeeoption = [
+        { label: "Priyanka", value: "all" },
+        { label: "Akki", value: "selected" }
+    ]
+
+    const isDocTypeoption = [
+        { label: "Text", value: "text" },
+        { label: "PDF", value: "pdf" },
+        { label: "Video", value: "video" },
+        { label: "Youtube", value: "youtube" }
+    ]
+
+    const isDurationoption = [
+        { label: "Permenet", value: "permenet" },
+        { label: "Part Time", value: "part-time" }
     ]
 
     // ------------- Get  Data From Reducer Code Start --------------
-    const { AddBannerDatalist } = useSelector((state: any) => ({
-        AddBannerDatalist: state.Banner.AddBannerlist,
-    }));
+    const AddNoticedatalist = useSelector((state: any) => state.NoticeBoard.AddNoticedatalist);
 
     useEffect(() => {
-        if (AddBannerDatalist?.success == true) {
-            dispatch(ResetBannerlist());
-            toast.success(AddBannerDatalist?.msg)
+        if (AddNoticedatalist?.success == true) {
+            dispatch(ResetNoticeBoardlist());
+            toast.success(AddNoticedatalist?.msg)
             navigate(ParentLink)
             validation.resetForm();
             setSelectedactiveid(null);
             setSelectedactiveOption(null);
             setValidateactive(1)
         }
-    }, [AddBannerDatalist]);
+    }, [AddNoticedatalist]);
     //  ------------- Get Data From Reducer Code end --------------
 
-    let Name = "Banner Add";
-    let ParentName = "Banner List";
-    let ParentLink = "/banner/list";
+    let Name = "Notice Board Add";
+    let ParentName = "Notice Board List";
+    let ParentLink = "/notice-board/list";
 
     return (
         <>
@@ -167,87 +214,165 @@ const NoticeBoardAddPage: FC = function () {
                 <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
 
-                        {(selectedBannerTypeid === "image" || selectedBannerTypeid === "video") &&
+                        {(selectedDocTypeid === "pdf" ||  selectedDocTypeid === "video") &&
                             <div>
                                 <ImageUploadPreview onFileSelect={setFile} />
-                                {validateImage == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please select banner image </FormFeedback> : null}
+                                {validateImage == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please select image/video/pdf </FormFeedback> : null}
                             </div>
                         }
 
-                        <div className="mt-[1rem]">
-                            <Label htmlFor="Status"> Banner Type </Label>
-                            <div className="mt-1">
-                                <Select
-                                    className="w-full dark:text-white"
-                                    classNames={{
-                                        control: () => "react-select__control",
-                                        singleValue: () => "react-select__single-value",
-                                        menu: () => "react-select__menu",
-                                        option: ({ isSelected }) =>
-                                            isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                        placeholder: () => "react-select__placeholder",
-                                    }}
-
-                                    value={selectedBannerTypeOption}
-                                    onChange={(e) => { IsActiveBannerdata(e) }}
-                                    options={isbanneroption}
-                                    isClearable={true}
-                                />
-                                {validatebannerType == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please select banner type </FormFeedback> : null}
-                            </div>
-                        </div>
-
-                        {selectedBannerTypeid === "image" &&
-                            <div className="mt-[1rem]">
+                        <div className="flex mt-[1rem] gap-x-4">
+                            <div className="flex-1">
                                 <Inputbox
-                                    id="duration"
-                                    name="duration"
-                                    label="Banner Duration"
+                                    id="name"
+                                    name="name"
+                                    label="Name"
                                     required={true}
-                                    placeholder="Banner duration in sec..."
-                                    type="number"
+                                    placeholder="Name"
+                                    type="text"
                                     validation={validation}
                                 />
                             </div>
+
+                            {(selectedDocTypeid === "text" || selectedDocTypeid === "youtube") &&
+                                <div className="flex-1">
+                                    <Inputbox
+                                        id="document_text"
+                                        name="document_text"
+                                        label="Document URL"
+                                        required={true}
+                                        placeholder="Document URL"
+                                        type="text"
+                                        validation={validation}
+                                    />
+                                </div>
+                            }
+                        </div>
+
+                        <div className="md:flex w-full mt-[1rem] gap-x-4">
+                            <div className="flex-1">
+                                <Label htmlFor="Status"> Send to </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedSendToOption}
+                                        onChange={(e) => { IsSendTodata(e) }}
+                                        options={isSendTooption}
+                                        isClearable={true}
+                                    />
+                                    {validateSendTo == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please select send to</FormFeedback> : null}
+                                </div>
+                            </div>
+
+                            {selectedSendToid == "selected" &&
+                                <div className="flex-1">
+                                    <Label htmlFor="Status">  Select User </Label>
+                                    <div className="mt-1">
+                                        <Select
+                                            className="w-full dark:text-white"
+                                            classNames={{
+                                                control: () => "react-select__control",
+                                                singleValue: () => "react-select__single-value",
+                                                menu: () => "react-select__menu",
+                                                option: ({ isSelected }) =>
+                                                    isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                                placeholder: () => "react-select__placeholder",
+                                            }}
+                                            isMulti={true}
+                                            value={selectedEmployeeOption}
+                                            onChange={(e) => { IsEmployeedata(e) }}
+                                            options={isemployeeoption}
+                                            isClearable={true}
+                                        />
+                                        {validateEmployee == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Employee </FormFeedback> : null}
+                                    </div>
+                                </div>
+                            } 
+                        </div>
+
+                         <div className="md:flex w-full mt-[1rem] gap-x-4">
+                            <div className="flex-1">
+                                <Label htmlFor="Status"> Type Of Document </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+
+                                        value={selectedDocTypeOption}
+                                        onChange={(e) => { IsDocTypedata(e) }}
+                                        options={isDocTypeoption}
+                                        isClearable={true}
+                                    />
+                                    {validateDocType == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Documnet Type </FormFeedback> : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1">
+                                <Label htmlFor="Status"> Duration </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+
+                                        value={selectedDurationOption}
+                                        onChange={(e) => { IsDurationdata(e) }}
+                                        options={isDurationoption}
+                                        isClearable={true}
+                                    />
+                                    {validateDuration == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Duration </FormFeedback> : null}
+                                </div>
+                            </div>
+                        </div>
+
+                        {selectedDurationid === "part-time" &&
+                            <div className="md:flex mt-[1rem] gap-x-4">
+                                <div className="flex-1">
+                                    <Inputbox
+                                        id="start_date"
+                                        name="start_date"
+                                        label="Start Date"
+                                        required={true}
+                                        placeholder="Start Date"
+                                        type="date"
+                                        validation={validation}
+                                    />
+                                </div>
+
+                                <div className="flex-1">
+                                    <Inputbox
+                                        id="end_date"
+                                        name="end_date"
+                                        label="End Date"
+                                        required={true}
+                                        placeholder="End Date"
+                                        type="date"
+                                        validation={validation}
+                                    />
+                                </div>
+                            </div>
                         }
-
-                        {/* { selectedBannerTypeid === "youtube" ||  && */}
-                        <div className="mt-[1rem]">
-                            <Inputbox
-                                id="youtube_url"
-                                name="youtube_url"
-                                label="Banner URL"
-                                required={true}
-                                placeholder="Banner URL"
-                                type="text"
-                                validation={validation}
-                            />
-                        </div>
-                        {/* } */}
-
-                        <div className="mt-[1rem]">
-                            <Inputbox
-                                id="name"
-                                name="name"
-                                label="Banner Name"
-                                required={true}
-                                placeholder="Banner Name"
-                                type="text"
-                                validation={validation}
-                            />
-                        </div>
-
-                        <div className="mt-[1rem]">
-                            <Inputbox
-                                id="description"
-                                name="description"
-                                label="Description"
-                                required={true}
-                                placeholder="Enter description"
-                                type="text"
-                                validation={validation}
-                            />
-                        </div>
 
                         <div className="mt-[1rem]">
                             <Label htmlFor="Status">Status</Label>
@@ -272,31 +397,8 @@ const NoticeBoardAddPage: FC = function () {
                             </div>
                         </div>
 
-                        <div className="mt-[1rem]">
-                            <Label htmlFor="Status"> Is Promotional </Label>
-                            <div className="mt-1">
-                                <Select
-                                    className="w-full dark:text-white"
-                                    classNames={{
-                                        control: () => "react-select__control",
-                                        singleValue: () => "react-select__single-value",
-                                        menu: () => "react-select__menu",
-                                        option: ({ isSelected }) =>
-                                            isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                        placeholder: () => "react-select__placeholder",
-                                    }}
-
-                                    value={selectedisPromotionalOption}
-                                    onChange={(e) => { IsPromotionaldata(e) }}
-                                    options={isPromotionoption}
-                                    isClearable={true}
-                                />
-                                {validateisPromotional == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please select status </FormFeedback> : null}
-                            </div>
-                        </div>
-
                         <div className="flex gap-x-3 justify-end mt-[1rem]">
-                            <Button className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton" type="submit" > Add Banner </Button>
+                            <Button className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton" type="submit" > Add Notice </Button>
                             <Button className="bg-deletebutton hover:bg-deletebutton dark:bg-deletebutton dark:hover:bg-deletebutton" onClick={() => navigate(ParentLink)}>  Close </Button>
                         </div>
                     </Form>

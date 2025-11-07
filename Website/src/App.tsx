@@ -14,6 +14,7 @@ import FAQSection from './component/FAQ/FAQ';
 import PagenotfoundSection from './component/Pagenotfound/Pagenotfound';
 import ProductDetailsSection from './pages/Product/ProductDetails';
 import ResearchSection from './pages/Research';
+import GallerySection from './pages/Gallery';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <Layout><HomeSection /> </Layout> } />  
         <Route path='/about' element={<Layout> <AboutSection /> </Layout>} />  
+        <Route path='/gallery' element={<Layout> <GallerySection /> </Layout>} />  
         <Route path='/product' element={<Layout> <ProductSection /> </Layout>} />  
         <Route path='/product-detail/:id' element={<Layout> <ProductDetailsSection /> </Layout>} />  
         <Route path='/contactus' element={<Layout> <ContactusSection /> </Layout>} />  
