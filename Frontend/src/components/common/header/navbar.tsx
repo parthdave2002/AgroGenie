@@ -44,9 +44,6 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
      const [LoginUserimg, setLoginUserimg] = useState("");
      const login = useSelector((state:any) => state.Login.Logincode);
      const Profileuserdata = useSelector((state:any) =>  state.User.Profileuserdata);
-
-     console.log("LoginUserimg", LoginUserimg);
-     
    
      useEffect(() => {
        setLoginUserimg( Profileuserdata?.data?.user_pic ? Profileuserdata?.data?.user_pic  :  login?.data?.user_img?.user_pic ? login?.data?.user_img?.user_pic : userphoto);

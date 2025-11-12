@@ -3,12 +3,15 @@ import React, { useState, useRef, useEffect } from "react";
 interface ImageUploadPreviewProps {
   onFileSelect: (file: File | null) => void;
   defaultImage?: string;
+  fileType?: "image" | "pdf" | "both";
 }
 
-const ImageUploadPreview: React.FC<ImageUploadPreviewProps> = ({ onFileSelect, defaultImage }) => {
+const ImageUploadPreview: React.FC<ImageUploadPreviewProps> = ({ onFileSelect, defaultImage, fileType ="image" }) => {
   const [fileName, setFileName] = useState<string>("");
   const [previewSrc, setPreviewSrc] = useState<string>(defaultImage || "");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+    const accept = fileType === "pdf" ? "application/pdf" : fileType === "both" ? "image/*,application/pdf": "image/*";
 
   useEffect(() => {
     if (defaultImage) {
@@ -48,28 +51,16 @@ const ImageUploadPreview: React.FC<ImageUploadPreviewProps> = ({ onFileSelect, d
   };
 
   return (
-    <div
-      className="w-32 h-32 flex border-dashed items-center justify-center border-2 border-gray-300 dark:border-gray-700 rounded-full overflow-hidden cursor-pointer"
-      onClick={handleImageClick}
-    >
-      <input
-        type="file"
-        className="hidden"
-        accept="image/*"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-      />
+    <div onClick={handleImageClick} className="w-32 h-32 flex border-dashed items-center justify-center border-2 border-gray-300 dark:border-gray-700 rounded-full overflow-hidden cursor-pointer">
+      <input type="file" className="hidden" accept={accept} ref={fileInputRef} onChange={handleFileChange} />
+      
       {previewSrc ? (
         <div className="relative w-full h-full">
           <img src={previewSrc} className="w-full h-full object-cover" alt="Preview" />
-          <button
-            onClick={handleRemoveImage}
-            className="absolute -top-2 -right-2 bg-red-600 border-none text-white w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-red-700 transition"
-          >
-            x
-          </button>
+          {/* <button onClick={handleRemoveImage} className="absolute -top-2 -right-2 bg-red-600 border-none text-white w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-red-700 transition" > x </button> */}
         </div>
-      ) : (
+      )
+      :(
         <div className="flex flex-col items-center text-gray-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"

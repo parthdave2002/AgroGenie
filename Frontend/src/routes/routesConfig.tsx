@@ -92,7 +92,7 @@ export const adminRoutes = [
   // Notice Board
   { path: "/notice-board/list", component: lazyImport("../pages/Admin/noticeBoard/noticeBoardList") },
   { path: "/notice-board/add", component: lazyImport("../pages/Admin/noticeBoard/noticeBoardAdd") },
-  { path: "/notice-board/details/:id", component: lazyImport("../pages/Admin/noticeBoardDetails") },
+  { path: "/notice-board/details/:id", component: lazyImport("../pages/Admin/noticeBoard/noticeBoardDetails") },
 
   // Coupon
   { path: "/coupon/list", component: lazyImport("../pages/Admin/coupon/couponList") },

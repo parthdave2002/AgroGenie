@@ -123,9 +123,9 @@ const SalesProfile : FC <PropsData> = function ({CloseProfile})  {
                                       <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.status ? item?.status.charAt(0).toUpperCase() + item?.status.slice(1).toLowerCase() : "-"} </Table.Cell>
                                       <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.reason} </Table.Cell>
                                       <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.requested_by?.name} </Table.Cell>
-                                      <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.requested_at ? new Date(item?.requested_at).toLocaleDateString() : "N/A"} </Table.Cell>
+                                      <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.requested_at ? moment(item?.requested_at).format("DD-MM-YYYY") : "N/A"} </Table.Cell>
                                       <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.approved_by?.name ? item?.approved_by?.name : "N/A"} </Table.Cell>
-                                      <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.approved_date ? new Date(item?.approved_date).toLocaleDateString() : "N/A"} </Table.Cell>
+                                      <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.approved_date ? moment(item?.approved_date).format("DD-MM-YYYY") : "N/A"} </Table.Cell>
                                   </Table.Row>
                               ))}
                           </Table.Body>

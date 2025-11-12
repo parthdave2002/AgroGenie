@@ -6,13 +6,26 @@ const noticeBoardController = {};
 noticeBoardController.getAllNotice = async (req, res, next) => {
   try {
     const { type } = req.user;
-    let { page, size, populate, selectQuery, sortQuery } = otherHelper.parseFilters(req);
+     const { id } = req.query;
+    let { page, size, populate,searchQuery, selectQuery, sortQuery } = otherHelper.parseFilters(req);
 
-    if (type !== "admin" ) {
-      const user = await categorySch.findById(req.query.id);
+    if (id) {
+      const singleNotice = await noticeSch.findOne({ _id: id, is_active: true });
+      if (!singleNotice) {
+        return otherHelper.sendResponse( res, httpStatus.NOT_FOUND,false, null, null,'Notice not found or inactive',null);
+      }
+       return otherHelper.sendResponse( res, httpStatus.OK,true, singleNotice, null, 'Notice fetched successfully',null );
+    }
+
+    searchQuery = { ...searchQuery, is_active: true };
+    if (type !== "admin") {
+      const notification = await noticeSch.find({ is_active: true }).sort({ created_at: -1 });
       return otherHelper.sendResponse(res, httpStatus.OK, true, notification, 'Notification data get successfully', null);
     }
 
+    const totalData = await noticeSch.countDocuments(searchQuery);
+    const notices = await noticeSch.find(searchQuery).select(selectQuery || "").sort(sortQuery || { created_at: -1 }).skip((page - 1) * size).limit(size);
+    return otherHelper.paginationSendResponse(res, httpStatus.OK,true, notices, 'Notices fetched successfully',page,size,totalData);
 
   } catch (err) {
     next(err);

@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { lazy,FC, useEffect, useMemo, useRef, useState } from "react";
 import { MdKeyboardArrowRight, MdReport } from "react-icons/md";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { FaAngleDown, FaRegClock, FaRupeeSign, FaUser, FaUserCircle } from "react-icons/fa";
@@ -9,21 +9,19 @@ import { FiLogOut } from "react-icons/fi";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import ExamplePagination from '../../components/common/pagination/pagination';
-import { getleadlist, getsalesDashboard, getSalesExecutiveOrderlist, MarkasReadLeadlist, resetinsertlogin } from "../../Store/actions";
+import { getleadlist, getNoticeBoardlist, getsalesDashboard, getSalesExecutiveOrderlist, MarkasReadLeadlist, resetinsertlogin } from "../../Store/actions";
 import moment from "moment";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { BsCartCheckFill } from "react-icons/bs";
 import SalesProfile from "./salesProfile";
+import CommonTable from "../../components/common/table/commonTable";
+import BoardSection from "../../components/salesComponent/boardData";
+const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
 
   interface PropsData {
     setDatactive: any;
     openProfile: boolean;
     setOpenProfile: (value: boolean) => void;
-  }
-  interface UserImage{
-    user_pic: string;
-    _id: string;
   }
 
   interface DashboardCount {
@@ -42,7 +40,6 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
   //---------    Get Dashboard data  start--------- 
   const [ComplainData, setComplainData] = useState([])
   const [FarmerData, setFarmerData] = useState([])
-  const [MyFarmerCount, setMyFarmerCount] = useState(0)
   const [TotalRevenue, setTotalRevenue] = useState<DashboardCount>()
   const [TotalOrder, setTotalOrder] = useState<DashboardCount>()
   const [TotalFutureOrder, setTotalFutureOrder] = useState<DashboardCount>()
@@ -52,6 +49,7 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
   const DashboardDataList = useSelector((state: any) => state.SalesDashboard.DashboardDataList?.data);
   const OrderDataList = useSelector((state: any) => state.Order.SalesExeOrderlist);
   const LeadDataList = useSelector((state: any) => state.Lead.Leaddatalist);
+  const Baorddatalist = useSelector((state: any) => state.NoticeBoard.Baorddatalist);
   
   const [SalesOrderData, setSalesOrderData] = useState([])
   // ----------- next Button  Code Start -------------
@@ -59,6 +57,7 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
     const [CurrentPageNo, setCurrentPageNo] = useState(0);
     const [PageNo, setPageNo] = useState(1);
     const [RoePerPage, setRoePerPage] = useState(5);
+    const [BoardDataList, setBoardDataList] = useState([]);
 
     const RowPerPage = (event: any) => {
       const value = Number(event)
@@ -140,6 +139,16 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
     dispatch(getSalesExecutiveOrderlist(requser))
   },[dispatch,PageNo, RoePerPage ])
 
+  // --------- notice boart Api call---------
+  useEffect(() =>{
+    dispatch(getNoticeBoardlist())
+  },[dispatch])
+
+  useEffect(() =>{
+    setBoardDataList(Baorddatalist? Baorddatalist : []);
+  },[Baorddatalist])
+  // --------- notice board Api call---------
+
   useEffect(() =>{
     setTotalListData(OrderDataList?.totalData)
     setSalesOrderData(OrderDataList?.data)
@@ -171,7 +180,6 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
       setTotalFarmerListData(DashboardDataList?.data?.customers?.total);
       setCurrentFarmerPageNo(DashboardDataList?.data?.customers?.page);
       setPageFarmerNo(DashboardDataList?.data?.customers?.page);
-      setMyFarmerCount(DashboardDataList?.data?.totalMyFarmer);
       setTotalRevenue(DashboardDataList?.data?.totalRevenue)
       setTotalOrder(DashboardDataList?.data?.totalOrder)
       setTotalFutureOrder(DashboardDataList?.data?.totalFutureOrder)
@@ -258,6 +266,76 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
       setConfirmationModal(false);
       setselectedTabbar("order")
     }
+
+    // ---------------- complain code start -----------
+      const complainColumns = useMemo(() => [
+        {
+          key: "category_pic",
+          label: "Complain id",
+          render: (row: any) => row?.complain_id?.replace(/^#/, ''),
+        },
+        {
+          key: "title",
+          label: "Title",
+        },
+        {
+          key: "customer_id",
+          label: "Farmer Name",
+          render: (row: any) => <div> {row?.customer_id?.firstname} {row?.customer_id?.middlename} {row?.customer_id?.lastname} </div>
+        },
+        {
+          key: "mobile_number",
+          label: "Mobile Number",
+        },
+        {
+          key: "is_active",
+          label: "Priority",
+          render: (row: any) => (row?.priority ? (row.priority.charAt(0).toUpperCase() + row.priority.slice(1).toLowerCase()) : "-"),
+        },
+        {
+          key: "created_at",
+          label: "Created Date",
+          render: (row: any) => (
+            <div>{moment(row?.created_at).format("DD-MM-YYYY hh:mm:ss")}</div>
+          )
+        }
+      ], [ComplainData]);
+    // --------- compalin code end -------------
+
+    // ---------------- Order code start -----------
+      const orderColumns = useMemo(() => [
+        {
+          key: "order_pic",
+          label: "Order id",
+          render: (row: any) => row?.order_id?.replace(/^#/, ''),
+        },
+        {
+          key: "added_at",
+          label: "Order Date",
+          render: (row: any) =>  <div>{moment(row?.added_at).format("DD-MM-YYYY hh:mm:ss")}</div>
+        },
+        {
+          key: "order_type",
+          label: "Order Type",
+          render:(row: any) => (row?.order_type ? row?.order_type.charAt(0).toUpperCase() + row?.order_type.slice(1).toLowerCase() : "-" )
+        },
+        {
+          key: "future_order_date",
+          label: "Callback Date",
+          render : (row: any) => (row?.order_type == "future" ? moment(row?.future_order_date).format("DD-MM-YYYY") : "-" )
+        },
+        {
+          key: "total_amount",
+          label: "COD Amt",
+          render: (row: any) => (Math.round(row?.total_amount))
+        },
+        {
+          key: "status",
+          label: "Status",
+          render: (row: any) =>  <div>{row?.status ? row?.status.charAt(0).toUpperCase() + row?.status.slice(1).toLowerCase() : "-"} </div>
+        }
+      ], [SalesOrderData]);
+    // --------- Order code end -------------
 
     // ----------- Tabnavbar code start --------------------
         const [selectedTabbar, setselectedTabbar] = useState("order");
@@ -460,28 +538,8 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
                     </div>
                     : null}
 
-                  {ComplainData && ComplainData.length ?
-                    <div className="bg-[#ffff] dark:bg-gray-900 rounded-xl py-3 px-5  w-[20rem] ">
-                      <div className="flex justify-between">
-                        <div className="text-[1.3rem] font-semibold text-gray-900 dark:text-gray-200"> Complain ({ComplainData.length})</div>
-                        <div className="flex  self-center align-center text-blue-500 hover:text-blue-800 cursor-pointer" onClick={() => ViweAllCall("Complain")}> <div> View all  </div>  <MdKeyboardArrowRight style={{ alignSelf: "center" }} /></div>
-                      </div>
-
-                      {ComplainData && ComplainData.map((item: any, k: number) => (
-                        <div className="bg-white dark:bg-gray-700 dark:hover:bg-gray-600 p-5 rounded-xl  relative my-4" key={k}>
-                          <div> {item?.priority && <div className={`absolute left-3 top-4 bottom-4 w-1 rounded-md ${item?.priority === "high" ? "bg-red-400" : item?.priority == "medium" ? "bg-yellow-400" : item?.priority === "low" ? "bg-blue-400" : ""}`} />} </div>
-
-                          <div className="pl-3 flex flex-col gap-y-1">
-                            {/* <div className="truncate text-gray-500 dark:text-gray-100 dark:text-gray-50 lg:max-w-[15rem]"> {item?.title} </div> */}
-                            <div className="text-[0.7rem] xl:text-[0.9rem] text-gray-500 dark:text-gray-100 dark:text-gray-50 lg:max-w-[15rem] truncate"> {item?.customer_id?.firstname} {item?.customer_id?.middlename} {item?.customer_id?.lastname} </div>
-                            <div className="flex justify-between">
-                              <div className="text-gray-500 dark:text-gray-100 dark:text-gray-50 text-[0.8rem]"> {item?.customer_id?.mobile_number}  </div>
-                              <div className="text-gray-500 dark:text-gray-100 dark:text-gray-50 text-[0.8rem]"> {moment(item?.created_at).format("DD-MM-YYYY")}  </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                  {BoardDataList && BoardDataList.length ?
+                    <BoardSection BoardDataList={BoardDataList} ViweAllCall={ViweAllCall} />
                     : null}
                 </div>
 
@@ -489,35 +547,23 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
                   <div className="mt-[4rem]">
                     <h3 className="mb-4 text-xl font-bold leading-none text-gray-900 dark:text-white"> Order List </h3>
                     {SalesOrderData && SalesOrderData.length > 0 ?
-
                       <>
-                        <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 ">
-                          <Table.Head className="bg-gray-100 dark:bg-gray-700">
-                            <Table.HeadCell>Order id</Table.HeadCell>
-                            <Table.HeadCell>Order Date</Table.HeadCell>
-                            <Table.HeadCell> Order Type</Table.HeadCell>
-                            <Table.HeadCell>Callback Date</Table.HeadCell>
-                            <Table.HeadCell>COD Amt</Table.HeadCell>
-                            <Table.HeadCell>Status</Table.HeadCell>
-                          </Table.Head>
-
-                          <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                            {SalesOrderData && SalesOrderData.map((item: any, k: number) => (
-                              <Table.Row key={k} className="hover:bg-gray-100 dark:hover:bg-gray-700" >
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item?.order_id?.replace(/^#/, '')} </Table.Cell>
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {moment(item?.added_at).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.order_type ? item?.order_type.charAt(0).toUpperCase() + item?.order_type.slice(1).toLowerCase() : "-"} </Table.Cell>
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.order_type == "future" ? moment(item?.future_order_date).format("DD-MM-YYYY") : "-"} </Table.Cell>
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {Math.round(item?.total_amount)} </Table.Cell>
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.status ? item?.status.charAt(0).toUpperCase() + item?.status.slice(1).toLowerCase() : "-"} </Table.Cell>
-                              </Table.Row>
-                            ))}
-                          </Table.Body>
-                        </Table>
-
+                        <CommonTable columns={orderColumns} data={SalesOrderData || []} />
                         <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
                       </>
                       : null}
+                  </div>
+                  : null}
+
+                {ComplainData && ComplainData.length > 0 ?
+                  <div className="mt-[4rem]">
+                    <h3 className="mb-4 text-xl font-bold leading-none text-gray-900 dark:text-white"> Complain List   ({ComplainData.length})</h3>
+                    {ComplainData && ComplainData.length > 0 ?
+                      <>
+                       <CommonTable columns={complainColumns} data={ComplainData || []} />
+                        <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
+                      </> 
+                    : null}
                   </div>
                   : null}
 
@@ -653,50 +699,27 @@ const SalesDashboardPage : FC <PropsData> = function ({ setDatactive,  openProfi
               : null}
 
             {ProductModal == true ?
-              <Modal
-                onClose={() => setProductModal(false)}
-                show={ProductModal}
-                size="2xl"
-                className="font-sans"
-              >
+              <Modal onClose={() => setProductModal(false)} show={ProductModal} size="2xl" className="font-sans" >
                 {/* Header */}
-                <Modal.Header className="px-6 pt-6 pb-2 border-b border-gray-200 dark:border-gray-700">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Product Details
-                  </h2>
-                </Modal.Header>
+                <Modal.Header className="px-6 pt-6 pb-2 border-b border-gray-200 dark:border-gray-700"> <h2 className="text-lg font-semibold text-gray-900 dark:text-white"> Product Details </h2> </Modal.Header>
 
                 {/* Body */}
                 <Modal.Body className="px-6 py-4 space-y-4 bg-gray-50 dark:bg-gray-900">
                   {Array.isArray(ProductItemModal) && ProductItemModal.length > 0 ? (
                     <div className="divide-y divide-gray-200 dark:divide-gray-700">
                       {ProductItemModal.map((item, k) => (
-                        <div
-                          key={k}
-                          className="py-3 grid grid-cols-2 md:grid-cols-4 gap-3 items-center"
-                        >
-                          <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {item?._id?.name?.englishname || "-"}
-                          </p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {item?._id?.categories?.name_eng || "-"}
-                          </p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {item?._id?.packaging || "-"}  {item?._id?.packagingtype?.type_eng || "-"}
-                          </p>
-                          <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-                            Qty: {item?.quantity || 0}
-                          </p>
+                        <div key={k} className="py-3 grid grid-cols-2 md:grid-cols-4 gap-3 items-center">
+                          <p className="text-sm font-medium text-gray-700 dark:text-gray-300"> {item?._id?.name?.englishname || "-"} </p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400"> {item?._id?.categories?.name_eng || "-"}</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400"> {item?._id?.packaging || "-"}  {item?._id?.packagingtype?.type_eng || "-"}</p>
+                          <p className="text-sm font-semibold text-gray-800 dark:text-gray-200"> Qty: {item?.quantity || 0}  </p>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
-                      No product details available.
-                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">  No product details available. </p>
                   )}
                 </Modal.Body>
-
               </Modal>
             : null}
           </>
