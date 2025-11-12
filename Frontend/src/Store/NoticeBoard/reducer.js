@@ -17,9 +17,9 @@ import {
 } from "./actionType";
 
 const INIT_STATE = {
-  Cropdatalist: [],
-  CroplistSize:0,
-  TotalCropData:0,
+  Baorddatalist: [],
+  BoardlistSize:0,
+  TotalBoardData:0,
   CurrentPage:1,
   AddNoticedatalist: [],
   error: {},
@@ -32,9 +32,9 @@ const NoticeBoard = (state = INIT_STATE, action) => {
         case GET_NOTICE_BOARD_LIST:
           return {
             ...state,
-            Cropdatalist: action.payload.data.data,
-            CroplistSize: action.payload.data.size,
-            TotalCropData: action.payload.data.totalData,
+            Baorddatalist: action.payload.data.data,
+            BoardlistSize: action.payload.data.size,
+            TotalBoardData: action.payload.data.totalData,
             CurrentPage: action.payload.data.page,
           };
       }
@@ -94,9 +94,9 @@ const NoticeBoard = (state = INIT_STATE, action) => {
           case RESET_NOTICE_BOARD_LIST:
             return {
               ...state,
-              Cropdatalist: [],
-              CroplistSize:0,
-              TotalCropData:0,
+              Baorddatalist: [],
+              BoardlistSize:0,
+              TotalBoardData:0,
               CurrentPage:1,
               AddNoticedatalist: [],
               error: {},

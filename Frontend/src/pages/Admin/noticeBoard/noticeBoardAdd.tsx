@@ -144,13 +144,12 @@ const NoticeBoardAddPage: FC = function () {
             const formData = new FormData();
             formData.append("name", values.name);
             formData.append("send_to", String(selectedSendToid));
-            formData.append("employee", String(selectedEmployeeid));
+            {selectedEmployeeid &&  formData.append("employee", String(selectedEmployeeid))}
             formData.append("type_document", String(selectedDocTypeid));
             formData.append("duration", String(selectedDurationid));
-            formData.append("duration", String(selectedDurationid));
+            formData.append("document_text", values?.document_text);
             formData.append("start_date", values?.start_date);
             formData.append("end_date", values?.end_date);
-
             formData.append("is_active", JSON.stringify(selectedactiveid));
 
             if (file) {
@@ -216,7 +215,7 @@ const NoticeBoardAddPage: FC = function () {
 
                         {(selectedDocTypeid === "pdf" ||  selectedDocTypeid === "video") &&
                             <div>
-                                <ImageUploadPreview onFileSelect={setFile} />
+                                <ImageUploadPreview  fileType="both" onFileSelect={setFile} />
                                 {validateImage == 1 ? <FormFeedback type="invalid" className="text-Red text-sm"> Please select image/video/pdf </FormFeedback> : null}
                             </div>
                         }

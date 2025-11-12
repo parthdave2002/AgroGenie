@@ -48,11 +48,14 @@ function* onDelNoticeBoardList({ payload: requstuser }) {
   try {
     const response = yield call(DelNoticeBoardlistApi, requstuser);
     yield put(DeleteNoticeBoardlistSuccess(DELETE_NOTICE_BOARD_LIST, response));
-     
-    if(response.success === true || response.success === "true"){
-      toast.success(response?.msg);
-        const response = yield call(NoticeBoardlistApi, requstuser);
-        yield put(getNoticeBoardlistSuccess(GET_NOTICE_BOARD_LIST, response));
+     if(response.success === true || response.success === "true"){
+       toast.success(response?.msg);
+       let reqData = {
+         page: 1,
+         size: 5
+       }
+      const responselist = yield call(NoticeBoardlistApi,reqData);
+      yield put(getNoticeBoardlistSuccess(GET_NOTICE_BOARD_LIST, responselist));
     }
   } catch (error) {
     toast.error(error?.msg);

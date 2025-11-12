@@ -25,6 +25,7 @@ const mimeType = {
   'image/gif': 'gif',
   'video/mp4': 'mp4',
   'video/mpeg': 'mpeg',
+  'application/pdf': 'pdf',
 };
 
 const uploaderHelper = {};
