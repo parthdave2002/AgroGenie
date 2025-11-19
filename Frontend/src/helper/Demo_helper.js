@@ -194,6 +194,7 @@ export const UpdateCustomerlistApi = async (requserdata) => await api.update(url
 export const DelCustomerlistApi = async (requserdata) => await api.delete(url.DELETE_CUSTOMER_DATA_LIST, requserdata);
 export const BlockCustomerlistApi = async (requserdata) => await api.update(url.BLOCK_CUSTOMER_DATA_LIST, requserdata);
 export const CheckCustomerApi = async (requserdata) => await api.get(url.CHECK_CUSTOMER_EXIST_LIST, requserdata);
+export const GetFarmerlistApi = async (requserdata) => await api.get(url.GET_NEAR_BY_FARMER, requserdata);
 
 // Crops API
 export const CroplistApi = (requserdata) => api.get(url.GET_CROP_LIST, requserdata);

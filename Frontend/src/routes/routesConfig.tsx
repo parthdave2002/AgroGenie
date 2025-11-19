@@ -74,7 +74,7 @@ export const adminRoutes = [
 
   // Lead & Report
   { path: "/lead/list", component: lazyImport("../pages/Admin/lead/lead") },
-  { path: "/report", component: lazyImport("../pages/report/report") },
+  { path: "/report", component: lazyImport("../pages/Admin/report/report") },
 
   // Crops
   { path: "/crop/list", component: lazyImport("../pages/Admin/crops/cropsList") },

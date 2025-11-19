@@ -1,5 +1,5 @@
 import { Badge } from "flowbite-react";
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { FaUser, FaRupeeSign, FaAsterisk, FaCloud  } from "react-icons/fa";
 import { FaHandHoldingDollar, FaNoteSticky } from "react-icons/fa6";
 import { useNavigate } from "react-router";
@@ -124,7 +124,7 @@ const DashboardPage: FC = function () {
       setSelectedTotalComplain(e.target.value)
     }
 
-  const orderColumns = [
+  const orderColumns  = useMemo(() => [
     {
       key: "order_id",
       label: "Order ID",
@@ -161,9 +161,9 @@ const DashboardPage: FC = function () {
         </Badge>
       ),
     },
-  ];
+  ],[]);
 
-  const complainColumns = [
+  const complainColumns  = useMemo(() => [
     {
       key: "complain_id",
       label: "Complain Id",
@@ -186,14 +186,14 @@ const DashboardPage: FC = function () {
       label: "Created Date",
       render: (row: any) => moment(row?.created_at).format("DD-MM-YYYY hh:mm:ss"),
     }
-  ];
+  ],[]);
 
-  const productColumns = [
+  const productColumns = useMemo(() => [
     { key: "name", label: "Name", render: (row: any) => row?.name?.englishname },
     { key: "categories", label: "Category", render: (row: any) => row?.categories?.name_eng || "N/A" },
     { key: "avl_qty", label: "Qty" },
     { key: "price", label: "Price", render: (row: any) => Math.round(row?.price) },
-  ];
+  ],[]);
 
   return (
     <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >

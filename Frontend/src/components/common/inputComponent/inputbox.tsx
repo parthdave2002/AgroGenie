@@ -13,9 +13,10 @@ interface InputProps {
     validation ?: any; 
     className ?: string;
     max ?: string;
+    disabled?: boolean;
 }
 
-const Inputbox:FC <InputProps>= ( { label, required, className, id, name, placeholder = "", type = "text", validation, max}) => {
+const Inputbox:FC <InputProps>= ( { label, required, className, id, name, placeholder = "", type = "text", validation, max, disabled}) => {
 
   return (
       <div>
@@ -33,6 +34,7 @@ const Inputbox:FC <InputProps>= ( { label, required, className, id, name, placeh
                       value={validation.values[name] || ""}
                       invalid={validation.touched[name] && validation.errors[name] ? true : false}
                       max={max}
+                      disabled={ disabled ? true : false }
                   />
                     {validation.touched[name] && validation.errors[name] && 
                       <FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors[name]}  </FormFeedback>

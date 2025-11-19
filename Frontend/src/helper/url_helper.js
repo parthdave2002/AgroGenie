@@ -109,6 +109,7 @@ export const UPDATE_CUSTOMER_DATA_LIST = "/api/customer/update-customer";
 export const DELETE_CUSTOMER_DATA_LIST = "/api/customer/remove-customer";
 export const BLOCK_CUSTOMER_DATA_LIST = "/api/customer/change-status";
 export const CHECK_CUSTOMER_EXIST_LIST = "/api/customer/matchnumber";
+export const GET_NEAR_BY_FARMER = "/api/customer/nearby-farmer";
 
 export const GET_CROP_LIST = "/api/crop/get-crop";
 export const ADD_CROP_LIST = "/api/crop/add-crop";

@@ -25,7 +25,11 @@ import {
 
   REST_CUSTOMER_DATA_LIST,
   REST_CUSTOMER_DATA_LIST_SUCCESS,
-  REST_CUSTOMER_DATA_LIST_ERROR
+  REST_CUSTOMER_DATA_LIST_ERROR,
+
+  GET_NEAR_BY_FARMER,
+  GET_NEAR_BY_FARMER_SUCCESS,
+  GET_NEAR_BY_FARMER_ERROR,
 } from "./actionType";
 
 export const getCustomerDatalist = (requserdata) => ({
@@ -134,5 +138,20 @@ export const CheckCustomerExistSuccess = (actionType, data) => ({
 
 export const CheckCustomerExistFail = (actionType, error) => ({
   type: CHECK_CUSTOMER_EXIST_LIST_ERROR,
+  payload: { actionType, error },
+});
+
+export const getNearbyFarmerDatalist = (requserdata) => ({
+  type: GET_NEAR_BY_FARMER,
+  payload: requserdata,
+});
+
+export const getNearbyFarmerDatalistSuccess = (actionType, data) => ({
+  type: GET_NEAR_BY_FARMER_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const getNearbyFarmerDatalistFail = (actionType, error) => ({
+  type: GET_NEAR_BY_FARMER_ERROR,
   payload: { actionType, error },
 });

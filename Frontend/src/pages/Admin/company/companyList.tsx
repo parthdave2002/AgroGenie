@@ -99,7 +99,6 @@ const CompanyListPage: FC = function () {
     navigate("/company/add")
   }
 
-
   const ChangestatusFuncall = (id:any) =>{
     let requserdata = { id: id};
     dispatch(ChangeStatusCompanylist(requserdata)); 
@@ -107,36 +106,14 @@ const CompanyListPage: FC = function () {
 
   let Name = "Company List";
   let Searchplaceholder = "Search For Company (Name)";
-
-  console.log("accessList", accessList) ;
-  
   let AddAccess = accessList?.add;
 
     const companyColumns =useMemo( () => [
-      {
-        key: "name_eng",
-        label: "Name (Eng)",
-      },
-      {
-        key: "name_guj",
-        label: "Name (Guj)",
-      },
-      {
-        key: "description",
-        label: "Description",
-      },
-      {
-        key: "is_active",
-        label: "Status",
-        render: (row: any) => row.is_active ?  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> :  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div>
-      },
-      {
-        key: "is_active",
-        label: "Created Date",
-        render: (row: any) => (
-          <div> {moment(row?.added_at).format("DD-MM-YYYY hh:mm:ss")} </div>
-        )
-      },
+      { key: "name_eng", label: "Name (Eng)" },
+      { key: "name_guj", label: "Name (Guj)"},
+      { key: "description",  label: "Description"},
+      { key: "is_active", label: "Status", render: (row: any) => row.is_active ?  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> :  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div> },
+      { key: "is_active", label: "Created Date",  render: (row: any) => ( <div> {moment(row?.added_at).format("DD-MM-YYYY hh:mm:ss")} </div>)},
       {
         key: "actions",
         label: "Actions",
@@ -148,7 +125,6 @@ const CompanyListPage: FC = function () {
         ),
       },
     ],[accessList, DeleteFuncall]);
-  
 
   return (
     <>
