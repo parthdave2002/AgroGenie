@@ -25,7 +25,6 @@ leaveController.getAllleave = async (req, res, next) => {
 
       const currentDate = new Date();
       const defaultMonth = `${String(currentDate.getMonth() + 1).padStart(2, "0")}-${currentDate.getFullYear()}`;
-      console.log("defaultMonth", defaultMonth);
       const targetMonth = month || defaultMonth;
 
       const parseDate = (dateStr) => {

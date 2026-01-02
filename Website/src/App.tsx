@@ -1,41 +1,45 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'; 
-import CartSection from './pages/Cart/Cart'
-import Layout from './layout/Layout';
-import HomeSection from './pages/Home';
-import ProductSection from './pages/Product';
-import AboutSection from './pages/About';
-import ContactusSection from './pages/Contact';
-import Termspagesection from './pages/Terms';
-import FAQSection from './component/FAQ/FAQ';
-import PagenotfoundSection from './component/Pagenotfound/Pagenotfound';
-import ProductDetailsSection from './pages/Product/ProductDetails';
-import ResearchSection from './pages/Research';
-import GallerySection from './pages/Gallery';
+import { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 
-function App() {
+import Layout from "./layout/Layout";
+import PagenotfoundSection from "./component/Pagenotfound/Pagenotfound";
 
+/* Lazy Loaded Pages */
+const HomeSection = lazy(() => import("./pages/Home"));
+const AboutSection = lazy(() => import("./pages/About"));
+const GallerySection = lazy(() => import("./pages/Gallery"));
+const ProductSection = lazy(() => import("./pages/Product"));
+const ProductDetailsSection = lazy(() => import("./pages/Product/ProductDetails"));
+const ContactusSection = lazy(() => import("./pages/Contact"));
+const ResearchSection = lazy(() => import("./pages/Research"));
+const Termspagesection = lazy(() => import("./pages/Terms"));
+
+const App: React.FC = () => {
   return (
-    <>
     <Router>
-      <Routes>
-        <Route path='/' element={ <Layout><HomeSection /> </Layout> } />  
-        <Route path='/about' element={<Layout> <AboutSection /> </Layout>} />  
-        <Route path='/gallery' element={<Layout> <GallerySection /> </Layout>} />  
-        <Route path='/product' element={<Layout> <ProductSection /> </Layout>} />  
-        <Route path='/product-detail/:id' element={<Layout> <ProductDetailsSection /> </Layout>} />  
-        <Route path='/contactus' element={<Layout> <ContactusSection /> </Layout>} />  
-        <Route path='/research' element={<Layout> <ResearchSection /> </Layout>} />  
-        <Route path='/faq' element={<Layout> <FAQSection /> </Layout>} />  
-        <Route path='/terms' element={<Layout> <Termspagesection /> </Layout>} />  
-        <Route path='/*' element={ <PagenotfoundSection /> } />  
-      </Routes>
-    </Router>
-    </>
-  )
-}
+      <Suspense fallback={<div className="loader">Loading...</div>}>
+        <Routes>
 
-export default App
+          {/* Layout Route */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomeSection />} />
+            <Route path="/about" element={<AboutSection />} />
+            <Route path="/gallery" element={<GallerySection />} />
+            <Route path="/product" element={<ProductSection />} />
+            <Route path="/product-detail/:id" element={<ProductDetailsSection />} />
+            <Route path="/contactus" element={<ContactusSection />} />
+            <Route path="/research" element={<ResearchSection />} />
+            <Route path="/terms" element={<Termspagesection />} />
+          </Route>
+
+          {/* 404 Route */}
+          <Route path="*" element={<PagenotfoundSection />} />
+
+        </Routes>
+      </Suspense>
+    </Router>
+  );
+};
+
+export default App;

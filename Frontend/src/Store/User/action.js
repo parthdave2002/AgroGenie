@@ -33,7 +33,11 @@ import {
 
   UPDATE_PROFILE_DATA_LIST,
   UPDATE_PROFILE_DATA_LIST_ERROR,
-  UPDATE_PROFILE_DATA_LIST_SUCCESS
+  UPDATE_PROFILE_DATA_LIST_SUCCESS,
+
+  UPDATE_PROFILE_PASSWORD,
+  UPDATE_PROFILE_PASSWORD_ERROR,
+  UPDATE_PROFILE_PASSWORD_SUCCESS
 } from "./actionType";
 
 export const getUserlist = (requserdata) => ({
@@ -164,7 +168,7 @@ export const ProfileUserdatalistFail = (actionType, error) => ({
 });
 
 
-// Update Profile user
+// Update Profile Image user
 export const UpdateProfileUserdatalist = (requserdata) => ({
   type: UPDATE_PROFILE_DATA_LIST,
   payload: requserdata,
@@ -177,5 +181,21 @@ export const UpdateProfileUserdatalistSuccess = (actionType, data) => ({
 
 export const UpdateProfileUserdatalistFail = (actionType, error) => ({
   type: UPDATE_PROFILE_DATA_LIST_ERROR,
+  payload: { actionType, error },
+});
+
+// Update Profile user password
+export const UpdateProfilePassword = (requserdata) => ({
+  type: UPDATE_PROFILE_PASSWORD,
+  payload: requserdata,
+});
+
+export const UpdateProfilePasswordSuccess = (actionType, data) => ({
+  type: UPDATE_PROFILE_PASSWORD_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const UpdateProfilePasswordFail = (actionType, error) => ({
+  type: UPDATE_PROFILE_PASSWORD_ERROR,
   payload: { actionType, error },
 });

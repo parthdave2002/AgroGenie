@@ -1,37 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { FaEnvelope, FaFacebookF, FaFacebookMessenger, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { FaEnvelope,  FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useTranslation } from "react-i18next";
 import CartSection from "../../pages/Cart/Cart";
 import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { FaArrowRightLong } from "react-icons/fa6";
 
+type MenuItem = {
+  label: string;
+  path: string;
+};
 
 const Header: React.FC = () => {
   const nagivate = useNavigate()
-  const { t, i18n } = useTranslation();
-
-  const [language, setLanguage] = useState("en");
-  const [isOpenlanguage, setIsOpenlang] = useState(false);
-
-  useEffect(() => {
-    const savedLang = localStorage.getItem("i18nextLng") || "en";
-    i18n.changeLanguage(savedLang);
-    setLanguage(savedLang);
-  }, []);
-
-  const handleLanguageChange = (lang: string) => {
-    i18n.changeLanguage(lang);
-    setLanguage(lang);
-    setIsOpenlang(false);
-  };
-
-  const labelMap: Record<string, string> = {
-    en: "English",
-    gj: "ગુજરાતી",
-  };
-
+  
   const [cartOpen, setCartOpen] = useState(false);
   const onClose = () => setCartOpen(false)
   const CartCall = () => setCartOpen(true)
@@ -39,6 +20,19 @@ const Header: React.FC = () => {
   const RedirectCall = (data: string) => {
     nagivate(data)
   }
+
+    /* -------------------- Menu Config -------------------- */
+  const menuItems: MenuItem[] = useMemo(
+    () => [
+      { label: "Home", path: "/" },
+      { label: "About", path: "/about" },
+      { label: "Research", path: "/research" },
+      { label: "Seeds/Products", path: "/product" },
+      { label: "Gallery", path: "/gallery" },
+      { label: "Contact", path: "/contactus" },
+    ],
+    []
+  );
 
   const [cartCount, setCartCount] = useState(0);
   useEffect(() => {
@@ -100,16 +94,14 @@ const Header: React.FC = () => {
         <div className="container border-b border-gray-100 mx-auto  py-3">
           <div className="md:flex flex-wrap items-center justify-between gap-4">
             <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}>   <LazyLoadImage effect="blur" src="/images/logo.webp" alt="logo" className="h-[3.5rem] mx-auto sm:mx-0" /> </div> </div>
-            {/* <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}> Logo </div> </div> */}
-
-            <div className="flex flex-row gap-x-[2rem] justify-center my-6 md:my-0">
-              <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/")}> {t("Home")}</div>
-              <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/about")}> {t("About")}</div>
-              <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/research")}> {t("Research")}</div>
-              <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/product")}> {t("Seeds/Products")} </div>
-              <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/gallery")}> {t("Gallery")} </div>
-              <div className="text-xl md:text-[1rem] hover:text-lime-600 font-heading  cursor-pointer" onClick={() => RedirectCall("/contactus")}> {t("Contact")} </div>
-            </div>
+  
+            <nav className="flex gap-x-8 justify-center my-6 md:my-0">
+              {menuItems.map(({ label, path }) => (
+                <span key={path}  onClick={() => RedirectCall(path)}   className="cursor-pointer font-heading hover:text-lime-600"  >
+                  {label}
+                </span>
+              ))}
+            </nav>
 
             <div className="flex gap-x-4">
               <li  className="relative flex gap-x-3 rounded-full bg-green-600 hover:bg-green-500 p-2.5 mx-1 cursor-pointer text-gray-50"  onClick={() => CartCall()}> 
@@ -121,9 +113,6 @@ const Header: React.FC = () => {
                 {/* <FaArrowRightLong size={18} className="text-white transition-transform duration-200 group-hover:translate-x-1" /> */}
               </button>
             </div>
-
-             
-
 
           </div>
         </div>

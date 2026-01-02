@@ -34,7 +34,7 @@ const GallerySection = () => {
               <section className="py-10 overflow-hidden">
                   <div className=" max-w-1600 mx-auto px-4">
 
-                      <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center "> List of <span className="text-lime-500"> Crops </span> </h2>
+                      <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center "> List of <span className="text-lime-500"> Category </span> </h2>
 
                       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 max-w-1600">
                           {cropList?.map((item: any, idx: number) => (

@@ -12,8 +12,10 @@ const ResearchSection = () => {
 
 
   return (
-    <div>
-      {/* <div className='font-body'> About Company </div> */}
+        <section className=" relative  py-10  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
+      <div className="relative z-10">
+
+   
       <section className=" text-gray-900 py-16 px-6 md:px-20 flex flex-col gap-20">
         <div className='flex flex-col md:flex-row' >
             <div className="w-full md:w-1/2 lg:w-1/2 pr-0 md:pr-10 mb-10 md:mb-0 flex items-center justify-center">
@@ -84,6 +86,7 @@ const ResearchSection = () => {
         </div>
       </section>
     </div>
+    </section>
   )
 }
 

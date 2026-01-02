@@ -34,7 +34,11 @@ import {
 
   UpdateProfileUserdatalist,
   UpdateProfileUserdatalistSuccess,
-  UpdateProfileUserdatalistFail
+  UpdateProfileUserdatalistFail,
+
+  UpdateProfilePassword,
+  UpdateProfilePasswordSuccess,
+  UpdateProfilePasswordFail
 } from "./action";
 import {
   GET_USER_LIST,
@@ -71,7 +75,11 @@ import {
 
   UPDATE_PROFILE_DATA_LIST,
   UPDATE_PROFILE_DATA_LIST_SUCCESS,
-  UPDATE_PROFILE_DATA_LIST_ERROR
+  UPDATE_PROFILE_DATA_LIST_ERROR,
+
+  UPDATE_PROFILE_PASSWORD,
+  UPDATE_PROFILE_PASSWORD_SUCCESS,  
+  UPDATE_PROFILE_PASSWORD_ERROR
 } from "./actionType";
 import {
   UserlistApi,
@@ -82,7 +90,8 @@ import {
   UpdateUserdatalistApi,
   CheckUserdatalistApi,
   profileUserdatalistApi,
-  updateprofileUserdatalistApi
+  updateprofileUserdatalistApi,
+  updateprofilePasswordApi
 } from "../../helper/Demo_helper";
 
 function* onGetuserList({ payload: requstuserlist }) {
@@ -182,6 +191,20 @@ function* onGetUpdateProfileData({ payload: requstuser }) {
   }
 }
 
+
+function* onGetUpdateProfilePasswordData({ payload: requstuser }) {
+  try {
+    const reponse = yield call(updateprofilePasswordApi, requstuser);
+    yield put(UpdateProfilePasswordSuccess(UPDATE_PROFILE_PASSWORD, reponse));
+    if (reponse.success == true) {
+      const reponse = yield call(profileUserdatalistApi, requstuser);
+      yield put(ProfileUserdatalistSuccess(GET_PROFILE_DATA_LIST, reponse));
+    } 
+  } catch (error) {
+    yield put(UpdateProfilePasswordFail(error));
+  }
+}
+
 function* UserSaga() {
   yield takeEvery(GET_USER_LIST, onGetuserList);
   yield takeEvery(GET_USER_VIEW, onGetuserView);
@@ -192,6 +215,8 @@ function* UserSaga() {
   yield takeEvery(CHECK_USER_LIST, onGetCheckUserdatalist);
   yield takeEvery(GET_PROFILE_DATA_LIST, onGetProfileData);
   yield takeEvery(UPDATE_PROFILE_DATA_LIST, onGetUpdateProfileData);
+  yield takeEvery(UPDATE_PROFILE_PASSWORD, onGetUpdateProfilePasswordData);
+
 }
 
 export default UserSaga;

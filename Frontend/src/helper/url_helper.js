@@ -20,6 +20,7 @@ export const UPDATE_USER_DATA_LIST = "/api/user/update-user";
 export const CHECK_USER_LIST = "/api/user/check-user";
 export const GET_PROFILE_DATA_LIST = "/api/user/profile";
 export const UPDATE_PROFILE_DATA_LIST = "/api/user/update-profile";
+export const UPDATE_PROFILE_PASSWORD = "/api/user/update-password";
 
 // Role Api
 export const GET_ROLES_LIST = "/api/role/get-role";
