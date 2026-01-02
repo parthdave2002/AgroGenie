@@ -13,7 +13,7 @@
 => Cancel request   // Done
 => Admin can request past date leave   // Done
 => Code optimization ( salesProfile.tsx )
-=> profile update : (  password, image ) (sales -> profile )
+=> profile update : (  password, image ) (sales -> profile )  // Done
 
 => Add role behalf of selected 
 => default text first in sales Dashboard
