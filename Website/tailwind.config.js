@@ -23,7 +23,7 @@ export default {
       },
       fontFamily: {
         body: ['"Open Sans"', "sans-serif"],
-        heading: ['"Nunito"', "sans-serif"],
+        heading: ['"Chilanka"', "cursive"],
       },
     },
   },

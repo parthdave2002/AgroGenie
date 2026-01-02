@@ -20,6 +20,7 @@ export const UPDATE_USER_DATA_LIST = "/api/user/update-user";
 export const CHECK_USER_LIST = "/api/user/check-user";
 export const GET_PROFILE_DATA_LIST = "/api/user/profile";
 export const UPDATE_PROFILE_DATA_LIST = "/api/user/update-profile";
+export const UPDATE_PROFILE_PASSWORD = "/api/user/update-password";
 
 // Role Api
 export const GET_ROLES_LIST = "/api/role/get-role";
@@ -109,11 +110,16 @@ export const UPDATE_CUSTOMER_DATA_LIST = "/api/customer/update-customer";
 export const DELETE_CUSTOMER_DATA_LIST = "/api/customer/remove-customer";
 export const BLOCK_CUSTOMER_DATA_LIST = "/api/customer/change-status";
 export const CHECK_CUSTOMER_EXIST_LIST = "/api/customer/matchnumber";
+export const GET_NEAR_BY_FARMER = "/api/customer/nearby-farmer";
 
 export const GET_CROP_LIST = "/api/crop/get-crop";
 export const ADD_CROP_LIST = "/api/crop/add-crop";
 export const DELETE_CROP_LIST = "/api/crop/remove-crop";
 export const CHANGE_STATUS_CROP_LIST = "/api/crop/status-crop";
+
+export const GET_NOTICE_BOARD_LIST = "/api/notice-board/get-notice-board";
+export const ADD_NOTICE_BOARD_LIST = "/api/notice-board/add-notice-board";
+export const DELETE_NOTICE_BOARD_LIST = "/api/notice-board/delete-notice-board";
 
 export const GET_COUPON_LIST = "/api/coupon/get-coupon";
 export const ADD_COUPON_LIST = "/api/coupon/add-coupon";
@@ -135,3 +141,11 @@ export const GET_STATE_DATA_LIST = "/api/location/get-state";
 export const GET_DISTRICT_DATA_LIST = "/api/location/get-district";
 export const GET_TALUKA_DATA_LIST = "/api/location/get-taluka";
 export const GET_VILLAGE_DATA_LIST = "/api/location/get-village";
+
+export const GET_LEAVE_LIST = "/api/leave/get-leave";
+export const ADD_LEAVE_LIST = "/api/leave/add-leave";
+export const GET_CHANGE_LEAVE_STATUS = "/api/leave/approve-leave";
+
+export const GET_TESTIMONIAL_LIST = "/api/testimonial/get-testimonial";
+export const ADD_TESTIMONIAL_LIST = "/api/testimonial/add-testimonial";
+export const DELETE_TESTIMONIAL_LIST = "/api/testimonial/remove-testimonial";

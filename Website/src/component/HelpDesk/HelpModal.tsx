@@ -56,7 +56,7 @@ const HelpModal: FC<HelpModalProps>= ({isOpenDelteModel, setisOpenDelteModel}) =
         dispatch(AddLeadlist(requserdata));
         set_is_loader(true);
         setFormSubmitted(true);
-        toast.success(t('advisor_contact_success'));
+        toast.success("Our Advisor will contact you soon.");
       },
       });
 
@@ -69,7 +69,7 @@ const HelpModal: FC<HelpModalProps>= ({isOpenDelteModel, setisOpenDelteModel}) =
         setMessageData("");
         setisOpenDelteModel(false)
         setMessageError(false);
-        toast.success(t('advisor_contact_success'));
+        toast.success("Our Advisor will contact you soon.")
         dispatch(ResetLeadlist()) 
         setFormSubmitted(false)
        }

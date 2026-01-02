@@ -1,15 +1,21 @@
-import React, { PropsWithChildren } from 'react';
-import Footer from '../component/Footer/footer';
-import Header from '../component/Header/Header';
-import HelpDesk from '../component/HelpDesk/HelpDesk';
+import React, { Suspense, lazy } from "react";
+import { Outlet } from "react-router-dom";
+const Header = lazy(() => import("../component/Header/Header"));
+const Footer = lazy(() => import("../component/Footer/footer"));
+const HelpDesk = lazy(() => import("../component/HelpDesk/HelpDesk"));
 
-const Layout: React.FC<PropsWithChildren> = ({ children }) => {
+const Layout: React.FC = () => {
   return (
     <>
-        <Header />
-        <HelpDesk /> 
-            <main> {children} </main>
-        <Footer />
+
+      <Header />
+      <HelpDesk />
+
+      <main>
+        <Outlet />
+      </main>
+
+      <Footer />
     </>
   );
 };

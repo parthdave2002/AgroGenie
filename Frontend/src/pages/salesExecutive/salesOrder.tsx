@@ -1,4 +1,4 @@
-import SalesMobileInput from '../../components/input/salesMobileInput';
+import SalesMobileInput from '../../components/common/inputComponent/salesMobileInput';
 import React, { FC, useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 import  farmerimage from "/images/users/farmer-2.png"
@@ -7,8 +7,8 @@ import moment from 'moment';
 import { CheckCustomerExist, getCallbackdata } from "../../Store/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import LoaderPage from '../../components/loader';
-import ToastMessage from '../../components/ToastMessage';
+import LoaderPage from '../../components/common/loader/loader';
+import ToastMessage from '../../components/common/toastmessage/ToastMessage';
 
 interface PropsData{
   setDatactive :any;

@@ -15,3 +15,17 @@
 .container-fluid {
   max-width: 1600px;
 }
+
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.modal-backdrop {
+  z-index: 9998 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal {
+  z-index: 9999 !important;
+}

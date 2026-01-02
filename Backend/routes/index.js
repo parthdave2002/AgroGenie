@@ -36,7 +36,6 @@ router.use('/order', orderdata);
 const bannerdata = require('./api/banner');
 router.use('/banner', bannerdata);
 
-
 const taglogdata = require('./api/taglog');
 router.use('/taglog', taglogdata);
 
@@ -61,7 +60,16 @@ router.use('/location', Statedata);
 const Reportdata = require('./api/report');
 router.use('/report', Reportdata);
 
+const Leavedata = require('./api/leave');
+router.use('/leave', Leavedata);
+
 const Testimonialdata = require('./api/testimonial');
 router.use('/testimonial', Testimonialdata);
+
+const Warehousedata = require('./api/warehouse');
+router.use('/warehouse', Warehousedata);
+
+const NoticeBoarddata = require('./api/noticeBoard');
+router.use('/notice-board', NoticeBoarddata);
 
 module.exports = router;

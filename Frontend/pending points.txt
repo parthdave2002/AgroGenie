@@ -1,0 +1,31 @@
+//  >>>>>>>>>>>>>>>>>>>>>  Frontend  <<<<<<<<<<<<<<<<<<<<<
+
+=> pagination for table  ( sales -> Dashboard)
+=> code spliting, optimization  ( sales -> Dashboard )
+=> Add noticeboard in role list page and do that accessbase  ( Admin -> Role List )
+=> api call multiple times fix  ( Admin ->  Notice board details  page )
+= > Leave Previous month list  ( Admin panel -> Leave module )   
+=> Leave pagination   ( sales panel -> Leave module )
+=> Leave balance  ( LWP : 8, Casual : 8 ) 
+=> Leave balance show on  profile
+=> Attendance list admin panel //Done
+=> Leave date range  // Done
+=> Cancel request   // Done
+=> Admin can request past date leave   // Done
+=> Code optimization ( salesProfile.tsx )
+=> profile update : (  password, image ) (sales -> profile )
+
+=> Add role behalf of selected 
+=> default text first in sales Dashboard
+
+new thing 
+=> profile create pie chart for compare with max -3 friends  ( Total Revenue, last week,  ) 
+=> while create user compare with 
+
+=> Revenue  ( yearly,  area chart)
+=> create main page form master menu ( remove from sidebar )
+
+//  >>>>>>>>>>>>>>>>>>>>>  Backend  <<<<<<<<<<<<<<<<<<<<<
+
+=> add module in accessbase
+=> Leave pagination   ( sales panel -> Leave module )

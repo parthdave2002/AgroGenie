@@ -5,7 +5,7 @@ const TestimonialController = require('../../modules/testimonial/testimonialCont
 const { authentication, authorization } = require('../../middleware/auth.middleware');
 
 router.get('/get-testimonial',  TestimonialController.getAllTestimonialList);
-router.post('/add-testimonial',authentication,authorization("Testimonial"), uploadHelper.uploadFiles('testimonial', 'single', 'testimonial_pics'),  TestimonialController.AddTestimonial);
+router.post('/add-testimonial',authentication,authorization("Testimonial"), uploadHelper.uploadFiles('testimonial', 'testimonial_pic'),  TestimonialController.AddTestimonial);
 router.delete('/remove-testimonial',authentication,authorization("Testimonial"), TestimonialController.DeleteTestimonial);
 
 module.exports = router

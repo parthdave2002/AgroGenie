@@ -5,8 +5,8 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderlist, ReturnOrderlist } from "../../Store/actions";
 import NavbarSidebarLayout from "../../layouts/navbar-sidebar";
-import ExampleBreadcrumb from "../../components/breadcrumb";
-import ExamplePagination from "../../components/pagination";
+import ExampleBreadcrumb from "../../components/common/breadcrumb/breadcrumb";
+import ExamplePagination from "../../components/common/pagination/pagination";
 const IMG_URL = import.meta.env["VITE_API_URL"];
 
 const WarehousePage  = function ()  {     
@@ -84,7 +84,7 @@ const WarehousePage  = function ()  {
     return (
         <>
         
-              <NavbarSidebarLayout isFooter={false}  isSidebar={true} isNavbar={true} isRightSidebar={true}>
+              <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
                     <ExampleBreadcrumb  Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename= {Changename} />
                     <>
                         {leadData && leadData.length > 0 ? (

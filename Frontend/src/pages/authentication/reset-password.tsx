@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Button, Card,  Label } from "flowbite-react";
 import type { FC } from "react";
-import LOGO from "../../img/logo.webp";
+import LOGO from "/images/authentication/logo.webp";
 import { FaRegEye, FaRegEyeSlash  } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
@@ -10,7 +10,7 @@ import { Form, Input, FormFeedback } from "reactstrap";
 import { resetpasswordData, VerifyTokenData } from "../../Store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import ToastMessage from "../../components/ToastMessage";
+import ToastMessage from "../../components/common/toastmessage/ToastMessage";
 import { toast } from "react-toastify";
 
 const ResetPasswordPage: FC = function () {

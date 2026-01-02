@@ -1,5 +1,5 @@
 {
-  "call_us": " Call us",
+
   "9100029429 / 9100029329": "9100029429 / 9100029329",
 
   "Home": "Home",
@@ -182,7 +182,5 @@
   "farmer": "Farmer",
   "job_application": "Job Application",
   "dealer": "Dealer",
-  "add_to_cart" : "Add to Cart",
-  "remove_from_cart" : "Remove from cart",
-  "advisor_contact_success": "Our Advisor will contact you soon."
+  "add_to_cart" : "Add to Cart"
 }

@@ -22,6 +22,7 @@ interface ProfileData{
 const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAccept, Mobile_number, CloseAddmodal}) => {
   const dispatch = useDispatch();
   const [data, setData] = useState<ProfileInfo | null>()
+  
   useEffect(() => {
     const customerDataString = Cookies.get("customer_data");
     if (customerDataString && customerDataString !== "undefined") {
@@ -66,14 +67,14 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
       setSelectedStateOption({label : data?.state?.name, value : data?.state?._id })
       setSelectedStateid(data?.state?._id)
 
-      setSelectedDistrictOption({ label : data?.district_name, value :data?.district })
-      setSelectedDistrictid(data?.district)
+      setSelectedDistrictOption({ label : data?.district?.name, value :data?.district?._id })
+      setSelectedDistrictid(data?.district?._id)
 
-      setSelectedTalukaOption({ label : data?.taluka_name, value :data?.taluka })
-      setSelectedTalukaid(data?.taluka)
+      setSelectedTalukaOption({ label : data?.taluka?.name, value :data?.taluka?._id })
+      setSelectedTalukaid(data?.taluka?._id)
 
-      setSelectedVillageOption({ label : data?.village_name, value :data?.village })
-      setSelectedVillageid(data?.village)
+      setSelectedVillageOption({ label : data?.village?.name, value :data?.village?._id })
+      setSelectedVillageid(data?.village?._id)
 
       // Header About
       const matchedaboutOption = HeardAboutOprions.find(opt => opt.value === data.heard_about_agribharat);
@@ -311,7 +312,7 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
         land_type : selectedlandtypeid,
         irrigation_source : selectedirrigationsourceid,
         irrigation_type : selectedirrigationtypeid,
-        // heard_about_agribharat : selectedheaderaboutid,
+        heard_about_agribharat : selectedheaderaboutid,
         smart_phone: true,
         crops:selectedcropid,
         ref_name : values?.ref_name

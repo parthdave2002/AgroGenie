@@ -1,17 +1,17 @@
-import { Badge, Button, Modal } from 'flowbite-react';
+import { Badge,  Modal } from 'flowbite-react';
 import React, { FC, useEffect, useState } from 'react'
 import { FaExclamationTriangle, FaPhoneVolume, FaSeedling, FaTruck, FaUserAlt, FaWindowClose } from 'react-icons/fa';
 import ComplainCreate from './complainCreate';
-import ReturnOrderModalPage from '../../components/modal/returnOrderModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderlist, getUpdateOrderlist, ResetOrderlist } from '../../Store/actions';
-import logo from "../../img/logo.webp";
+import logo from "/images/authentication/logo.webp";
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-import SuccessErrorModalPage from '../../components/modal/successErrorModal';
 import moment from 'moment';
 import { BsCartXFill } from 'react-icons/bs';
 const IMG_URL = import.meta.env["VITE_API_URL"];
+import ReturnOrderModalPage from '../../components/common/modal/returnOrderModal';
+import SuccessErrorModalPage from '../../components/common/modal/successErrorModal';
 
 interface OrderDetailsProps{
   orderId : string | null;
@@ -353,8 +353,8 @@ const OrderDetails : FC <OrderDetailsProps> = ({orderId, closeOrderDetail, openD
                               {/* --- Static Top Content --- */}
                               <div className="flex flex-col">
                                 <div className="text-center mb-2">
-                                  <h6 className="text-[0.9rem]  text-gray-500 ">  એગ્રો જીની કંપનીમાંથી 100% ખાતરીબંધ બ્રાન્ડેડ કૃષિ પ્રોડક્ટ ઘરે બેઠા ઓર્ડર કરવા અને ખેતીને લગતી વધુ માહિતી માટે  </h6>
-                                  <h6 className="text-[0.9rem]  text-gray-500 ">  હેલ્પલાઇન નંબર +91 90635 63590  પર સંપર્ક કરો!!!  જય કિસાન  </h6>
+                                  <h6 className="text-[0.9rem]  text-gray-500 ">  એગ્રી ભારત કંપનીમાંથી 100% ખાતરીબંધ બ્રાન્ડેડ કૃષિ પ્રોડક્ટ ઘરે બેઠા ઓર્ડર કરવા અને ખેતીને લગતી વધુ માહિતી માટે  </h6>
+                                  <h6 className="text-[0.9rem]  text-gray-500 ">  હેલ્પલાઇન નંબર 9100029429/9100029329 પર સંપર્ક કરો!!!  જય કિસાન  </h6>
                                 </div>
             
                                 <div className="flex justify-between items-center mb-4">
@@ -364,17 +364,17 @@ const OrderDetails : FC <OrderDetailsProps> = ({orderId, closeOrderDetail, openD
             
                                 <div className="flex justify-between items-center mb-4 border-b pb-4">
                                   <div>
-                                    <p className="text-gray-500 text-[0.9rem]"> AgroGenie Ventures LLP, </p>
-                                    <p className="text-gray-500 text-[0.9rem]">At:  Anand - 388001, Ta.: Anand,</p>
-                                    <p className="text-gray-500 text-[0.9rem]">  Dist.: GPO Road, Anand, Gujarat </p>
-                                    <p className="text-gray-500 text-[0.9rem]">  GST : 24ABVFA5722H1ZA </p>
+                                    <p className="text-gray-500 text-[0.9rem]"> Warehouse-1, Diu Road, </p>
+                                    <p className="text-gray-500 text-[0.9rem]">At: Kesariya - 362560, Ta.: Una,</p>
+                                    <p className="text-gray-500 text-[0.9rem]">  Dist.: Gir Somnath, Gujarat </p>
+                                    <p className="text-gray-500 text-[0.9rem]">  GST :  </p>
                                   </div>
                                   <div className="text-right">
-                                    <p className="text-gray-500 text-sm"><strong> Pesticide Lic No: </strong>GJ/AND/PT1200123/2025-26 </p>
-                                    <p className="text-gray-500 text-sm"><strong> Seeds Lic No: </strong>  GJ/AND/FR1900789/2025-26 </p>
-                                    <p className="text-gray-500 text-sm"> <strong> Ferlitizer Lic No: </strong> GJ/AND/SD2100456/2025-26</p>
-                                    <p className="text-gray-500 text-sm"> E-mail:  touch@agrogenieseeds.com</p>
-                                    <p className="text-gray-500 text-sm"> Contact : +91 90635 63590  </p>
+                                    <p className="text-gray-500 text-sm"><strong> Pesticide Lic No: </strong> GRS/FP1230000664/2023-24 </p>
+                                    <p className="text-gray-500 text-sm"><strong> Seeds Lic No: </strong>  GRS/FSR230000774/2023-24	 </p>
+                                    <p className="text-gray-500 text-sm"> <strong> Ferlitizer Lic No: </strong> GRS/FFR230000775/2023-24 </p>
+                                    <p className="text-gray-500 text-sm"> E-mail: agribharat2023@gmail.com</p>
+                                    <p className="text-gray-500 text-sm"> Contact : 91000 29329/91000 29429 </p>
                                   </div>
                                 </div>
             
@@ -431,10 +431,10 @@ const OrderDetails : FC <OrderDetailsProps> = ({orderId, closeOrderDetail, openD
                                 <>
                                   <div className="mt-4 flex">
                                     <div className="flex-1 text-[0.8rem]">
-                                      <p>A/c Holder: AgroGenie Ventures LLP</p>
-                                      <p>A/c No: 10074 944041</p>
-                                      <p>Bank: IDFC First Bank, Gandhinagar</p>
-                                      <p>IFSC: IDFB0042343</p>
+                                      <p>A/c Holder: AGRI BHARAT</p>
+                                      <p>A/c No: 50200102495365</p>
+                                      <p>Bank: HDFC BANK, KAPADWANJ</p>
+                                      <p>IFSC: HDFC0000748</p>
                                     </div>
             
                                     <div className="flex-1 text-[1rem]">
@@ -496,17 +496,18 @@ const OrderDetails : FC <OrderDetailsProps> = ({orderId, closeOrderDetail, openD
                                   <div className="mt-4 text-[0.8rem] text-gray-700">
                                       <div className="flex justify-between"> 
                                           <div className="text-[1.2rem]" ><strong>Terms & Conditions:</strong>  </div>
-                                          {/* <img src="/images/authentication/signature.webp" className="mb-3 border-b border-dashed border-gray-400 pb-1 w-[8rem] h-[3rem]" />  */}
+                                          <img src="/images/authentication/signature.webp" className="mb-3 border-b border-dashed border-gray-400 pb-1 w-[8rem] h-[3rem]" /> 
                                       </div>
-                                    <p className="text-[0.8rem]">  (1) પાર્સલની ડિલિવરી વખતે બધો સામાન તપાસી લેશો, વસ્તુ ગૂમની ફરિયાદ માન્ય નહીં રાખવામાં આવે. વેચાયેલ માલમાં ખામી હશે તો બદલી આપશું પણ પાછો લેવામાં નહિ આવે. </p>
-                                    <p className="text-[0.8rem]">  (2) પમ્પની બેટરી અને ટોર્ચ લાઈટ માં માત્ર 6 મહિનાની બેટરીની વૉરંટી આવે છે. ચાર્જિંગ કરતી વખતે આ વસ્તુઓ વાપરવી નહિ, વધુ પડતું ચાર્જિંગ ટાળો અને પાવર ઓછો હોય ત્યારે વસ્તુને ચાર્જિંગમાં ના રાખો. </p>
-                                    <p className="text-[0.8rem]">  (3)અમારા તમામ ઉત્પાદનો માત્ર કૃષિ ઉપયોગ માટે જ છે. ખેતીમાં ઉત્પાદન હવામાન, પાણી, આબોહવા, જમીન, માવજત અને સમય જેવા વિવિધ પરિબળો પર આધારિત હોય છે, પાકની નિષ્ફળતા, ઉપજમાં ઘટાડો અથવા ગુણવત્તાના નુકસાન માટે કંપની ક્યારેય જવાબદાર રહેશે નહીં અને કોપને કોઈપણ નુકસાન માટે વળતર આપશે નહીં. </p>
+                                    <p className="text-[0.8rem]">  (1) All products are intended for lawful agricultural use only. </p>
+                                    <p className="text-[0.8rem]">  (2) Product performance depends on various external factors such as weather, soil conditions, and usage methods. The company shall not be held responsible for crop failure, yield loss, or quality issues. </p>
+                                    <p className="text-[0.8rem]">  (3) The battery Pump and Torch have a limited warranty of 6 months for battery only. Do not use electric items while charging, use original adaptor and avoid overcharge or charge in low voltage as it may damage battery.  </p>
+                                    <p className="text-[0.8rem]">  (4) All disputes are subject to the jurisdiction of Una or Kapadvanj. E & O.E  </p>
                                   </div>
             
                                   <div className="mt-4 text-center text-gray-600">
                                     <h6 className="text-[1rem] leading-none">
                                         <span role="img" aria-label="pray" className="mr-1">🙏</span>
-                                        એગ્રોજીની માંથી ખરીદી કરી આપની સેવાની તક આપવા બદલ આપશ્રીનો આભાર.
+                                        એગ્રી ભારતમાંથી ખરીદી કરવા બદલ આભાર !
                                         <span role="img" aria-label="pray" className="ml-1">🙏</span>
                                       </h6>
                                     <div className="flex justify-center items-center gap-x-3 mt-3 text-[0.9rem]"> 

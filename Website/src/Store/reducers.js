@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import Banner from "./Banner/reducer";
+import Testimonial from "./Testimonial/reducer";
 import Category from "./Category/reducer";
 import Company from "./Company/reducer";
 import Coupon from "./Coupon/reducer";
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     Company,
     Product,
     Banner,
+    Testimonial,
     Crop,
     Coupon,
     Lead

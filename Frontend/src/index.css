@@ -1,191 +1,6 @@
-/* see https://github.com/themesberg/flowbite-admin-dashboard/blob/main/src/css/input.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* chart styles */
-.apexcharts-tooltip {
-  @apply bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-lg shadow-lg !important;
-}
-
-.apexcharts-tooltip .apexcharts-tooltip-title {
-  @apply py-2 px-4 bg-gray-100 dark:bg-gray-600 border-b border-gray-200 dark:border-gray-500 !important;
-}
-
-.apexcharts-xaxistooltip {
-  @apply text-gray-500 border-0 bg-white dark:bg-gray-700 dark:text-gray-300 rounded-lg shadow-lg !important;
-}
-
-.apexcharts-tooltip .apexcharts-tooltip-text-y-value {
-  @apply dark:text-white;
-}
-
-.apexcharts-xaxistooltip-text {
-  @apply font-medium text-sm !important;
-}
-
-.apexcharts-xaxistooltip:before,
-.apexcharts-xaxistooltip:after {
-  @apply border-0 !important;
-}
-
-/* SVG map styles */
-.svgMap-map-wrapper {
-  @apply bg-white !important;
-}
-
-.svgMap-map-image {
-  @apply dark:bg-gray-800;
-}
-
-.svgMap-map-controls-wrapper {
-  @apply shadow-none left-0 bottom-0 dark:bg-gray-800 !important;
-}
-
-.svgMap-map-controls-zoom {
-  @apply dark:bg-gray-800 !important;
-}
-
-.svgMap-map-wrapper .svgMap-control-button {
-  @apply rounded-lg border-solid border border-gray-300 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600 !important;
-}
-
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:after,
-.svgMap-map-wrapper .svgMap-control-button.svgMap-zoom-button:before {
-  @apply dark:bg-gray-600 dark:hover:bg-gray-500;
-}
-
-.svgMap-map-wrapper .svgMap-control-button:first-child {
-  @apply mr-2 !important;
-}
-
-.svgMap-tooltip {
-  @apply bg-white dark:bg-gray-700 shadow-lg rounded-lg border-0 text-left !important;
-}
-
-.svgMap-tooltip
-  .svgMap-tooltip-content-container
-  .svgMap-tooltip-flag-container {
-  @apply inline-block mr-2 text-left border-0 p-0 !important;
-}
-
-.svgMap-tooltip
-  .svgMap-tooltip-content-container
-  .svgMap-tooltip-flag-container
-  .svgMap-tooltip-flag {
-  @apply inline-block border-0 h-4 p-0 !important;
-}
-
-.svgMap-tooltip .svgMap-tooltip-title {
-  @apply inline-block pt-2 text-gray-900 dark:text-white font-semibold text-sm !important;
-}
-
-.svgMap-tooltip .svgMap-tooltip-content {
-  @apply mt-0 !important;
-}
-
-.svgMap-tooltip .svgMap-tooltip-content table td {
-  @apply text-sm text-left text-gray-500 dark:text-gray-400 font-normal !important;
-}
-
-.svgMap-tooltip .svgMap-tooltip-content table td span {
-  @apply text-sm text-left text-gray-900 dark:text-white font-semibold !important;
-}
-
-.svgMap-tooltip .svgMap-tooltip-pointer {
-  @apply hidden !important;
-}
-
-.svgMap-map-wrapper .svgMap-country {
-  @apply dark:stroke-gray-800;
-}
-
-.svgMap-map-wrapper .svgMap-country {
-  @apply dark:stroke-gray-800 !important;
-}
-
-.svgMap-country[fill="#4B5563"] {
-  @apply fill-[#4B5563] !important;
-}
-
-.your-carousel-class-name .control-arrow {
-  display: none !important;
-}
-
-/* kanban styles */
-
-.drag-card {
-  @apply opacity-100 !important;
-  @apply rotate-6;
-}
-
-.ghost-card {
-  @apply bg-gray-100/40 dark:bg-gray-600/40 !important;
-}
-
-/* calendar styles */
-
-.fc .fc-toolbar {
-  @apply flex-row-reverse justify-end px-4 !important;
-}
-
-.fc .fc-toolbar.fc-header-toolbar {
-  @apply mb-5 !important;
-}
-
-.fc .fc-toolbar-title {
-  @apply text-lg text-gray-900 font-semibold !important;
-}
-
-.fc .fc-today-button {
-  @apply rounded-lg border border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 !important;
-}
-
-.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
-  @apply mx-2 !important;
-}
-
-.fc .fc-button-group .fc-prev-button,
-.fc .fc-button-group .fc-next-button {
-  @apply bg-white border-0 text-gray-500 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 rounded inline-flex focus:bg-gray-100 focus:ring-1 focus:ring-gray-100 justify-center !important;
-}
-
-.fc .fc-scrollgrid {
-  @apply border-l-0 border-gray-200 !important;
-}
-
-.fc .fc-daygrid-day-frame {
-  @apply border-gray-200 !important;
-}
-
-.fc .fc-col-header-cell-cushion {
-  @apply py-3 text-base text-gray-900 font-semibold !important;
-}
-
-.fc-theme-standard th {
-  @apply border-0 border-b border-gray-200 !important;
-}
-
-.fc-direction-ltr .fc-daygrid-event.fc-event-end {
-  @apply mr-2 !important;
-}
-
-.fc-direction-ltr .fc-daygrid-event.fc-event-start {
-  @apply ml-2 !important;
-}
-
-.fc .fc-event .fc-event-main {
-  @apply p-2 bg-primary-700 hover:bg-primary-800 !important;
-}
-
-.fc .fc-h-event .fc-event-main-frame {
-  @apply text-xs font-semibold !important;
-}
-
-.fc .fc-daygrid-day-frame {
-  @apply hover:bg-gray-50 cursor-pointer !important;
-}
 
 /* User Module Modal input type  */
 .userinput{
@@ -217,33 +32,11 @@
 /* Add Profile page Code End */
 
 
-/* Card Code Start */
-
-.DialerRightCard{ 
-  @apply xl:p-1 xl:w-[19rem] lg:w-[19rem] lg:h-[80vh] xl:h-[80vh] rounded-md lg:p-1 2xl:w-[23rem]
-}
-
-.DialerRightData{ 
-  @apply lg:text-[0.8rem] lg:font-semibold xl:text-[0.8rem] xl:font-semibold 2xl:text-[1rem] 2xl:font-semibold
-}
-
-.DialerLeftCard{ 
-  @apply xl:p-2 xl:w-[13rem] 2xl:w-[17rem] 2xl:h-[80vh] xl:h-[80vh] rounded-md
-}
-
-.DialerLeftData{ 
-  @apply lg:text-[0.8rem] lg:font-semibold xl:text-[0.8rem] xl:font-semibold
-}
-
 
 .Card{ 
   @apply bg-white shadow-md shadow-gray-400/50 hover:bg-gray-200 border border-gray-200 rounded-md lg:mt-[0.5rem] xl:mt-[1rem] text-gray-600 lg:px-1 dark:bg-gray-900 dark:border dark:border-gray-600 dark:text-white dark:shadow-gray-400 
 }
 /* Card  Code End */
-
-/* Page Header Code Start */
-.PageHeader { @apply  text-center lg:leading-4 lg:text-[1.2rem] lg:font-bold text-yellow-500 p-2 dark:text-white}
-/*  Page Header Code End */
 
 /* close btn code start */
 .Closebtn{ @apply lg:w-[1.8rem] lg:h-[2rem] text-red-500 hover:text-red-600 }
@@ -261,25 +54,11 @@
 }
 /* Multiple Select button Code End */
 
-/* Modal Code Start */
-
-.DialerModalBody{
-  @apply px-6 pt-6 pb-6  rounded-md
-}
-/* Modal Code End */
-
 /* DeafultCard Code start */
 .DeafultCard{
   @apply xl:w-[26rem] lg:w-[19rem] lg:mt-2 shadow-inner shadow-indigo-500/50 hover:shadow-indigo-500/40 rounded-md dark:bg-gray-900 dark:text-white dark:shadow-gray-600
 }
 
-.DeafultCardHeader{
-  @apply lg:text-[0.8rem] lg:font-bold xl:text-[0.9rem] xl:font-bold text-gray-600 
-}
-
-.DeafultCardData{
-  @apply lg:text-[0.8rem] lg:font-semibold xl:text-[0.9rem] xl:font-medium border border-blue-100 rounded-lg justify-between lg:my-0.5 flex text-gray-500 dark:text-white dark:border-gray-700
-}
 .ViewAllButton{
   @apply lg:text-[0.7rem] lg:font-bold lg:h-4 xl:h-5 xl:text-[0.9rem] xl:font-bold rounded-md bg-white text-gray-600 cursor-pointer hover:text-gray-700
 }
@@ -291,36 +70,6 @@
 /* DeafultCard Code start */
 
 
-/* Add Plantation Code start */
-.AddPlantationModalheader{
-  @apply lg:w-[10rem] text-center lg:text-[1.5rem] lg:font-bold text-gray-500 rounded-md 
-}
-
-.AddPlantationModalBody{
-  @apply flex lg:w-[30rem] justify-between grid grid-cols-2 justify-items-center
-}
-
-.AddPlantationModalData{
-  @apply border shadow-inner shadow-indigo-500/50 hover:shadow-indigo-500/40 text-gray-500 text-center rounded-md p-1 lg:w-[10rem] lg:text-[1rem] lg:font-semibold cursor-pointer lg:my-1
-}
-/* Add Plantation Code end */
-
-/* SendWhatsApp Button Code start */
-.SendWhatsApp{
-  @apply bg-green-400 hover:bg-green-500 p-1 text-white rounded-xl lg:w-[10rem] xl:w-[20rem] cursor-pointer self-center lg:text-[1rem] lg:font-semibold  text-center
-}
-
-/*  SendWhatsApp Button Code end */
-
-/* Kanban Code start */
-.KanbanData{
-  @apply text-center border border-gray-100 rounded-md lg:text-[0.7rem] self-center lg:font-semibold xl:text-[1rem] xl:font-bold
-}
-
-.KanbanTaskName{
-  @apply lg:text-[0.9rem] self-center lg:font-semibold  xl:text-[1rem] xl:font-bold cursor-pointer h-[5rem] py-2
-}
-/* Kanban Code start */
 
 ::-webkit-scrollbar {
   display: none;

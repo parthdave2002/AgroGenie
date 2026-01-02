@@ -1,13 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Button, Label, Modal } from 'flowbite-react';
 import { Form, Input, FormFeedback } from "reactstrap";
-import * as Yup from "yup";
 import Select from "react-select";
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddComplainlist, ResetComplainlist } from '../../Store/actions';
-import SuccessErrorModalPage from '../../components/modal/successErrorModal';
-import { MdNoteAlt } from 'react-icons/md';
+import SuccessErrorModalPage from '../../components/common/modal/successErrorModal';
 import { FaAddressCard } from 'react-icons/fa';
 import Cookies from 'js-cookie';
 

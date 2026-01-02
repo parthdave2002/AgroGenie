@@ -96,6 +96,7 @@ productController.getAllProductList = async (req, res, next) => {
       { path: 'company', model: 'company', select: 'name_eng name_guj' },
       { path: 'packagingtype', model: 'packing-type', select: 'type_eng type_guj' },
       { path: 'crops', model: 'crop', select: 'name_eng name_guj' },
+      { path: 'warehouse', model: 'warehouse', select: 'name' },
     ];
 
     if (req.query.id) {
@@ -159,7 +160,7 @@ productController.getAllProductList = async (req, res, next) => {
           })
          
 
-      if (searchResults.length === 0) return otherHelper.sendResponse(res, httpStatus.OK, true, null, [], 'Data not found', null);
+      if (searchResults.length === 0) return otherHelper.sendResponse(res, httpStatus.OK, true, [], [], 'Data not found', null);
 
       const formattedResults = searchResults.map((product) => ({
         ...product.toObject(),
@@ -173,7 +174,7 @@ productController.getAllProductList = async (req, res, next) => {
       searchConditions.push({ crops: req.query.crop });
       const searchResults = await productSch.find({ crops: req.query.crop, is_deleted: false }).populate(populatedata).exec();
 
-      if (searchResults.length === 0) return otherHelper.sendResponse(res, httpStatus.OK, true, null, [], 'Data not found', null);
+      if (searchResults.length === 0) return otherHelper.sendResponse(res, httpStatus.OK, true, [], [], 'Data not found', null);
 
       const formattedResults = searchResults.map((product) => ({
         ...product.toObject(),
@@ -198,9 +199,11 @@ productController.getAllProductList = async (req, res, next) => {
 productController.AddProductData = async (req, res, next) => {
   try {
     const Product = req.body;
-    if (req.files) {
-      Product.product_pics = req.files.map(file => file.filename);
+
+     if (req.file && req.file.location) {
+      Product.product_pics = req.file.location;
     }
+
     if (Product.description && typeof Product.description === "string") {
       try {
         Product.description = JSON.parse(Product.description);

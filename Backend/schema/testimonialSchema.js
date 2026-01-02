@@ -9,12 +9,7 @@ const testimonialSchema = new schema({
   body_eng: { type: String},
   body_guj: { type: String},
   rating : { type: Number, min: 1, max: 5 },
-  testimonial_pics: { type: String, default: null },
-  updated_at: { type: Date },
-  updated_by: { type: schema.Types.ObjectId, ref: 'users' },
-  is_deleted: { type: Boolean, default: false, required: true },
-  deleted_by: { type: schema.Types.ObjectId, ref: 'users' },
-  deleted_at: { type: Date },
-});
+  testimonial_pic : { type: String, default: null },
+}, { timestamps : true});
 
 module.exports = testimonial = mongoose.model('testimonial', testimonialSchema);

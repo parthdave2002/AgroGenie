@@ -1,20 +1,20 @@
 import React, { FC, useEffect, useState } from 'react'
 import {  FaPencilAlt, FaPowerOff } from 'react-icons/fa'
 import SalesAddFarmer from './salesAddFarmer';
-import LogoutModal from '../../components/modal/logoutModal';
+import LogoutModal from '../../components/common/modal/logoutModal';
 import FarmerHistory from './farmerHistory';
 import FarmeDashboard from './farmeDashboard';
 import { TiShoppingCart } from "react-icons/ti";
 import Salesproductlist from '../../components/productdetails/salesproductlist';
 import ProductDetailData from '../../components/productdetails/salesproductDetails';
-import SalesMobileInput from '../../components/input/salesMobileInput';
+import SalesMobileInput from '../../components/common/inputComponent/salesMobileInput';
 import {  useSelector } from 'react-redux';
 import CartList from './cart';
-import LoaderPage from "../../components/loader";
+import LoaderPage from "../../components/common/loader/loader";
 import OrderDetails from '../../components/salesComponent/orderDetails';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-
+import NeaByFarmer from './nearByfarmer';
 interface PropsData{
   setOpenProfile : (value: boolean) => void;
   Mobile_number ?: string;
@@ -194,6 +194,9 @@ const SalesFarmerDashboard : FC<PropsData> = ( {setOpenProfile, Mobile_number, o
                       <div className='flex-1 flex justify-end  self-end '> <div className='border border-indigo-500 text-indigo-500 dark:text-white hover:text-gray-100 font-semibold px-6 py-2 rounded-full  gap-3 hover:bg-indigo-800 transition flex text-center cursor-pointer  transition-all duration-500 ease-in-out' onClick={() => EditFarmerCall()}> <FaPencilAlt className='self-center h-5 w-5' />Update Farmer  </div> </div>
                     </div>
                     <FarmeDashboard viewButton={true} classData="border dark:border-gray-600 rounded-xl w-full py-2 px-4 transition-all duration-800 ease-in-out" />
+
+                    <div className='mt-[2rem] text-[2rem] dark:text-gray-400 font-bold'> Near By Farmer </div>
+                    <NeaByFarmer  />
 
                     <div className='mt-[2rem] text-[2rem] dark:text-gray-400 font-bold'> History </div>
                     <FarmerHistory setOpenDetailId={setOpenDetailId} openComplain={openComplain} setOpenComplain={setOpenComplain}  setOpenDetailIData={setOpenDetailIData}  setOpenDetailsmodal={setOpenDetailsmodal}  AddtoCartCall={AddtoCartCall} setCartOrderid={setCartOrderid} FuturOrderDate={setfuture_date}   orderId={orderId} set_OrderId={set_OrderId} />

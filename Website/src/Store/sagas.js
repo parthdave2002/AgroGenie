@@ -1,5 +1,6 @@
 import { all, fork } from "redux-saga/effects";
 import BannerSaga from "./Banner/saga";
+import TestimonialSaga from "./Testimonial/saga";
 import CategorySaga from "./Category/saga";
 import CompanySaga from "./Company/saga";
 import CouponSaga from "./Coupon/saga";
@@ -15,6 +16,7 @@ export default function* rootSaga() {
     fork(CompanySaga),
     fork(ProductSaga),
     fork(BannerSaga),
+    fork(TestimonialSaga),
     fork(CropSaga),
     fork(CouponSaga),
     fork(LeadSaga),

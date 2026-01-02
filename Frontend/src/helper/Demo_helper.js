@@ -100,10 +100,11 @@ export const UserlistApi = (requserdata) => api.get(url.GET_USER_LIST, requserda
 export const UserlistViewApi = (requserdata) => api.get(url.GET_USER_VIEW, requserdata);
 export const AddUserlistApi = async (requserdata) => await api.postMultipart(url.ADD_USER_LIST, requserdata);
 export const DelUserlistApi = async (requserdata) => await api.get(url.DELETE_USER_LIST, requserdata);
-export const UpdateUserdatalistApi = async (requserdata) => await api.create(url.UPDATE_USER_DATA_LIST, requserdata);
+export const UpdateUserdatalistApi = async (requserdata) => await api.postMultipart(url.UPDATE_USER_DATA_LIST, requserdata);
 export const CheckUserdatalistApi = async (requserdata) => await api.get(url.CHECK_USER_LIST, requserdata);
 export const profileUserdatalistApi = async (requserdata) => await api.get(url.GET_PROFILE_DATA_LIST, requserdata);
 export const updateprofileUserdatalistApi = async (requserdata) => await api.postMultipart(url.UPDATE_PROFILE_DATA_LIST, requserdata);
+export const updateprofilePasswordApi = async (requserdata) => await api.get(url.UPDATE_PROFILE_PASSWORD, requserdata);
 
 // Roles Api
 export const RolelistApi = async (requserdata) => await api.get(url.GET_ROLES_LIST, requserdata);
@@ -194,6 +195,7 @@ export const UpdateCustomerlistApi = async (requserdata) => await api.update(url
 export const DelCustomerlistApi = async (requserdata) => await api.delete(url.DELETE_CUSTOMER_DATA_LIST, requserdata);
 export const BlockCustomerlistApi = async (requserdata) => await api.update(url.BLOCK_CUSTOMER_DATA_LIST, requserdata);
 export const CheckCustomerApi = async (requserdata) => await api.get(url.CHECK_CUSTOMER_EXIST_LIST, requserdata);
+export const GetFarmerlistApi = async (requserdata) => await api.get(url.GET_NEAR_BY_FARMER, requserdata);
 
 // Crops API
 export const CroplistApi = (requserdata) => api.get(url.GET_CROP_LIST, requserdata);
@@ -206,6 +208,11 @@ export const CouponlistApi = (requserdata) => api.get(url.GET_COUPON_LIST, requs
 export const AddCouponlistApi = async (requserdata) => await api.create(url.ADD_COUPON_LIST, requserdata);
 export const DelCouponlistApi = async (requserdata) => await api.delete(url.DELETE_COUPON_LIST, requserdata);
 export const StatusCouponlistApi = async (requserdata) => await api.delete(url.CHANGE_STATUS_COUPON_LIST, requserdata);
+
+// NoticeBoard API
+export const NoticeBoardlistApi = (requserdata) => api.get(url.GET_NOTICE_BOARD_LIST, requserdata);
+export const AddNoticeBoardlistApi = async (requserdata) => await api.postMultipart(url.ADD_NOTICE_BOARD_LIST, requserdata);
+export const DelNoticeBoardlistApi = async (requserdata) => await api.delete(url.DELETE_NOTICE_BOARD_LIST, requserdata);
 
 // Lead API
 export const LeadlistApi = (requserdata) => api.get(url.GET_LEAD_LIST, requserdata);
@@ -223,3 +230,11 @@ export const StatelistApi = (requserdata) => api.get(url.GET_STATE_DATA_LIST, re
 export const DistrictlistApi = (requserdata) => api.get(url.GET_DISTRICT_DATA_LIST, requserdata);
 export const TalukalistApi = (requserdata) => api.get(url.GET_TALUKA_DATA_LIST, requserdata);
 export const VillagelistApi = (requserdata) => api.get(url.GET_VILLAGE_DATA_LIST, requserdata);
+
+export const LeavelistApi = (requserdata) => api.get(url.GET_LEAVE_LIST, requserdata);
+export const AdddLeavelistApi = (requserdata) => api.create(url.ADD_LEAVE_LIST, requserdata);
+export const ChangeLeavelistApi = (requserdata) => api.create(url.GET_CHANGE_LEAVE_STATUS, requserdata);
+
+export const TestimoniallistApi = (requserdata) => api.get(url.GET_TESTIMONIAL_LIST, requserdata);
+export const AddTestimoniallistApi = (requserdata) => api.postMultipart(url.ADD_TESTIMONIAL_LIST, requserdata);
+export const DelTestimoniallistApi = (requserdata) => api.delete(url.DELETE_TESTIMONIAL_LIST, requserdata);

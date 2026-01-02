@@ -106,10 +106,10 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
               if (onClose) {
                 onClose();
               }
-              toast.success(t('advisor_contact_success'));
+                 toast.success("Our Advisor will contact you soon.")
               // dispatch(ResetLeadlist())
             setTimeout(() =>{
-              toast.success(t('advisor_contact_success'));
+                 toast.success("Our Advisor will contact you soon.")
               navigate("/")
             },3000)
         }
@@ -150,7 +150,7 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
                       <div className="w-16 h-16 flex items-center justify-center rounded-lg border bg-gray-50">
                         <LazyLoadImage
                           effect="blur"
-                          src={`${IMG_URL}/public/product/${item?.product_pics[0]}`}
+                          src={item?.product_pics[0]}
                           alt={item?.title}
                           className="w-[3rem] h-[3rem] object-contain"
                         />

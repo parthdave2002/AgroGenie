@@ -12,35 +12,23 @@ const FAQSection = () => {
   };
   return (
     <div className='py-5'>
-        <div className='max-w-1600 mx-auto px-4'>
-      <h2 className="md:text-[2rem] text-[1.5rem] font-heading font-semibold my-5">{t("Frequently Asked Questions")}</h2>
-        <div className="max-w-7xl mx-auto p-6">
+      <div className='max-w-1600 mx-auto px-4'>
+        <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center gap-x-3 ">Most Frequently <span className="text-lime-500"> Asked Questions </span> </h2>
+        <div className="max-w-7xl mx-auto p-6 font-body">
 
-      {/* {faqs.map((faq, index) => (
-        <div key={index} className="mb-4 border-b border-gray-300 pb-4">
-          <button className="w-full flex justify-between items-center text-left  font-semibold font-heading text-gray-800 focus:outline-none"  onClick={() => toggleFAQ(index)}  > <div className='text-md md:text-xl font-heading'>  {faq.question} </div> {openIndex === index ? <FaChevronUp /> : <FaChevronDown />} </button>
-          {openIndex === index && ( <p className="mt-3 text-gray-600 font-heading transition-all duration-500 ease-in-out text-lg ">{faq.answer}</p> )}
-        </div>
-      ))} */}
-
-       {faqs.map((faq:any, index:number) => (
-            <div key={index} className="mb-4 border-b border-gray-300 pb-4">
-              <button
-                className="w-full flex justify-between items-center text-left font-semibold font-heading text-gray-800 focus:outline-none"
-                onClick={() => toggleFAQ(index)}
-              >
-                <div className='text-md md:text-xl font-heading'>{faq.question}</div>
+          {faqs.map((faq: any, index: number) => (
+            <div key={index} className="mb-4 border-b border-gray-300 pb-4 font-body">
+              <button className="w-full flex justify-between items-center text-left text-gray-800 focus:outline-none" onClick={() => toggleFAQ(index)}>
+                <div className='text-md md:text-xl'>{faq.question}</div>
                 {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
               </button>
               {openIndex === index && (
-                <p className="mt-3 text-gray-600 font-heading transition-all duration-500 ease-in-out text-lg">
-                  {faq.answer}
-                </p>
+                <p className="mt-3 text-gray-600 transition-all duration-500 ease-in-out text-lg"> {faq.answer} </p>
               )}
             </div>
           ))}
-    </div>
-    </div>
+        </div>
+      </div>
     </div>
   )
 }

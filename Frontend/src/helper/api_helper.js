@@ -26,24 +26,40 @@ const setAuthorization = (token) => {
 
 class APIClient {
   /* Fetches data from given url */
-  get = (url, params ) => {
+  get = async(url, params ) => {
     let response;
-
     let paramKeys = [];
 
-    if(params){
-      Object.keys(params).map(key => {
-        paramKeys.push(key + '=' + params[key])
-        return paramKeys;
-    });
-    
-      const queryString = paramKeys && paramKeys.length ? paramKeys.join('&') : "";
-      response = axios.get(`${url}?${queryString}`, params);
-    } else {
-        response = axios.get(`${url}`, params);
-    }
+    try {
 
-    return response;
+      if (params) {
+        Object.keys(params).map(key => {
+          paramKeys.push(key + '=' + params[key])
+          return paramKeys;
+        });
+
+        const queryString = paramKeys && paramKeys.length ? paramKeys.join('&') : "";
+        response = await axios.get(`${url}?${queryString}`, params);
+      } else {
+        response = await axios.get(`${url}`, params);
+      }
+
+      return response;
+    } catch (error) {
+
+      if (error?.msg == "Module Access Restricted") {
+        Cookies.remove("token");
+        Cookies.remove("username");
+        Cookies.remove("access");
+        Cookies.remove("role");
+        Cookies.remove("userType");
+
+        // window.location.replace("/login");
+        toast.error("Module Access Restricted.");
+      }
+
+      throw error;
+    }
   }
 
   /* post given data to url */
