@@ -25,7 +25,11 @@ import {
 
   REST_CUSTOMER_DATA_LIST,
   REST_CUSTOMER_DATA_LIST_SUCCESS,
-  REST_CUSTOMER_DATA_LIST_ERROR
+  REST_CUSTOMER_DATA_LIST_ERROR,
+
+  GET_NEAR_BY_FARMER,
+  GET_NEAR_BY_FARMER_SUCCESS,
+  GET_NEAR_BY_FARMER_ERROR,
 } from "./actionType";
 
 const INIT_STATE = {
@@ -38,6 +42,9 @@ const INIT_STATE = {
   DeleteCustomerlist: [],
   BlockCustomerlist:[],
   CheckCustomerExistlist:[],
+  Farmerlist: [],
+  FarmerlistSize:0,
+  TotalFarmerData:0,
   error: {},
 };
 
@@ -138,6 +145,9 @@ const Customer = (state = INIT_STATE, action) => {
             UpdateCustomerlist:[],
             DeleteCustomerlist: [],
             CheckCustomerExistlist:[],
+            Farmerlist: [],
+            FarmerlistSize:0,
+            TotalFarmerData:0,
             error: {},
           };
       }
@@ -186,6 +196,29 @@ const Customer = (state = INIT_STATE, action) => {
             ...state,
             error: action.payload,
           };
+        default:
+          return { ...state };
+      }
+
+    case GET_NEAR_BY_FARMER_SUCCESS:
+      switch (action.payload.actionType) {
+        case GET_NEAR_BY_FARMER:
+          return {
+            ...state,
+            Farmerlist: action.payload.data.data,
+            FarmerlistSize: action.payload.data.size,
+            TotalFarmerData: action.payload.data.totalData,
+            CurrentPage: action.payload.data.page,
+          };
+      }
+    case GET_NEAR_BY_FARMER_ERROR:
+      switch (action.payload.actionType) {
+        case GET_NEAR_BY_FARMER:
+          return {
+            ...state,
+            error: action.payload,
+          };
+
         default:
           return { ...state };
       }

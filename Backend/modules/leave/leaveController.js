@@ -20,18 +20,45 @@ leaveController.getAllleave = async (req, res, next) => {
       return otherHelper.paginationSendResponse(res, httpStatus.OK, true, lead, 'Leave data get successfully', page, size, lead.totalData);
     }
 
-    if(type === "admin"){
+    if (type === "admin") {
+      const { month } = req.query;
 
       const currentDate = new Date();
-      const currentMonthYear = `${String(currentDate.getMonth() + 1).padStart(2, "0")}-${currentDate.getFullYear()}`;
+      const defaultMonth = `${String(currentDate.getMonth() + 1).padStart(2, "0")}-${currentDate.getFullYear()}`;
+      const targetMonth = month || defaultMonth;
+
+      const parseDate = (dateStr) => {
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+          return new Date(dateStr);
+        }
+
+        if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
+          const [day, month, year] = dateStr.split("-");
+          return new Date(`${year}-${month}-${day}`);
+        }
+
+        return null;
+      };
+
+      const getMonthRange = (monthStr) => {
+        const [m, y] = monthStr.split("-");
+        const start = new Date(`${y}-${m}-01`);
+        const end = new Date(y, m, 0);
+        return { start, end };
+      };
+      const { start: monthStart, end: monthEnd } = getMonthRange(targetMonth);
 
       const allLeaves = await leaveSch.find().populate(userPopulate).sort(sortQuery || { createdAt: -1 });
-
       const leavesThisMonth = allLeaves.filter((leave) => {
-        if (!leave.request_date) return false;
-        return leave.request_date.slice(3) === currentMonthYear;
-      });
+        if (!leave.start_date || !leave.end_date) return false;
 
+        const leaveStart = parseDate(leave.start_date);
+        const leaveEnd = parseDate(leave.end_date);
+
+        if (!leaveStart || !leaveEnd) return false;
+
+        return leaveStart <= monthEnd && leaveEnd >= monthStart;
+      });
       const groupedData = {};
 
       leavesThisMonth.forEach((leave) => {
@@ -46,24 +73,11 @@ leaveController.getAllleave = async (req, res, next) => {
           };
         }
 
-        groupedData[userId].leaves.push({
-          _id: leave._id,
-          request_date: leave.request_date,
-          leave_type: leave.leave_type,
-          reason: leave.reason,
-          status: leave.status,
-          approved_by: leave.approved_by || null,
-          approved_date: leave.approved_date || null,
-          requested_by: leave.requested_by || null,
-          request_for: leave.request_for || null,
-          requested_at: leave.createdAt,
-          updatedAt: leave.updatedAt,
-        });
+        groupedData[userId].leaves.push(leave);
       });
 
       const responseData = Object.values(groupedData);
-
-      return otherHelper.sendResponse( res, httpStatus.OK, true,responseData, null,'Users leave fetched successfully', null);
+      return otherHelper.sendResponse(res, httpStatus.OK, true, responseData, null, 'Users leave fetched successfully', null);
     }
 
   } catch (err) {
@@ -74,48 +88,24 @@ leaveController.getAllleave = async (req, res, next) => {
 leaveController.addleave = async (req, res, next) => {
   try {
     const { id : userid ,type } = req.user
-    const { request_date, leave_type, reason, request_for } = req.body;
+    const { leave_type, reason, request_for, start_date, end_date, days } = req.body;
 
     if(type === "admin"){
-      if(!request_for){
-        return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Please select user', null);
-      }
-
-      const newLeave = new leaveSch({
-        request_date: request_date,
-        leave_type,
-        reason,
-        request_for : request_for,
-        requested_by: userid,
-        status: 'pending',
-      });
-
+      if(!request_for) otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Please select user', null);
+      
+      const newLeave = new leaveSch({ leave_type, reason,  start_date,  end_date,  days, request_for : request_for, requested_by: userid, status: 'pending', });
       await newLeave.save();
       return otherHelper.sendResponse(res, httpStatus.OK, true, newLeave, null, 'Leave created successfully', null);
     }
 
-    if (!userid || !request_date) {
+    if (!userid || !start_date || !end_date) {
       return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Missing required parameters', null);
     }
 
-    const alreadyonleave = await leaveSch.findOne({
-      request_for : userid,
-      request_date: request_date
-    });
+    const alreadyonleave = await leaveSch.findOne({request_for : userid, start_date: { $lte: start_date }, end_date: { $gte: end_date }, status: { $in: ['pending', 'approved'] } });
+    if (alreadyonleave) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'You have already applied for leave on this date', null);
 
-    if (alreadyonleave) {
-      return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'You have already applied for leave on this date', null);
-    }
-
-    const newLeave = new leaveSch({
-      request_date: request_date,
-      leave_type,
-      reason,
-      requested_by: userid,
-       request_for : userid,
-      status: 'pending',
-    });
-
+    const newLeave = new leaveSch({ start_date,  end_date, days, leave_type, reason, requested_by: userid,  request_for : userid,  status: 'pending'  });
     await newLeave.save();
     return otherHelper.sendResponse(res, httpStatus.OK, true, newLeave, null, 'Leave created successfully', null);
   } catch (err) {

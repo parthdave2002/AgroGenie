@@ -4,18 +4,18 @@
 => code spliting, optimization  ( sales -> Dashboard )
 => Add noticeboard in role list page and do that accessbase  ( Admin -> Role List )
 => api call multiple times fix  ( Admin ->  Notice board details  page )
-= > Leave Previous month list  ( Admin panel -> Leave module )
+= > Leave Previous month list  ( Admin panel -> Leave module )   
 => Leave pagination   ( sales panel -> Leave module )
 => Leave balance  ( LWP : 8, Casual : 8 ) 
-=> Leave date range 
-=> attendance list admin panel
-=> Cancel request
-=> Admin can request past date leave  
 => Leave balance show on  profile
+=> Attendance list admin panel //Done
+=> Leave date range  // Done
+=> Cancel request   // Done
+=> Admin can request past date leave   // Done
 => Code optimization ( salesProfile.tsx )
-=> profile update : (  password, image ) (sales -> profile )
+=> profile update : (  password, image ) (sales -> profile )  // Done
 
-=> Add role behalf of selected
+=> Add role behalf of selected 
 => default text first in sales Dashboard
 
 new thing 

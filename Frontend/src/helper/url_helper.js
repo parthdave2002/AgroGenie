@@ -20,6 +20,7 @@ export const UPDATE_USER_DATA_LIST = "/api/user/update-user";
 export const CHECK_USER_LIST = "/api/user/check-user";
 export const GET_PROFILE_DATA_LIST = "/api/user/profile";
 export const UPDATE_PROFILE_DATA_LIST = "/api/user/update-profile";
+export const UPDATE_PROFILE_PASSWORD = "/api/user/update-password";
 
 // Role Api
 export const GET_ROLES_LIST = "/api/role/get-role";
@@ -109,6 +110,7 @@ export const UPDATE_CUSTOMER_DATA_LIST = "/api/customer/update-customer";
 export const DELETE_CUSTOMER_DATA_LIST = "/api/customer/remove-customer";
 export const BLOCK_CUSTOMER_DATA_LIST = "/api/customer/change-status";
 export const CHECK_CUSTOMER_EXIST_LIST = "/api/customer/matchnumber";
+export const GET_NEAR_BY_FARMER = "/api/customer/nearby-farmer";
 
 export const GET_CROP_LIST = "/api/crop/get-crop";
 export const ADD_CROP_LIST = "/api/crop/add-crop";

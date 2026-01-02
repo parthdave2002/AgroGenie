@@ -104,6 +104,7 @@ export const UpdateUserdatalistApi = async (requserdata) => await api.postMultip
 export const CheckUserdatalistApi = async (requserdata) => await api.get(url.CHECK_USER_LIST, requserdata);
 export const profileUserdatalistApi = async (requserdata) => await api.get(url.GET_PROFILE_DATA_LIST, requserdata);
 export const updateprofileUserdatalistApi = async (requserdata) => await api.postMultipart(url.UPDATE_PROFILE_DATA_LIST, requserdata);
+export const updateprofilePasswordApi = async (requserdata) => await api.get(url.UPDATE_PROFILE_PASSWORD, requserdata);
 
 // Roles Api
 export const RolelistApi = async (requserdata) => await api.get(url.GET_ROLES_LIST, requserdata);
@@ -194,6 +195,7 @@ export const UpdateCustomerlistApi = async (requserdata) => await api.update(url
 export const DelCustomerlistApi = async (requserdata) => await api.delete(url.DELETE_CUSTOMER_DATA_LIST, requserdata);
 export const BlockCustomerlistApi = async (requserdata) => await api.update(url.BLOCK_CUSTOMER_DATA_LIST, requserdata);
 export const CheckCustomerApi = async (requserdata) => await api.get(url.CHECK_CUSTOMER_EXIST_LIST, requserdata);
+export const GetFarmerlistApi = async (requserdata) => await api.get(url.GET_NEAR_BY_FARMER, requserdata);
 
 // Crops API
 export const CroplistApi = (requserdata) => api.get(url.GET_CROP_LIST, requserdata);

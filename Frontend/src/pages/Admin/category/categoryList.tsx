@@ -119,14 +119,8 @@ const CategoryListPage: FC = function () {
           <img  src={row?.category_pic}   alt="Category" className="h-16 w-16 object-cover rounded-full"  /> 
         )
       },
-      {
-        key: "name_eng",
-        label: "Name (Eng)",
-      },
-      {
-        key: "name_guj",
-        label: "Name (Guj)",
-      },
+      { key: "name_eng", label: "Name (Eng)"},
+      { key: "name_guj",  label: "Name (Guj)"},
       {
         key: "is_active",
         label: "Status",

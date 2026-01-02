@@ -73,49 +73,6 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
       fetchAndOpenComplain();
     }, [openComplain, dispatch]);
 
-    // useEffect(() =>{
-    //   const fetchAndOpenComplain = async () => {
-    //     if (orderId) {
-    //           console.log(" +++++++++++++++++= >>>>>>>>", orderId);
-    //       try {
-    //         setselectedTabbar("Order");
-    //         console.log("UserOrderDataList >>>>>>>>", UserOrderDataList.length);
-            
-    //         // if(UserOrderDataList.length == 0){
-    //              const customerDataString = Cookies.get("customer_data");
-    //               let customerData = null;
-    //               if (customerDataString && customerDataString !== "undefined") {
-    //                 customerData = JSON.parse(customerDataString);
-    //               }
-    //               const customerId = customerData?._id;
-    //               if (!customerId) return;
-    //               const requser = { customer_id: customerId, page: 1, size: 10 };
-    //               await dispatch(getFarmerOrderlist(requser) as any);
-    //         // }
-
-    //         await new Promise(resolve => setTimeout(resolve, 500));
-    //         const orderItem :any = UserOrderDataList.find((item: any) => item?.order_id === orderId);
-    //         console.log("orderItem ***********", orderItem);
-
-    //         if (orderItem) {
-    //            setOpenDetailIData(orderItem);
-    //             console.log("&&&&&&&&&&&&&&& orderItem ***********");
-    //             await new Promise(resolve => setTimeout(resolve, 200));
-    //             setOpenDetailsmodal(true)
-    //             setOpenDetailIData(orderItem?.order_id);
-    //         } else {
-    //           console.error("Order item not found!");
-    //           // toast.error("Complain not found!");
-    //         }
-    //       } catch (err) {
-    //         console.error("Error fetching complain list:", err);
-    //         // toast.error("Something went wrong!");
-    //       }
-    //     }
-    //   };
-
-    //   fetchAndOpenComplain();
-    // },[orderId])
 
     const TabData = [
       { title: "Order", icon: <BsCartCheckFill  size={20} /> },

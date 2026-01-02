@@ -200,4 +200,27 @@ customerController.matchNumber = async (req, res, next) => {
   }
 };
 
+customerController.NearbyFarmerList = async (req, res, next) => {
+  try {
+    const { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
+    const populateFields = [
+      { path: 'crops', model: 'crop', select: 'name_eng name_guj' },
+      { path: 'created_by', model: 'users', select: 'name' },
+      { path: 'state', model: 'State', select: 'name' },
+      { path: 'village', model: 'Village', select: 'name' },
+      { path: 'taluka', model: 'Taluka', select: 'name' },
+      { path: 'district', model: 'District', select: 'name' },
+    ];
+
+     const customer_id  = req.query.customer_id; 
+     const customer = await customerSch.findById(customer_id);
+    if (!customer)  otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Customer not found', null);
+    const sameVillageCustomers = await customerSch.find({ village: customer.village,  _id: { $ne: customer_id }  }).sort(sortQuery).skip((page - 1) * size).limit(size).populate(populateFields).select("customer_name firstname middlename lastname mobile_number alternate_number smart_phone land_area land_type irrigation_source irrigation_type crops heard_about_agribharat address district taluka village pincode added_at").lean();
+
+    return otherHelper.paginationSendResponse(res, httpStatus.OK, true, sameVillageCustomers, null, 'Near By farmer found', null);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = customerController;

@@ -16,7 +16,9 @@ import {
   BlockCustomerFail,
   CheckCustomerExist,
   CheckCustomerExistSuccess,
-  CheckCustomerExistFail
+  CheckCustomerExistFail,
+  getNearbyFarmerDatalistSuccess,
+  getNearbyFarmerDatalistFail,
 } from "./action";
 import {
   GET_CUSTOMER_DATA_LIST,
@@ -25,9 +27,10 @@ import {
   DELETE_CUSTOMER_DATA_LIST,
   REST_CUSTOMER_DATA_LIST,
   BLOCK_CUSTOMER_DATA_LIST,
-  CHECK_CUSTOMER_EXIST_LIST
+  CHECK_CUSTOMER_EXIST_LIST,
+  GET_NEAR_BY_FARMER,
 } from "./actionType";
-import { CustomerlistApi, AddCustomerlistApi,UpdateCustomerlistApi, DelCustomerlistApi, BlockCustomerlistApi, CheckCustomerApi} from "../../helper/Demo_helper";
+import { CustomerlistApi, GetFarmerlistApi, AddCustomerlistApi,UpdateCustomerlistApi, DelCustomerlistApi, BlockCustomerlistApi, CheckCustomerApi} from "../../helper/Demo_helper";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
@@ -107,6 +110,16 @@ function* onCheckCustomerList({ payload: requstuser }) {
   }
 }
 
+function* onGetFarmerDatalist({ payload: requstuser }) {
+  try {
+    const response = yield call(GetFarmerlistApi, requstuser);
+    yield put(getNearbyFarmerDatalistSuccess(GET_NEAR_BY_FARMER, response));
+  } catch (error) {
+    yield put(getNearbyFarmerDatalistFail(error));
+  }
+}
+
+
 function* CustomerSaga() {
   yield takeEvery(GET_CUSTOMER_DATA_LIST, onGetCustomerDatalist);
   yield takeEvery(ADD_CUSTOMER_DATA_LIST, onAddCustomerList);
@@ -115,6 +128,6 @@ function* CustomerSaga() {
   yield takeEvery(REST_CUSTOMER_DATA_LIST, onResetCustomerList);
   yield takeEvery(BLOCK_CUSTOMER_DATA_LIST, onBlockCustomerList);
   yield takeEvery(CHECK_CUSTOMER_EXIST_LIST, onCheckCustomerList);
-
+  yield takeEvery(GET_NEAR_BY_FARMER, onGetFarmerDatalist);
 }
 export default CustomerSaga;

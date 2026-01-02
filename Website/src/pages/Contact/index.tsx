@@ -60,7 +60,7 @@ const ContactusSection = () => {
   useEffect(() => {
     set_is_loader(false);
     if (formSubmitted && Adddetail && validation?.resetForm) {
-      toast.success(t('advisor_contact_success'));
+         toast.success("Our Advisor will contact you soon.")
       dispatch(ResetLeadlist())
       validation.resetForm();
       setMessageError(false);

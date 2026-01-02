@@ -10,15 +10,10 @@ import { IoArrowRedoSharp } from 'react-icons/io5';
 import { SiBattledotnet } from "react-icons/si";
 import { FaWindowClose } from 'react-icons/fa';
 import { CartItemProps, Product, ProductDetails } from '../../types/types';
-import { useTranslation } from 'react-i18next';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import GlobalLoader from '../../component/Loader/Loader';
-// const IMG_URL = import.meta.env["VITE_API_URL"];
-const IMG_URL = import.meta.env.VITE_API_URL;
 
 const ProductDetailsSection = () => {
-  const { i18n, t } = useTranslation();
-  const lang = i18n.language;
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -179,14 +174,14 @@ const ProductDetailsSection = () => {
 
               {/* RIGHT - Details */}
               <div className='flex-1 px-[1rem] md:px-[3rem]'>
-                <div className='text-gray-900 text-[1.5rem] font-bold'>  {lang === 'gj' ? productsData?.name?.gujaratiname : productsData?.name?.englishname} </div>
+                <div className='text-gray-900 text-[1.5rem] font-bold'>  {productsData?.name?.englishname} </div>
 
                 <div className='text-gray-900 text-[1rem] mt-3'>
-                  {lang === 'gj' ? productsData?.tech_name?.gujarati_tech_name : productsData?.tech_name?.english_tech_name}
+                  {productsData?.tech_name?.english_tech_name}
                 </div>
 
                 <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
-                  <div className='w-[8rem] font-heading text-[1rem]'>Packing</div> :   {productsData?.packaging} {lang === 'gj' ? productsData?.packagingtype?.type_guj : productsData?.packagingtype?.type_eng}
+                  <div className='w-[8rem] font-heading text-[1rem]'>Packing</div> :   {productsData?.packaging} {productsData?.packagingtype?.type_eng}
                 </div>
 
                 <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
@@ -194,7 +189,7 @@ const ProductDetailsSection = () => {
                 </div>
 
                 <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
-                  <div className='w-[8rem] font-heading text-[1rem]'>Company</div> :  {lang === 'gj' ? productsData?.company?.name_guj : productsData?.company?.name_eng}
+                  <div className='w-[8rem] font-heading text-[1rem]'>Company</div> :  { productsData?.company?.name_eng}
                 </div>
 
                 <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
@@ -230,9 +225,9 @@ const ProductDetailsSection = () => {
                   </div>
 
                   {!cartItems ?
-                    <button className="text-red-600 px-4 py-2 text-md flex items-end ml-[7rem] rounded-full justify-end border border-[#d8d8d8] hover:bg-red-100 transition-all duration-300 mt-4" onClick={() => productsData && removeFromCart(productsData?._id)} > {t("remove_from_cart")} </button>
+                    <button className="text-red-600 px-4 py-2 text-md flex items-end ml-[7rem] rounded-full justify-end border border-[#d8d8d8] hover:bg-red-100 transition-all duration-300 mt-4" onClick={() => productsData && removeFromCart(productsData?._id)} > Remove from cart </button>
                     :
-                    <button className="text-gray-50 px-4 py-2 text-md flex items-center gap-1 rounded-full bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-white transition-all duration-300 mt-3 md:mt-0" onClick={() => productsData && AddCall(productsData)}>    {t("add_to_cart")} <FaCartShopping /> </button>
+                    <button className="text-gray-50 px-4 py-2 text-md flex items-center gap-1 rounded-full bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-white transition-all duration-300 mt-3 md:mt-0" onClick={() => productsData && AddCall(productsData)}>   Add to Cart <FaCartShopping /> </button>
                   }
                 </div>
               </div>
@@ -244,8 +239,8 @@ const ProductDetailsSection = () => {
                 <div key={index} className="mb-4 p-4 rounded-lg shadow-sm">
 
                   <div className="flex flex-col gap-2 ">
-                    <div className="font-bold text-gray-600 text-[1.2rem] flex gap-x-3"> <IoArrowRedoSharp className='self-center' />  {lang === 'gj' ? data?.gujaratiHeader : data?.englishHeader} </div>
-                    <div className="font-medium text-gray-600  flex gap-x-3"> <div className='h-4 w-4 flex self-top pt-1'> <SiBattledotnet /> </div> <div className='text-[0.9rem]'>  {lang === 'gj' ? data?.gujaratiValue : data.englishValue} </div> </div>
+                    <div className="font-bold text-gray-600 text-[1.2rem] flex gap-x-3"> <IoArrowRedoSharp className='self-center' />  {data?.englishHeader} </div>
+                    <div className="font-medium text-gray-600  flex gap-x-3"> <div className='h-4 w-4 flex self-top pt-1'> <SiBattledotnet /> </div> <div className='text-[0.9rem]'>  {data?.englishValue} </div> </div>
                   </div>
                 </div>
               ))}
@@ -288,10 +283,10 @@ const ProductDetailsSection = () => {
                     </div>
 
                     <div className="flex justify-between items-center text-sm ">
-                      <h3 className="block w-full font-heading font-semibold text-[16px] leading-[25px] capitalize text-[#333333] mb-1 cursor-pointer truncate max-w-[11rem]"> {lang === 'gj' ? product?.name?.gujaratiname : product?.name?.englishname} </h3>
+                      <h3 className="block w-full font-heading font-semibold text-[16px] leading-[25px] capitalize text-[#333333] mb-1 cursor-pointer truncate max-w-[11rem]"> {product?.name?.englishname} </h3>
                       <span className="font-normal font-heading text-[1rem] leading-[18px] flex gap-x-1">
                         <div> {product?.packaging}  </div>
-                        <div>{lang === 'gj' ? product?.packagingtype?.type_guj : product?.packagingtype?.type_eng}    </div>
+                        <div>{product?.packagingtype?.type_eng}    </div>
                       </span>
                     </div>
 
@@ -307,8 +302,8 @@ const ProductDetailsSection = () => {
                       )}
 
                       {cartItem ?
-                        <button className="text-red-600 px-4 py-2 text-md flex items-end ml-[7rem] rounded-full justify-end border border-[#d8d8d8] hover:bg-red-100 transition-all duration-300 mt-4" onClick={() => removeFromCart(product?._id)} > {t("remove_from_cart")} </button>
-                        : <button className="text-gray-50 px-4 py-2 text-md flex items-center gap-1 rounded-full flex items-center justify-center bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-white transition-all duration-300" onClick={() => AddCall(product)}>{t("add_to_cart")} <FaCartShopping />  </button>
+                        <button className="text-red-600 px-4 py-2 text-md flex items-end ml-[7rem] rounded-full justify-end border border-[#d8d8d8] hover:bg-red-100 transition-all duration-300 mt-4" onClick={() => removeFromCart(product?._id)} > Remove from cart </button>
+                        : <button className="text-gray-50 px-4 py-2 text-md flex items-center gap-1 rounded-full flex items-center justify-center bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-white transition-all duration-300" onClick={() => AddCall(product)}> Add to Cart <FaCartShopping />  </button>
                       }
                     </div>
                   </div>

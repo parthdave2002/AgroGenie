@@ -10,4 +10,5 @@ router.delete('/remove-customer',authentication,authorization("Customer"), custo
 router.put('/change-status',authentication,authorization("Customer"), customerController.changeStatus);
 router.get('/matchnumber',authentication,  customerController.matchNumber);
 
+router.get('/nearby-farmer',authentication,  customerController.NearbyFarmerList);
 module.exports = router;

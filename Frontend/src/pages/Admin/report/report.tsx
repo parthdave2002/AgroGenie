@@ -100,33 +100,22 @@ const ReportPage: FC = function () {
 
   return (
     <>
-      <NavbarSidebarLayout
-        
-        isSidebar={true}
-        isNavbar={true}
-        
-      >
+      <NavbarSidebarLayout  isSidebar={true} isNavbar={true}>
         <div className="min-h-screen">
           <ExampleBreadcrumb Name={Name} />
           <div className="bg-white dark:bg-gray-800 p-4 flex gap-x-4 ">
 
             <div>
-              <Select
-              className="w-[15rem] dark:text-white"
+              <Select className="w-[15rem] dark:text-white"
               classNames={{
                 control: () => "react-select__control",
                 singleValue: () => "react-select__single-value",
                 menu: () => "react-select__menu",
-                option: ({ isSelected }) =>
-                  isSelected
-                    ? "react-select__option--is-selected"
-                    : "react-select__option",
+                option: ({ isSelected }) => isSelected  ? "react-select__option--is-selected"  : "react-select__option",
                 placeholder: () => "react-select__placeholder",
               }}
               value={selectedStatusOption}
-              onChange={(e) => {
-                IsActivedata(e);
-              }}
+              onChange={(e) => { IsActivedata(e); }}
               options={isactiveoption}
               isClearable={true}
             />
@@ -154,8 +143,6 @@ const ReportPage: FC = function () {
               />
               <IoCalendarNumberSharp className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
             </div>
-
-            
 
             {selectedStatusid != "" ? 
               <Button  gradientDuoTone="purpleToPink"  onClick={() => GetdataCall()} > <div className="flex items-center gap-x-3 w-[5rem] text-center"> <FaSearch /> Submit </div>  </Button>
