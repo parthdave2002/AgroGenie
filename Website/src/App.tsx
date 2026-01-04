@@ -5,11 +5,13 @@ import "./App.css";
 import Layout from "./layout/Layout";
 import PagenotfoundSection from "./component/Pagenotfound/Pagenotfound";
 
+
 /* Lazy Loaded Pages */
 const HomeSection = lazy(() => import("./pages/Home"));
 const AboutSection = lazy(() => import("./pages/About"));
 const GallerySection = lazy(() => import("./pages/Gallery"));
 const ProductSection = lazy(() => import("./pages/Product"));
+const ProductList = lazy(() => import("./pages/Product/ProductList"));
 const ProductDetailsSection = lazy(() => import("./pages/Product/ProductDetails"));
 const ContactusSection = lazy(() => import("./pages/Contact"));
 const ResearchSection = lazy(() => import("./pages/Research"));
@@ -26,7 +28,8 @@ const App: React.FC = () => {
             <Route path="/" element={<HomeSection />} />
             <Route path="/about" element={<AboutSection />} />
             <Route path="/gallery" element={<GallerySection />} />
-            <Route path="/product" element={<ProductSection />} />
+            <Route path="/product-category" element={<ProductSection />} />
+            <Route path="/product/:id" element={<ProductList />} />
             <Route path="/product-detail/:id" element={<ProductDetailsSection />} />
             <Route path="/contactus" element={<ContactusSection />} />
             <Route path="/research" element={<ResearchSection />} />

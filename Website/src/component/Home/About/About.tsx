@@ -13,7 +13,7 @@ const About = () => {
 
   return (
     
-        <div className='py-10  '>
+        <div className='py-10  px-4 '>
             <div className='flex flex-col md:flex-row' >
                 <div className="w-full md:w-1/2 lg:w-1/2 pr-0 md:pr-10 mb-10 md:mb-0 flex items-center justify-center">
                     <LazyLoadImage effect="blur" src="/images/about.webp" alt="About Us" className="rounded-lg shadow-lg object-cover h-96 w-full" />
