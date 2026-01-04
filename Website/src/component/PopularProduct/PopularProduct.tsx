@@ -106,12 +106,6 @@ const PopularProductSection: React.FC = () => {
             Our Most <span className="text-lime-500">Popular Products</span>
           </h2>
 
-          <button
-            onClick={() => redirect("/product")}
-            className="mt-4 text-green-600 hover:text-green-500 font-medium"
-          >
-            View All
-          </button>
         </div>
 
         {/* Product Grid */}
