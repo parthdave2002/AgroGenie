@@ -21,7 +21,7 @@ const productSchema = new schema({
   product_pics: [{ type: String, default: null }],
   categories: { type: schema.Types.ObjectId, required: true, ref: 'categories' },
   company: { type: schema.Types.ObjectId, required: true, ref: 'company' },
-  warehouse: { type: schema.Types.ObjectId, required: true, ref: 'warehouse' },
+  warehouse: { type: schema.Types.ObjectId, required: false, ref: 'warehouse' },
   batch_no: { type: String },
   hsn_code: { type: String },
   s_gst: { type: Number, required: true, default: 0 },

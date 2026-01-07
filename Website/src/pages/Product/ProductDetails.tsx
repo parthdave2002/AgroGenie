@@ -174,7 +174,7 @@ const ProductDetailsSection = () => {
 
               {/* RIGHT - Details */}
               <div className='flex-1 px-[1rem] md:px-[3rem]'>
-                <div className='text-gray-900 text-[1.5rem] font-bold'>  {productsData?.name?.englishname} </div>
+                <div className='text-gray-900 text-[1.5rem] font-bold'>  {productsData?.name?.englishname.toUpperCase()} </div>
 
                 <div className='text-gray-900 text-[1rem] mt-3'>
                   {productsData?.tech_name?.english_tech_name}
@@ -248,7 +248,7 @@ const ProductDetailsSection = () => {
           </div>
 
           <div className='my-[3rem]'>
-            <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center gap-x-3"> Relevant <span className="text-lime-500">  Crop Products </span> </h2>
+            <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center gap-x-3"> Relevant <span className="text-lime-500">  Category Products </span> </h2>
 
             <div className="md:grid  md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-1600">
               {relatedproductsData && relatedproductsData.map((product: any, k: number) => {
@@ -283,7 +283,7 @@ const ProductDetailsSection = () => {
                     </div>
 
                     <div className="flex justify-between items-center text-sm ">
-                      <h3 className="block w-full font-heading font-semibold text-[16px] leading-[25px] capitalize text-[#333333] mb-1 cursor-pointer truncate max-w-[11rem]"> {product?.name?.englishname} </h3>
+                      <h3 className="block w-full font-heading font-semibold text-[16px] leading-[25px] capitalize text-[#333333] mb-1 cursor-pointer truncate max-w-[11rem]"> {product?.name?.englishname.toUpperCase()} </h3>
                       <span className="font-normal font-heading text-[1rem] leading-[18px] flex gap-x-1">
                         <div> {product?.packaging}  </div>
                         <div>{product?.packagingtype?.type_eng}    </div>

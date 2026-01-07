@@ -6,7 +6,7 @@ const CategoryCarouselSection = lazy(() => import('../../component/Home/Category
 const BestSellingProductSection = lazy(() => import('../../component/Home/BestSellingProduct/BestSellingProduct'));
 const DiscountBannerSection = lazy(() => import('../../component/Home/DiscountBanner/DiscountBanner'));
 const BrandCarouselSection = lazy(() => import('../../component/Home/Brand/Brand'));
-const PopularProductSection = lazy(() => import('../../component/PopularProduct/PopularProduct'));
+const PopularProductSection = lazy(() => import('../../component/Home/PopularProduct/PopularProduct'));
 const PromoBannerSection = lazy(() => import('../../component/PromotionBanner/PromotionBanner'));
 const TestimonailSection = lazy(() => import('../../component/Testimonial/Testimonail'));
 // const LookingForSection = lazy(() => import('../../component/Looking/LookingFor')); // optional
@@ -38,7 +38,7 @@ useEffect(() => {
 
   return (
     <div>
-      {/* <Suspense fallback={<GlobalLoader />}> */}
+
       <section  className=" relative  py-10  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
         <div className="flex flex-col space-y-8 relative z-10">
         
@@ -53,7 +53,7 @@ useEffect(() => {
           <TestimonailSection />
         </div>
         </section>
-      {/* </Suspense> */}
+
 
       {modal && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
