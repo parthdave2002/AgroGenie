@@ -32,9 +32,13 @@ const ProductAddPage: FC = function () {
     }, [file, productImage])
 
     useEffect(() => {
+        let requser ={
+           page: 1,
+            size : 25
+        }
         if (CompanyListData.length == 0) dispatch(getCompanylist({ all: "true" }));
         if (PackingTypeListData.length == 0) dispatch(getPackingTypelist());
-        if (CategoryListData.length == 0) dispatch(getCategorylist());
+        if (CategoryListData.length == 0) dispatch(getCategorylist(requser));
         if (CropListData.length == 0) dispatch(getCroplist({ all: "true" }));
     }, [])
 

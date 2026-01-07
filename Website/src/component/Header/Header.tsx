@@ -140,6 +140,8 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 import CartSection from "../../pages/Cart/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategorylist } from "../../Store/actions";
 
 /* ================= TYPES ================= */
 type MenuItem = {
@@ -149,20 +151,21 @@ type MenuItem = {
 };
 
 type DropdownItem = {
-  label: string;
-  path: string;
+  _id: string;
+  name_eng: string;
+  category_pic : string;
 };
 
 /* ================= DATA ================= */
-const productDropdown: DropdownItem[] = [
-  { label: "Vegetable Seeds", path: "/product/vegetable" },
-  { label: "Field Crop Seeds", path: "/product/field" },
-  { label: "Hybrid Seeds", path: "/product/hybrid" },
-];
+// const productDropdown: DropdownItem[] = [
+//   { label: "Vegetable Seeds", path: "/product/vegetable" },
+//   { label: "Field Crop Seeds", path: "/product/field" },
+//   { label: "Hybrid Seeds", path: "/product/hybrid" },
+// ];
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -170,6 +173,12 @@ const Header: React.FC = () => {
   const RedirectCall = (path: string) => {
     navigate(path);
   };
+
+  const DropdownRedirect = (data: string, id: string ) => {
+    if (data != null) {
+      navigate(`/product/${data}/${id}`);
+    }
+  }
 
   const OpenBrochure = () => {
     window.open("/pdf/brochure.pdf", "_blank");
@@ -212,6 +221,22 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  const [categoryList, setCategoryList] = useState<DropdownItem[]>([])
+
+  useEffect(() => {
+    let requser ={
+        page: 1,
+        size : 25
+    }
+    dispatch(getCategorylist(requser))
+  }, [dispatch])
+
+  const categorydetail: any = useSelector((state: any) => state.Category.Categorylist);
+
+  useEffect(() => {
+    setCategoryList(categorydetail)
+  }, [categorydetail])
+
   return (
     <>
 
@@ -224,11 +249,11 @@ const Header: React.FC = () => {
             </div>
             <div className="flex items-center gap-2">
               <FaPhoneAlt className="text-lime-500" />
-              <a  href="tel:+919063563590"  className="hover:text-lime-500"> +91 90635 63590 </a>
+              <a  href="https://wa.me/919063563590" target="_blank" rel="noopener noreferrer" className="hover:text-lime-500"> +91 90635 63590 </a>
             </div>
             <div className="flex items-center gap-2">
               <FaEnvelope className="text-lime-500" />
-              <a  href="mailto:touch@agrogenieseeds.com"   className="hover:text-lime-500" >  touch@agrogenieseeds.com  </a>
+              <a  href="https://mail.google.com/mail/?view=cm&fs=1&to=touch@agrogenieseeds.com" target="_blank" rel="noopener noreferrer"   className="hover:text-lime-500" >  touch@agrogenieseeds.com  </a>
             </div>
           </div>
 
@@ -271,10 +296,11 @@ const Header: React.FC = () => {
 
                     {/* DROPDOWN (DESKTOP ONLY) */}
                     <div  className=" absolute left-0 top-full mt-3 w-56  bg-white border border-gray-100  shadow-lg rounded-lg opacity-0 invisible  group-hover:opacity-100 group-hover:visible transition-all duration-200 hidden md:block z-50 ">
-                      {productDropdown.map((item) => (
-                        <div key={item.path} onClick={() => RedirectCall(item.path)}  className="px-4 py-3 text-sm cursor-pointer hover:bg-lime-50 hover:text-lime-600" >
-                          {item.label}
-                        </div>
+                      {categoryList && categoryList?.map((item) => (
+                        <div key={item?._id} onClick={() => DropdownRedirect(item?.name_eng, item?._id)}  className="px-4 py-2 text-sm cursor-pointer hover:bg-lime-50 hover:text-lime-600 flex gap-x-3" >
+                           <div className=" flex items-center justify-center  transition "><LazyLoadImage effect="blur"   src={item?.category_pic} alt={item?.name_eng} className=" object-contain rounded-full  h-[2rem] w-[2rem]" />  </div>
+                           <div className="font-semibold text-[1rem] self-center"> {item?.name_eng}   </div>
+                          </div>
                       ))}
                     </div>
                   </div>
@@ -284,7 +310,7 @@ const Header: React.FC = () => {
 
             {/* ================= DESKTOP ACTIONS ================= */}
             <div className="hidden md:flex items-center gap-4">
-              <div className="relative bg-green-600 hover:bg-green-500 p-2.5 rounded-full cursor-pointer text-white" onClick={() => setCartOpen(true)}>
+              <div className="relative bg-green-600 hover:bg-green-700 p-2.5 rounded-full cursor-pointer text-white" onClick={() => setCartOpen(true)}>
                 <MdOutlineShoppingCart size={24} />
                 <span className="absolute -top-1 -right-1 bg-red-500 text-xs w-5 h-5 flex items-center justify-center rounded-full">
                   {cartCount}

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from "react-toastify";
-import { getProductlist } from '../../Store/Product/action';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import GlobalLoader from '../../component/Loader/Loader';
@@ -15,7 +14,11 @@ const ProductSection = () => {
   const [cropList, setCropList] = useState([])
 
   useEffect(() => {
-    dispatch(getCategorylist())
+        let requser ={
+          page: 1,
+          size: 50
+        }
+    dispatch(getCategorylist(requser))
   }, [dispatch])
 
   const cropdetail: any = useSelector((state: any) => state.Category.Categorylist);
@@ -24,9 +27,9 @@ const ProductSection = () => {
         setCropList(cropdetail)
     }, [cropdetail])
 
-  const RedirectCall = (data: string) => {
+  const RedirectCall = (data: string, id: string ) => {
     if (data != null) {
-      navigate(`/product/${data}`);
+      navigate(`/product/${data}/${id}`);
     }
   }
 
@@ -42,7 +45,7 @@ const ProductSection = () => {
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 max-w-1600">
                 {cropList?.map((item: any, idx: number) => (
                   <div key={idx} className="flex flex-col items-center text-center group cursor-pointer" >
-                    <div className="bg-gray-100 flex items-center justify-center group-hover:shadow-md transition rounded-full p-1" onClick={() => RedirectCall(item?._id)}>
+                    <div className="bg-gray-100 flex items-center justify-center group-hover:shadow-md transition rounded-full p-1" onClick={() => RedirectCall(item?.name_eng, item?._id)}>
                       <LazyLoadImage effect="blur" src={item?.category_pic} alt={item?.name_eng} className=" object-contain rounded-full border-2 border-green-600 h-[10rem] w-[10rem]" />  </div>
                     <div className='mt-2 text-md md:text-[1rem] font-heading font-semibold   text-gray-800'> {item?.name_eng} </div>
                   </div>

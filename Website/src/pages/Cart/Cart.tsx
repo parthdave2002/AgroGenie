@@ -12,8 +12,6 @@ import { useTranslation } from "react-i18next";
 import { AddLeadlist, ResetLeadlist } from '../../Store/Lead/action';
 import { useLocation, useNavigate } from "react-router-dom";
 import ToastMessage from "../../component/ToastMessage";
-const IMG_URL = import.meta.env.VITE_API_URL; 
-// const IMG_URL = import.meta.env["VITE_API_URL"];
 
 interface CartProps {
   cartOpen?: boolean;
@@ -98,7 +96,7 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
       const Adddetail :any = useSelector((state:any) => state.Lead.AddLeaddatalist); 
              
       useEffect(() => { 
-          const isProductPage = location.pathname === "/product" || location.pathname.startsWith("/product-detail");
+          const isProductPage = location.pathname.startsWith("/product");
         if (formSubmitted  && Adddetail &&  isProductPage ) { 
            localStorage.removeItem("product")
             setCartData([]);
@@ -159,7 +157,7 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
                       {/* Product Info */}
                       <div className="flex-1">
                         <p className="text-md font-semibold font-heading  max-w-[12rem] truncate text-gray-900 truncate">
-                          {item?.name?.englishname}
+                          {item?.name?.englishname.toUpperCase()}
                         </p>
 
                         <div className="flex items-center gap-2 mt-1 text-sm text-gray-700">

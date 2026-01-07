@@ -25,7 +25,7 @@ const Termspagesection = () => {
         <div className="flex justify-center w-full px-4">
           <div className="flex flex-wrap justify-center bg-gray-200 rounded-xl overflow-hidden w-full sm:w-auto">
             {tabs.map((tab, index) => (
-              <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg font-medium transition-colors duration-300   ${activeTab === tab.id ? "bg-lime-500 text-white" : "text-gray-700 hover:bg-gray-300"}  ${index === 0 ? "rounded-l-xl" : ""}  ${index === tabs.length - 1 ? "rounded-r-xl" : ""}`} >  {tab.label} </button>
+              <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg font-medium transition-colors duration-300   ${activeTab === tab.id ? "bg-[#1d4a34] text-white" : "text-gray-700 hover:bg-gray-300"}  ${index === 0 ? "rounded-l-xl" : ""}  ${index === tabs.length - 1 ? "rounded-r-xl" : ""}`} >  {tab.label} </button>
             ))}
           </div>
         </div>
