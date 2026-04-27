@@ -1,4 +1,4 @@
-import { FC, lazy, useEffect, useMemo, useState } from "react";
+import { FC, lazy, useEffect, useState } from "react";
 import { Label, Button } from "flowbite-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,10 +7,11 @@ import { Form, FormFeedback } from "reactstrap";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { AddSubTagloglist, ResetTagloglist } from "../../../Store/actions";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { isactiveoption } from "../../../types/dropdown";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
 
 const SubTaglogAddPage : FC = function () {
     const dispatch = useDispatch();
@@ -58,11 +59,6 @@ const SubTaglogAddPage : FC = function () {
           dispatch(AddSubTagloglist(requserdata));
         },
     });
-
-    const isactiveoption = useMemo( () => [
-        { label: "Active", value: true },
-        { label: "Inactive", value: false }
-    ],[])
 
     // ------------- Get  Data From Reducer Code Start --------------
         const  AddTagloglistData = useSelector((state: any) =>  state.Taglog.AddSubTagloglist );

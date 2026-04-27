@@ -8,8 +8,9 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddPackingTypelist, ResetPackingTypelist } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { isactiveoption } from "../../../types/dropdown";
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
@@ -61,15 +62,9 @@ const AddpackingTypePage: FC = function () {
         },
     });
 
-    const isactiveoption = [
-        { label: "Active", value: true },
-        { label: "Inactive", value: false }
-    ]
-
     // ------------- Get  Data From Reducer Code Start --------------
     const { AddPackingtypelist } = useSelector((state: any) => ({
         AddPackingtypelist: state.PackingType.AddPackingtypelist,
-
     }));
 
     useEffect(() => {

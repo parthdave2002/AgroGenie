@@ -1,29 +1,65 @@
 import type { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserView  } from "../../../Store/actions";
-import { useEffect, useState  } from "react";
+import { lazy, useEffect, useState  } from "react";
 import { useParams } from "react-router";
 import moment from "moment";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import ExampleBreadcrumb from "../../../components/common/breadcrumb/breadcrumb";
 import { UserData } from "types/types";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const LoaderPage = lazy(() => import("../../../components/common/loader/loader"));
 
 const UserDetailsPage: FC = function () {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     if(id){
+      setLoader(true)
       let requserdata = {  id: id };
       dispatch(getUserView(requserdata))
     }
-  },[id])
+  },[id,dispatch])
 
   const [UserDataList, setUserDataList] = useState<UserData>();
   const UserView = useSelector((state: any) => state.User.UserView);
 
   useEffect(() => {
+    setLoader(false);
     setUserDataList(UserView ? UserView.data  : null);
   }, [UserView]);
+
+  const details = [
+    { label: "Advisor Name", value: UserDataList?.name },
+    { label: "Email", value: UserDataList?.email },
+    {
+      label: "Gender",
+      value: UserDataList?.gender
+        ? UserDataList.gender.charAt(0).toUpperCase() +
+          UserDataList.gender.slice(1).toLowerCase()
+        : "Unknown",
+    },
+    { label: "Mobile Number", value: UserDataList?.mobile_no },
+    { label: "Role", value: UserDataList?.role?.role_title },
+    { label: "Date of Joining", value: UserDataList?.date_of_joining },
+    { label: "Date of Birth", value: UserDataList?.date_of_birth },
+    { label: "Address", value: UserDataList?.address },
+    {
+      label: "Emergency Contact Person",
+      value: UserDataList?.emergency_contact_person,
+    },
+    { label: "Emergency Mobile No", value: UserDataList?.emergency_mobile_no },
+    { label: "Aadhar Card", value: UserDataList?.aadhar_card ? "Yes" : "No" },
+    { label: "Pan Card", value: UserDataList?.pan_card ? "Yes" : "No" },
+    { label: "Bank Passbook", value: UserDataList?.bank_passbook ? "Yes" : "No" },
+    {
+      label: "Created Date",
+      value: UserDataList?.added_at
+        ? moment(UserDataList.added_at).format("DD-MM-YYYY HH:mm:ss")
+        : "N/A",
+    },
+    { label: "Status", value: UserDataList?.is_active ? "Active" : "Inactive" },
+  ];
   //  ------------- Get Advisor Data From Reducer Code Start --------------
 
   let Name = "Advisor Details";
@@ -33,108 +69,33 @@ const UserDetailsPage: FC = function () {
   return (
     <>
       <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
-        <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink ={ParentLink} />
-        <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
-            <div>
-              <div  className="grid grid-cols-3 gap-4">
-                 <img  className="w-20 h-20 rounded-full" src={ UserDataList?.user_pic ? UserDataList?.user_pic : ""}  alt="advisor photo"  />
+        {loader ? (  <LoaderPage /> ) : (
+          <>
+            <ExampleBreadcrumb
+              Name={Name}
+              ParentName={ParentName}
+              ParentLink={ParentLink}
+            />
+            <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+              <div>
+                <div className="grid grid-cols-3 gap-4">
+                  <img
+                    className="w-20 h-20 rounded-full"
+                    src={UserDataList?.user_pic ? UserDataList?.user_pic : ""}
+                    alt="advisor photo"
+                  />
 
-                {/* Name */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Advisor Name</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.name || "N/A"}</p>
-                </div>
-
-                {/* Email */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Email</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.email || "N/A"}</p>
-                </div>
-
-                {/* Gender */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Gender</h3>
-                  <p className="text-gray-900 dark:text-white">
-                      {UserDataList?.gender ? UserDataList.gender.charAt(0).toUpperCase() + UserDataList.gender.slice(1).toLowerCase() : "Unknown"}
-                    </p>
-                </div>
-
-                {/* Mobile Number */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Mobile Number</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.mobile_no || "N/A"}</p>
-                </div>
-
-                 {/* Role */}
-                 <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Role</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.role?.role_title || "N/A"}</p>
-                </div>
-
-                {/* Date of Joining */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Date of Joining</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.date_of_joining || "N/A"}</p>
-                </div>
-
-                {/* Date of birth */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Date of Birth</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.date_of_birth || "N/A"}</p>
-                </div>
-               
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Address</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.address || "N/A"}</p>
-                </div>
-
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Emergency contact person</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.emergency_contact_person || "N/A"}</p>
-                </div>
-
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Emergency mobile no</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.emergency_mobile_no || "N/A"}</p>
-                </div>
-
-
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Aadhar card</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.aadhar_card == true? "Yes" : "No" }</p>
-                </div>
-
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Pan card</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.pan_card == true? "Yes" : "No" }</p>
-                </div>
-
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Bank passbook</h3>
-                  <p className="text-gray-900 dark:text-white">{UserDataList?.bank_passbook == true? "Yes" : "No" }</p>
-                </div>
-
-
-
-                {/* Created Date */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Created Date</h3>
-                  <p className="text-gray-900 dark:text-white">
-                    {UserDataList?.added_at ? moment(UserDataList.added_at).format("DD-MM-YYYY HH:mm:ss") : "N/A"}
-                  </p>
-                </div>
-
-                {/* Status */}
-                <div className="p-4 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Status</h3>
-                  <p className="text-gray-900 dark:text-white text-sm font-bold  rounded-lg">
-                    {UserDataList?.is_active ? "Active" : "Inactive"}
-                  </p>
+                  {details.map((item, index) => (
+                    <div key={index} className="detailswrapper">
+                      <h3 className="detailslebel">{item.label}</h3>
+                      <p className="detailsvalue">{item.value || "N/A"}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-
             </div>
-        </div>
+          </>
+        )}
       </NavbarSidebarLayout>
     </>
   );

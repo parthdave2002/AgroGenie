@@ -8,18 +8,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { ChangeStatusSubTagloglist, DeleteSubTagloglist,  getSubTagloglist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
-import CommonTable from "../../../components/common/table/commonTable";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import LoaderPage from "../../../components/common/loader/loader";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 
 const SubTaglogListPage: FC = function () {
   const dispatch = useDispatch();
   const { id } = useParams()
   const [isOpenDelteModel, setisOpenDelteModel] = useState(false);
   const [TaglogList, setTaglogList] = useState([]);
+  const [loader, setLoader] = useState(false);
   
   //------------ Access Data Code start------------
   const { SubTagloglist, SubTagloglistSize, SubTotalTaglogData, SubCurrentPage, permissionsdata } = useSelector((state: any) => ({
@@ -67,12 +69,14 @@ const SubTaglogListPage: FC = function () {
       };
       if (searchData)  requserdata.search = searchData;
       dispatch(getSubTagloglist(requserdata));
+      setLoader(true)
     }, [dispatch, PageNo, RoePerPage, searchData]);
 
     useEffect(() => {        
       setTaglogList(SubTagloglist? SubTagloglist : []);
       setTotalListData(SubTotalTaglogData ? SubTotalTaglogData : 0);
       setCurrentPageNo(SubCurrentPage ? SubCurrentPage : 1);
+      setLoader(false)
     }, [SubTagloglist,  SubTagloglistSize, SubTotalTaglogData, SubCurrentPage]);
   //  ------------- Get Data From Reducer Code end --------------
 
@@ -86,6 +90,7 @@ const SubTaglogListPage: FC = function () {
     const DeletepackingType = () => {
       let rqeuserdata = { taglog_id : id , id: Delete_id };
       dispatch(DeleteSubTagloglist(rqeuserdata));
+      setLoader(true)
       setisOpenDelteModel(false);
     };
   // -------  Delete Code End ---------------
@@ -135,9 +140,13 @@ const SubTaglogListPage: FC = function () {
   return (
     <>
       <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
-        <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink={ParentLink} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename={Changename} />
-        <CommonTable columns={subTaglogColumns} data={TaglogList || []} />
-        <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
+        {loader ? <LoaderPage /> :
+          <>
+            <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink={ParentLink} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename={Changename} />
+            <CommonTable columns={subTaglogColumns} data={TaglogList || []} />
+            <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
+          </>
+        }
       </NavbarSidebarLayout>
     
         {isOpenDelteModel && (

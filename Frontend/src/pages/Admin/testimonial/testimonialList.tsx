@@ -4,16 +4,16 @@ import { HiTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import LoaderPage from "../../../components/common/loader/loader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import moment from "moment";
 import { DeleteTagloglist, getTestimoniallist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
-import CommonTable from "../../../components/common/table/commonTable";
-import moment from "moment";
+import LoaderPage from "../../../components/common/loader/loader";
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const TestimonialListPage: FC = function () {
   const dispatch = useDispatch();

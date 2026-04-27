@@ -10,11 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddUserlist, getRoleslist, getUserView, ResetUserdatalist, UpdateUserdatalist } from "../../../Store/actions";
 import { toast } from "react-toastify";
 import { UserData } from "types/types";
-import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { yesnooption, genderoption, isactiveoption } from "../../../types/dropdown";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const ImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/imageuploader"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const IMG_URL = import.meta.env["VITE_API_URL"];
 
 const AddUserPage : FC = function () {
@@ -72,23 +73,6 @@ const AddUserPage : FC = function () {
         }
         };
     //---------------- Role option code end ----------------
-
-
-    const genderoption =[
-        { label : "Male", value : "male"},
-        { label : "Female", value : "female"},
-        { label : "Other", value : "other"},
-    ]
-
-    const Dropdownoption =[
-        { label :"Yes", value : true },
-        { label :"No", value : false }
-    ]
-
-    const isactiveoption =[
-        { label :"Active", value : true},
-        { label :"Inactive", value : false}
-    ]
 
     //---------------- Gender option code start ----------------
         const [selectedGenderOption, setSelectedGenderOption] = useState<{ label: string; value: string } | null>(null);
@@ -328,25 +312,24 @@ const AddUserPage : FC = function () {
             setSelectedStatusid(selectedSatus?.value ?? null);
         }
     
-        if (UserDataList?.aadhar_card !== undefined && UserDataList?.aadhar_card !== null && Dropdownoption.length > 0) {
-            const selectedAadhar :any = Dropdownoption.find((dropdown:any) => dropdown.value === UserDataList.aadhar_card);
+        if (UserDataList?.aadhar_card !== undefined && UserDataList?.aadhar_card !== null && yesnooption.length > 0) {
+            const selectedAadhar :any = yesnooption.find((dropdown:any) => dropdown.value === UserDataList.aadhar_card);
             setSelectedAadharOption(selectedAadhar || null);
             setSelectedAadharid(selectedAadhar?.value);
         }
     
-        if (UserDataList?.pan_card !== undefined && UserDataList?.pan_card !== null && Dropdownoption.length > 0) {
-            const selectedPan :any = Dropdownoption.find((dropdown:any) => dropdown.value === UserDataList.pan_card);
+        if (UserDataList?.pan_card !== undefined && UserDataList?.pan_card !== null && yesnooption.length > 0) {
+            const selectedPan :any = yesnooption.find((dropdown:any) => dropdown.value === UserDataList.pan_card);
             setSelectedpancardOption(selectedPan || null);
             setSelectedPancardid(selectedPan?.value);
         }
     
-        if (UserDataList?.bank_passbook !== undefined && UserDataList?.bank_passbook !== null &&  Dropdownoption.length > 0) {
-            const selectedSatus :any = Dropdownoption.find((dropdown:any) => dropdown.value === UserDataList.bank_passbook);
+        if (UserDataList?.bank_passbook !== undefined && UserDataList?.bank_passbook !== null &&  yesnooption.length > 0) {
+            const selectedSatus :any = yesnooption.find((dropdown:any) => dropdown.value === UserDataList.bank_passbook);
             setSelectedBankPassbookOption(selectedSatus);
             setSelectedBankPassbookid(selectedSatus?.value ?? null);
         }
     }
- 
   }, [UserDataList]);
 
     const today = new Date();
@@ -572,7 +555,7 @@ const AddUserPage : FC = function () {
                                         }}
                                         value={selectedAadharOption}
                                         onChange={(e) => { IsActiveAadhardata(e) }}
-                                        options={Dropdownoption}
+                                        options={yesnooption}
                                         isClearable={true}
                                     />
                                     {ValidateAadharStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select aadhar card status  </FormFeedback> : null}
@@ -594,7 +577,7 @@ const AddUserPage : FC = function () {
                                         }}
                                         value={selectedpancardOption}
                                         onChange={(e) => { IsActivePancarddata(e) }}
-                                        options={Dropdownoption}
+                                        options={yesnooption}
                                         isClearable={true}
                                     />
                                     {ValidatePanStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select pan card status  </FormFeedback> : null}
@@ -616,7 +599,7 @@ const AddUserPage : FC = function () {
                                         }}
                                         value={selectedBankPassbookOption}
                                         onChange={(e) => { IsActiveBankPassbookdata(e) }}
-                                        options={Dropdownoption}
+                                        options={yesnooption}
                                         isClearable={true}
                                     />
                                     {ValidatePassbookStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select passbook status  </FormFeedback> : null}

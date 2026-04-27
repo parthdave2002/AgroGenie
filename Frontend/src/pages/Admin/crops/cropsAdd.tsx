@@ -8,15 +8,15 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddCroplist, ResetCroplist } from "../../../Store/actions";
-import MultiImageUploadPreview from "../../../components/common/inputComponent/multiimageuploader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { isactiveoption } from "../../../types/dropdown";
+const MultiImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/multiimageuploader"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const AddCropsPage : FC = function () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const [file, setFile] = useState<File[] >([]);
     const [cropImage, setcropImage] = useState<File[] | string[]>([]);
     const [validateCrop, setvalidateCrop] = useState(0);
@@ -54,6 +54,7 @@ const AddCropsPage : FC = function () {
         description_eng:"",
         description_guj:"",
         crop_drive: "",
+        pouch_drive:"",
         status: "",
         crop_pics: [],
     });
@@ -78,6 +79,7 @@ const AddCropsPage : FC = function () {
             formData.append("description_guj",  values?.description_guj);
             formData.append("description_eng", values?.description_eng);
             formData.append("crop_drive", values?.crop_drive);
+            formData.append("pouch_drive", values.pouch_drive);
             formData.append("is_active", JSON.stringify(selectedactiveid));
             if (file) {
                 file.forEach((data) => {
@@ -87,11 +89,6 @@ const AddCropsPage : FC = function () {
           dispatch(AddCroplist(formData));
         },
     });
-
-    const isactiveoption =[
-        { label :"Active",   value : true  },
-        { label :"Inactive",  value : false }
-    ]
 
     // ------------- Get  Data From Reducer Code Start --------------
         const AddCropdatalist  = useSelector((state: any) => state.Crop.AddCropdatalist );
@@ -153,7 +150,6 @@ const AddCropsPage : FC = function () {
                         </div>
                         
                         <div className="flex gap-x-[2rem] my-[1rem]">
-                           
                             <div className="flex-1">
                                 <Inputbox
                                     id="description_eng"
@@ -179,14 +175,25 @@ const AddCropsPage : FC = function () {
                             </div>
                         </div>
                        
-
                         <div className="flex-1">
                             <Inputbox
                                 id="crop_drive"
                                 name="crop_drive"
-                                label="Drive URL"
+                                label="Gallery Drive URL"
                                 required={false}
-                                placeholder="Enter crop Drive Data"
+                                placeholder="Enter Gallery Drive Data"
+                                type="text"
+                                validation={validation}
+                            />
+                        </div>
+
+                        <div className="flex-1 my-[1rem]">
+                            <Inputbox
+                                id="pouch_drive"
+                                name="pouch_drive"
+                                label="Pouch Drive URL"
+                                required={false}
+                                placeholder="Enter Pouch Drive Data"
                                 type="text"
                                 validation={validation}
                             />

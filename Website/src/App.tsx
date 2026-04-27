@@ -34,6 +34,7 @@ const App: React.FC = () => {
             <Route path="/contactus" element={<ContactusSection />} />
             <Route path="/research" element={<ResearchSection />} />
             <Route path="/terms" element={<Termspagesection />} />
+            <Route path="/pouch" element={<GallerySection />} />
           </Route>
 
           {/* 404 Route */}

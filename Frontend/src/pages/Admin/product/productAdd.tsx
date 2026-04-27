@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { DescriptionData, ProductDetails } from "types/types";
 import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import MultiImageUploadPreview from "../../../components/common/inputComponent/multiimageuploader";
+import { isactiveoption, yesnooption } from "../../../types/dropdown";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const ProductAddPage: FC = function () {
@@ -416,20 +417,9 @@ const ProductAddPage: FC = function () {
         },
     });
 
-    const isactiveoption = [
-        { label: "Active", value: true },
-        { label: "Inactive", value: false }
-    ]
-
-        const isshowoption = [
-        { label: "Yes", value: true },
-        { label: "No", value: false }
-    ]
-
     // ------------- Get  Data From Reducer Code Start --------------
     const AddCompanyDatalist = useSelector((state: any) => state.Product.AddProductlist);
     const UpdateProductlistdata = useSelector((state: any) => state.Product.UpdateProductlist);
-
 
     useEffect(() => {
         if (AddCompanyDatalist?.success == true || UpdateProductlistdata?.success == true) {
@@ -938,7 +928,7 @@ const ProductAddPage: FC = function () {
                                                 isSelected ? "react-select__option--is-selected" : "react-select__option",
                                             placeholder: () => "react-select__placeholder",
                                         }}
-                                        value={selectedBestSellingOption}  onChange={(e) => { IsBestSellingdata(e) }}   options={isshowoption}   isClearable={true}   />
+                                        value={selectedBestSellingOption}  onChange={(e) => { IsBestSellingdata(e) }}   options={yesnooption}   isClearable={true}   />
                                     {validateBestSelling == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Best Selling </FormFeedback>  : null}
                                 </div>
                             </div>
@@ -955,7 +945,7 @@ const ProductAddPage: FC = function () {
                                                 isSelected ? "react-select__option--is-selected" : "react-select__option",
                                             placeholder: () => "react-select__placeholder",
                                         }}
-                                          value={selectedMostPopularOption}   onChange={(e) => { IsMostpopulardata(e) }} options={isshowoption}   isClearable={true}  />
+                                          value={selectedMostPopularOption}   onChange={(e) => { IsMostpopulardata(e) }} options={yesnooption}   isClearable={true}  />
                                     {validateMostpopular == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Most Popular </FormFeedback>  : null}
                                 </div>
                             </div>
@@ -973,7 +963,7 @@ const ProductAddPage: FC = function () {
                                                 isSelected ? "react-select__option--is-selected" : "react-select__option",
                                             placeholder: () => "react-select__placeholder",
                                         }}
-                                        value={selectedShowwebOption}  onChange={(e) => { IsShowwebdata(e) }}  options={isshowoption}   isClearable={true} />
+                                        value={selectedShowwebOption}  onChange={(e) => { IsShowwebdata(e) }}  options={yesnooption}   isClearable={true} />
                                     {validateShowweb == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select status </FormFeedback>  : null}
                                 </div>
                             </div>

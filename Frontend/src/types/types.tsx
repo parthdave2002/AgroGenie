@@ -218,3 +218,9 @@ export interface OrderDetailsType {
     total_amount : number;
     coupon : any;
   }
+
+  export interface LeavePropsData{
+      CloseProfile: () => void;
+      confirmationModal: boolean;
+      type?: string;
+  }

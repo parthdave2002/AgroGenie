@@ -8,12 +8,12 @@ import { useNavigate } from "react-router";
 import { getUserlist, DeleteUserlist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 import LoaderPage from "../../../components/common/loader/loader";
-import CommonTable from "../../../components/common/table/commonTable";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const UserListPage: FC = function () {
   const navigate = useNavigate();

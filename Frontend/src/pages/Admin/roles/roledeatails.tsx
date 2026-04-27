@@ -1,7 +1,7 @@
 
-import type { FC } from "react";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import ExampleBreadcrumb from "../../../components/common/breadcrumb/breadcrumb";
+import { lazy, type FC } from "react";
+const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const RoleDetailsPage: FC = function () {
 

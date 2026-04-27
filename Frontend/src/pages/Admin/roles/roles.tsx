@@ -1,23 +1,24 @@
 import type { FC } from "react";
-import {  Button, Checkbox, Table} from "flowbite-react";
+import {  Button } from "flowbite-react";
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { HiKey } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { getRoleslist, DeleteRoleslist,} from "../../../Store/actions";
 import { useNavigate } from "react-router-dom";
 import UseAccessList from "../../../hooks/useAccessList";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import CommonTable from "../../../components/common/table/commonTable";
+import LoaderPage from "../../../components/common/loader/loader";
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 
 const RolesPage: FC = function () {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpenDelteModel, setisOpenDelteModel] = useState(false);
-  
+  const [loader, setLoader] = useState(false);
   const [TotalListData, setTotalListData] = useState(0);
   const [CurrentPageNo, setCurrentPageNo] = useState(0);
   const [RolesList, setRoleList] = useState([]);
@@ -34,7 +35,6 @@ const RolesPage: FC = function () {
   const accessList = UseAccessList(permissionsdata, "Role");
   // ----------------- Access Data Code end  -----------------
 
-
   // Delete Role Data Code Start
   const [id, set_Delete_id] = useState(0);
   const DeleteFuncall = (id: any) => {
@@ -46,6 +46,7 @@ const RolesPage: FC = function () {
     let rqeuserdata = { id: id };
     dispatch(DeleteRoleslist(rqeuserdata));
     setisOpenDelteModel(false);
+    setLoader(true)
   };
 
   const roleColumns = useMemo(() => [
@@ -79,7 +80,6 @@ const RolesPage: FC = function () {
     // },
   ], [accessList, DeleteFuncall]);
 
-
   // ---------------- Search User code start ----------------
   const [searchData, setSearchData] = useState<string | null>(null);
   const Changename = useCallback((value: string) => {
@@ -91,18 +91,18 @@ const RolesPage: FC = function () {
   }, []);
   // ---------------- Search User code end ----------------
 
- //  ----------------- next Button  Code Start  -----------------
- const [PageNo, setPageNo] = useState(1);
- const [RoePerPage, setRoePerPage] = useState(5);
+  //  ----------------- next Button  Code Start  -----------------
+    const [PageNo, setPageNo] = useState(1);
+    const [RoePerPage, setRoePerPage] = useState(5);
 
- const RowPerPage = (event: any) => {
-  const value = Number(event)
-   setRoePerPage(value);
-   setPageNo(1)
- };
+    const RowPerPage = (event: any) => {
+      const value = Number(event)
+      setRoePerPage(value);
+      setPageNo(1)
+    };
 
- const PageDataList = (data:any) =>{ setPageNo(data)}
- // ----------------- Nect button Code End  -----------------
+    const PageDataList = (data:any) =>{ setPageNo(data)}
+  // ----------------- Nect button Code End  -----------------
 
   useEffect(() => {
     let requserdata: { page: number; size: number; search?: string } = {
@@ -111,12 +111,14 @@ const RolesPage: FC = function () {
     };
     if (searchData)  requserdata.search = searchData;
     dispatch(getRoleslist(requserdata));
+    setLoader(true)
   }, [dispatch, PageNo, RoePerPage,searchData]);
 
   useEffect(() => {
     setRoleList(Roleslist ? Roleslist : null);
     setTotalListData(TotalRoleListData ? TotalRoleListData : 0);
     setCurrentPageNo(CurrentPage ? CurrentPage : 1);
+    setLoader(false)
   }, [Roleslist, TotalRoleListData, CurrentPage]);
 
   const ModuleListFuncall = (id: any) => {
@@ -134,9 +136,13 @@ const RolesPage: FC = function () {
   return (
     <>
       <NavbarSidebarLayout  isSidebar={true} isNavbar={true}  >
-        <ExampleBreadcrumb  Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename= {Changename} isOpenAddModel= {OpenAddModel} AddAccess={AddAccess}/>
-          <CommonTable columns={roleColumns} data={RolesList || []} />
-        <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage}   RowsPerPageValue={RoePerPage}  PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData}/>
+        {loader ? <LoaderPage /> :
+          <>
+            <ExampleBreadcrumb  Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename= {Changename} isOpenAddModel= {OpenAddModel} AddAccess={AddAccess}/>
+              <CommonTable columns={roleColumns} data={RolesList || []} />
+            <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage}   RowsPerPageValue={RoePerPage}  PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData}/>
+          </>
+        }
       </NavbarSidebarLayout>
 
       {isOpenDelteModel && (

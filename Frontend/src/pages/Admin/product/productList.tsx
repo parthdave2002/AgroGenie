@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { DeleteProductlist,  getProductlist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import LoaderPage from "../../../components/common/loader/loader";
-import CommonTable from "../../../components/common/table/commonTable";
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const ProductListPage: FC = function () {
   const dispatch = useDispatch();

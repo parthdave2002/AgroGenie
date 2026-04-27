@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { lazy, FC, Suspense, useEffect, useState, useCallback, useMemo } from "react";
 import { Button } from "flowbite-react";
 import { HiTrash} from "react-icons/hi";
@@ -7,8 +6,9 @@ import { useNavigate } from "react-router";
 import moment from "moment";
 import { DeletePackinglist, getPackinglist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
-import CommonTable from "../../../components/common/table/commonTable";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import LoaderPage from "../../../components/common/loader/loader";
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
@@ -16,6 +16,7 @@ const DeleteModalPage = lazy(() => import("../../../components/common/modal/dele
 const PackingListPage: FC = function () {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
   const [isOpenDelteModel, setisOpenDelteModel] = useState(false);
   const [PackingTypeList, setPackingTypeList] = useState([]);
   
@@ -37,7 +38,7 @@ const PackingListPage: FC = function () {
     const [CurrentPageNo, setCurrentPageNo] = useState(0);
     const [PageNo, setPageNo] = useState(1);
     const [RoePerPage, setRoePerPage] = useState(5);
-
+  
     const RowPerPage = (value: any) => { setRoePerPage(value)};
     const PageDataList = (data:any) =>{ setPageNo(data)}
   // ------------- Next button Code End -------------
@@ -61,9 +62,11 @@ const PackingListPage: FC = function () {
         search: searchData
       };
       dispatch(getPackinglist(requserdata));
+      setLoader(true)
     }, [dispatch, PageNo, RoePerPage, searchData]);
 
     useEffect(() => {  
+      setLoader(false)
       setPackingTypeList(Packinglist ? Packinglist : null);
       setTotalListData(TotalPackingData ? TotalPackingData : 0);
       setCurrentUserListSize(PackinglistSize ? PackinglistSize : 0);
@@ -82,6 +85,7 @@ const PackingListPage: FC = function () {
       let rqeuserdata = { id: Delete_id };
       dispatch(DeletePackinglist(rqeuserdata));
       setisOpenDelteModel(false);
+      setLoader(true)
     };
   // -------  Delete Code End ---------------
 
@@ -129,9 +133,13 @@ const PackingListPage: FC = function () {
   return (
     <>
       <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >
-        <ExampleBreadcrumb  Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename= {Changename} isOpenAddModel= {OpenAddModel} AddAccess={AddAccess}/>
-        <CommonTable columns={userColumns} data={PackingTypeList || []} />
-        <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage}  PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData}/>
+        {loader ? <LoaderPage /> :
+          <>
+            <ExampleBreadcrumb  Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename= {Changename} isOpenAddModel= {OpenAddModel} AddAccess={AddAccess}/>
+            <CommonTable columns={userColumns} data={PackingTypeList || []} />
+            <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage}  PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData}/>
+          </>
+        }
       </NavbarSidebarLayout>
     
         {isOpenDelteModel && (
