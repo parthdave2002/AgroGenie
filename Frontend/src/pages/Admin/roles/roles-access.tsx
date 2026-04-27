@@ -4,8 +4,8 @@ import { Button } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ResetRolesAccesslist, SaveRolesAccesslist, getRolesAccesslist } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const RolesAccessPage: FC = function () {
   const dispatch = useDispatch();

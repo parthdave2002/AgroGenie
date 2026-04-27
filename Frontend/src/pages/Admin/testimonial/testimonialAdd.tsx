@@ -7,10 +7,10 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {  AddTestimoniallist, ResetTestimoniallist } from "../../../Store/actions";
 import { toast } from "react-toastify";
-import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const ImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/imageuploader"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const TestimonialAddPage : FC = function () {
     const dispatch = useDispatch();
@@ -26,7 +26,6 @@ const TestimonialAddPage : FC = function () {
             }
         }, [file])
     
-
     const [initialValues, setinitialValues] = useState({
         name_eng: "",
         name_guj: "",
@@ -48,21 +47,18 @@ const TestimonialAddPage : FC = function () {
         }),
         
         onSubmit: (values) => {
-
             if (!file) return setValidateImage(1)
             const formData = new FormData();
-                       formData.append("name_eng", values?.name_eng);
-                      formData.append("name_guj", values.name_guj);
-                      formData.append("village_eng", values?.village_eng);
-                      formData.append("village_guj", values.village_guj);
-
-                      formData.append("body_eng", values?.body_eng);
-                      formData.append("body_guj", values?.body_guj);
-                      formData.append("rating", "5");
-                      if (file) {
-                          formData.append("testimonial_pic", file);
-                      }
-
+                formData.append("name_eng", values?.name_eng);
+                formData.append("name_guj", values.name_guj);
+                formData.append("village_eng", values?.village_eng);
+                formData.append("village_guj", values.village_guj);
+                formData.append("body_eng", values?.body_eng);
+                formData.append("body_guj", values?.body_guj);
+                formData.append("rating", "5");
+                if (file) {
+                    formData.append("testimonial_pic", file);
+                }
           dispatch(AddTestimoniallist(formData));
         },
     });

@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNoticeBoardlist } from "../../../Store/actions";
 import { useParams } from "react-router";
 import moment from "moment";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { FaFilePdf } from "react-icons/fa";
 import { Modal } from "flowbite-react";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const NoticeBoardDetailsPage: FC = function () {
   const dispatch = useDispatch();

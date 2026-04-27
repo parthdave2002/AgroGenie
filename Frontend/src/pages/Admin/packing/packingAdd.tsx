@@ -3,12 +3,13 @@ import { Label, Button } from "flowbite-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import { Form, Input, FormFeedback } from "reactstrap";
+import { Form, FormFeedback } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AddPackinglist, ResetPackinglist,  } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { isactiveoption } from "../../../types/dropdown";
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const AddpackingPage : FC = function () {
@@ -56,11 +57,6 @@ const AddpackingPage : FC = function () {
           dispatch(AddPackinglist(requserdata));
         },
     });
-
-    const isactiveoption =[
-        { label :"Active", value : true },
-        { label :"Inactive", value : false }
-    ]
 
     // ------------- Get  Data From Reducer Code Start --------------
         const AddPackinglistData = useSelector((state: any) => state.Packing.AddPackinglist);
@@ -113,7 +109,6 @@ const AddpackingPage : FC = function () {
                                         isSelected ? "react-select__option--is-selected" : "react-select__option",
                                     placeholder: () => "react-select__placeholder",
                                 }}
-                              
                                 value={selectedactiveOption}
                                 onChange={(e) => { IsActivedata(e) }}
                                 options={isactiveoption}

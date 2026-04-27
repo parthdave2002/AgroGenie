@@ -1,15 +1,14 @@
 import { FC, lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserData } from "types/types";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import {ProfileUserdatalist, UpdateProfileUserdatalist }  from "../../../Store/actions";
-import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
-import ChangeProfilePassword from "../../../components/common/profile/changeprofilePassword";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const ImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/imageuploader"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const ChangeProfilePassword = lazy(() => import("../../../components/common/profile/changeprofilePassword"));
 
 const ProfilePage : FC = function () {
     const dispatch =useDispatch()
-
     const [file1, setFile1] = useState<File | null>(null);
     const [userData, setuserData] = useState<UserData>();
 

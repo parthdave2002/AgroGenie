@@ -6,6 +6,7 @@ const leaveSchema = new schema({
   end_date : { type: String },
   request_for : { type: schema.Types.ObjectId, ref: 'users' },
   leave_type: { type: String, enum: ['casual', 'lwp', 'sick', 'emergency'] },
+  leave_plan : {type: String },
   reason: { type: String },
   days: { type: Number, default: 1 },
   status: { type: String,  enum: [ 'pending','approved', 'rejected', 'cancel'], default : "pending"  },

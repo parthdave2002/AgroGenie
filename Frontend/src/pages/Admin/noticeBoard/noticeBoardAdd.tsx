@@ -7,10 +7,11 @@ import { Form, FormFeedback } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
 import { AddNoticeBoardlist, ResetNoticeBoardlist } from "../../../Store/actions";
+import { isactiveoption, isDocTypeoption, isDurationoption, isemployeeoption, isSendTooption } from "../../../types/dropdown";
+const ImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/imageuploader"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const NoticeBoardAddPage: FC = function () {
@@ -159,32 +160,6 @@ const NoticeBoardAddPage: FC = function () {
         },
     });
 
-    const isactiveoption = [
-        { label: "Active", value: true },
-        { label: "Inactive", value: false }
-    ]
-
-    const isSendTooption = [
-        { label: "All", value: "all" },
-        { label: "Selected", value: "selected" }
-    ]
-
-    const isemployeeoption = [
-        { label: "Priyanka", value: "all" },
-        { label: "Akki", value: "selected" }
-    ]
-
-    const isDocTypeoption = [
-        { label: "Text", value: "text" },
-        { label: "PDF", value: "pdf" },
-        { label: "Video", value: "video" },
-        { label: "Youtube", value: "youtube" }
-    ]
-
-    const isDurationoption = [
-        { label: "Permenet", value: "permenet" },
-        { label: "Part Time", value: "part-time" }
-    ]
 
     // ------------- Get  Data From Reducer Code Start --------------
     const AddNoticedatalist = useSelector((state: any) => state.NoticeBoard.AddNoticedatalist);

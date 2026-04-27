@@ -1,18 +1,18 @@
 import { lazy,FC, Suspense, useEffect, useState, useMemo } from "react";
+import moment from "moment";
 import { Button } from "flowbite-react";
 import { HiTrash} from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import { FaExclamationCircle } from "react-icons/fa";
 import { DeleteNoticeBoardlist,  getNoticeBoardlist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
-import CommonTable from "../../../components/common/table/commonTable";
-import moment from "moment";
-import { FaExclamationCircle } from "react-icons/fa";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 
 const NoticeBoardListPage: FC = function () {
   const dispatch = useDispatch();

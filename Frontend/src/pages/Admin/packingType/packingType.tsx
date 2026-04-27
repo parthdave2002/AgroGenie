@@ -8,9 +8,8 @@ import { FaExchangeAlt } from "react-icons/fa";
 import { getPackingTypelist, DeletePackingTypelist, ChangeStatusPackingTypelist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 import LoaderPage from "../../../components/common/loader/loader";
-import CommonTable from "../../../components/common/table/commonTable";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
@@ -92,12 +91,6 @@ const PackinTypeListPage: FC = function () {
       setisOpenDelteModel(false);
     };
   // -------  Delete Code End ---------------
-
-  // --------- Checkbox Code start ------------
-    const CheckData = (data:any) =>{
-      console.log(data)
-    }
-  // --------- Checkbox Code end ------------
 
   const OpenAddModel = () =>{
     navigate("/packing-type/add")

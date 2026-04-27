@@ -8,10 +8,10 @@ import { Form, FormFeedback } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AddTagloglist, ResetTagloglist } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { isactiveoption } from "../../../types/dropdown";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
-
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"))
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
 
 const TaglogAddPage : FC = function () {
     const dispatch = useDispatch();
@@ -57,11 +57,6 @@ const TaglogAddPage : FC = function () {
           dispatch(AddTagloglist(requserdata));
         },
     });
-
-    const isactiveoption =[
-        { label :"Active", value : true },
-        { label :"Inactive", value : false }
-    ]
 
     // ------------- Get  Data From Reducer Code Start --------------
         const AddTagloglistData = useSelector((state: any) => state.Taglog.AddTagloglist);

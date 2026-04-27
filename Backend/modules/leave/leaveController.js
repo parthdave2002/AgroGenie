@@ -88,12 +88,12 @@ leaveController.getAllleave = async (req, res, next) => {
 leaveController.addleave = async (req, res, next) => {
   try {
     const { id : userid ,type } = req.user
-    const { leave_type, reason, request_for, start_date, end_date, days } = req.body;
+    const { leave_type,leave_plan, reason, request_for, start_date, end_date, days } = req.body;
 
     if(type === "admin"){
       if(!request_for) otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Please select user', null);
       
-      const newLeave = new leaveSch({ leave_type, reason,  start_date,  end_date,  days, request_for : request_for, requested_by: userid, status: 'pending', });
+      const newLeave = new leaveSch({ leave_type, leave_plan, reason,  start_date,  end_date,  days, request_for : request_for, requested_by: userid, status: 'pending', });
       await newLeave.save();
       return otherHelper.sendResponse(res, httpStatus.OK, true, newLeave, null, 'Leave created successfully', null);
     }
@@ -105,7 +105,7 @@ leaveController.addleave = async (req, res, next) => {
     const alreadyonleave = await leaveSch.findOne({request_for : userid, start_date: { $lte: start_date }, end_date: { $gte: end_date }, status: { $in: ['pending', 'approved'] } });
     if (alreadyonleave) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'You have already applied for leave on this date', null);
 
-    const newLeave = new leaveSch({ start_date,  end_date, days, leave_type, reason, requested_by: userid,  request_for : userid,  status: 'pending'  });
+    const newLeave = new leaveSch({ start_date,  end_date, days, leave_type, leave_plan, reason, requested_by: userid,  request_for : userid,  status: 'pending'  });
     await newLeave.save();
     return otherHelper.sendResponse(res, httpStatus.OK, true, newLeave, null, 'Leave created successfully', null);
   } catch (err) {

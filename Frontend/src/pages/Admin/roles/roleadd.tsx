@@ -8,24 +8,19 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddRoleslist, ResetRoleslist } from "../../../Store/actions"
-import Inputbox from "../../../components/common/inputComponent/inputbox";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import { isactiveoption } from "../../../types/dropdown";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
 
 const AddRolePage : FC = function () {
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
-    const isactiveoption =[
-        { label :"Active", value : true},
-        { label :"Inactive", value : false}
-    ]
-
     //---------------- Satus option code start ----------------
         const [selectedStatusOption, setSelectedStatusOption] = useState(null);
         const [selectedStatusid, setSelectedStatusid] = useState<boolean | null>(null);
         const [validateStatusid, setvalidateStatusid] = useState(0);
-
 
         const IsActivedata = (data: any) => {
         if (!data) {
@@ -137,7 +132,7 @@ const AddRolePage : FC = function () {
                                         options={isactiveoption}
                                         isClearable={true}
                                     />
-                                     {validateStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select status  </FormFeedback> : null}
+                                    {validateStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select status  </FormFeedback> : null}
                             </div>
                         </div>
 

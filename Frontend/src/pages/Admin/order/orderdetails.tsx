@@ -9,9 +9,9 @@ import { Button } from "flowbite-react";
 import { FaPrint } from "react-icons/fa6";
 import { MdFileDownload } from "react-icons/md";
 import { getOrderlist  } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { OrderDetailsType } from "../../../types/types";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const OrdererDetailsPage: FC = function () {
   const dispatch = useDispatch();

@@ -8,17 +8,17 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { getOrderlist } from "../../../Store/actions";
 import LoaderPage from "../../../components/common/loader/loader";
-import CommonTable from "../../../components/common/table/commonTable";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const OrderListPage : FC = function () {
-      const navigate = useNavigate();
-      const dispatch = useDispatch();
-      const invoiceRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const invoiceRef = useRef<HTMLDivElement>(null);
 
-    // ----------- next Button  Code Start -------------
+  // ----------- next Button  Code Start -------------
       const [UserDataList, setUserDataList] = useState([]);
       const [PageNo, setPageNo] = useState(1);
       const [RoePerPage, setRoePerPage] = useState(5);
@@ -30,9 +30,9 @@ const OrderListPage : FC = function () {
          setPageNo(1)
        };
       const PageDataList = (data:any) =>{ setPageNo(data)}
-    // ------------- Next button Code End -------------
+  // ------------- Next button Code End -------------
     
-    // ---------------- Search User code start ----------------
+  // ---------------- Search User code start ----------------
     const [searchData, setSearchData] = useState<string | null>(null);
     const Changename = useCallback((value: string) => {
       const timeout = setTimeout(() => {
@@ -41,7 +41,7 @@ const OrderListPage : FC = function () {
       }, 500); // 500ms debounce
       return () => clearTimeout(timeout);
     }, []);
-    // ---------------- Search User code end ----------------
+  // ---------------- Search User code end ----------------
 
     useEffect(() => {
         let requserdata: { page: number; size: number; search?: string } = {
@@ -53,7 +53,7 @@ const OrderListPage : FC = function () {
         setLoader(true)
     }, [dispatch, PageNo, RoePerPage, searchData]);
  
-    // ------------- Get  Data From Reducer Code Start --------------
+  // ------------- Get  Data From Reducer Code Start --------------
       const { Orderlist,  OrderlistSize, TotalOrderData, CurrentPage } = useSelector((state: any) => ({
           Orderlist: state.Order.Orderlist,
           OrderlistSize: state.Order.OrderlistSize,
@@ -70,35 +70,35 @@ const OrderListPage : FC = function () {
         setCurrentPageNo(CurrentPage ? CurrentPage : 1);
         setLoader(false)
       }, [Orderlist, TotalOrderData, OrderlistSize, CurrentPage]);
-    //  ------------- Get  Data From Reducer Code end --------------
+  //  ------------- Get  Data From Reducer Code end --------------
 
     let Name = "Order List";
     let Searchplaceholder = "Search For Orders";
 
-  const OrderDetailsCall = (data: any) => {
-    navigate(`/order/details/${data}`)
-  }
+    const OrderDetailsCall = (data: any) => {
+      navigate(`/order/details/${data}`);
+    };
 
-    const [ parcelModal, setparcelModal ] = useState(false);
-    const [ parcelModalData, setparcelModalData ] = useState<any>({});
-    const OpenParcelModal = (id:any) =>{
-      setparcelModalData(id)
-      setparcelModal(true)
-    }
+    const [parcelModal, setparcelModal] = useState(false);
+    const [parcelModalData, setparcelModalData] = useState<any>({});
+    const OpenParcelModal = (id: any) => {
+      setparcelModalData(id);
+      setparcelModal(true);
+    };
 
     const Downloadcall = async () => {
       const input = invoiceRef.current;
       if (!input) return;
 
       const canvas = await html2canvas(input, {
-        scale: 3,            // HIGH quality
+        scale: 3, // HIGH quality
         useCORS: true,
         allowTaint: false,
       });
 
       const imgData = canvas.toDataURL("image/jpeg", 1.0);
 
-      const pdfWidth = canvas.width * 0.264583;  // px to mm
+      const pdfWidth = canvas.width * 0.264583; // px to mm
       const pdfHeight = canvas.height * 0.264583;
 
       const pdf = new jsPDF("p", "mm", [pdfWidth, pdfHeight]);
@@ -107,73 +107,70 @@ const OrderListPage : FC = function () {
       pdf.save("COD_Parcel.pdf");
     };
 
-          const printPDF = async () => {
-        if (!invoiceRef.current) return;
-    
-        const input = invoiceRef.current;
-    
-        // Capture the div as image
-        const canvas = await html2canvas(input, {
-          scale: 2, // improves quality
-          useCORS: true,
-        });
-    
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "px", "a4"); // px is better for html2canvas
-    
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-        const blob = pdf.output("blob");
-        const blobUrl = URL.createObjectURL(blob);
-        window.open(blobUrl, "_blank");
-      }
+    const printPDF = async () => {
+      if (!invoiceRef.current) return;
 
+      const input = invoiceRef.current;
+      const canvas = await html2canvas(input, {
+        scale: 2, // improves quality
+        useCORS: true,
+      });
 
-  const userColumns = useMemo(() => [
-    {
-      key: "order_id",
-      label: "Order id",
-      render: (row:any) =>(
-        <div onClick={() => OrderDetailsCall(row?._id)}>  {row?.order_id}</div>
-      )
-    },
-    {
-      key: "advisor_name",
-      label: "Advisor Name",
-      render : (row : any) => (
-        <div> {row?.advisor_name?.name} </div>
-      )
-    },
-    {
-      key: "total_amount",
-      label: "COD Amt",
-      render: (row:any) =>(
-        <div> ₹ {Math.round(row?.total_amount)} </div>
-      )
-    },
-    {
-      key: "order_type",
-      label: "Type",
-      render : (row:any) =>(
-        <div> {row?.order_type.charAt(0).toUpperCase() + row?.order_type.slice(1).toLowerCase() } </div>
-      )
-    },
-    {
-      key: "is_active",
-      label: "Status",
-      render: (row: any) => (
-        <div>{row?.status ? row?.status.charAt(0).toUpperCase() + row?.status.slice(1).toLowerCase() : "-"}</div>
-      )
-    },
-    {
-      key: "actions",
-      label: "Actions",
-      render: (row: any) => (
-       <div> {row?.status && row?.status === "confirm" ? <Button onClick={() => OpenParcelModal(row) }> Parcel cover </Button> : "-" } </div>
-      ),
-    },
-  ], []);    
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "px", "a4"); // px is better for html2canvas
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      const blob = pdf.output("blob");
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl, "_blank");
+    };
+
+    const userColumns = useMemo(() => [
+      {
+        key: "order_id",
+        label: "Order id",
+        render: (row:any) =>(
+          <div onClick={() => OrderDetailsCall(row?._id)}>  {row?.order_id}</div>
+        )
+      },
+      {
+        key: "advisor_name",
+        label: "Advisor Name",
+        render : (row : any) => (
+          <div> {row?.advisor_name?.name} </div>
+        )
+      },
+      {
+        key: "total_amount",
+        label: "COD Amt",
+        render: (row:any) =>(
+          <div> ₹ {Math.round(row?.total_amount)} </div>
+        )
+      },
+      {
+        key: "order_type",
+        label: "Type",
+        render : (row:any) =>(
+          <div> {row?.order_type.charAt(0).toUpperCase() + row?.order_type.slice(1).toLowerCase() } </div>
+        )
+      },
+      {
+        key: "is_active",
+        label: "Status",
+        render: (row: any) => (
+          <div>{row?.status ? row?.status.charAt(0).toUpperCase() + row?.status.slice(1).toLowerCase() : "-"}</div>
+        )
+      },
+      {
+        key: "actions",
+        label: "Actions",
+        render: (row: any) => (
+        <div> {row?.status && row?.status === "confirm" ? <Button onClick={() => OpenParcelModal(row) }> Parcel cover </Button> : "-" } </div>
+        ),
+      },
+    ], []);    
 
     return (
       <>
