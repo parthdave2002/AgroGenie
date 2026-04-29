@@ -6,11 +6,15 @@
 require('dotenv').config();
 const http = require('http');
 const app = require('./app');
+const { initializeSocket } = require('./helper/socket.helper');
 const port = process.env.PORT || 8000;
 const env = process.env.ENV || 'Development';
 const app_name = process.env.APP_NAME || 'Agrogenie';
 const server = http.createServer(app);
 
+// Initialize Socket.IO
+const io = initializeSocket(server);
+app.set('io', io);
 app.set('PORT_NUMBER', port);
 
 

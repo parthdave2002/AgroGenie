@@ -1,12 +1,12 @@
 
 import type { FC } from "react";
-import NavbarSidebarLayout from "../../layouts/navbar-sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { getTagloglist } from "../../Store/actions";
-import { useEffect, useState, } from "react";
-import ExampleBreadcrumb from "../../components/common/breadcrumb/breadcrumb";
+import { getTagloglist } from "../../../Store/actions";
+import { lazy, useEffect, useState, } from "react";
 import { useParams } from "react-router";
 import moment from "moment";
+const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"))
 
 const TaglogDetailsPage: FC = function () {
   const dispatch = useDispatch();

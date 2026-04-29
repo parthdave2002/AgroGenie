@@ -45,7 +45,7 @@ function* onMarkLeadlist({ payload: requstuser }) {
     yield put(MarkasReadLeadlistSuccess(MARK_AS_READ_LEAD_LIST, response));
       toast.success(response?.msg);
       if(response.success === true || response.success === "true"){
-        const newresponse = yield call(LeadlistApi({ type :"order", page:1, size : 5 }));
+        const newresponse = yield call(LeadlistApi({ status :"Pending", page:1, size : 5 }));
         yield put(getleadlistSuccess(GET_LEAD_LIST, newresponse));
       }
   } catch (error) {

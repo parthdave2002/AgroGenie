@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import { HiShoppingBag, HiCube, HiPuzzle, HiUsers, HiChartPie, HiLibrary } from "react-icons/hi";
-import { FaWarehouse } from "react-icons/fa";
-import { MdFlight, MdLeaderboard } from "react-icons/md"; 
+import { FaAddressBook, FaClipboardList, FaWarehouse } from "react-icons/fa";
+import {  MdComputer, MdLeaderboard, MdRateReview } from "react-icons/md"; 
 import { TbReportSearch } from "react-icons/tb";
 import { GiWheat } from "react-icons/gi";
 import { FaUser, FaTags  } from "react-icons/fa";
@@ -13,6 +13,7 @@ import type { FC, PropsWithChildren } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import { IoIosSettings } from "react-icons/io";
 
 interface NavbarSidebarLayoutProps {
   isSidebar?: boolean;
@@ -46,11 +47,11 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       icon: HiChartPie, // Reference the actual icon component
       to: "/dashboard",
     },
-    //  {
-    //   name: "Warehouse",
-    //   icon: FaWarehouse, // Reference the actual icon component
-    //   to: "/warehouse",
-    // },
+     {
+      name: "Warehouse",
+      icon: FaWarehouse, // Reference the actual icon component
+      to: "/warehouse",
+    },
     {
       name: "Advisor",
       icon: HiUsers,
@@ -110,19 +111,9 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       to: "/category/list",
     },
     {
-      name: "Banner",
-      icon:  BsCloudArrowUpFill ,
-      to: "/banner/list",
-    },
-    {
       name: "Taglog",
       icon:  FaTags,
       to: "/taglog/list",
-    },
-     {
-      name: "Testimonial",
-      icon:  FaTags,
-      to: "/testimonial/list",
     },
     {
       name: "Crop",
@@ -134,21 +125,39 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       icon:  BiSolidCoupon,
       to: "/coupon/list",
     },
+  ]
 
+  const WebsiteMenu = [
+    {
+      name: "Banner",
+      icon:  BsCloudArrowUpFill ,
+      to: "/banner/list",
+    },
+
+     {
+      name: "Testimonial",
+      icon:  MdRateReview,
+      to: "/testimonial/list",
+    },
+  ]
+
+  const SubSettingMenu = [
     {
       name: "User Leaves",
-      icon:  MdFlight,
+      icon:  FaAddressBook,
       to: "/leave/list",
     },
     {
       name: "Notice Board",
-      icon:  MdFlight,
+      icon:  FaClipboardList,
       to: "/notice-board/list",
     },
   ]
 
   const filteredSidebarData = user === "admin" ? SidebarData : SidebarData.filter((item:any) => AccessList.includes(item.name));
   const filteredSubMasterMenu = user === "admin" ? SubMasterMenu : SubMasterMenu.filter((item:any) => AccessList.includes(item.name));
+  const filteredSubSettingMenu = user === "admin" ? SubSettingMenu : SubSettingMenu.filter((item:any) => AccessList.includes(item.name));
+  const filteredWebsiteMenu = user === "admin" ? WebsiteMenu : WebsiteMenu.filter((item:any) => AccessList.includes(item.name));
 
   return (
     <div className="hidden lg:block">
@@ -168,6 +177,20 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
                   <h4 className="dark:text-gray-400"> Master:</h4>
                   <Sidebar.Collapse icon={HiShoppingBag} label="Master">
                     {filteredSubMasterMenu.map((item, k) => (
+                      <NavLink to={item.to} key={k}>
+                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                      </NavLink>
+                    ))}
+                  </Sidebar.Collapse>
+                  <Sidebar.Collapse icon={MdComputer} label="Manage Website">
+                    {filteredWebsiteMenu.map((item, k) => (
+                      <NavLink to={item.to} key={k}>
+                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                      </NavLink>
+                    ))}
+                  </Sidebar.Collapse>
+                   <Sidebar.Collapse icon={IoIosSettings} label="Setting">
+                    {filteredSubSettingMenu.map((item, k) => (
                       <NavLink to={item.to} key={k}>
                         <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
                       </NavLink>
