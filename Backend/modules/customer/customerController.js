@@ -212,12 +212,41 @@ customerController.NearbyFarmerList = async (req, res, next) => {
       { path: 'district', model: 'District', select: 'name' },
     ];
 
-     const customer_id  = req.query.customer_id; 
-     const customer = await customerSch.findById(customer_id);
-    if (!customer)  otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Customer not found', null);
-    const sameVillageCustomers = await customerSch.find({ village: customer.village,  _id: { $ne: customer_id }  }).sort(sortQuery).skip((page - 1) * size).limit(size).populate(populateFields).select("customer_name firstname middlename lastname mobile_number alternate_number smart_phone land_area land_type irrigation_source irrigation_type crops heard_about_agribharat address district taluka village pincode added_at").lean();
+    const customer_id = req.query.customer_id;
+    if (!customer_id) {
+      return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Customer id is required', null);
+    }
 
-    return otherHelper.paginationSendResponse(res, httpStatus.OK, true, sameVillageCustomers, null, 'Near By farmer found', null);
+    const customer = await customerSch.findById(customer_id);
+    if (!customer) {
+      return otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Customer not found', null);
+    }
+
+    const nearbyQuery = { village: customer.village, _id: { $ne: customer_id } };
+    const [sameVillageCustomers, totalData] = await Promise.all([
+      customerSch
+        .find(nearbyQuery)
+        .sort(sortQuery)
+        .skip((page - 1) * size)
+        .limit(size)
+        .populate(populateFields)
+        .select(
+          "customer_name firstname middlename lastname mobile_number alternate_number smart_phone land_area land_type irrigation_source irrigation_type crops heard_about_agribharat address district taluka village pincode added_at"
+        )
+        .lean(),
+      customerSch.countDocuments(nearbyQuery),
+    ]);
+
+    return otherHelper.paginationSendResponse(
+      res,
+      httpStatus.OK,
+      true,
+      sameVillageCustomers,
+      'Near By farmer found',
+      page,
+      size,
+      totalData
+    );
   } catch (err) {
     next(err);
   }

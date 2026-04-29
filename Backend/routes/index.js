@@ -72,4 +72,7 @@ router.use('/warehouse', Warehousedata);
 const NoticeBoarddata = require('./api/noticeBoard');
 router.use('/notice-board', NoticeBoarddata);
 
+const Chatdata = require('./api/chat');
+router.use('/chat', Chatdata);
+
 module.exports = router;

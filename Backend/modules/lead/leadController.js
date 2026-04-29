@@ -31,7 +31,7 @@ leadController.getAlllead = async (req, res, next) => {
       return otherHelper.paginationSendResponse(res, httpStatus.OK, true, searchResults, 'Lead data found', page, size, searchResults.length);
     }
 
-    if (req.query.status) searchQuery.status = req.query.status;
+    if (req.query.status) searchQuery.status = req.query.status.toLowerCase();
     if (req.query.type) searchQuery.type = req.query.type;
     if (req.query.user_type) searchQuery.user_type = req.query.user_type;
 
