@@ -1,3 +1,6 @@
+import { BsFillStopwatchFill } from "react-icons/bs";
+import { FaCircleCheck } from "react-icons/fa6";
+
 export const genderoption = [
   { label: "Male", value: "male" },
   { label: "Female", value: "female" },
@@ -52,4 +55,9 @@ export const isleaveplanoption = [
   { label: "Full Day", value: "full-day" },
   { label: "Half day (1st half)", value: "fist-half" },
   { label: "Half day (2st half)", value: "secound-half" },
+];
+
+export const ManagerDashboardTabData = [
+  { title: "Pending", icon: <BsFillStopwatchFill size={20} /> },
+  { title: "Completed", icon: <FaCircleCheck size={20} /> },
 ];

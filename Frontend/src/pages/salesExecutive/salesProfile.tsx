@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
-import { Table, Button } from "flowbite-react";
+import { FC, useEffect, useMemo, useState } from 'react';
+import { Button } from "flowbite-react";
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { getleavelist } from '../../Store/actions';
@@ -12,12 +12,11 @@ interface PropsData{
     CloseProfile: () => void;
 }
 
-const SalesProfile : FC <PropsData> = function ({CloseProfile})  {
+const SalesProfile : FC <PropsData> = function ()  {
     const dispatch = useDispatch();
 
     const [SalesLeaveData, setSalesLeaveData] = useState([])
     const [confirmationModal, setConfirmationModal] = useState(false);
-
 
     // ----------- next Button  Code Start -------------
     const [TotalListData, setTotalListData] = useState(0);
@@ -27,10 +26,10 @@ const SalesProfile : FC <PropsData> = function ({CloseProfile})  {
 
     const RowPerPage = (event: any) => {
       const value = Number(event)
-       setRoePerPage(value);
-       setPageNo(1)
-     };
-    const PageDataList = (data:any) =>{ setPageNo(data)}
+      setRoePerPage(value);
+      setPageNo(1);
+    };
+    const PageDataList = (data:any) => { setPageNo(data) }
   // ------------- Next button Code End -------------
 
 
@@ -38,7 +37,8 @@ const SalesProfile : FC <PropsData> = function ({CloseProfile})  {
 
     useEffect(() => {
         setSalesLeaveData(Leavedatalist?.data?.data);
-        setTotalListData(Leavedatalist?.TotalPackingtypeData ? Leavedatalist?.TotalPackingtypeData : 0);
+        // setRoePerPage(Leavedatalist?.size ? Leavedatalist?.size : null)
+        setTotalListData(Leavedatalist?.totalData ? Leavedatalist?.totalData : 0);
         setCurrentPageNo(Leavedatalist?.CurrentPage ? Leavedatalist?.CurrentPage : 1);
     }, [Leavedatalist]);
 
@@ -48,17 +48,17 @@ const SalesProfile : FC <PropsData> = function ({CloseProfile})  {
         size: RoePerPage
       };
         dispatch(getleavelist(requserdata));
-    }, [dispatch, PageNo, RoePerPage,]);
+    }, [dispatch, PageNo, RoePerPage]);
 
     const RequestLeave = () => {
         setConfirmationModal(true);
     }
 
-      const LeaveColumns  = useMemo(() => [
+    const LeaveColumns  = useMemo(() => [
         { key: "start_date",  label: "Leave Date", render: (row: any) => `${moment(row.start_date).format("DD-MM-YYYY")} To ${moment(row.end_date).format("DD-MM-YYYY")}`, },
         { key: "days",  label: "Leave Days",},
         { key: "leave_type",  label: "Leave Type",  render: (row: any) => row?.leave_type ? row?.leave_type.charAt(0).toUpperCase() + row?.leave_type.slice(1).toLowerCase() : "-"},
-        {  key: "status",  label: "Status", render: (row: any) =>row?.status ? row?.status.charAt(0).toUpperCase() + row?.status.slice(1).toLowerCase() : "-"},
+        // {  key: "status",  label: "Status", render: (row: any) =>row?.status ? row?.status.charAt(0).toUpperCase() + row?.status.slice(1).toLowerCase() : "-"},
         {  key: "reason", label: "Reason"},
         {
           key: "status",
@@ -80,28 +80,25 @@ const SalesProfile : FC <PropsData> = function ({CloseProfile})  {
           label: "Approved date",
           render: (row: any) => row?.approved_date ? moment(row?.approved_date).format("DD-MM-YYYY") : "N/A"
         },
-      ],[]);
+    ],[]);
 
   return (
     <>
-
-        <div >
-            <ChangeProfilePassword />
-        </div>
+        <div> <ChangeProfilePassword />  </div>
     
-          <div className="mt-[4rem]">
-                <div className='flex justify-between mb-6 self-center'>
-                  <h3 className="self-center text-2xl font-bold leading-none text-gray-900 dark:text-white"> Leave History </h3>
-                  <Button gradientDuoTone="purpleToPink" onClick={ () =>  RequestLeave()}> Request Leave </Button>
-                </div>
-
-                {SalesLeaveData && SalesLeaveData.length > 0 ?
-                  <>
-                        <CommonTable columns={LeaveColumns} data={SalesLeaveData || []} />
-                        <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
-                  </>
-                : null}
+        <div className="mt-[4rem]">
+          <div className='flex justify-between mb-6 self-center'>
+            <h3 className="self-center text-2xl font-bold leading-none text-gray-900 dark:text-white"> Leave History </h3>
+            <Button gradientDuoTone="purpleToPink" onClick={ () =>  RequestLeave()}> Request Leave </Button>
           </div>
+
+          {SalesLeaveData && SalesLeaveData.length > 0 ?
+            <>
+              <CommonTable columns={LeaveColumns} data={SalesLeaveData || []} />
+              <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
+            </>
+          : null}
+        </div>
 
         {confirmationModal ?
             <LeaveAdd CloseProfile={() => setConfirmationModal(false)}  confirmationModal={confirmationModal} type="S"/>

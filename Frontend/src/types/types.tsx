@@ -42,6 +42,30 @@ export interface ProfileInfo {
   state: { name: string; _id: string }
 }
 
+export type DashboardCardProps = {
+  icon: any;
+  title: string;
+  selectedFrame: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  data?: {
+    daily?: number;
+    weekly?: number;
+    monthly?: number;
+  };
+};
+
+
+export interface DashboardPropsData {
+  setDatactive: any;
+  openProfile: boolean;
+  setOpenProfile: (value: boolean) => void;
+}
+
+export interface DashboardCount {
+  daily: number;
+  monthly: number;
+  weekly: number;
+}
 export interface AccessData {
   add: boolean;
   view: boolean;

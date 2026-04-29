@@ -195,8 +195,15 @@ const SalesFarmerDashboard : FC<PropsData> = ( {setOpenProfile, Mobile_number, o
                     </div>
                     <FarmeDashboard viewButton={true} classData="border dark:border-gray-600 rounded-xl w-full py-2 px-4 transition-all duration-800 ease-in-out" />
 
-                    <div className='mt-[2rem] text-[2rem] dark:text-gray-400 font-bold'> Near By Farmer </div>
-                    <NeaByFarmer  />
+                    <div className="flex gap-4 mt-[2rem]">
+                      <div className="w-[65%]">
+                        Left Content
+                      </div>
+
+                      <div className="w-[35%] ">
+                        <NeaByFarmer  />
+                      </div>
+                    </div>
 
                     <div className='mt-[2rem] text-[2rem] dark:text-gray-400 font-bold'> History </div>
                     <FarmerHistory setOpenDetailId={setOpenDetailId} openComplain={openComplain} setOpenComplain={setOpenComplain}  setOpenDetailIData={setOpenDetailIData}  setOpenDetailsmodal={setOpenDetailsmodal}  AddtoCartCall={AddtoCartCall} setCartOrderid={setCartOrderid} FuturOrderDate={setfuture_date}   orderId={orderId} set_OrderId={set_OrderId} />

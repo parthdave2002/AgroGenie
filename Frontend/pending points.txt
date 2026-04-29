@@ -1,31 +1,60 @@
-//  >>>>>>>>>>>>>>>>>>>>>  Frontend  <<<<<<<<<<<<<<<<<<<<<
-
-=> pagination for table  ( sales -> Dashboard)
-=> code spliting, optimization  ( sales -> Dashboard )
-=> Add noticeboard in role list page and do that accessbase  ( Admin -> Role List )
-=> api call multiple times fix  ( Admin ->  Notice board details  page )
-= > Leave Previous month list  ( Admin panel -> Leave module )   
-=> Leave pagination   ( sales panel -> Leave module )
-=> Leave balance  ( LWP : 8, Casual : 8 ) 
+======================= Need to Imaplement  ===================
+=> Leave balance dynamic from admin panel ( LWP : 8, Casual : 8 ) 
+=> Leave Previous month list  ( Admin panel -> Leave module )
 => Leave balance show on  profile
-=> Attendance list admin panel //Done
-=> Leave date range  // Done
-=> Cancel request   // Done
-=> Admin can request past date leave   // Done
-=> Code optimization ( salesProfile.tsx )
-=> profile update : (  password, image ) (sales -> profile )  // Done
-
-=> Add role behalf of selected 
-=> default text first in sales Dashboard
-
-new thing 
-=> profile create pie chart for compare with max -3 friends  ( Total Revenue, last week,  ) 
-=> while create user compare with 
-
-=> Revenue  ( yearly,  area chart)
-=> create main page form master menu ( remove from sidebar )
-
-//  >>>>>>>>>>>>>>>>>>>>>  Backend  <<<<<<<<<<<<<<<<<<<<<
-
 => add module in accessbase
-=> Leave pagination   ( sales panel -> Leave module )
+=> Chating app ( for sales and admin)  // inprogress
+=> Payment gateway for online Order  
+
+============================== Admin panel Task =========================
+=> Add noticeboard in role list page and do that accessbase  ( Admin -> Role List )
+
+============================ Add new role : =============================== 
+Team Leader 
+=> Team Leader Dashboard
+=> List of advisor in team.
+=> admin panel module accessbase
+=> profile create pie chart for compare with max -3 friends  ( Total Revenue, last week,  ) 
+=> Revenue  ( yearly,  area chart)
+
+HR admin : (HRMS)
+=> From admin panel manage modules accessbase
+=> payroll management
+
+Warehouse 
+=> warehouse dashboard
+=> warehouse management 
+=> product management
+=> Order management
+
+Confirmation 
+=> manage lead data 
+
+================================================ Changes =================================
+
+1. Backend/index.js
+2. Backend/package.json
+3. Backend/helper/socket.helper.js
+4. Backend/modules/chat/chatController.js
+4.1.Backend/modules/customer/customerController.js
+5. Backend/modules/lead/leadController.js    // if (req.query.status) searchQuery.status = req.query.status.toLowerCase();
+6. Backend/routes/index.js
+7. Backend/routes/api/chat.js
+8. Backend/schema/chatSchema.js
+9. Frontend/package.json
+10.Frontend/src/components/chat/chatButton.tsx
+11.Frontend/src/components/chat/chatProfile.tsx
+12.Frontend/src/components/chat/chatSingle.tsx
+13.Frontend/src/components/chat/chatUserlist.tsx
+14.Frontend/src/hooks/useSocket.js
+15.Frontend/src/pages/Admin/noticeBoard/noticeBoardDetails.tsx
+16.Frontend/src/pages/Managerdashboard/dashoboard.tsx
+17.Frontend/src/pages/salesExecutive/salesDashboard.tsx
+18.Frontend/src/pages/salesExecutive/salesProfile.tsx
+19.Frontend/src/routes/routesConfig.tsx
+20.Frontend/src/Store/Lead/saga.js
+21.Frontend/src/types/dropdown.tsx
+22.Frontend/src/types/types.tsx
+23.Frontend/src/components/common/pagination/smallPagination.tsx
+24.Frontend/src/pages/salesExecutive/nearByfarmer.tsx
+25.Frontend/src/pages/salesExecutive/salesFarmerDashboard.tsx
