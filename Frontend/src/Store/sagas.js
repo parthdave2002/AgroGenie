@@ -24,6 +24,7 @@ import LocationSaga from "./Location/saga";
 import LeaveSaga from "./Leave/saga";
 import TestimonialSaga from "./Testimonial/saga";
 import NoticeBoardSaga from "./NoticeBoard/saga";
+import WarehouseSaga from "./Warehouse/saga.js";
 import SalesDashboardSaga from "./SalesExecutive/dashboard/saga";
 
 export default function* rootSaga() {
@@ -52,6 +53,7 @@ export default function* rootSaga() {
     fork(NoticeBoardSaga),
     fork(ComplainSaga),
     fork(SalesDashboardSaga),
-    fork(LocationSaga)
+    fork(LocationSaga),
+    fork(WarehouseSaga),
   ]);
 }

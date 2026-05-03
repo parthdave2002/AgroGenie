@@ -29,3 +29,7 @@
 .modal {
   z-index: 9999 !important;
 }
+
+.input {
+  @apply border rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-black;
+}

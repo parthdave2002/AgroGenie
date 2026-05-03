@@ -23,6 +23,7 @@ import Location from "./Location/reducer";
 import Leave from "./Leave/reducer";
 import Testimonial from "./Testimonial/reducer";
 import NoticeBoard from "./NoticeBoard/reducer";
+import Warehouse from "./Warehouse/reducer";
 import SalesDashboard from "./SalesExecutive/dashboard/reducer";
 
 const rootReducer = combineReducers({
@@ -51,7 +52,8 @@ const rootReducer = combineReducers({
     NoticeBoard,
     Complain,
     SalesDashboard,
-    Location
+    Location,
+    Warehouse,
 });
 
 export default rootReducer;

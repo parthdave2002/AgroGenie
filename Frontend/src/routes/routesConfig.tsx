@@ -100,5 +100,10 @@ export const adminRoutes = [
   // Misc
   { path: "/sales-crm", component: lazyImport(() => import("../pages/salesExecutive")) },
   { path: "/chat", component: lazyImport(() => import("../components/chat/chatButton")) },
-  { path: "/warehouse", component: lazyImport(() => import("../pages/warehouse/warehouse")) },
+
+
+  { path: "/warehouse/list", component: lazyImport(() => import("../pages/warehouse/warehouse")) },
+  { path: "/warehouse/add", component: lazyImport(() => import("../pages/warehouse/warehouseAdd")) },
+  { path: "/warehouse/edit/:id", component: lazyImport(() => import("../pages/warehouse/warehouseAdd")) },
+  { path: "/warehouse/details/:id", component: lazyImport(() => import("../pages/warehouse/warehouseDetails")) },
 ];
