@@ -149,3 +149,7 @@ export const GET_CHANGE_LEAVE_STATUS = "/api/leave/approve-leave";
 export const GET_TESTIMONIAL_LIST = "/api/testimonial/get-testimonial";
 export const ADD_TESTIMONIAL_LIST = "/api/testimonial/add-testimonial";
 export const DELETE_TESTIMONIAL_LIST = "/api/testimonial/remove-testimonial";
+
+export const GET_WAREHOUSE_LIST = "/api/warehouse/get-warehouse";
+export const ADD_WAREHOUSE_LIST = "/api/warehouse/add-warehouse";
+export const DELETE_WAREHOUSE_LIST = "/api/warehouse/remove-warehouse";

@@ -1,167 +1,131 @@
-import { FC, useEffect,  useState } from "react";
-import { Button, Table, Modal } from "flowbite-react";
+import { lazy,FC, Suspense, useEffect, useState, useMemo } from "react";
 import moment from "moment";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Button } from "flowbite-react";
+import { HiTrash} from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderlist, ReturnOrderlist } from "../../Store/actions";
-import NavbarSidebarLayout from "../../layouts/navbar-sidebar";
-import ExampleBreadcrumb from "../../components/common/breadcrumb/breadcrumb";
-import ExamplePagination from "../../components/common/pagination/pagination";
-const IMG_URL = import.meta.env["VITE_API_URL"];
+import { useNavigate } from "react-router";
+import { DeleteBannerlist,  getWarehouselist } from "../../Store/actions";
+import UseAccessList from "../../hooks/useAccessList";
+const DeleteModalPage = lazy(() => import("../../components/common/modal/deleteModal"));
+const ToastMessage = lazy(() => import("../../components/common/toastmessage/ToastMessage"));
+const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
+const ExampleBreadcrumb = lazy(() => import("../../components/common/breadcrumb/breadcrumb"));
+const CommonTable = lazy(() => import("../../components/common/table/commonTable"));
+const NavbarSidebarLayout = lazy(() => import("../../layouts/navbar-sidebar"));
 
-const WarehousePage  = function ()  {     
+const WarehousePage: FC = function () {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isOpenDelteModel, setisOpenDelteModel] = useState(false);
+  const [WarehouseDataList, setWarehouseDataList] = useState([]);
+  
+  //------------ Access Data Code start------------
+    const { Warehouselist, WarehouselistSize, TotalWarehouseData, CurrentPage, permissionsdata } = useSelector((state: any) => ({
+      Warehouselist: state.Warehouse.Warehouselist,
+      WarehouselistSize: state.Warehouse.WarehouselistSize,
+      TotalWarehouseData: state.Warehouse.TotalWarehouseData,
+      CurrentPage: state.Warehouse.CurrentPage,
+      permissionsdata: state.Login.permissionsdata
+    }));
 
-    const dispatch = useDispatch();
-    const [leadData, setLeadData] = useState<any>(null)
-    const [ProductModalData, setProductModalData] = useState([]);
-    const [ProductModal, setProductModal] = useState(false);
-      const OpenModal = (data:any) =>{
-        setProductModal(true)
-        setProductModalData(data?.products)
-      }
+    const accessList = UseAccessList(permissionsdata, "Warehouse");
+  //--------- Access Data Code end------------------
 
-      const [confirmationModal, setConfirmationModal] = useState(false);
-        const [LeadeId, setLeadeId] = useState("");
-        
-            const OPenConfirmModal =(data:string) =>{
-              setConfirmationModal(true)
-              setLeadeId(data)
-            }
+  // ----------- next Button  Code Start -------------
+    const [TotalListData, setTotalListData] = useState(0);
+ 
+    const [CurrentPageNo, setCurrentPageNo] = useState(0);
+    const [PageNo, setPageNo] = useState(1);
+    const [RoePerPage, setRoePerPage] = useState(5);
 
-               const DelCall = () =>{
-                  let requser={  order_id : LeadeId}
-                  dispatch(ReturnOrderlist(requser))
-                  setConfirmationModal(false);
-                }
+    const RowPerPage = (event: any) => {
+      const value = Number(event)
+       setRoePerPage(value);
+       setPageNo(1)
+     };
+    const PageDataList = (data:any) =>{ setPageNo(data)}
+  // ------------- Next button Code End -------------
 
-          // ------------- Get  Data From Reducer Code Start --------------
-            const { Orderlist,  OrderlistSize, TotalOrderData, CurrentPage } = useSelector((state: any) => ({
-                Orderlist: state.Order.Orderlist,
-                OrderlistSize: state.Order.OrderlistSize,
-                TotalOrderData: state.Order.TotalOrderData,
-                CurrentPage: state.Order.CurrentPage,
-              }));
-      
-            const [TotalListData, setTotalListData] = useState(0);
-            const [CurrentPageNo, setCurrentPageNo] = useState(0);
-            
-            useEffect(() => {
-              setLeadData(Orderlist?.data ? Orderlist?.data  : Orderlist);
-              setTotalListData(TotalOrderData ? TotalOrderData : 0);
-              setCurrentPageNo(CurrentPage ? CurrentPage : 1);
-            }, [Orderlist, TotalOrderData, OrderlistSize, CurrentPage]);
-          //  ------------- Get  Data From Reducer Code end --------------
+  // ---------------- Search code start ----------------
+    const [searchData, setSearchData] = useState(null);
+    const Changename = (data:any) =>{
+      setSearchData(data)
+    }
+  // ---------------- Search code end ----------------
 
-      // ----------- next Button  Code Start -------------
-        // const [TotalListData, setTotalListData] = useState(0);
-        // const [CurrentPageNo, setCurrentPageNo] = useState(0);
-        const [PageNo, setPageNo] = useState(1);
-        const [RoePerPage, setRoePerPage] = useState(5);
+  // ------------- Get  Data From Reducer Code Start --------------
+    useEffect(() => {
+      let requserdata: { page: number; size: number; search?: string } = {
+        page: PageNo,
+        size: RoePerPage
+      };
+      if (searchData)  requserdata.search = searchData;
+      dispatch(getWarehouselist(requserdata));
+    }, [dispatch, PageNo, RoePerPage, searchData]);
 
-        const RowPerPage = (event: any) => {
-          const value = Number(event)
-          setRoePerPage(value);
-          setPageNo(1);
-          setCurrentPageNo(0)
-        };
-        const PageDataList = (data:any) =>{ setPageNo(data)}
-      // ------------- Next button Code End -------------
+    useEffect(() => {        
+      setWarehouseDataList(Warehouselist? Warehouselist : []);
+      setTotalListData(TotalWarehouseData ? TotalWarehouseData : 0);
+      setCurrentPageNo(CurrentPage ? CurrentPage : 1);
+    }, [Warehouselist,  WarehouselistSize, TotalWarehouseData, CurrentPage]);
+  //  ------------- Get Data From Reducer Code end --------------
 
-      // ---------------- Search code start ----------------
-        const [searchData, setSearchData] = useState(null);
-        const Changename = (data:any) =>{
-          setSearchData(data)
-        }
-      // ---------------- Search code end ----------------
-          
-        useEffect(() => {          
-          dispatch(getOrderlist({returnOrder : true}))
-        }, [dispatch])
+  // ------------  Delete Code Start ------------
+    const [Delete_id, set_Delete_id] = useState(0);
+    const DeleteFuncall = (id: any) => {
+      set_Delete_id(id);
+      setisOpenDelteModel(true);
+    };
 
-      let Name = "Warehouse ";
-      let Searchplaceholder = "Search For order id";
+    const DeletepackingType = () => {
+      let rqeuserdata = { id: Delete_id };
+      dispatch(DeleteBannerlist(rqeuserdata));
+      setisOpenDelteModel(false);
+    };
+  // -------  Delete Code End ---------------
 
-    return (
-        <>
-        
-              <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
-                    <ExampleBreadcrumb  Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename= {Changename} />
-                    <>
-                        {leadData && leadData.length > 0 ? (
-                            <>
-                                <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 ">
-                                    <Table.Head className="bg-gray-100 dark:bg-gray-700">
-                                    <Table.HeadCell>Order id</Table.HeadCell>
-                                    <Table.HeadCell>Farmer Name</Table.HeadCell>
-                                    <Table.HeadCell>Mobile Number</Table.HeadCell>
-                                    <Table.HeadCell>Created Date</Table.HeadCell>
-                                    <Table.HeadCell>Status</Table.HeadCell>
-                                    <Table.HeadCell>Advisor Name</Table.HeadCell>
-                                    <Table.HeadCell> Action</Table.HeadCell>
-                                    </Table.Head>
+  const OpenAddModel = () =>{
+    navigate("/warehouse/add")
+  }
 
-                                    <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                                    {leadData &&
-                                        leadData.map((item: any, k: number) => (
-                                        <Table.Row key={k}    className="hover:bg-gray-100 dark:hover:bg-gray-700"    >
-                                            <Table.Cell  className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer"  onClick={() => OpenModal(item)} >   {item?.order_id}  </Table.Cell>
-                                            <Table.Cell  className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer"  onClick={() => OpenModal(item)} >   {item?.customer?.firstname}  {item?.customer?.middlename}  {item?.customer?.lastname}  </Table.Cell>
-                                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">   {item?.customer?.mobile_number ? item?.customer?.mobile_number : "-"}   </Table.Cell>
-                                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">   {moment(item?.added_at).format( "DD-MM-YYYY hh:mm:ss"   )}   </Table.Cell>
-                                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">   {item?.status ? item?.status.charAt(0).toUpperCase() +  item?.status.slice(1).toLowerCase()  : "-"} </Table.Cell>
-                                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">    {item?.advisor_name?.name}     </Table.Cell>
-                                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">   <Button onClick={() => OPenConfirmModal(item._id)}>  Mark As Return   </Button>    </Table.Cell>
-                                        </Table.Row>
-                                        ))}
-                                    </Table.Body>
-                                </Table>
+  let Name = "Warehouse List";
+  let Searchplaceholder = "Search For Warehouse (Name)";
+  let AddAccess = accessList?.add;
 
-                                <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage}   RowsPerPageValue={RoePerPage}  PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData}/>
-                          </>
-                        ) : (
-                        <div className="text-center py-4 dark:text-gray-50">   No DataFound   </div>
-                        )}
+  const warehouseColumns = useMemo(() => [
+    {  key: "name", label: "Name" },
+    {  key: 'location', label : "Location",  render : ( row : any) => row.location },
+    {  key: 'address', label : "Address",  render : ( row : any) => row.address },
+    {  key: "is_active",  label: "Status",  render: (row: any) => row.is_active ? <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> : <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div> },
+    {  key: "createdAt", label: "Created At",  render : (row :any) => ( <div> {moment(row?.createdAt).format("DD-MM-YYYY hh:mm:ss")} </div>) },
+    {
+      key: "actions",
+      label: "Actions",
+      render: (row: any) => (
+        <div className="flex items-center gap-x-3">
+          {accessList?.delete && <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Warehouse </div> </Button>}
+        </div>
+      ),
+    },
+  ], [accessList, DeleteFuncall]);
+  
+  return (
+    <>
+      <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
+        <ExampleBreadcrumb  Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename= {Changename} isOpenAddModel= {OpenAddModel} AddAccess={AddAccess}/>
+          <CommonTable columns={warehouseColumns} data={WarehouseDataList || []} />  
+        <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage}   RowsPerPageValue={RoePerPage}  PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData}/>
+      </NavbarSidebarLayout>
+    
+        {isOpenDelteModel && (
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"> <div className="text-white">Loading...</div> </div> }>
+            <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Banner"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DeletepackingType} />
+          </Suspense>
+        )}
+        <ToastMessage />
+                  
+    </>
+  );
+};
 
-                        {confirmationModal ? (
-                        <Modal onClose={() => setConfirmationModal(false)}   show={confirmationModal} size="md"  >
-                            <Modal.Header className="px-6 pt-6 pb-0"> <span className="sr-only"> Change status</span>   </Modal.Header>
-                            <Modal.Body className="px-6 pt-0 pb-6 ">
-                              <div className="flex flex-col items-center gap-y-6 text-center">
-                                  
-                                  <HiOutlineExclamationCircle className="text-7xl text-red-500" />
-                                  <p className="text-xl text-gray-500">  Are you sure you want to mark as return ?   </p>
-                                  <div className="flex items-center gap-x-3">
-                                  <Button color="failure" onClick={() => DelCall()}>  Yes, I'm sure  </Button>
-                                  <Button   color="gray"  onClick={() => setConfirmationModal(false)}  >    No, cancel  </Button>
-                                  </div>
-                              </div>
-                            </Modal.Body>
-                        </Modal>
-                        ) : null}
-
-                        {ProductModal == true ? (
-                        <Modal  onClose={() => setProductModal(false)}  show={ProductModal}  size="xl" dismissible>
-                                <Modal.Header className="px-6 pt-6 pb-0">   <span className="sr-only"> Change status</span> </Modal.Header>
-                                <Modal.Body className="px-6 pt-0 pb-6 max-h-[22rem] overflow-scroll">
-                                <div className="space-y-4">
-                                    {ProductModalData &&  ProductModalData.map((item: any, k: number) => ( 
-                                        <div  className="flex items-start gap-4 p-4 border rounded-lg shadow-sm bg-white" key={k}>
-                                            <span>  <img  className="w-12 h-12 rounded-full object-cover border"  src={`${IMG_URL}/public/product/${item?.id?.product_pics?.[0]}`} alt="product photo"  />   </span>
-                                             <div className="flex flex-col text-sm">
-                                              <span className="text-sm font-medium text-gray-900">    {item?.id?.name?.englishname}    </span>
-                                              <div className="text-gray-600 mt-1">   Quantity: <strong>{item?.quantity}</strong> </div>
-                                              <div className="text-gray-600 mt-1">  Packaging: {item?.id?.packaging}  {item?.id?.packagingtype?.type_eng} </div>
-                                              </div>
-                                          </div>
-                                    ))}
-                                </div>
-                                </Modal.Body>
-                        </Modal>
-                        ) : null}
-                    </>
-            </NavbarSidebarLayout>
-        </>
-           
-    );
-} 
 export default WarehousePage;

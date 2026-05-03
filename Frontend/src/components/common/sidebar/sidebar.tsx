@@ -50,7 +50,7 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
      {
       name: "Warehouse",
       icon: FaWarehouse, // Reference the actual icon component
-      to: "/warehouse",
+      to: "/warehouse/list",
     },
     {
       name: "Advisor",

@@ -238,3 +238,7 @@ export const ChangeLeavelistApi = (requserdata) => api.create(url.GET_CHANGE_LEA
 export const TestimoniallistApi = (requserdata) => api.get(url.GET_TESTIMONIAL_LIST, requserdata);
 export const AddTestimoniallistApi = (requserdata) => api.postMultipart(url.ADD_TESTIMONIAL_LIST, requserdata);
 export const DelTestimoniallistApi = (requserdata) => api.delete(url.DELETE_TESTIMONIAL_LIST, requserdata);
+
+export const WarehouselistApi = (requserdata) => api.get(url.GET_WAREHOUSE_LIST, requserdata);
+export const AddWarehouselistApi = (requserdata) => api.postMultipart(url.ADD_WAREHOUSE_LIST, requserdata);
+export const DelWarehouselistApi = (requserdata) => api.delete(url.DELETE_WAREHOUSE_LIST, requserdata);

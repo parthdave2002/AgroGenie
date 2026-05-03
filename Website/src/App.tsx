@@ -1,12 +1,8 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-
 import Layout from "./layout/Layout";
 import PagenotfoundSection from "./component/Pagenotfound/Pagenotfound";
-
-
-/* Lazy Loaded Pages */
 const HomeSection = lazy(() => import("./pages/Home"));
 const AboutSection = lazy(() => import("./pages/About"));
 const GallerySection = lazy(() => import("./pages/Gallery"));
@@ -16,6 +12,7 @@ const ProductDetailsSection = lazy(() => import("./pages/Product/ProductDetails"
 const ContactusSection = lazy(() => import("./pages/Contact"));
 const ResearchSection = lazy(() => import("./pages/Research"));
 const Termspagesection = lazy(() => import("./pages/Terms"));
+const CheckoutSection = lazy(() => import("./pages/Cart/Checkout"));
 
 const App: React.FC = () => {
   return (
@@ -35,11 +32,10 @@ const App: React.FC = () => {
             <Route path="/research" element={<ResearchSection />} />
             <Route path="/terms" element={<Termspagesection />} />
             <Route path="/pouch" element={<GallerySection />} />
+            <Route path="/checkout" element={<CheckoutSection />} />
           </Route>
 
-          {/* 404 Route */}
           <Route path="*" element={<PagenotfoundSection />} />
-
         </Routes>
       </Suspense>
     </Router>
