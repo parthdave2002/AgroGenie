@@ -3,13 +3,19 @@ const lazyImport = (importFn: () => Promise<any>) => lazy(importFn);
 
 export const adminRoutes = [
   { path: "/dashboard", component: lazyImport(() => import("../pages/Admin/adminDashboard/index")) },
-  { path: "/manager-dashboard", component: lazyImport(() => import("../pages/managerDashboard/dashoboard")) },
+  { path: "/manager-dashboard", component: lazyImport(() => import("../pages/Managerdashboard/dashoboard")) },
 
   // Users
   { path: "/users/list", component: lazyImport(() => import("../pages/Admin/users/list")) },
   { path: "/users/add", component: lazyImport(() => import("../pages/Admin/users/useradd")) },
   { path: "/users/edit/:id", component: lazyImport(() => import("../pages/Admin/users/useradd")) },
   { path: "/users/details/:id", component: lazyImport(() => import("../pages/Admin/users/userdetails")) },
+
+  //  User Category
+  { path: "/users/category/list", component: lazyImport(() => import("../pages/Admin/usersCategory/userCategorylist")) },
+  { path: "/users/category/add", component: lazyImport(() => import("../pages/Admin/usersCategory/userCategoryadd")) },
+  { path: "/users/category/edit/:id", component: lazyImport(() => import("../pages/Admin/usersCategory/userCategoryadd")) },
+
 
   // Roles
   { path: "/roles/list", component: lazyImport(() => import("../pages/Admin/roles/roles")) },
@@ -92,6 +98,9 @@ export const adminRoutes = [
   { path: "/notice-board/list", component: lazyImport(() => import("../pages/Admin/noticeBoard/noticeBoardList")) },
   { path: "/notice-board/add", component: lazyImport(() => import("../pages/Admin/noticeBoard/noticeBoardAdd")) },
   { path: "/notice-board/details/:id", component: lazyImport(() => import("../pages/Admin/noticeBoard/noticeBoardDetails")) },
+
+
+  { path: "/kanban", component: lazyImport(() => import("../pages/Admin/kanban/kanban")) },
 
   // Coupon
   { path: "/coupon/list", component: lazyImport(() => import("../pages/Admin/coupon/couponList")) },

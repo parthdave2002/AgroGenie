@@ -106,6 +106,12 @@ export const profileUserdatalistApi = async (requserdata) => await api.get(url.G
 export const updateprofileUserdatalistApi = async (requserdata) => await api.postMultipart(url.UPDATE_PROFILE_DATA_LIST, requserdata);
 export const updateprofilePasswordApi = async (requserdata) => await api.get(url.UPDATE_PROFILE_PASSWORD, requserdata);
 
+// user category API
+export const UserCategoryViewApi = async (requserdata) => await api.get(url.GET_USER_CATEGORY_VIEW, requserdata);
+export const AddUserCategorylistApi = async (requserdata) => await api.create(url.ADD_USER_CATEGORY_LIST, requserdata);
+export const UpdateUserCategorylistApi = async (requserdata) => await api.update(url.UPDATE_USER_CATEGORY_LIST, requserdata);
+export const DelUserCategorylistApi = async (requserdata) => await api.delete(url.DELETE_USER_CATEGORY_LIST, requserdata);
+
 // Roles Api
 export const RolelistApi = async (requserdata) => await api.get(url.GET_ROLES_LIST, requserdata);
 export const UpdatelistApi = async (requserdata) => await api.get(url.UPDATE_ROLES_LIST,requserdata);
@@ -242,3 +248,13 @@ export const DelTestimoniallistApi = (requserdata) => api.delete(url.DELETE_TEST
 export const WarehouselistApi = (requserdata) => api.get(url.GET_WAREHOUSE_LIST, requserdata);
 export const AddWarehouselistApi = (requserdata) => api.postMultipart(url.ADD_WAREHOUSE_LIST, requserdata);
 export const DelWarehouselistApi = (requserdata) => api.delete(url.DELETE_WAREHOUSE_LIST, requserdata);
+
+export const KanbanBoardlistApi = (requserdata) => api.get(url.GET_KANBAN_BOARD, requserdata);
+export const AddKanbanColumnApi = (requserdata) => api.create(url.ADD_KANBAN_COLUMN, requserdata);
+export const DelKanbanColumnApi = (requserdata) => api.delete(url.DELETE_KANBAN_COLUMN, requserdata);
+
+export const AddKanbanTaskApi = (requserdata) => api.create(url.ADD_KANBAN_TASK, requserdata);
+export const UpdateKanbanTaskApi = (requserdata) => api.put(url.UPDATE_KANBAN_TASK, requserdata);
+export const DelKanbanTaskApi = (requserdata) => api.delete(url.DELETE_KANBAN_TASK, requserdata);
+export const AddSubTaskApi = (requserdata) => api.create(url.ADD_SUBTASK, requserdata);
+export const DelSubTaskApi = (requserdata) => api.delete(url.DELETE_SUBTASK, requserdata);

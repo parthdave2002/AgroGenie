@@ -58,6 +58,7 @@ const UserDetailsPage: FC = function () {
         ? moment(UserDataList.added_at).format("DD-MM-YYYY HH:mm:ss")
         : "N/A",
     },
+    { label: "Category", value: UserDataList?.user_category?.category_name || "N/A" },
     { label: "Status", value: UserDataList?.is_active ? "Active" : "Inactive" },
   ];
   //  ------------- Get Advisor Data From Reducer Code Start --------------
@@ -78,7 +79,7 @@ const UserDetailsPage: FC = function () {
             />
             <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
               <div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-x-4 gap-y-8">
                   <img
                     className="w-20 h-20 rounded-full"
                     src={UserDataList?.user_pic ? UserDataList?.user_pic : ""}
@@ -86,7 +87,7 @@ const UserDetailsPage: FC = function () {
                   />
 
                   {details.map((item, index) => (
-                    <div key={index} className="detailswrapper">
+                    <div key={index} className="detailswrapper dark:text-gray-50">
                       <h3 className="detailslebel">{item.label}</h3>
                       <p className="detailsvalue">{item.value || "N/A"}</p>
                     </div>

@@ -14,6 +14,11 @@ router.post('/add-user', authentication,authorization("User"), uploadHelper.uplo
 router.post('/update-user', authentication,authorization("User"), uploadHelper.uploadFiles('user', 'user_pic'), userModule.UpdateUserImage);
 // /USERlIST API CODE END
 
+router.get('/get-user-category',authentication,authorization("User"), userModule.GetAllUserCategory);
+router.post('/add-user-category',authentication,authorization("User"), userModule.AddUserCategory);
+router.put('/update-user-category',authentication,authorization("User"), userModule.UpdateUserCategory);
+router.delete('/delete-user-category',authentication,authorization("User"), userModule.DeleteUserCategory);
+
 router.post('/login', userModule.Login);
 
 router.get('/profile', authentication, userModule.GetProfile);

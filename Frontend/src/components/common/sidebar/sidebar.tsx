@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import { HiShoppingBag, HiCube, HiPuzzle, HiUsers, HiChartPie, HiLibrary } from "react-icons/hi";
-import { FaAddressBook, FaClipboardList, FaWarehouse } from "react-icons/fa";
+import { FaAddressBook, FaClipboardList, FaWarehouse, FaUserTag  } from "react-icons/fa";
 import {  MdComputer, MdLeaderboard, MdRateReview } from "react-icons/md"; 
 import { TbReportSearch } from "react-icons/tb";
 import { GiWheat } from "react-icons/gi";
@@ -143,7 +143,7 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
 
   const SubSettingMenu = [
     {
-      name: "User Leaves",
+      name: "Advisor Leave",
       icon:  FaAddressBook,
       to: "/leave/list",
     },
@@ -151,6 +151,11 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       name: "Notice Board",
       icon:  FaClipboardList,
       to: "/notice-board/list",
+    },
+    {
+      name: "Advisor Category",
+      icon:  FaUserTag,
+      to: "/users/category/list",
     },
   ]
 

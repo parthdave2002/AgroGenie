@@ -1,4 +1,5 @@
 const userSch = require('../../schema/userSchema');
+const userCategorySch = require('../../schema/userCategorySchema');
 const roleAccessModel = require("../../schema/role_accessschema")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -30,7 +31,7 @@ userController.GetAllUser = async (req, res, next) => {
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
     searchQuery = { ...searchQuery, is_deleted: false, user_type: { $ne: 'admin' }  };
     selectQuery = 'name email password gender mobile_no date_of_joining date_of_birth address emergency_mobile_no emergency_contact_person added_at role pan_card bank_passbook aadhar_card user_id is_active user_pic';
-    populate = [{ path: 'role',  model: 'roles', select: 'role_title' }];
+    populate = [{ path: 'role',  model: 'roles', select: 'role_title' }, { path: 'user_category', model: 'user_categories', select: 'category_name' }];
 
     if(req.query.id){
       const user = await userSch.findById(req.query.id).select(selectQuery).populate(populate);;
@@ -251,6 +252,7 @@ userController.updateUserProfileImage = async (req, res, next) => {
     next(err);
   }
 };
+
 userController.updateUserPassword = async (req, res, next) => {
   let { password, current_password } = req.query;
   let userId = req.user.id;
@@ -277,6 +279,73 @@ userController.updateUserPassword = async (req, res, next) => {
   } catch (err) {
     next(err);    
   }
-}
+};
+
+userController.GetAllUserCategory = async (req, res, next) => {
+  try {
+    let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
+    searchQuery = { ...searchQuery, is_deleted: false };
+
+    if(req.query.id){
+      const user = await userCategorySch.findById(req.query.id).select(selectQuery).populate(populate);;
+      return otherHelper.paginationSendResponse(res, httpStatus.OK, true, user,  null, " Search Data found", page, size, user.length);
+    }
+
+    if (req.query.search && req.query.search !== "null"){
+      const searchResults = await userCategorySch.find({ is_deleted: false, $or: [{ category_name: { $regex: req.query.search, $options: "i" } }]}) .select(selectQuery).populate(populate);
+      if (searchResults.length === 0)   return otherHelper.sendResponse(res, httpStatus.OK, true, null, [],'Data not found', null);
+      return otherHelper.paginationSendResponse(res, httpStatus.OK, true, searchResults , " Search Data found", page, size, searchResults.length);
+    }
+
+    const pulledData = await otherHelper.getQuerySendResponse(userCategorySch, page, size, sortQuery, searchQuery, selectQuery, next, populate);
+    return otherHelper.paginationSendResponse(res, httpStatus.OK, true, pulledData.data, config.category_get, page, size, pulledData.totalData);
+  } catch (err) {
+    next(err);
+  }
+};
+
+userController.AddUserCategory = async (req, res, next) => {
+  try {
+    const { category_name, description, is_active, goal_amt } = req.body;
+    if (!category_name) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, config.validationMessage.categoryRequired, null);
+    const existingCategory = await userCategorySch.findOne({ category_name: category_name, is_deleted: false });
+    if (existingCategory) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, config.validationMessage.categoryExists, null);
+    const newCategory = await userCategorySch.create({ category_name, description, is_active, goal_amt });
+    return otherHelper.sendResponse(res, httpStatus.OK, true, newCategory, null, config.category_add, null);
+  } catch (err) {
+    next(err);
+  }
+};
+
+userController.UpdateUserCategory = async (req, res, next) => {
+  try {
+    const { id, category_name, description, is_active, goal_amt } = req.body;
+    if (!id) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, config.validationMessage.categoryIdRequired, null);
+    const category = await userCategorySch.findById(id);
+    if (!category) return otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, config.validationMessage.categoryNotFound, null);
+    if (category_name) {
+      const existingCategory = await userCategorySch.findOne({ category_name: category_name, is_deleted: false, _id: { $ne: id } });
+      if (existingCategory) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, config.validationMessage.categoryExists, null);
+    }
+    const updateData = { category_name, description, is_active, goal_amt, updated_at: new Date() };
+    const updatedCategory = await userCategorySch.findByIdAndUpdate(id, updateData, { new: true });
+    return otherHelper.sendResponse(res, httpStatus.OK, true, updatedCategory, null, 'User category updated successfully!', null);
+  } catch (err) {
+    next(err);
+  } 
+};
+
+userController.DeleteUserCategory = async (req, res, next) => {
+  try {
+    const categoryId = req.query.id;
+    if (! categoryId) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, config.validationMessage.categoryRequired, null);
+    const category = await userCategorySch.findById(categoryId);
+    if (!category) return otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, config.validationMessage.categoryNotFound, null);
+    await userCategorySch.findByIdAndUpdate(categoryId, { is_active: !category.is_active, deleted_at: new Date() }, { new: true });
+    return otherHelper.sendResponse(res, httpStatus.OK, true, null, null, config.category_delete, null);
+  } catch (err) {
+    next(err);
+  } 
+};
 
 module.exports = userController;

@@ -7,7 +7,7 @@ import Select from "react-select";
 import { Form, FormFeedback } from "reactstrap";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { AddUserlist, getRoleslist, getUserView, ResetUserdatalist, UpdateUserdatalist } from "../../../Store/actions";
+import { AddUserlist, getRoleslist, getUserCategoryView, getUserView, ResetUserdatalist, UpdateUserdatalist } from "../../../Store/actions";
 import { toast } from "react-toastify";
 import { UserData } from "types/types";
 import { yesnooption, genderoption, isactiveoption } from "../../../types/dropdown";
@@ -165,6 +165,24 @@ const AddUserPage : FC = function () {
         };
     //---------------- Bank passbook option code end ----------------
 
+    //---------------- Advisor category option code start ----------------
+        const [selectedAdvisorCategoryOption, setSelectedAdvisorCategoryOption] = useState(null);
+        const [selectedAdvisorCategoryId, setSelectedAdvisorCategoryId] = useState<null | string>(null);
+        const [ValidateAdvisorCategoryStatusid, setValidateAdvisorCategoryStatusid] = useState(0);
+
+        const IsActiveAdvisorCategorydata = (data: any) => {
+        if (!data) {
+            setValidateAdvisorCategoryStatusid(1);
+            setSelectedAdvisorCategoryId(null);
+            setSelectedAdvisorCategoryOption(null);
+        } else {
+            setValidateAdvisorCategoryStatusid(0);
+            setSelectedAdvisorCategoryId(data.value);
+            setSelectedAdvisorCategoryOption(data);
+        }
+        };
+    //---------------- Advisor category option code end ----------------
+
     const navigate = useNavigate();
     const [initialValues, setinitialValues] = useState<UserData>({
         name: "",
@@ -182,7 +200,8 @@ const AddUserPage : FC = function () {
         aadhar_card:"",
         pan_card:"",
         bank_passbook : null,
-        user_pic : ""
+        user_pic : "",
+        user_category: { category_name: "", _id: "" },
     });
     
     const validation = useFormik({
@@ -223,6 +242,7 @@ const AddUserPage : FC = function () {
             if (selectedAadharid == null) return setValidateAadharStatusid(1);
             if (selectedPancardid  == null) return setValidatePanStatusid(1);
             if (selectedBankPassbookid  == null) return setValidatePassbookStatusid(1);
+            if (selectedAdvisorCategoryId  == null) return setValidateAdvisorCategoryStatusid(1);
 
             const formData = new FormData();
             formData.append("name", values.name);
@@ -240,6 +260,7 @@ const AddUserPage : FC = function () {
             formData.append("bank_passbook",JSON.stringify(selectedBankPassbookid));
             formData.append("is_active", JSON.stringify(selectedStatusid));
             formData.append("role", selectedRoleid);
+            formData.append("user_category", selectedAdvisorCategoryId);
             if (file instanceof File)  formData.append("user_pic", file);
 
             if(id){
@@ -255,9 +276,13 @@ const AddUserPage : FC = function () {
     //  -------------- Get Role Data list -------------------
         const RolesList = useSelector((state: any) => state.Role.Roleslist || []);
         const roleoption = RolesList && RolesList.map((role : any) => ({  label: role.role_title,  value: role._id  }));
+
+        const UsersCategoryList = useSelector((state: any) => state.User.UserCategoryView?.data || []);
+        const userCategoryOption = UsersCategoryList && UsersCategoryList.map((category : any) => ({  label: category.category_name,  value: category._id  }));
         
         useEffect(() =>{
         dispatch(getRoleslist());
+        dispatch(getUserCategoryView());
         },[])
     //  -------------- Get Role Data list -------------------
 
@@ -328,6 +353,12 @@ const AddUserPage : FC = function () {
             const selectedSatus :any = yesnooption.find((dropdown:any) => dropdown.value === UserDataList.bank_passbook);
             setSelectedBankPassbookOption(selectedSatus);
             setSelectedBankPassbookid(selectedSatus?.value ?? null);
+        }
+
+        if (UserDataList?.user_category !== undefined && UserDataList?.user_category !== null &&  userCategoryOption.length > 0) {
+            const selectedSatus :any = userCategoryOption.find((dropdown:any) => dropdown.value === UserDataList.user_category);
+            setSelectedAdvisorCategoryOption(selectedSatus);
+            setSelectedAdvisorCategoryId(selectedSatus?.value ?? null);
         }
     }
   }, [UserDataList]);
@@ -605,6 +636,32 @@ const AddUserPage : FC = function () {
                                     {ValidatePassbookStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select passbook status  </FormFeedback> : null}
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="md:flex gap-x-[2rem]">
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="bank_passbook"> Advisor Category <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedAdvisorCategoryOption}
+                                        onChange={(e) => { IsActiveAdvisorCategorydata(e) }}
+                                        options={userCategoryOption}
+                                        isClearable={true}
+                                    />
+                                    {ValidateAdvisorCategoryStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select advisor category  </FormFeedback> : null}
+                                </div>
+                            </div>
+                            <div></div>
+                            <div></div>
                         </div>
 
                         <div className="flex gap-x-3 justify-end mt-[3rem]">

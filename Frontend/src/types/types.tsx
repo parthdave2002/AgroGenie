@@ -84,6 +84,11 @@ export interface RoleData {
   _id: string
 }
 
+export interface AdvisorCategoryData {
+  category_name: string;
+  _id: string
+}
+
 export interface UserData {
   aadhar_card: boolean | "";
   // added_at: string;
@@ -103,8 +108,17 @@ export interface UserData {
   role: RoleData;
   user_pic: string;
   added_at?: string;
+  _id?: string;
+  user_category?: AdvisorCategoryData;
 }
 
+export interface UserCategoryData {
+  category_name: string;
+  description: string;
+  goal_amt: number | string;
+  is_active: boolean | "";
+  added_at?: string;
+}
 
 export interface DescriptionData {
   id: number | string;

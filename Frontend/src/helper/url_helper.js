@@ -22,6 +22,12 @@ export const GET_PROFILE_DATA_LIST = "/api/user/profile";
 export const UPDATE_PROFILE_DATA_LIST = "/api/user/update-profile";
 export const UPDATE_PROFILE_PASSWORD = "/api/user/update-password";
 
+// User Category Api
+export const GET_USER_CATEGORY_VIEW = "/api/user/get-user-category";
+export const ADD_USER_CATEGORY_LIST = "/api/user/add-user-category";
+export const UPDATE_USER_CATEGORY_LIST = "/api/user/update-user-category";
+export const DELETE_USER_CATEGORY_LIST = "/api/user/delete-user-category";
+
 // Role Api
 export const GET_ROLES_LIST = "/api/role/get-role";
 export const UPDATE_ROLES_LIST = "/api/role/roleview";
@@ -153,3 +159,13 @@ export const DELETE_TESTIMONIAL_LIST = "/api/testimonial/remove-testimonial";
 export const GET_WAREHOUSE_LIST = "/api/warehouse/get-warehouse";
 export const ADD_WAREHOUSE_LIST = "/api/warehouse/add-warehouse";
 export const DELETE_WAREHOUSE_LIST = "/api/warehouse/remove-warehouse";
+
+// Kanban Api
+export const GET_KANBAN_BOARD = "/api/kanban/board";
+export const ADD_KANBAN_COLUMN = "/api/kanban/add-column";
+export const DELETE_KANBAN_COLUMN = "/api/kanban/delete-column";
+export const ADD_KANBAN_TASK = "/api/kanban/add-task";
+export const UPDATE_KANBAN_TASK = "/api/kanban/update-task";
+export const DELETE_KANBAN_TASK = "/api/kanban/delete-task";
+export const ADD_SUBTASK = "/api/kanban/add-subtask";
+export const DELETE_SUBTASK = "/api/kanban/delete-subtask";

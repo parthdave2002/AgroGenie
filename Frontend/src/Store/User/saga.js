@@ -38,7 +38,15 @@ import {
 
   UpdateProfilePassword,
   UpdateProfilePasswordSuccess,
-  UpdateProfilePasswordFail
+  UpdateProfilePasswordFail,
+  getUserCategoryViewSuccess,
+  getUserCategoryViewFail,
+  AddUserCategorylistSuccess,
+  AddUserCategorylistFail,
+  DeleteUserCategorylistSuccess,
+  DeleteUserCategorylistFail,
+  UpdateUserCategorylistSuccess,
+  UpdateUserCategorylistFail
 } from "./action";
 import {
   GET_USER_LIST,
@@ -79,7 +87,20 @@ import {
 
   UPDATE_PROFILE_PASSWORD,
   UPDATE_PROFILE_PASSWORD_SUCCESS,  
-  UPDATE_PROFILE_PASSWORD_ERROR
+  UPDATE_PROFILE_PASSWORD_ERROR,
+
+  GET_USER_CATEGORY_VIEW,
+  GET_USER_CATEGORY_VIEW_ERROR,
+  GET_USER_CATEGORY_VIEW_SUCCESS,
+
+  ADD_USER_CATEGORY_LIST,
+  ADD_USER_CATEGORY_LIST_ERROR,
+  ADD_USER_CATEGORY_LIST_SUCCESS,
+
+  DELETE_USER_CATEGORY_LIST,
+  DELETE_USER_CATEGORY_LIST_ERROR,
+  DELETE_USER_CATEGORY_LIST_SUCCESS,
+  UPDATE_USER_CATEGORY_LIST,
 } from "./actionType";
 import {
   UserlistApi,
@@ -91,7 +112,11 @@ import {
   CheckUserdatalistApi,
   profileUserdatalistApi,
   updateprofileUserdatalistApi,
-  updateprofilePasswordApi
+  updateprofilePasswordApi,
+  UserCategoryViewApi,
+  AddUserCategorylistApi,
+  UpdateUserCategorylistApi,
+  DelUserCategorylistApi,
 } from "../../helper/Demo_helper";
 
 function* onGetuserList({ payload: requstuserlist }) {
@@ -205,6 +230,61 @@ function* onGetUpdateProfilePasswordData({ payload: requstuser }) {
   }
 }
 
+//  Category User Saga
+function* onGetuserCategoryView({ payload: requstuser }) {
+  try {
+    const reponse = yield call(UserCategoryViewApi, requstuser);
+    yield put(getUserCategoryViewSuccess(GET_USER_CATEGORY_VIEW, reponse));
+  } catch (error) {
+    yield put(getUserCategoryViewFail(error));
+  }
+}
+
+function* onGetAdduserCategoryList({ payload: requstuser }) {
+  try {
+    const reponse = yield call(AddUserCategorylistApi, requstuser);
+    yield put(AddUserCategorylistSuccess(ADD_USER_CATEGORY_LIST, reponse));
+
+    if (reponse.success == false) {
+      toast.error(reponse?.msg)
+    } 
+  } catch (error) {
+    toast.error(error)
+    yield put(AddUserCategorylistFail(error));
+  }
+}
+
+function* onGetUpdateuserCategoryList({ payload: requstuser }) {
+  try {
+    const reponse = yield call(UpdateUserCategorylistApi, requstuser);
+    yield put(UpdateUserCategorylistSuccess(UPDATE_USER_CATEGORY_LIST, reponse));
+
+    if (reponse.success == false) {
+      toast.error(reponse?.msg)
+    } 
+  } catch (error) {
+    toast.error(error)
+    yield put(UpdateUserCategorylistFail(error));
+  }
+}
+
+function* onGetDeleteuserCategoryList({ payload: requstuser }) {
+  try {
+    const reponse = yield call(DelUserCategorylistApi, requstuser);
+    yield put(DeleteUserCategorylistSuccess(DELETE_USER_CATEGORY_LIST, reponse));
+    if (reponse?.success === true || reponse?.success === "true") {
+      toast.success(reponse?.msg);
+      let requserdata = {  page: 1,  size: 10 };
+      const newreponse = yield call(UserCategoryViewApi, requserdata);
+      yield put(getUserCategoryViewSuccess(GET_USER_CATEGORY_VIEW, newreponse));
+    }
+  } catch (error) {
+    console.log("error in delete category", error)
+    yield put(DeleteUserCategorylistFail(error));
+  }
+}
+
+
 function* UserSaga() {
   yield takeEvery(GET_USER_LIST, onGetuserList);
   yield takeEvery(GET_USER_VIEW, onGetuserView);
@@ -216,7 +296,10 @@ function* UserSaga() {
   yield takeEvery(GET_PROFILE_DATA_LIST, onGetProfileData);
   yield takeEvery(UPDATE_PROFILE_DATA_LIST, onGetUpdateProfileData);
   yield takeEvery(UPDATE_PROFILE_PASSWORD, onGetUpdateProfilePasswordData);
-
+  yield takeEvery(GET_USER_CATEGORY_VIEW, onGetuserCategoryView);
+  yield takeEvery(ADD_USER_CATEGORY_LIST, onGetAdduserCategoryList);
+  yield takeEvery(UPDATE_USER_CATEGORY_LIST, onGetUpdateuserCategoryList);
+  yield takeEvery(DELETE_USER_CATEGORY_LIST, onGetDeleteuserCategoryList);
 }
 
 export default UserSaga;
