@@ -28,6 +28,7 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
   const [TotalFutureOrder, setTotalFutureOrder] = useState<DashboardCount>()
   const [TotalReturnOrder, setTotalReturnOrder] = useState<DashboardCount>()
   const [LoginUserimg, setLoginUserimg] = useState("");
+  const [MyGoal, setMyGoal] = useState(0);
 
   const login = useSelector((state:any) => state.Login.Logincode);
   const DashboardDataList = useSelector((state: any) => state.SalesDashboard.DashboardDataList?.data);
@@ -159,7 +160,8 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
       setTotalRevenue(DashboardDataList?.data?.totalRevenue)
       setTotalOrder(DashboardDataList?.data?.totalOrder)
       setTotalFutureOrder(DashboardDataList?.data?.totalFutureOrder)
-      setTotalReturnOrder(DashboardDataList?.data?.totalReturnOrder)
+      setTotalReturnOrder(DashboardDataList?.data?.totalReturnOrder);
+      setMyGoal(DashboardDataList?.data?.myGoal);
     }
   }, [DashboardDataList])
   //---------    Get Dashboard data end--------- 
@@ -378,6 +380,7 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
             <div className="flex justify-between">
               <div className="flex flex-col self-center mt-3">
                 <div className="text-[0.9rem] text-gray-500 dark:text-gray-100 dark:text-gray-200"> Welcome back, {data ? data : ""}!</div>
+                <div className="text-[1rem] font-semibold text-gray-900 dark:text-gray-100"> Today's Goal :  {TotalRevenue?.daily} / {MyGoal} </div>
                 <div className="text-[2.5rem] font-semibold text-gray-900 dark:text-gray-100"> {isProfileData == false ? "Dashboard" : "Profile" }  </div>
               </div>
 

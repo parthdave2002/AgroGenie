@@ -37,7 +37,23 @@ import {
 
   UPDATE_PROFILE_PASSWORD,
   UPDATE_PROFILE_PASSWORD_ERROR,
-  UPDATE_PROFILE_PASSWORD_SUCCESS
+  UPDATE_PROFILE_PASSWORD_SUCCESS,
+
+  GET_USER_CATEGORY_VIEW,
+  GET_USER_CATEGORY_VIEW_ERROR,
+  GET_USER_CATEGORY_VIEW_SUCCESS,
+
+  ADD_USER_CATEGORY_LIST,
+  ADD_USER_CATEGORY_LIST_ERROR,
+  ADD_USER_CATEGORY_LIST_SUCCESS,
+
+  UPDATE_USER_CATEGORY_LIST,
+  UPDATE_USER_CATEGORY_LIST_ERROR,
+  UPDATE_USER_CATEGORY_LIST_SUCCESS,
+
+  DELETE_USER_CATEGORY_LIST,
+  DELETE_USER_CATEGORY_LIST_ERROR,
+  DELETE_USER_CATEGORY_LIST_SUCCESS,
 } from "./actionType";
 
 export const getUserlist = (requserdata) => ({
@@ -197,5 +213,65 @@ export const UpdateProfilePasswordSuccess = (actionType, data) => ({
 
 export const UpdateProfilePasswordFail = (actionType, error) => ({
   type: UPDATE_PROFILE_PASSWORD_ERROR,
+  payload: { actionType, error },
+});
+
+export const getUserCategoryView = (requserdata) => ({
+  type: GET_USER_CATEGORY_VIEW,
+  payload: requserdata,
+});
+
+export const getUserCategoryViewSuccess = (actionType, data) => ({
+  type: GET_USER_CATEGORY_VIEW_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const getUserCategoryViewFail = (actionType, error) => ({
+  type: GET_USER_CATEGORY_VIEW_ERROR,
+  payload: { actionType, error },
+});
+
+export const AddUserCategorylist = (requserdata) => ({
+  type: ADD_USER_CATEGORY_LIST,
+  payload: requserdata,
+});
+
+export const AddUserCategorylistSuccess = (actionType, data) => ({
+  type: ADD_USER_CATEGORY_LIST_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const AddUserCategorylistFail = (actionType, error) => ({
+  type: ADD_USER_CATEGORY_LIST_ERROR,
+  payload: { actionType, error },
+});
+
+export const UpdateUserCategorylist = (requserdata) => ({
+  type: UPDATE_USER_CATEGORY_LIST,
+  payload: requserdata,
+}); 
+
+export const UpdateUserCategorylistSuccess = (actionType, data) => ({
+  type: UPDATE_USER_CATEGORY_LIST_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const UpdateUserCategorylistFail = (actionType, error) => ({
+  type: UPDATE_USER_CATEGORY_LIST_ERROR,
+  payload: { actionType, error },
+});
+
+export const DeleteUserCategorylist = (requserdata) => ({
+  type: DELETE_USER_CATEGORY_LIST,
+  payload: requserdata,
+});
+
+export const DeleteUserCategorylistSuccess = (actionType, data) => ({
+  type: DELETE_USER_CATEGORY_LIST_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const DeleteUserCategorylistFail = (actionType, error) => ({
+  type: DELETE_USER_CATEGORY_LIST_ERROR,
   payload: { actionType, error },
 });

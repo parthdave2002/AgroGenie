@@ -16,6 +16,10 @@ module.exports = {
     rolesInvalid: 'Sorry, the Role you selected is invalid!',
     rolesRequired: 'Sorry, you missed the roles field!',
     userOrCompanyRequired: 'Please select at least one between company and user for subscription',
+    categoryRequired: 'Category name is required',
+    categoryExists: 'Category name already exists',
+    categoryIdRequired: 'Category ID is required',
+    categoryNotFound: 'Category not found',
   },
   validate: {
     empty: 'This field is required',
@@ -49,4 +53,7 @@ module.exports = {
   alverified: { message: 'Already verified. You can log in', is_verified: true },
   alregistered: { message: 'Email/phone already registered. Check your mail or sms for verification code.', is_verified: false },
   regnotverifed: { message: 'Email/mobile no not verified. Please check your mail or otp message.', is_verified: false },
+  category_get: 'User category data obtained successfully!',
+  category_add: 'User category added successfully!',
+  category_delete: 'User category status changed successfully!',
 };

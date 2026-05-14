@@ -75,7 +75,10 @@ router.use('/notice-board', NoticeBoarddata);
 const Chatdata = require('./api/chat');
 router.use('/chat', Chatdata);
 
-const paymentRoutes = require('./api/payment');
-router.use('/payment', paymentRoutes);
+const kanbanRoutes = require('./api/kanban');
+router.use('/kanban', kanbanRoutes);
+
+// const paymentRoutes = require('./api/payment');
+// router.use('/payment', paymentRoutes);
 
 module.exports = router;

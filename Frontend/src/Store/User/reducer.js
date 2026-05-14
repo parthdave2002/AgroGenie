@@ -37,7 +37,23 @@ import {
 
   UPDATE_PROFILE_PASSWORD,
   UPDATE_PROFILE_PASSWORD_SUCCESS,
-  UPDATE_PROFILE_PASSWORD_ERROR
+  UPDATE_PROFILE_PASSWORD_ERROR,
+
+  GET_USER_CATEGORY_VIEW,
+  GET_USER_CATEGORY_VIEW_ERROR,
+  GET_USER_CATEGORY_VIEW_SUCCESS,
+
+  ADD_USER_CATEGORY_LIST,
+  ADD_USER_CATEGORY_LIST_ERROR,
+  ADD_USER_CATEGORY_LIST_SUCCESS,
+
+  UPDATE_USER_CATEGORY_LIST,
+  UPDATE_USER_CATEGORY_LIST_ERROR,
+  UPDATE_USER_CATEGORY_LIST_SUCCESS,
+
+  DELETE_USER_CATEGORY_LIST,
+  DELETE_USER_CATEGORY_LIST_ERROR,
+  DELETE_USER_CATEGORY_LIST_SUCCESS,
 } from "./actionType";
 
 const INIT_STATE = {
@@ -51,6 +67,9 @@ const INIT_STATE = {
   CheckUserList:[],
   Profileuserdata:[],
   UpdateProfileuserdata:[],
+  UserCategoryView: [],
+  AddUserCategorylistdata:[],
+  UpdateUserCategoryList:[],
   error: {},
 };
 
@@ -176,6 +195,9 @@ const User = (state = INIT_STATE, action) => {
             UpdateUserList: [],
             UpdateProfileuserdata:[],
             CheckUserList:[],
+            AddUserCategorylistdata:[],
+            UpdateUserCategoryList:[],
+            userCategoryView: [],
             error: {},
           };
       }
@@ -240,6 +262,81 @@ const User = (state = INIT_STATE, action) => {
     case UPDATE_PROFILE_DATA_LIST_ERROR:
       switch (action.payload.actionType) {
         case UPDATE_PROFILE_DATA_LIST:
+          return {
+            ...state,
+            error: action.payload,
+          };
+        default:
+          return { ...state };
+      }
+
+    case GET_USER_CATEGORY_VIEW_SUCCESS:
+      switch (action.payload.actionType) {
+        case GET_USER_CATEGORY_VIEW:
+          return {  
+            ...state,
+            UserCategoryView: action.payload.data,
+          };
+      }
+    case GET_USER_CATEGORY_VIEW_ERROR:
+      switch (action.payload.actionType) {
+        case GET_USER_CATEGORY_VIEW:
+          return {
+            ...state,
+            error: action.payload,
+          };
+        default:
+          return { ...state };
+      }
+    case ADD_USER_CATEGORY_LIST_SUCCESS:
+      switch (action.payload.actionType) {
+        case ADD_USER_CATEGORY_LIST:
+          return {
+            ...state,
+            AddUserCategorylistdata: action.payload.data,
+          };
+      }
+    case ADD_USER_CATEGORY_LIST_ERROR:
+      switch (action.payload.actionType) {
+        case ADD_USER_CATEGORY_LIST:
+          return {
+            ...state,
+            error: action.payload,
+          };
+        default:
+          return { ...state };
+      }
+
+    case  UPDATE_USER_CATEGORY_LIST_SUCCESS:
+      switch (action.payload.actionType) {
+        case UPDATE_USER_CATEGORY_LIST:
+          return {  
+            ...state,
+            UpdateUserCategoryList: action.payload.data,
+          };
+      } 
+    case UPDATE_USER_CATEGORY_LIST_ERROR:
+      switch (action.payload.actionType) {
+        case UPDATE_USER_CATEGORY_LIST:
+          return {
+            ...state,
+            error: action.payload,
+          };
+        default:
+          return { ...state };
+      }
+
+    case DELETE_USER_CATEGORY_LIST_SUCCESS:
+      switch (action.payload.actionType) {
+        case DELETE_USER_CATEGORY_LIST:
+          return {
+            ...state,
+            UserCategoryView: action.payload.data,
+          };
+      } 
+    case DELETE_USER_CATEGORY_LIST_ERROR:
+      switch (action.payload.actionType) {
+        case DELETE_USER_CATEGORY_LIST:
           return {
             ...state,
             error: action.payload,

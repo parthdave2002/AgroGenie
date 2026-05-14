@@ -3,6 +3,7 @@ const otherHelper = require('../../helper/others.helper');
 const orderSch = require('../../schema/orderSchema');
 const customerSch = require("../../schema/customerSchema")
 const complainSch = require("../../schema/complainSchema")
+const userSch = require("../../schema/userSchema")
 const salesExecutiveController = {};
 
 salesExecutiveController.GetSalesExecutiveDashboard = async (req, res, next) => {
@@ -13,6 +14,7 @@ salesExecutiveController.GetSalesExecutiveDashboard = async (req, res, next) => 
       { path: 'products.id', model: 'product', select: 'name  hsn_code discount batch_no price c_gst s_gst ' },
       { path: 'customer_id', model: 'customer', select: 'customer_name  firstname middlename lastname  mobile_number ' },
       { path: 'advisor_name', model: 'users', select: 'name' },
+      
     ];
 
     const loggedInUserId = req.user.id;
@@ -90,6 +92,8 @@ salesExecutiveController.GetSalesExecutiveDashboard = async (req, res, next) => 
       },
     );
     response.totalMyFarmer = totalFarmer;
+    const user = await userSch.findById(req.user.id).populate([{ path: 'user_category', model: 'user_categories', select: 'category_name goal_amt' }]);
+    response.myGoal = user?.user_category?.goal_amt || 0;
     response.customers = {
       data: customers,
       total: totalCustomerCount,
