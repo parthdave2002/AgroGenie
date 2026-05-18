@@ -110,6 +110,7 @@ export interface UserData {
   added_at?: string;
   _id?: string;
   user_category?: AdvisorCategoryData;
+  team_leader ?: { name: string; _id: string };
 }
 
 export interface UserCategoryData {

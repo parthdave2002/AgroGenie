@@ -162,6 +162,7 @@ export const AddProductlistApi = async (requserdata) => await api.postMultipart(
 export const UpdateProductApi = async (requserdata) => await api.update(url.UPDATE_PRODUCT_LIST, requserdata);
 export const DelProductlistApi = async (requserdata) => await api.delete(url.DELETE_PRODUCT_LIST, requserdata);
 export const DetailProductlistApi = (requserdata) => api.get(url.GET_PRODUCT_LIST, requserdata);
+export const GetAllrelevantProductlistApi = (requserdata) => api.get(url.GET_ALL_RELEVANT_PRODUCT_LIST, requserdata);
 
 // Order API
 export const UpdateOrderlistApi = (requserdata) => api.update(url.GET_UPDATE_ORDER_LIST, requserdata);
@@ -246,7 +247,7 @@ export const AddTestimoniallistApi = (requserdata) => api.postMultipart(url.ADD_
 export const DelTestimoniallistApi = (requserdata) => api.delete(url.DELETE_TESTIMONIAL_LIST, requserdata);
 
 export const WarehouselistApi = (requserdata) => api.get(url.GET_WAREHOUSE_LIST, requserdata);
-export const AddWarehouselistApi = (requserdata) => api.postMultipart(url.ADD_WAREHOUSE_LIST, requserdata);
+export const AddWarehouselistApi = (requserdata) => api.create(url.ADD_WAREHOUSE_LIST, requserdata);
 export const DelWarehouselistApi = (requserdata) => api.delete(url.DELETE_WAREHOUSE_LIST, requserdata);
 
 export const KanbanBoardlistApi = (requserdata) => api.get(url.GET_KANBAN_BOARD, requserdata);

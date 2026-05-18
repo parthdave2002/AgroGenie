@@ -1,71 +1,66 @@
-import { lazy,FC, useEffect, useState, } from "react"
+import { lazy,FC, useEffect, useState, useMemo, } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import moment from "moment";
-import { getCategorylist } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import { ProductDetails } from "../../../types/types";
+import { GetAllrelevantProductlist } from "../../../Store/actions";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 
 const CategoryDetailsPage: FC = function () {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const [CategoryList, setCategoryList] = useState([]);
-
+   const { id } = useParams();
+   const [ProductList, setProductList] = useState<ProductDetails[]>([]);
+   const [loader, setLoader] = useState(false);
+   
+   // ----------- next Button Code Start -------------
+     const [TotalListData, setTotalListData] = useState(0);
+     const [CurrentUserListSize, setCurrentUserListSize] = useState();
+     const [CurrentPageNo, setCurrentPageNo] = useState(0);
+     const [PageNo, setPageNo] = useState(1);
+     const [RoePerPage, setRoePerPage] = useState(5);
+ 
+     const RowPerPage = (event: any) => {
+       const value = Number(event)
+        setRoePerPage(value);
+        setPageNo(1)
+      };
+     const PageDataList = (data:any) =>{ setPageNo(data)}
+   // ------------- Next button Code End -------------
+ 
   useEffect(() =>{
     if(id){
-        // setLoading(true)
-        dispatch(getCategorylist({ id : id}))   
+      setLoader(true)
+      dispatch(GetAllrelevantProductlist({ category_id : id}))   
     }
   },[id]);
   
-  const Categorylist = useSelector((state: any) =>  state.PackingType.Categorylist);
+  const RelevantProductlist = useSelector((state: any) => state.Product.RelevantProductlist);
   useEffect(() => {  
-    setCategoryList(Categorylist ? Categorylist : null);
-  }, [Categorylist]);
+    setProductList(RelevantProductlist ? RelevantProductlist : null);
+  }, [RelevantProductlist]);
+
+  const companyColumns =useMemo( () => [
+      { key: "name", label: "Name (Eng)", render: (row: any) => row.name?.englishname},
+      { key: "avl_qty", label: "Available Quantity"},
+      { key: "packaging",  label: "Packaging", render: (row: any) => row.packaging ? `${row.packaging} ${row?.packagingtype?.type_eng}` : "N/A" },
+      { key: "is_active", label: "Status", render: (row: any) => row.is_active ?  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> :  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div> },
+      { key: "added_at", label: "Created Date",  render: (row: any) => ( <div> {moment(row?.added_at).format("DD-MM-YYYY hh:mm:ss")} </div>)},
+  ],[]);
 
   let Name = "Cateogry Details";
   let ParentName = "Cateogry List";
   let ParentLink = "/category/list";
 
-  const SingleUserDataList = [
-    {
-      "is_active": true,
-      "_id": "67ab2c70371d4b1e04ef3514",
-      "name": "seed",
-      "created_at": "1997-01-12",
-      "created_by": "Demo Sales executive",
-    }
-  ] 
-
   return (
     <>
-      <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >
-        <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink ={ParentLink} />
+      <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
+        <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink ={ParentLink} />
         <div  className="mt-[2rem] bg-white dark:bg-gray-800 p-4"> 
-          <div>
-            {SingleUserDataList && SingleUserDataList.map((data: any, index: number) => (
-              <div key={index} className="grid grid-cols-3 gap-6">
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Name</h3>
-                  <p className="text-gray-900 dark:text-white">{data?.name || "N/A"}</p>
-                </div>
-
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Created Date</h3>
-                  <p className="text-gray-900 dark:text-white">
-                    {data?.created_at ? moment(data.created_at).format("DD-MM-YYYY HH:mm:ss") : "N/A"}
-                  </p>
-                </div>
-
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Status</h3>
-                  <p className="text-white text-sm font-bold py-1 px-3 rounded-lg">
-                    {data?.is_active ? "Active" : "Inactive"}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div> 
+          <CommonTable columns={companyColumns} data={ProductList || []} />
+          <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
         </div>
       </NavbarSidebarLayout>
     </>

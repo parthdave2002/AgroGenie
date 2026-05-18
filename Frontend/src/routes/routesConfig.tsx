@@ -3,7 +3,7 @@ const lazyImport = (importFn: () => Promise<any>) => lazy(importFn);
 
 export const adminRoutes = [
   { path: "/dashboard", component: lazyImport(() => import("../pages/Admin/adminDashboard/index")) },
-  { path: "/manager-dashboard", component: lazyImport(() => import("../pages/Managerdashboard/dashoboard")) },
+  { path: "/manager-dashboard", component: lazyImport(() => import("../pages/managerDashboard/dashoboard")) },
 
   // Users
   { path: "/users/list", component: lazyImport(() => import("../pages/Admin/users/list")) },
@@ -109,6 +109,7 @@ export const adminRoutes = [
   // Misc
   { path: "/sales-crm", component: lazyImport(() => import("../pages/salesExecutive")) },
   { path: "/chat", component: lazyImport(() => import("../components/chat/chatButton")) },
+  { path: "/team-leader", component: lazyImport(() => import("../pages/teamLeader/dashboard")) },
 
 
   { path: "/warehouse/list", component: lazyImport(() => import("../pages/warehouse/warehouse")) },

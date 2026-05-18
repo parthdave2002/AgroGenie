@@ -21,7 +21,7 @@ const INIT_STATE = {
   WarehouselistSize:0,
   TotalWarehouses:0,
   CurrentPage:1,
-  AddWarehouselist: [],
+  AddWarehouselistdata: [],
   error: {},
 };
 
@@ -55,7 +55,7 @@ const Warehouse = (state = INIT_STATE, action) => {
         case ADD_WAREHOUSE_LIST:
           return {
             ...state,
-            AddWarehouselist: action.payload.data,
+            AddWarehouselistdata: action.payload.data,
           };
       }
     case ADD_WAREHOUSE_LIST_ERROR:

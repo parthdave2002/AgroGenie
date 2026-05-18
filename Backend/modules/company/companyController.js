@@ -7,6 +7,7 @@ const companyController = {};
 companyController.GetCompanylist = async (req, res, next) => {
   try {
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10, false);
+    populate = [ { path: 'products', model: 'product', select: 'name hsn_code discount batch_no price added_at packaging avl_qty product_pics is_active categories' }];
    
     searchQuery = { ...searchQuery, is_deleted: false };
     if (req.query.page && req.query.page == 0) {
@@ -16,7 +17,7 @@ companyController.GetCompanylist = async (req, res, next) => {
     }
 
     if (req.query.id) {
-      const user = await companySch.findById(req.query.id);
+      const user = await companySch.findById(req.query.id).populate(populate);
       return otherHelper.sendResponse(res, httpStatus.OK, true, user, null, 'Company data get successfully', null);
     }
 

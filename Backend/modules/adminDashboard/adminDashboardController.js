@@ -55,7 +55,7 @@ adminDashboardController.getDashboardData = async (req, res, next) => {
   try {
     const periods = ['daily', 'weekly', 'monthly'];
     const productQuery = await productSch.find({ is_deleted: false }).sort({ added_at: -1 }).limit(5).populate([{ path: 'categories', model: 'categories', select: 'name_guj name_eng' }]).select('name categories avl_qty price hsn_code batch_no added_at').lean();
-    const userQuery  = await userSch.find({ is_deleted: false }).sort({ added_at: -1 }).limit(5).select('name email is_active user_pic added_at').lean();
+    const userQuery  = await userSch.find({ is_deleted: false }).sort({ added_at: -1 }).limit(5).select('name email is_active user_pic user_category added_at').populate([{ path: 'user_category', model: 'user_categories', select: 'category_name goal_amt' }]).lean();
     const customerQuery = await customerSch
       .find()
       .sort({ added_at: -1 })

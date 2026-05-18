@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { Label, Button } from "flowbite-react";
 import { Form, FormFeedback } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { AddBannerlist, ResetBannerlist } from "../../Store/actions";
+import { AddBannerlist, AddWarehouselist, ResetBannerlist } from "../../Store/actions";
 import { isactiveoption } from "../../types/dropdown";
 const ExampleBreadcrumb = lazy(() => import("../../components/common/breadcrumb/breadcrumb"));
 const NavbarSidebarLayout = lazy(() => import("../../layouts/navbar-sidebar"));
@@ -54,28 +54,32 @@ const WarehouseAddPage: FC = function () {
         }),
 
         onSubmit: (values) => {
-            if (selectedactiveid == null) return setValidateactive(1)
-            dispatch(AddBannerlist(values));
+            if (selectedactiveid == null) return setValidateactive(1);
+            let reqdata ={
+                name: values.name,
+                location: values.location,
+                address: values.address,
+                is_active: selectedactiveid
+            }
+            dispatch(AddWarehouselist(reqdata));
         },
     });
 
 
     // ------------- Get  Data From Reducer Code Start --------------
-    const { AddBannerDatalist } = useSelector((state: any) => ({
-        AddBannerDatalist: state.Banner.AddBannerlist,
-    }));
+    const AddWarehouselistdata = useSelector((state: any) => state.Warehouse.AddWarehouselistdata);
 
     useEffect(() => {
-        if (AddBannerDatalist?.success == true) {
+        if (AddWarehouselistdata?.success == true) {
             dispatch(ResetBannerlist());
-            toast.success(AddBannerDatalist?.msg)
+            toast.success(AddWarehouselistdata?.msg)
             navigate(ParentLink)
             validation.resetForm();
             setSelectedactiveid(null);
             setSelectedactiveOption(null);
             setValidateactive(1)
         }
-    }, [AddBannerDatalist]);
+    }, [AddWarehouselistdata]);
     //  ------------- Get Data From Reducer Code end --------------
 
     let Name = "Warehouse Add";
@@ -148,7 +152,7 @@ const WarehouseAddPage: FC = function () {
                         </div>
 
                         <div className="flex gap-x-3 justify-end mt-[1rem]">
-                            <Button className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton" type="submit" > Add Banner </Button>
+                            <Button className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton" type="submit" > Add Warehouse </Button>
                             <Button className="bg-deletebutton hover:bg-deletebutton dark:bg-deletebutton dark:hover:bg-deletebutton" onClick={() => navigate(ParentLink)}>  Close </Button>
                         </div>
                     </Form>

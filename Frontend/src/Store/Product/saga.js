@@ -15,7 +15,9 @@ import {
   ResetProductlistFail,
   GetProductViewlist,
   GetProductViewlistSuccess,
-  GetProductViewlistFail
+  GetProductViewlistFail,
+  GetAllrelevantProductlistSuccess,
+  GetAllrelevantProductlistFail
 } from "./action";
 import {
   GET_RELATED_PRODUCT_LIST,
@@ -24,9 +26,10 @@ import {
   UPDATE_PRODUCT_LIST,
   DELETE_PRODUCT_LIST,
   GET_PRODUCT_VIEW_LIST,
-  RESET_PRODUCT_LIST
+  RESET_PRODUCT_LIST,
+  GET_ALL_RELEVANT_PRODUCT_LIST
 } from "./actionType";
-import { RelatedProductlistApi,ProductlistApi,  AddProductlistApi, DelProductlistApi, UpdateProductApi,  DetailProductlistApi} from "../../helper/Demo_helper";
+import { RelatedProductlistApi,ProductlistApi,  AddProductlistApi, DelProductlistApi, UpdateProductApi,  DetailProductlistApi, GetAllrelevantProductlistApi} from "../../helper/Demo_helper";
 import { toast } from "react-toastify";
 
 
@@ -102,6 +105,15 @@ function* onGetProductViewList({ payload: requstuser }) {
   }
 }
 
+function* onGetAllRelevantProductList({ payload: requstuser }) {
+  try {
+    const response = yield call(GetAllrelevantProductlistApi, requstuser);
+    yield put(GetAllrelevantProductlistSuccess(GET_ALL_RELEVANT_PRODUCT_LIST, response));
+  } catch (error) {
+    yield put(GetAllrelevantProductlistFail(error));
+  }
+}
+
 function* ProductSaga() {
   yield takeEvery(GET_RELATED_PRODUCT_LIST, onGetRelatedProductList);
   yield takeEvery(GET_PRODUCT_LIST, onGetProductList);
@@ -110,5 +122,6 @@ function* ProductSaga() {
   yield takeEvery(DELETE_PRODUCT_LIST, onDelProductList);
   yield takeEvery(RESET_PRODUCT_LIST, onResetProductList);
   yield takeEvery(GET_PRODUCT_VIEW_LIST, onGetProductViewList);
+  yield takeEvery(GET_ALL_RELEVANT_PRODUCT_LIST, onGetAllRelevantProductList);
 }
 export default ProductSaga;

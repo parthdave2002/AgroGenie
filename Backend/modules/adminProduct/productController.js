@@ -375,4 +375,27 @@ productController.UpdateProductData = async (req, res, next) => {
   }
 };
 
+productController.ProductDetailsData = async (req, res, next) => {
+  try {
+    let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
+    const { category_id, warehouse_id, company_id } = req.query;
+      const data = await productSch.find({
+        $or: [
+          { warehouse: warehouse_id },
+          { categories: category_id },
+          { company: company_id },
+        ]
+      }).populate([
+        { path: 'warehouse', select: 'name' },
+        { path: 'categories', select: 'name' },
+        { path: 'company', select: 'name' },
+        { path: 'packagingtype', select: 'type_eng type_guj' },
+      ]);
+
+    return otherHelper.paginationSendResponse(res, httpStatus.OK, true, data, 'Product details retrieved successfully', page, size, data.length);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = productController;
