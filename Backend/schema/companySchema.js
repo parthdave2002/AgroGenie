@@ -11,4 +11,14 @@ const companySchema = new schema({
     added_by: { type: schema.Types.ObjectId, ref: 'users' },
 });
 
+companySchema.set('toObject', { virtuals: true });
+companySchema.set('toJSON', { virtuals: true });
+
+companySchema.virtual('products', {
+    ref: 'product',
+    localField: '_id',
+    foreignField: 'company',
+    justOne: false,
+});
+
 module.exports = Company = mongoose.model('company', companySchema);

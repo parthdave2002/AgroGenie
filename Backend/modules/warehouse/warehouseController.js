@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const warehouseSch = require('../../schema/warehouseSchema');
+const productSchema = require('../../schema/productSchema');
 const warehouseController = {};
 
 warehouseController.getAllWarehouseList = async (req, res, next) => {
@@ -61,8 +62,12 @@ warehouseController.DeleteWarehouse = async (req, res, next) => {
     const Warehouse_id = await warehouseSch.findById(id);
     if(!Warehouse_id) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Warehouse not found', null);
 
-    const deleted = await warehouseSch.findByIdAndDelete(id);
-    return otherHelper.sendResponse(res, httpStatus.OK, true, deleted, null, 'Warehouse deleted successfully', null);
+    const isAssociated = await  productSchema.findOne({ warehouse: id }); 
+    if (isAssociated)  return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Cannot delete warehouse because its assign to product', null);
+    
+    let changeStatus = !Warehouse_id.is_active;
+    const deleted = await warehouseSch.findByIdAndUpdate(id, { is_active : changeStatus ,updated_at: new Date() }, { new: true });
+    return otherHelper.sendResponse(res, httpStatus.OK, true, deleted, null, 'Warehouse status updated successfully', null);
   } catch (err) {
     next(err);
   }

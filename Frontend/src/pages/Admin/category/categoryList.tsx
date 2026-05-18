@@ -5,13 +5,12 @@ import { HiTrash} from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import moment from "moment";
-import { FaExchangeAlt } from "react-icons/fa";
+import { FaExchangeAlt, FaExclamationCircle } from "react-icons/fa";
 import { ChangeStatusCategorylist, DeleteCategorylist,  getCategorylist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
-import LoaderPage from "../../../components/common/loader/loader";
-import CommonTable from "../../../components/common/table/commonTable";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const LoaderPage = lazy(() => import("../../../components/common/loader/loader"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
@@ -98,7 +97,7 @@ const CategoryListPage: FC = function () {
     navigate("/category/add")
   }
 
-  const DetailsPageCall = (id:any) =>{
+  const DetailsFuncall = (id:any) =>{
     navigate(`/category/details/${id}`)
   }
 
@@ -131,6 +130,7 @@ const CategoryListPage: FC = function () {
           <div className="flex items-center gap-x-3">
             {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
             {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Category </div> </Button> : null}
+            {accessList?.view ? <Button gradientDuoTone="purpleToPink" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Category</div> </Button> : null}
           </div>
         ),
       },

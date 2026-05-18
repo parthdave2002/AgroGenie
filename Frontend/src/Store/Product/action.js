@@ -25,7 +25,11 @@ import {
 
   RESET_PRODUCT_LIST,
   RESET_PRODUCT_LIST_ERROR,
-  RESET_PRODUCT_LIST_SUCCESS
+  RESET_PRODUCT_LIST_SUCCESS,
+
+  GET_ALL_RELEVANT_PRODUCT_LIST,
+  GET_ALL_RELEVANT_PRODUCT_LIST_SUCCESS,
+  GET_ALL_RELEVANT_PRODUCT_LIST_ERROR,
 } from "./actionType";
 
 export const getRelatedProductlist = (requserdata) => ({
@@ -132,5 +136,20 @@ export const UpdateProductlistSuccess = (actionType, data) => ({
 
 export const UpdateProductlistFail = (actionType, error) => ({
   type: UPDATE_PRODUCT_LIST_ERROR,
+  payload: { actionType, error },
+});
+
+export const GetAllrelevantProductlist = (requserdata) => ({
+  type: GET_ALL_RELEVANT_PRODUCT_LIST,
+  payload: requserdata,
+});
+
+export const GetAllrelevantProductlistSuccess = (actionType, data) => ({
+  type: GET_ALL_RELEVANT_PRODUCT_LIST_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const GetAllrelevantProductlistFail = (actionType, error) => ({
+  type: GET_ALL_RELEVANT_PRODUCT_LIST_ERROR,
   payload: { actionType, error },
 });

@@ -1,20 +1,19 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC, lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import moment from "moment";
 import { Button } from "flowbite-react";
 import { HiTrash} from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import moment from "moment";
-import { FaExchangeAlt } from "react-icons/fa";
-import { ChangeStatusCompanylist, DeleteCompanylist,  getCompanylist } from "../../../Store/actions";
+import { FaExchangeAlt, FaExclamationCircle } from "react-icons/fa";
 import UseAccessList from "../../../hooks/useAccessList";
-import LoaderPage from "../../../components/common/loader/loader";
-import CommonTable from "../../../components/common/table/commonTable";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
+import { ChangeStatusCompanylist, DeleteCompanylist,  getCompanylist } from "../../../Store/actions";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const LoaderPage = lazy(() => import("../../../components/common/loader/loader"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 
 const CompanyListPage: FC = function () {
   const dispatch = useDispatch();
@@ -95,6 +94,10 @@ const CompanyListPage: FC = function () {
     };
   // -------  Delete Code End ---------------
 
+  const DetailsFuncall = (id:any) =>{
+    navigate(`/company/details/${id}`)
+  }
+
   const OpenAddModel = () =>{
     navigate("/company/add")
   }
@@ -121,6 +124,7 @@ const CompanyListPage: FC = function () {
           <div className="flex items-center gap-x-3">
             {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
             {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Company</div> </Button> : null}
+            <Button gradientDuoTone="purpleToPink" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Company</div> </Button>
           </div>
         ),
       },

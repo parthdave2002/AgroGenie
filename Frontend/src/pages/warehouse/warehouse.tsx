@@ -4,8 +4,9 @@ import { Button } from "flowbite-react";
 import { HiTrash} from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { DeleteBannerlist,  getWarehouselist } from "../../Store/actions";
+import { ChangeStatusCompanylist, DeleteWarehouselist,  getWarehouselist } from "../../Store/actions";
 import UseAccessList from "../../hooks/useAccessList";
+import { FaExchangeAlt } from "react-icons/fa";
 const DeleteModalPage = lazy(() => import("../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
@@ -77,12 +78,17 @@ const WarehousePage: FC = function () {
       setisOpenDelteModel(true);
     };
 
-    const DeletepackingType = () => {
+    const Deletewarehouse = () => {
       let rqeuserdata = { id: Delete_id };
-      dispatch(DeleteBannerlist(rqeuserdata));
+      dispatch(DeleteWarehouselist(rqeuserdata));
       setisOpenDelteModel(false);
     };
   // -------  Delete Code End ---------------
+
+  const ChangestatusFuncall = (id:any) =>{
+    let requserdata = { id: id};
+    dispatch(DeleteWarehouselist(requserdata)); 
+  }
 
   const OpenAddModel = () =>{
     navigate("/warehouse/add")
@@ -103,7 +109,8 @@ const WarehousePage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.delete && <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Warehouse </div> </Button>}
+          {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+          {/* {accessList?.delete && <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Warehouse </div> </Button>} */}
         </div>
       ),
     },
@@ -119,11 +126,10 @@ const WarehousePage: FC = function () {
     
         {isOpenDelteModel && (
           <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"> <div className="text-white">Loading...</div> </div> }>
-            <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Banner"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DeletepackingType} />
+            <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Warehouse"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={Deletewarehouse} />
           </Suspense>
         )}
-        <ToastMessage />
-                  
+        <ToastMessage />           
     </>
   );
 };

@@ -8,4 +8,4 @@ const warehouseSchema = new schema({
   is_active: { type: Boolean },
 }, { timestamps : true});
 
-module.exports = warehouse = mongoose.model('warehouse', warehouseSchema);
+module.exports = Warehouse = mongoose.model('warehouse', warehouseSchema);

@@ -77,6 +77,7 @@ export const ADD_PRODUCT_LIST = "/api/product/add-product";
 export const UPDATE_PRODUCT_LIST = "/api/product/update-product";
 export const DELETE_PRODUCT_LIST = "/api/product/remove-product";
 export const GET_RELATED_PRODUCT_LIST = "/api/product/product-related";
+export const GET_ALL_RELEVANT_PRODUCT_LIST = "/api/product/product-details";
 
 // Order
 export const GET_UPDATE_ORDER_LIST = "/api/order/update-order";

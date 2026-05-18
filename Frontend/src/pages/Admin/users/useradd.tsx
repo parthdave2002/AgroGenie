@@ -20,6 +20,11 @@ const IMG_URL = import.meta.env["VITE_API_URL"];
 
 const AddUserPage : FC = function () {
 
+    const teamLeaderOption =[
+        { label: "No Team Leader", value: "" },
+        { label: "Self", value: "self" }
+    ]
+
     const { id } = useParams();
     const dispatch = useDispatch();
     const [file, setFile] = useState<File | null |  string>(null);
@@ -182,6 +187,24 @@ const AddUserPage : FC = function () {
         }
         };
     //---------------- Advisor category option code end ----------------
+    
+    //---------------- Team Leader option code start ----------------
+        const [selectedTeamLeaderOption, setSelectedTeamLeaderOption] = useState(null);
+        const [selectedTeamLeaderId, setSelectedTeamLeaderId] = useState<null | string>(null);
+        const [ValidateTeamLeaderStatusid, setValidateTeamLeaderStatusid] = useState(0);
+
+        const IsActiveTeamLeaderdata = (data: any) => {
+        if (!data) {
+            setValidateTeamLeaderStatusid(1);
+            setSelectedTeamLeaderId(null);
+            setSelectedTeamLeaderOption(null);
+        } else {
+            setValidateTeamLeaderStatusid(0);
+            setSelectedTeamLeaderId(data.value);
+            setSelectedTeamLeaderOption(data);
+        }
+        };
+    //---------------- Team Leader option code end ----------------
 
     const navigate = useNavigate();
     const [initialValues, setinitialValues] = useState<UserData>({
@@ -202,6 +225,7 @@ const AddUserPage : FC = function () {
         bank_passbook : null,
         user_pic : "",
         user_category: { category_name: "", _id: "" },
+        team_leader: { name: "", _id: "" },
     });
     
     const validation = useFormik({
@@ -261,6 +285,7 @@ const AddUserPage : FC = function () {
             formData.append("is_active", JSON.stringify(selectedStatusid));
             formData.append("role", selectedRoleid);
             formData.append("user_category", selectedAdvisorCategoryId);
+            formData.append("team_leader", JSON.stringify(selectedTeamLeaderId));
             if (file instanceof File)  formData.append("user_pic", file);
 
             if(id){
@@ -360,8 +385,14 @@ const AddUserPage : FC = function () {
             setSelectedAdvisorCategoryOption(selectedSatus);
             setSelectedAdvisorCategoryId(selectedSatus?.value ?? null);
         }
+
+        if (UserDataList?.team_leader !== undefined && UserDataList?.team_leader !== null &&  teamLeaderOption.length > 0) {
+            const selectedTeamLeader :any = teamLeaderOption.find((dropdown:any) => dropdown.value === UserDataList.team_leader);
+            setSelectedTeamLeaderOption(selectedTeamLeader || null);
+            setSelectedTeamLeaderId(selectedTeamLeader?.value ?? null);
+        }
     }
-  }, [UserDataList]);
+  },[UserDataList]);
 
     const today = new Date();
     const minDate = new Date(today.setFullYear(today.getFullYear() - 18));
@@ -660,7 +691,27 @@ const AddUserPage : FC = function () {
                                     {ValidateAdvisorCategoryStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select advisor category  </FormFeedback> : null}
                                 </div>
                             </div>
-                            <div></div>
+                             <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="bank_passbook"> Advisor TeamLeader <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedTeamLeaderOption}
+                                        onChange={(e) => { IsActiveTeamLeaderdata(e) }}
+                                        options={teamLeaderOption}
+                                        isClearable={true}
+                                    />
+                                    {ValidateTeamLeaderStatusid == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please select team leader  </FormFeedback> : null}
+                                </div>
+                            </div>
                             <div></div>
                         </div>
 
