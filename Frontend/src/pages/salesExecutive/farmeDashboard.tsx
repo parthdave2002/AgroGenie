@@ -1,12 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { MdKeyboardArrowDown, MdKeyboardArrowRight, MdKeyboardArrowUp } from 'react-icons/md'
 import Cookies from 'js-cookie';
-import { ProfileInfo } from 'types/types';
-
-interface DashboardProps{
-  classData ?: string;
-  viewButton : boolean;
-}
+import { ProfileInfo, DashboardProps } from '../../types/types';
 
 const FarmeDashboard : FC <DashboardProps> = ({classData, viewButton}) => {
   const [expanded, setExpanded] = useState(false);

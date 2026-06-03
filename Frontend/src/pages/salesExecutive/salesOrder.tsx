@@ -1,21 +1,17 @@
-import SalesMobileInput from '../../components/common/inputComponent/salesMobileInput';
-import React, { FC, useEffect, useState } from 'react'
+import React, { lazy, FC, useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 import  farmerimage from "/images/users/farmer-2.png"
-import SalesFarmerDashboard from './salesFarmerDashboard';
 import moment from 'moment';
-import { CheckCustomerExist, getCallbackdata } from "../../Store/actions";
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import LoaderPage from '../../components/common/loader/loader';
-import ToastMessage from '../../components/common/toastmessage/ToastMessage';
+import { useDispatch, useSelector } from 'react-redux';
+import { CheckCustomerExist, getCallbackdata } from "../../Store/actions";
+import { SalesOrderPropsData } from '../../types/types';
+const ToastMessage = lazy(() => import("../../components/common/toastmessage/ToastMessage"));
+const LoaderPage = lazy(() => import("../../components/common/loader/loader"));
+const SalesMobileInput = lazy(() => import("../../components/common/inputComponent/salesMobileInput"));
+const SalesFarmerDashboard = lazy(() => import("./salesFarmerDashboard"));
 
-interface PropsData{
-  setDatactive :any;
-  openProfile : boolean;
-  setOpenProfile : (value : boolean) => void;
-}
-const SalesOrder : FC <PropsData> = function ({ setDatactive, openProfile,setOpenProfile })  {
+const SalesOrder : FC <SalesOrderPropsData> = function ({ setDatactive, openProfile,setOpenProfile })  {
   const dispatch = useDispatch()
   const [isLoading, setisLoading] = useState(false);
   const [inialTime, setinialTime] = useState(true);

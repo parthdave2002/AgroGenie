@@ -153,9 +153,12 @@ productController.getAllProductList = async (req, res, next) => {
     }
 
     searchQuery = { ...searchQuery, is_deleted: false };
-
+   const escapeRegex = (text) => {
+      return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    };
     if (req.query.search && req.query.search !== 'null') {
-      const regex = { $regex: req.query.search, $options: 'i' };
+      const escapedSearch = escapeRegex(req.query.search);
+      const regex = { $regex: escapedSearch, $options: 'i' };
       const isValidObjectId = mongoose.Types.ObjectId.isValid(req.query.search);
 
       let categoryFilter = [];

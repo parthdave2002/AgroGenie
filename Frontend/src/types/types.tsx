@@ -263,3 +263,82 @@ export interface OrderDetailsType {
       confirmationModal: boolean;
       type?: string;
   }
+
+  export interface NearByFarmerProps {
+    farmerId: string;
+    OpenFarmerDetailsModal : boolean;
+    setisOpenConfirmModel : () => void;
+  }
+
+  export interface Cartprops{
+    setCartOpen : (value : boolean) => void;
+    handleRemoveCall  : (value : boolean) => void;
+    CartData ?: any;
+    setCartItem: (value : any) => void;
+    cartOrderid ?: any;
+    setCartOrderid: (value : any) => void;
+    future_date ?:any;
+  }
+
+  export interface DashboardProps{
+    classData ?: string;
+    viewButton : boolean;
+  }
+
+  export interface FarmerHistoryProps{
+    setOpenDetailId : ( value : any) => void;
+    setOpenDetailsmodal : ( value : boolean) => void;
+    setOpenDetailIData : ( value : any) => void;
+    AddtoCartCall : ( value : any) => void;
+    FuturOrderDate : ( value : any) => void;
+    setCartOrderid : ( value : any) => void;
+    openComplain ?: string;
+    setOpenComplain  ?: ( value : string) => void;
+    orderId ?: string;
+    set_OrderId  ?: (value: string) => void;
+  }
+
+  export interface ProfileAddModalData{
+    isEditFarmer ?: boolean;
+    setFarmerAdded : (value: boolean) => void;
+    CloseAddmodal: (value: any) => void;
+    handleAccept : (value: boolean) => void;
+    Mobile_number ?: string;
+  }
+
+  export interface ProfilePropsData{
+      setDatactive :any;
+      openProfile : boolean;
+      setOpenProfile : (value : boolean) => void;
+  }
+
+  export interface FarmerDashboardPropsData{
+    setOpenProfile : (value: boolean) => void;
+    Mobile_number ?: string;
+    openComplain ?: string;
+    setOpenComplain ?: (value: string) => void;
+    orderId ?: string;
+    set_OrderId  ?: (value: string) => void;
+  }
+
+  export interface SalesOrderPropsData{
+    setDatactive :any;
+    openProfile : boolean;
+    setOpenProfile : (value : boolean) => void;
+  }
+
+  export interface SalesProPropsData{
+      setDatactive :any;
+  }
+
+  export interface SalesProfilePropsData{
+    CloseProfile: () => void;
+  }
+
+  export interface SalesComplainPropsData{
+      setDatactive :any;
+      openComplain: string;
+      openProfile : boolean;
+      setOpenProfile : (value : boolean) => void;
+      setOpenComplain : (value : string) => void;
+  }

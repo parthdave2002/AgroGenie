@@ -1,7 +1,4 @@
 import { FC} from "react";
-import {  FaAccessibleIcon, FaCapsules, FaOpencart } from "react-icons/fa";
-import { MdGridView  } from "react-icons/md";
-import { BiShocked } from "react-icons/bi";
 
 interface PropsData{
   setDatactive :any;
@@ -18,15 +15,13 @@ const SalesHeaderPage : FC<PropsData> = function ({ active, setDatactive, openPr
     //   { name: "Complain", icon: <BiShocked   size={20}  /> },
     // ];
 
-
-        const menuItems = [
+    const menuItems = [
       { name: "Dashboard", icon: <img src="/images/icon/dashboard.webp" alt="Dashboard" width={30} height={30} /> },
       { name: "Farmer", icon: <img src="/images/icon/farmer.webp" alt="Farmer" width={30} height={30} />},
       { name: "Products", icon: <img src="/images/icon/product.webp" alt="Product" width={30} height={30} /> },
       { name: "Order", icon: <img src="/images/icon/order.webp" alt="Order" width={30} height={30} /> },
       { name: "Complain", icon: <img src="/images/icon/complain.webp" alt="Complain" width={30} height={30} /> },
     ];
-
 
     return (
       <div className="flex justify-end  ">

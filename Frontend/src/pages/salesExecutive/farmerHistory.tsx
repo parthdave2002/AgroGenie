@@ -1,27 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Button, Table } from "flowbite-react";
-import { BsCartCheckFill } from 'react-icons/bs';
-import { FaRegClock } from 'react-icons/fa';
-import { MdReport } from 'react-icons/md';
-import moment from 'moment';
-import ComplainDetails from '../../components/salesComponent/complainDetails';
-import ExamplePagination from '../../components/common/pagination/pagination';
-import { getCustomerTagloglist, getFarmerComplainlist, getFarmerOrderlist } from '../../Store/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { FC, lazy, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-
-interface FarmerHistoryProps{
-  setOpenDetailId : ( value : any) => void;
-  setOpenDetailsmodal : ( value : boolean) => void;
-  setOpenDetailIData : ( value : any) => void;
-  AddtoCartCall : ( value : any) => void;
-  FuturOrderDate : ( value : any) => void;
-  setCartOrderid : ( value : any) => void;
-  openComplain ?: string;
-  setOpenComplain  ?: ( value : string) => void;
-  orderId ?: string;
-  set_OrderId  ?: (value: string) => void;
-}
+import moment from 'moment';
+import { Button, Table } from "flowbite-react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCustomerTagloglist, getFarmerComplainlist, getFarmerOrderlist } from '../../Store/actions';
+import { FarmerHistoryProps } from '../../types/types';
+import { FarmerDashboardTabData } from '../../types/dropdown';
+const CommonTable = lazy(() => import("../../components/common/table/commonTable"));
+const ComplainDetails = lazy(() => import("../../components/salesComponent/complainDetails"));
+const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
 
 const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetailsmodal, setOpenDetailIData, AddtoCartCall, FuturOrderDate, setCartOrderid, openComplain, setOpenComplain, orderId, set_OrderId}) => {
   const dispatch = useDispatch()
@@ -72,13 +59,6 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
 
       fetchAndOpenComplain();
     }, [openComplain, dispatch]);
-
-
-    const TabData = [
-      { title: "Order", icon: <BsCartCheckFill  size={20} /> },
-      { title: "Complain", icon: <MdReport  size={20} /> },
-      { title: "Taglog", icon: <FaRegClock  size={20} /> },
-    ]
 
     const TabSelection = (data: string) => {
       setselectedTabbar(data)
@@ -149,8 +129,6 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
     const Orderlist = useSelector((state: any) => state.Order.SingleFarmerOrderlist );
     const Complainlist = useSelector((state: any) => state.Complain.SinglefarmerComplainlist );
     const Tagloglist = useSelector((state: any) => state.Taglog.CustomerTagloglist );
-
-
     
     useEffect(() => {
       if(selectedTabbar == "Order"){
@@ -198,7 +176,7 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
       <div className='mt-3 border dark:border-gray-600 rounded-xl w-full py-2 px-5'>
         <div className="flex items-center gap-x-6 bg-gray-100 dark:bg-gray-900 p-3 rounded-xl">
           <ul className="flex items-center gap-x-6">
-            {TabData.map((data: any, k: number) => (
+            {FarmerDashboardTabData.map((data: any, k: number) => (
               <li key={k} className={`relative flex flex-col items-center justify-center gap-1 py-2 px-2 cursor-pointer transition-all duration-300 ease-in-out font-medium text-sm ${selectedTabbar === data.title ? "text-blue-500 font-semibold" : "text-gray-500 dark:text-gray-400"}`} onClick={() => TabSelection(data.title)} >
                 <span className="flex items-center text-[1rem] font-semibold gap-x-4">{data.icon} {data.title}</span>
                 {selectedTabbar === data.title && (<span className="px-2 absolute bottom-[-4px] left-0 w-full h-[2px] bg-blue-500"></span>)}
