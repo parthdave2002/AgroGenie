@@ -30,6 +30,10 @@ import {
   GET_NEAR_BY_FARMER,
   GET_NEAR_BY_FARMER_SUCCESS,
   GET_NEAR_BY_FARMER_ERROR,
+
+  GET_NEAR_BY_FARMER_ORDER,
+  GET_NEAR_BY_FARMER_ORDER_SUCCESS,
+  GET_NEAR_BY_FARMER_ORDER_ERROR
 } from "./actionType";
 
 const INIT_STATE = {
@@ -45,6 +49,9 @@ const INIT_STATE = {
   Farmerlist: [],
   FarmerlistSize:0,
   TotalFarmerData:0,
+  FarmerOrderlist: [],
+  FarmerOrderlistSize:0,
+  TotalFarmerOrderData:0,
   error: {},
 };
 
@@ -214,6 +221,29 @@ const Customer = (state = INIT_STATE, action) => {
     case GET_NEAR_BY_FARMER_ERROR:
       switch (action.payload.actionType) {
         case GET_NEAR_BY_FARMER:
+          return {
+            ...state,
+            error: action.payload,
+          };
+
+        default:
+          return { ...state };
+      }
+
+    case GET_NEAR_BY_FARMER_ORDER_SUCCESS:
+      switch (action.payload.actionType) {
+        case GET_NEAR_BY_FARMER_ORDER:
+          return {
+            ...state,
+            FarmerOrderlist: action.payload.data.data,
+            FarmerOrderlistSize: action.payload.data.size,
+            TotalFarmerOrderData: action.payload.data.totalData,
+            CurrentPage: action.payload.data.page,
+          };
+      }
+    case GET_NEAR_BY_FARMER_ORDER_ERROR:
+      switch (action.payload.actionType) {
+        case GET_NEAR_BY_FARMER_ORDER:
           return {
             ...state,
             error: action.payload,

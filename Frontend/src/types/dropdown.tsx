@@ -1,5 +1,6 @@
-import { BsFillStopwatchFill } from "react-icons/bs";
-import { FaCircleCheck } from "react-icons/fa6";
+import { BsCartCheckFill, BsFillStopwatchFill } from "react-icons/bs";
+import { FaCircleCheck, FaRegClock } from "react-icons/fa6";
+import { MdReport } from "react-icons/md";
 
 export const genderoption = [
   { label: "Male", value: "male" },
@@ -60,4 +61,10 @@ export const isleaveplanoption = [
 export const ManagerDashboardTabData = [
   { title: "Pending", icon: <BsFillStopwatchFill size={20} /> },
   { title: "Completed", icon: <FaCircleCheck size={20} /> },
+];
+
+export const  FarmerDashboardTabData = [
+  { title: "Order", icon: <BsCartCheckFill  size={20} /> },
+  { title: "Complain", icon: <MdReport  size={20} /> },
+  { title: "Taglog", icon: <FaRegClock  size={20} /> },
 ];

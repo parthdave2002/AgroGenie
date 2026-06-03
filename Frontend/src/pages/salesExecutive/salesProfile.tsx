@@ -1,18 +1,15 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { lazy, FC, useEffect, useMemo, useState } from 'react';
 import { Button } from "flowbite-react";
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { getleavelist } from '../../Store/actions';
-import ExamplePagination from '../../components/common/pagination/pagination';
-import LeaveAdd from '../../components/salesComponent/leaveAdd';
-import ChangeProfilePassword from '../../components/common/profile/changeprofilePassword';
-import CommonTable from '../../components/common/table/commonTable';
+import { SalesProfilePropsData } from '../../types/types';
+const ChangeProfilePassword = lazy(() => import("../../components/common/profile/changeprofilePassword"));
+const LeaveAdd = lazy(() => import("../../components/salesComponent/leaveAdd"));
+const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
+const CommonTable = lazy(() => import("../../components/common/table/commonTable"));
 
-interface PropsData{
-    CloseProfile: () => void;
-}
-
-const SalesProfile : FC <PropsData> = function ()  {
+const SalesProfile : FC <SalesProfilePropsData> = function ()  {
     const dispatch = useDispatch();
 
     const [SalesLeaveData, setSalesLeaveData] = useState([])
@@ -31,8 +28,6 @@ const SalesProfile : FC <PropsData> = function ()  {
     };
     const PageDataList = (data:any) => { setPageNo(data) }
   // ------------- Next button Code End -------------
-
-
     const Leavedatalist = useSelector((state: any) => state.Leave.Leavedatalist)
 
     useEffect(() => {

@@ -1,16 +1,15 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, lazy, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa';
-import ProductDetailData from '../../components/productdetails/salesproductDetails';
-import SalesMobileInput from '../../components/common/inputComponent/salesMobileInput';
-import Salesproductlist from '../../components/productdetails/salesproductlist';
-interface PropsData{
-    setDatactive :any;
-}
-const SalesProduct : FC <PropsData> = function ({ setDatactive})  {
+import { SalesProPropsData } from '../../types/types';
+const Salesproductlist = lazy(() => import("../../components/productdetails/salesproductlist"));
+const SalesMobileInput = lazy(() => import("../../components/common/inputComponent/salesMobileInput"));
+const ProductDetailData = lazy(() => import("../../components/productdetails/salesproductDetails"));
 
-    const [ProductDetails, setProductDetails] = useState<null | string>(null);
-    const [searchData, setSearchData] = useState("");
-    const handleChange = (data:any) => setSearchData(data)
+const SalesProduct : FC <SalesProPropsData> = function ({ setDatactive})  {
+
+  const [ProductDetails, setProductDetails] = useState<null | string>(null);
+  const [searchData, setSearchData] = useState("");
+  const handleChange = (data:any) => setSearchData(data)
 
   const ProductDetailsCall = (data:string) =>  setProductDetails(data);
   const ProductCLoseCall = () => {

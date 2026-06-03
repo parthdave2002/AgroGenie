@@ -30,6 +30,10 @@ import {
   GET_NEAR_BY_FARMER,
   GET_NEAR_BY_FARMER_SUCCESS,
   GET_NEAR_BY_FARMER_ERROR,
+
+  GET_NEAR_BY_FARMER_ORDER,
+  GET_NEAR_BY_FARMER_ORDER_SUCCESS,
+  GET_NEAR_BY_FARMER_ORDER_ERROR
 } from "./actionType";
 
 export const getCustomerDatalist = (requserdata) => ({
@@ -153,5 +157,20 @@ export const getNearbyFarmerDatalistSuccess = (actionType, data) => ({
 
 export const getNearbyFarmerDatalistFail = (actionType, error) => ({
   type: GET_NEAR_BY_FARMER_ERROR,
+  payload: { actionType, error },
+});
+
+export const getNearbyFarmerOrder = (requserdata) => ({
+  type: GET_NEAR_BY_FARMER_ORDER,
+  payload: requserdata,
+});
+
+export const getNearbyFarmerOrderSuccess = (actionType, data) => ({
+  type: GET_NEAR_BY_FARMER_ORDER_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const getNearbyFarmerOrderFail = (actionType, error) => ({
+  type: GET_NEAR_BY_FARMER_ORDER_ERROR,
   payload: { actionType, error },
 });

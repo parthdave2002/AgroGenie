@@ -252,4 +252,51 @@ customerController.NearbyFarmerList = async (req, res, next) => {
   }
 };
 
+customerController.NearbyFarmerOrderList = async (req, res, next) => {
+   try {
+    const { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
+    const customer_id = req.query.id;
+
+    if (!customer_id) {
+      return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Customer ID is required', null);
+    }
+
+    const customer = await customerSch.findById(customer_id);
+    if (!customer) {
+      return otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Customer not found', null);
+    }
+
+    const populateFields = [
+      { path: 'products.id', model: 'product', select: 'name price discount packaging packagingtype' },
+      { path: 'coupon', model: 'coupon', select: 'code discount' },
+    ];
+
+    const query = { customer: customer_id };
+    let orders = await orderSch.find(query).sort(sortQuery).skip((page - 1) * size).limit(size).populate(populateFields).lean();
+    
+    // Populate packagingtype for each product
+    orders = await Promise.all(orders.map(async (order) => {
+      if (order.products && Array.isArray(order.products)) {
+        order.products = await Promise.all(order.products.map(async (product) => {
+          if (product.id && product.id.packagingtype) {
+            const packagingTypeSchema = require('../../schema/adminPackingTypeSchema');
+            const packagingType = await packagingTypeSchema.findById(product.id.packagingtype).lean();
+            if (packagingType) {
+              product.id.packagingtype = packagingType;
+            }
+          }
+          return product;
+        }));
+      }
+      return order;
+    }));
+
+    const totalData = await orderSch.countDocuments(query);
+
+    return otherHelper.paginationSendResponse( res, httpStatus.OK, true, orders, 'Orders fetched successfully', page, size, totalData );
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = customerController;

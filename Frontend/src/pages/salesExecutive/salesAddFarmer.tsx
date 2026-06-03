@@ -1,25 +1,18 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Label, Button } from "flowbite-react";
 import { FaUser, FaWindowClose } from 'react-icons/fa';
 import { Form, Input, FormFeedback } from "reactstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 import Select from "react-select";
 import { toast } from 'react-toastify';
-import { AddCustomerDatalist, CheckCustomerExist, getCroplist, getdistrictdata, getstatedatalist, gettalukadata, getvillagedata, ResetCustomerDatalist, UpdateCustomerDatalist } from '../../Store/actions';
-import Cookies from 'js-cookie';
-import {ProfileInfo} from "../../types/types"
+import { useDispatch, useSelector } from 'react-redux';
+import {ProfileAddModalData, ProfileInfo} from "../../types/types"
+import { AddCustomerDatalist, getCroplist, getdistrictdata, getstatedatalist, gettalukadata, getvillagedata, ResetCustomerDatalist, UpdateCustomerDatalist } from '../../Store/actions';
+import { HeardAboutOprions, IrrigationSourceOptions, IrrigationTypeOptions, LandTypeOptions } from '../../types/dropdown';
 
-interface ProfileData{
-  isEditFarmer ?: boolean;
-  setFarmerAdded : (value: boolean) => void;
-  CloseAddmodal: (value: any) => void;
-  handleAccept : (value: boolean) => void;
-  Mobile_number ?: string;
-}
-
-const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAccept, Mobile_number, CloseAddmodal}) => {
+const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, handleAccept, Mobile_number, CloseAddmodal}) => {
   const dispatch = useDispatch();
   const [data, setData] = useState<ProfileInfo | null>()
   
@@ -329,22 +322,6 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
   });
 
   // -------------- Header about code start ---------
-  const HeardAboutOprions = useMemo(() => [
-    { label :"Newspaper", value : "newspaper"},
-    { label :"TV Ad", value : "tv add"},
-    { label :"Magazine", value : "magazine"},
-    { label :"Van campaign", value : "van campaign"},
-    { label :"Instagram", value : "instagram"},
-    { label :"Facebook", value : "facebook"},
-    { label :"What's App", value : "whatsapp"},
-    { label :"Linkedin", value : "linkedin"},
-    { label :"Youtube", value : "youtube"},
-    { label :"Brochure ", value : "brochure"},
-    { label :"Agro shop", value : "shop"},
-    { label :"Field office", value : "officer"},
-    { label :"Other farmer", value : "other farmer"},
-  ], []);
-
   const [selectedheaderaboutOption, setSelectedheaderaboutOption] = useState<{ label: string, value: string } | null>(null);
   const [selectedheaderaboutid, setSelectedheaderaboutid] = useState<string | null>(null);
   const [validateheaderabout, setValidateheaderabout] = useState(0);
@@ -393,13 +370,6 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
   // --------------Crop code end ---------
 
   // -------------- Irrigation source code start ---------
-  const IrrigationSourceOptions= [
-    { label :"Well", value : "well"},
-    { label :"Borwell", value : "borwell"},
-    { label :"Canal", value : "canal"},
-    { label :"Other", value : "other"},
-    { label :"No source", value : "no source"},
-  ]
 
   const [selectedirrigationsourceOption, setSelectedirrigationsourceOption] = useState<{ label: string, value: string } | null>(null);
   const [selectedirrigationsourceid, setSelectedirrigationsourceid] = useState<string | null>(null);
@@ -419,12 +389,6 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
   // -------------- Irrigation source code end ---------
 
   // -------------- Irrigation type code start ---------
-  const IrrigationTypeOptions= [
-    { label :"Drip", value : "drip"},
-    { label :"Sprinkler", value : "sprinkler"},
-    { label :"Flood", value : "flood"},
-  ]
-
   const [selectedirrigationtypeOption, setSelectedirrigationtypeOption] = useState<{ label: string, value: string } | null>(null);
   const [selectedirrigationtypeid, setSelectedirrigationtypeid] = useState<string | null>(null);
   const [validateirrigationtype, setValidateirrigationtype] = useState(0);
@@ -443,12 +407,6 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
   // -------------- Irrigation type code end ---------
 
   // -------------- Land type code start ---------
-  const LandTypeOptions= [
-    { label :"Acre", value : "acre"},
-    { label :"Bigha", value : "bigha"},
-    { label :"Hacter", value : "hacter"},
-  ]
-
   const [selectedlandtypeOption, setSelectedlandtypeOption] = useState<{ label: string, value: string } | null>(null);
   const [selectedlandtypeid, setSelectedlandtypeid] = useState<string | null>(null);
   const [validatelandtype, setValidatelandtype] = useState(0);
@@ -910,8 +868,6 @@ const SalesAddFarmer: FC<ProfileData> = ({setFarmerAdded, isEditFarmer, handleAc
               {validateheaderabout == 1 ? (<FormFeedback type="invalid" className="text-Red text-sm"> Please select Heard Aboutus </FormFeedback>) : null}
             </div>
           </div>
-
-         
 
           <div>
             <Label htmlFor="ref_name"> Refrence Number </Label>

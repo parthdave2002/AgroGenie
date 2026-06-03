@@ -1,21 +1,17 @@
-import { FC, useEffect, useState } from "react";
+import { lazy, FC, useEffect, useState } from "react";
 import  farmerimage from "/images/users/farmer-2.png"
 import { FaArrowLeft } from "react-icons/fa";
-import SalesFarmerDashboard from "./salesFarmerDashboard";
-import { toast } from "react-toastify";
-import ToastMessage from "../../components/common/toastmessage/ToastMessage";
-import SalesMobileInput from "../../components/common/inputComponent/salesMobileInput";
-import { useDispatch, useSelector } from "react-redux";
-import { CheckCustomerExist, getCallbackdata } from "../../Store/actions";
 import moment from "moment";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { CheckCustomerExist, getCallbackdata } from "../../Store/actions";
+import { ProfilePropsData } from "../../types/types";
+const SalesFarmerDashboard = lazy(() => import("./salesFarmerDashboard"));
+const ToastMessage = lazy(() => import("../../components/common/toastmessage/ToastMessage"));
+const SalesMobileInput = lazy(() => import("../../components/common/inputComponent/salesMobileInput"));
 
-interface PropsData{
-    setDatactive :any;
-    openProfile : boolean;
-    setOpenProfile : (value : boolean) => void;
-}
-const SalesFarmerDetailsPage : FC  <PropsData> = function ({ setDatactive, openProfile,setOpenProfile })  {
+const SalesFarmerDetailsPage : FC  <ProfilePropsData> = function ({ setDatactive, openProfile,setOpenProfile })  {
     const [ Mobile_number, setMobile_number] = useState<string>("");
     const DashboardCall = (data:string) => setDatactive(data)
 

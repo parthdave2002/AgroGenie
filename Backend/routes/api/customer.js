@@ -11,4 +11,6 @@ router.put('/change-status',authentication,authorization("Customer"), customerCo
 router.get('/matchnumber',authentication,  customerController.matchNumber);
 
 router.get('/nearby-farmer',authentication,  customerController.NearbyFarmerList);
+router.get('/nearby-farmer-order',authentication,  customerController.NearbyFarmerOrderList);
+
 module.exports = router;

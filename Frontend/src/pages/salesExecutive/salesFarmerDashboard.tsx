@@ -1,30 +1,23 @@
-import React, { FC, useEffect, useState } from 'react'
-import {  FaPencilAlt, FaPowerOff } from 'react-icons/fa'
-import SalesAddFarmer from './salesAddFarmer';
-import LogoutModal from '../../components/common/modal/logoutModal';
-import FarmerHistory from './farmerHistory';
-import FarmeDashboard from './farmeDashboard';
+import React, { lazy, FC, useEffect, useState } from 'react'
+import { FaPencilAlt, FaPowerOff } from 'react-icons/fa'
 import { TiShoppingCart } from "react-icons/ti";
-import Salesproductlist from '../../components/productdetails/salesproductlist';
-import ProductDetailData from '../../components/productdetails/salesproductDetails';
-import SalesMobileInput from '../../components/common/inputComponent/salesMobileInput';
-import {  useSelector } from 'react-redux';
-import CartList from './cart';
-import LoaderPage from "../../components/common/loader/loader";
-import OrderDetails from '../../components/salesComponent/orderDetails';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-import NeaByFarmer from './nearByfarmer';
-interface PropsData{
-  setOpenProfile : (value: boolean) => void;
-  Mobile_number ?: string;
-  openComplain ?: string;
-  setOpenComplain ?: (value: string) => void;
-  orderId ?: string;
-  set_OrderId  ?: (value: string) => void;
-}
+import { FarmerDashboardPropsData } from '../../types/types';
+const NeaByFarmer = lazy(() => import("./nearByfarmer"));
+const CartList = lazy(() => import("./cart"));
+const FarmerHistory = lazy(() => import("./farmerHistory"));
+const FarmeDashboard = lazy(() => import("./farmeDashboard"));
+const SalesAddFarmer = lazy(() => import("./salesAddFarmer"));
+const LogoutModal = lazy(() => import("../../components/common/modal/logoutModal"));
+const OrderDetails = lazy(() => import("../../components/salesComponent/orderDetails"));
+const LoaderPage = lazy(() => import("../../components/common/loader/loader"));
+const SalesMobileInput = lazy(() => import("../../components/common/inputComponent/salesMobileInput"));
+const ProductDetailData = lazy(() => import("../../components/productdetails/salesproductDetails"));
+const Salesproductlist = lazy(() => import("../../components/productdetails/salesproductlist"));
 
-const SalesFarmerDashboard : FC<PropsData> = ( {setOpenProfile, Mobile_number, openComplain, setOpenComplain, orderId, set_OrderId }) => {
+const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, Mobile_number, openComplain, setOpenComplain, orderId, set_OrderId }) => {
   const [farmedAdded, setFarmerAdded] = useState(false);
   const [isLoading, setisLoading] = useState(true);
   const [ isEditFarmer, setIsEditFarmer] = useState(false);

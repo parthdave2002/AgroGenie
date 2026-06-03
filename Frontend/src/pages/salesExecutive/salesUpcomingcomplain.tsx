@@ -1,23 +1,16 @@
-import { FC, useEffect, useState } from "react";
+import { lazy, FC, useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import SalesFarmerDashboard from "./salesFarmerDashboard";
-import SalesMobileInput from "../../components/common/inputComponent/salesMobileInput";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckCustomerExist, getSalesComplainlist, ResetComplainlist } from "../../Store/actions";
 import moment from "moment";
 import { toast } from "react-toastify";
-import LoaderPage from "../../components/common/loader/loader";
-import ToastMessage from "../../components/common/toastmessage/ToastMessage";
+import { SalesComplainPropsData } from "../../types/types";
+const SalesMobileInput = lazy(() => import("../../components/common/inputComponent/salesMobileInput"));
+const LoaderPage = lazy(() => import("../../components/common/loader/loader"));
+const ToastMessage = lazy(() => import("../../components/common/toastmessage/ToastMessage"));
+const SalesFarmerDashboard = lazy(() => import("./salesFarmerDashboard"));
 
-interface PropsData{
-    setDatactive :any;
-    openComplain: string;
-    openProfile : boolean;
-    setOpenProfile : (value : boolean) => void;
-    setOpenComplain : (value : string) => void;
-}
-
-const SalesUpcomingComplainPage : FC <PropsData> = function ({ setDatactive, openProfile, setOpenProfile, openComplain, setOpenComplain })  {
+const SalesUpcomingComplainPage : FC <SalesComplainPropsData> = function ({ setDatactive, openProfile, setOpenProfile, openComplain, setOpenComplain })  {
     
     const dispatch = useDispatch()
     const [isLoading, setisLoading] = useState(false);
@@ -48,7 +41,6 @@ const SalesUpcomingComplainPage : FC <PropsData> = function ({ setDatactive, ope
         setinialTime(true)
         dispatch(ResetComplainlist())
         dispatch(getSalesComplainlist())
-
     },[])
 
     const [UserComplainDataList, setUserComplainDataList] = useState([]);

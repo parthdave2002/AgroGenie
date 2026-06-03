@@ -1,28 +1,18 @@
-import React, { FC, useEffect, useState } from 'react'
-import { Button, Table } from "flowbite-react";
+import React, { FC, lazy, useEffect, useState } from 'react'
+import { Table } from "flowbite-react";
 import { FaGhost, FaPhoneVolume, FaUserAlt, FaWindowClose } from 'react-icons/fa'
+import moment from 'moment';
+import Cookies from 'js-cookie';
+import { Input } from 'reactstrap';
+import { toast } from 'react-toastify';
 import { HiTrash } from 'react-icons/hi';
 import { FaCartShopping } from 'react-icons/fa6';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from 'reactstrap';
-import { AddOrderlist, getUpdateOrderlist, ResetOrderlist, getCouponlist, ResetCouponlist } from '../../Store/actions';
-import { toast } from 'react-toastify';
 import { BsCartXFill } from 'react-icons/bs';
-import Cookies from 'js-cookie';
-import moment from 'moment';
-import SuccessErrorModalPage from '../../components/common/modal/successErrorModal';
-import ConfirmationModalPage from '../../components/common/modal/confirmationModal';
-import { ProfileInfo } from 'types/types';
-
-interface Cartprops{
-  setCartOpen : (value : boolean) => void;
-  handleRemoveCall  : (value : boolean) => void;
-  CartData ?: any;
-  setCartItem: (value : any) => void;
-  cartOrderid ?: any;
-  setCartOrderid: (value : any) => void;
-  future_date ?:any;
-}
+import { Cartprops, ProfileInfo } from '../../types/types';
+import { AddOrderlist, getUpdateOrderlist, ResetOrderlist, getCouponlist, ResetCouponlist } from '../../Store/actions';
+const ConfirmationModalPage = lazy(() => import("../../components/common/modal/confirmationModal"));
+const SuccessErrorModalPage = lazy(() => import("../../components/common/modal/successErrorModal"));
 
 const CartList : FC<Cartprops> = ({setCartOpen,CartData, handleRemoveCall, setCartItem, cartOrderid, setCartOrderid, future_date}) => {
   const dispatch = useDispatch();
