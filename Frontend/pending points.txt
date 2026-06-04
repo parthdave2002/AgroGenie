@@ -34,3 +34,20 @@ Confirmation
 => manage lead data 
 
 ================================================ Changes =================================
+Near by farmer	Add dropdown for taluka and village filter
+	remove no info and add village name 
+	description : farmer details add in single line
+	
+Offer	"Dist, Taluka, Village, State, Land, Crop, Referral, Total confirm Order Amount, Successfull order, 
+Complain, New Farmer (0$ purchase)"
+	
+Cart 	Cart page redesign, remove customer section and show coupon list 
+	
+Farmer Dashboard	add referral section and that added number show in lead table
+	show referral point 
+	after first success order point will be credited to referrar
+	
+	show Offers list
+	
+Admin panel	admin can add referral point 
+	admin can add offers based on filters

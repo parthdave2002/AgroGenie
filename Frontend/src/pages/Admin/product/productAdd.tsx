@@ -7,13 +7,13 @@ import { HiTrash } from "react-icons/hi";
 import { Form, Input, FormFeedback } from "reactstrap";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { AddProductlist, getCategorylist, getCompanylist, getCroplist, getPackingTypelist, GetProductViewlist, ResetProductlist, UpdateProductlist } from "../../../Store/actions";
+import { AddProductlist, getCategorylist, getCompanylist, getCroplist, getPackingTypelist, GetProductViewlist, getWarehouselist, ResetProductlist, UpdateProductlist } from "../../../Store/actions";
 import { toast } from "react-toastify";
-import { DescriptionData, ProductDetails } from "types/types";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import MultiImageUploadPreview from "../../../components/common/inputComponent/multiimageuploader";
+import { DescriptionData, ProductDetails } from "../../../types/types";
 import { isactiveoption, yesnooption } from "../../../types/dropdown";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const MultiImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/multiimageuploader"));
 
 const ProductAddPage: FC = function () {
     const { id } = useParams();
@@ -33,15 +33,29 @@ const ProductAddPage: FC = function () {
     }, [file, productImage])
 
     useEffect(() => {
-        let requser ={
-           page: 1,
-            size : 25
-        }
-        if (CompanyListData.length == 0) dispatch(getCompanylist({ all: "true" }));
+        let requser ={ page: 1, size : 25 }
         if (PackingTypeListData.length == 0) dispatch(getPackingTypelist());
         if (CategoryListData.length == 0) dispatch(getCategorylist(requser));
         if (CropListData.length == 0) dispatch(getCroplist({ all: "true" }));
+        if (CompanyListData.length == 0) dispatch(getCompanylist({ all: "true" }));
+        if (warehouselist.length == 0) dispatch(getWarehouselist({ page: 1, size : 25}));
     }, [])
+
+    const CategoryCall = () => {
+        if (CategoryListData.length == 0) dispatch(getCategorylist({ page: 1, size : 25}));
+    };
+
+    const CropCall = () => {
+        if (CropListData.length == 0)  dispatch(getCroplist({ all: "true" })); 
+    };
+
+    const packingTypeCall = () => {
+        if (PackingTypeListData.length == 0)  dispatch(getPackingTypelist({ page: 1, size : 25}));   
+    };
+
+    const CompanyCall = () => {
+        if (CompanyListData.length == 0) dispatch(getCompanylist({ all: "true" }));
+    };
 
     // ------------- Company Get Data From Reducer Code Start --------------
     const [CompanyListData, setCompanyListData] = useState([]);
@@ -222,7 +236,7 @@ const ProductAddPage: FC = function () {
     };
     // ------ ismost Popular code end ------
 
-// ------ show on web code start ------
+    // ------ show on web code start ------
     const [selectedShowwebOption, setSelectedShowwebOption] = useState(null);
     const [selectedShowwebid, setSelectedShowwebid] = useState<null | boolean>(null);
     const [validateShowweb, setValidateShowweb] = useState(0);
@@ -239,6 +253,31 @@ const ProductAddPage: FC = function () {
         }
     };
     // ------ show on web code end ------
+
+    // ------ Warehouse code start ------
+    const [WarehouseListData, setWarehouseListData] = useState([]);
+    const warehouselist = useSelector((state: any) => state.Warehouse.Warehouselist);
+    const warehouseoption = WarehouseListData && WarehouseListData?.filter((item: any) => item.is_active).map((item: any) => ({ label: item.name, value: item._id }));
+    const [selectedWarehouseOption, setSelectedWarehouseOption] = useState(null);
+    const [selectedWarehouseid, setSelectedWarehouseid] = useState<null | string>(null);
+    const [validateWarehouse, setValidateWarehouse] = useState(0);
+
+    useEffect(() => {
+        setWarehouseListData(warehouselist ? warehouselist : []);
+    }, [warehouselist]);
+
+    const IsWarehousedata = (data: any) => {
+        if (!data) {
+            setSelectedWarehouseid(null);
+            setSelectedWarehouseOption(null);
+            setValidateWarehouse(1)
+        } else {
+            setSelectedWarehouseid(data.value);
+            setSelectedWarehouseOption(data);
+            setValidateWarehouse(0)
+        }
+    };
+    // ------ Warehouse code end ------
 
     const [initialValues, setinitialValues] = useState<ProductDetails>({
         added_at: '',
@@ -288,6 +327,7 @@ const ProductAddPage: FC = function () {
         isBestSelling : false,
         isMostpopular : false,
         isShowonsite : true,
+        warehouse : null,
         tech_name: {
             gujarati_tech_name: '',
             english_tech_name: ''
@@ -363,6 +403,11 @@ const ProductAddPage: FC = function () {
             //     return;
             // }
 
+            if(selectedWarehouseid == null){
+                setValidateWarehouse(1)
+                return;
+            }
+
             if (selectedpackingTypeid == null) {
                 setValidatepackingType(1)
                 return;
@@ -400,6 +445,7 @@ const ProductAddPage: FC = function () {
                 formData.append(`description[${index}][englishValue]`, item.englishValue);
             });
             formData.append("is_active", JSON.stringify(selectedactiveid));
+            formData.append("warehouse", String(selectedWarehouseid));
             if (file) {
                 file.forEach((data) => {
                     formData.append("product_pics", data);
@@ -455,27 +501,27 @@ const ProductAddPage: FC = function () {
     }, [Productlist]);
 
     useEffect(() => {
-        // setinitialValues(prev => ({
-        //     ...prev,
-        //     name: {
-        //         ...prev.name,
-        //         englishname: ProductList?.name?.englishname ?? "",
-        //         gujaratiname: ProductList?.name?.gujaratiname ?? ""
-        //     },
-        //     tech_name: {
-        //         ...prev.tech_name,
-        //         english_tech_name: ProductList?.tech_name?.english_tech_name ?? "",
-        //         gujarati_tech_name: ProductList?.tech_name?.gujarati_tech_name ?? ""
-        //     },
-        //     packaging: ProductList?.packaging ?? "",
-        //     avl_qty: ProductList?.avl_qty ?? "",
-        //     price: ProductList?.price ?? "",
-        //     discount: ProductList?.discount ?? 0,
-        //     batch_no: ProductList?.batch_no ?? "",
-        //     hsn_code: ProductList?.hsn_code ? JSON.parse(ProductList.hsn_code) : "",
-        //     c_gst: ProductList?.c_gst ?? "",
-        //     s_gst: ProductList?.s_gst ?? "",
-        // }));
+        setinitialValues((prev:any) => ({
+            ...prev,
+            name: {
+                ...prev.name,
+                englishname: ProductList?.name?.englishname ?? "",
+                gujaratiname: ProductList?.name?.gujaratiname ?? ""
+            },
+            tech_name: {
+                ...prev.tech_name,
+                english_tech_name: ProductList?.tech_name?.english_tech_name ?? "",
+                gujarati_tech_name: ProductList?.tech_name?.gujarati_tech_name ?? ""
+            },
+            packaging: ProductList?.packaging ?? "",
+            avl_qty: ProductList?.avl_qty ?? "",
+            price: ProductList?.price ?? "",
+            discount: ProductList?.discount ?? 0,
+            batch_no: ProductList?.batch_no ?? "",
+            hsn_code: ProductList?.hsn_code ? JSON.parse(ProductList.hsn_code) : "",
+            c_gst: ProductList?.c_gst ?? "",
+            s_gst: ProductList?.s_gst ?? "",
+        }));
 
         if (ProductList?.description) {
             const formattedDescription = ProductList?.description.map((desc: any) => ({
@@ -559,412 +605,82 @@ const ProductAddPage: FC = function () {
 
                         <div className="dark:bg-gray-800 flex-1 p-4 rounded-lg border border-gray-300 dark:border-gray-500 space-y-3 mb-4">
                             <div className="text-[1.2rem] font-bold dark:text-gray-100"> Product Name</div>
-                            <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="Name">Name ( Eng ) <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="englishname"
-                                        name="name.englishname"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product english name"
-                                        type="text"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values?.name?.englishname || ""}
-                                        invalid={validation.touched?.name?.englishname && validation.errors?.name?.englishname ? true : false}
-                                    />
-                                    {validation.touched.name?.englishname && validation.errors?.name?.englishname ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.name?.englishname} </FormFeedback>) : null}
+                            <div className="grid lg:grid-cols-2 gap-4">
+                                <div className="flex-1 mt-[1rem] ">
+                                    <Label htmlFor="Name">Name ( Eng ) <span className='text-red-500'>*</span> </Label>
+                                    <div className="mt-1">
+                                        <Input
+                                            id="englishname"
+                                            name="name.englishname"
+                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            placeholder="Product english name"
+                                            type="text"
+                                            onChange={validation.handleChange}
+                                            onBlur={validation.handleBlur}
+                                            value={validation.values?.name?.englishname || ""}
+                                            invalid={validation.touched?.name?.englishname && validation.errors?.name?.englishname ? true : false}
+                                        />
+                                        {validation.touched.name?.englishname && validation.errors?.name?.englishname ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.name?.englishname} </FormFeedback>) : null}
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="Name">Name ( Guj ) <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="gujaratiname"
-                                        name="name.gujaratiname"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product gujarati name"
-                                        type="text"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values?.name?.gujaratiname || ""}
-                                        invalid={validation.touched?.name?.gujaratiname && validation.errors?.name?.gujaratiname ? true : false}
-                                    />
-                                    {validation.touched?.name?.gujaratiname && validation.errors?.name?.gujaratiname ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.name?.gujaratiname} </FormFeedback>) : null}
+                                <div className="flex-1 mt-[1rem] ">
+                                    <Label htmlFor="Name">Name ( Guj ) <span className='text-red-500'>*</span> </Label>
+                                    <div className="mt-1">
+                                        <Input
+                                            id="gujaratiname"
+                                            name="name.gujaratiname"
+                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            placeholder="Product gujarati name"
+                                            type="text"
+                                            onChange={validation.handleChange}
+                                            onBlur={validation.handleBlur}
+                                            value={validation.values?.name?.gujaratiname || ""}
+                                            invalid={validation.touched?.name?.gujaratiname && validation.errors?.name?.gujaratiname ? true : false}
+                                        />
+                                        {validation.touched?.name?.gujaratiname && validation.errors?.name?.gujaratiname ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.name?.gujaratiname} </FormFeedback>) : null}
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="dark:bg-gray-800  flex-1 p-4 rounded-lg border border-gray-300  dark:border-gray-500 space-y-3 mb-4">
                             <div className="text-[1.2rem] font-bold dark:text-gray-100"> Technical Name</div>
-                            <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="tech_name">Technical Name ( Eng )</Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="tech_name_eng"
-                                        name="tech_name.english_tech_name"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product technical name"
-                                        type="text"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values?.tech_name?.english_tech_name || ""}
-                                        invalid={validation.touched?.tech_name?.english_tech_name && validation.errors?.tech_name?.english_tech_name ? true : false}
-                                    />
-                                    {validation.touched?.tech_name?.english_tech_name && validation.errors?.tech_name?.english_tech_name ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.tech_name?.english_tech_name} </FormFeedback>) : null}
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="Name">Technical Name ( Guj )  </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="gujarati_tech_name"
-                                        name="tech_name.gujarati_tech_name"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product technical  name"
-                                        type="text"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values?.tech_name?.gujarati_tech_name || ""}
-                                        invalid={validation.touched?.tech_name?.gujarati_tech_name && validation.errors?.tech_name?.gujarati_tech_name ? true : false}
-                                    />
-                                    {validation.touched?.tech_name?.gujarati_tech_name && validation.errors?.tech_name?.gujarati_tech_name ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.tech_name?.gujarati_tech_name} </FormFeedback>) : null}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="md:flex gap-x-[2rem]">
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="packaging">Packing <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="packaging"
-                                        name="packaging"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product packing"
-                                        type="number"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values.packaging ?? ""}
-                                        invalid={validation.touched.packaging && validation.errors.packaging ? true : false}
-                                    />
-                                    {validation.touched.packaging && validation.errors.packaging ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.packaging} </FormFeedback>) : null}
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="Status">Packing Type <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Select
-                                        className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-                                        value={selectedpackingTypeOption}
-                                        onChange={(e) => { IspackingTypedata(e) }}
-                                        options={packingtypeoption}
-                                        isClearable={true}
-                                    />
-                                    {validatepackingType == 1 ? (
-                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select packing type </FormFeedback>
-                                    ) : null}
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="Status">Category <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Select
-                                        className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-                                        value={selectedCategoryOption}
-                                        onChange={(e) => { IsCategorydata(e) }}
-                                        options={categoryoption}
-                                        isClearable={true}
-                                    />
-                                    {validateCategory == 1 ? (
-                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select category </FormFeedback>
-                                    ) : null}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="md:flex gap-x-[2rem]">
-
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="Status">Crop  </Label>
-                                <div className="mt-1">
-                                    <Select
-                                        className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-                                        value={selectedcropOption}
-                                        onChange={(e) => { IsCropdata(e) }}
-                                        options={cropoption}
-                                        isClearable={true}
-                                        isMulti={true}
-                                    />
-                                    {/* {validateCrop == 1 ? (
-                                    <FormFeedback type="invalid" className="text-Red text-sm"> Please Select crop </FormFeedback>
-                                ) : null} */}
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="qty"> QTY <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="avl_qty"
-                                        name="avl_qty"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product QTY"
-                                        type="number"
-                                        min="0"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values.avl_qty ?? ""}
-                                        invalid={validation.touched.avl_qty && validation.errors.avl_qty ? true : false}
-                                    />
-                                    {validation.touched.avl_qty && validation.errors.avl_qty ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.avl_qty} </FormFeedback>) : null}
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="price"> Price <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="price"
-                                        name="price"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product Price"
-                                        type="number"
-                                        min="0"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values.price ?? ""}
-                                        invalid={validation.touched.price && validation.errors.price ? true : false}
-                                    />
-                                    {validation.touched.price && validation.errors.price ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.price} </FormFeedback>) : null}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="md:flex gap-x-[2rem]">
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="discount"> Discount <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="discount"
-                                        name="discount"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product discount"
-                                        type="number"
-                                        min="0"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values.discount ?? ""}
-                                        invalid={validation.touched.discount && validation.errors.discount ? true : false}
-                                    />
-                                    {validation.touched.discount && validation.errors.discount ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.discount} </FormFeedback>) : null}
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="Status">Company <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Select
-                                        className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-                                        value={selectedCompanyOption}
-                                        onChange={(e) => { IsCompanydata(e) }}
-                                        options={companyoption}
-                                        isClearable={true}
-                                    />
-                                    {validateCompany == 1 ? (
-                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select company  </FormFeedback>
-                                    ) : null}
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="batch_no"> Batch No <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="batch_no"
-                                        name="batch_no"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product batch no"
-                                        type="text"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values.batch_no}
-                                        invalid={validation.touched.batch_no && validation.errors.batch_no ? true : false}
-                                    />
-                                    {validation.touched.batch_no && validation.errors.batch_no ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.batch_no} </FormFeedback>) : null}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="md:flex gap-x-[2rem]">
-                            <div className="flex-1 mt-[1rem]">
-                                <Label htmlFor="hsn_code"> HSN code <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Input
-                                        id="hsn_code"
-                                        name="hsn_code"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
-                                        placeholder="Product hsn code"
-                                        type="text"
-                                        onChange={validation.handleChange}
-                                        onBlur={validation.handleBlur}
-                                        value={validation.values.hsn_code}
-                                        invalid={validation.touched.hsn_code && validation.errors.hsn_code ? true : false}
-                                    />
-                                    {validation.touched.hsn_code && validation.errors.hsn_code ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.hsn_code} </FormFeedback>) : null}
-                                </div>
-                            </div>
-
-                            <div className="flex gap-x-2">
+                            <div className="grid lg:grid-cols-2 gap-4">
                                 <div className="flex-1 mt-[1rem] ">
-                                    <Label htmlFor="c_gst"> CGST <span className='text-red-500'>*</span> </Label>
+                                    <Label htmlFor="tech_name">Technical Name ( Eng )</Label>
                                     <div className="mt-1">
                                         <Input
-                                            id="c_gst"
-                                            name="c_gst"
-                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-[10rem]"
-                                            placeholder="Product CGST"
-                                            type="number"
+                                            id="tech_name_eng"
+                                            name="tech_name.english_tech_name"
+                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            placeholder="Product technical name"
+                                            type="text"
                                             onChange={validation.handleChange}
                                             onBlur={validation.handleBlur}
-                                            value={validation.values.c_gst}
-                                            invalid={validation.touched.c_gst && validation.errors.c_gst ? true : false}
+                                            value={validation.values?.tech_name?.english_tech_name || ""}
+                                            invalid={validation.touched?.tech_name?.english_tech_name && validation.errors?.tech_name?.english_tech_name ? true : false}
                                         />
-                                        {validation.touched.c_gst && validation.errors.c_gst ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.c_gst} </FormFeedback>) : null}
+                                        {validation.touched?.tech_name?.english_tech_name && validation.errors?.tech_name?.english_tech_name ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.tech_name?.english_tech_name} </FormFeedback>) : null}
                                     </div>
                                 </div>
 
                                 <div className="flex-1 mt-[1rem] ">
-                                    <Label htmlFor="s_gst"> SGST <span className='text-red-500'>*</span> </Label>
+                                    <Label htmlFor="Name">Technical Name ( Guj )  </Label>
                                     <div className="mt-1">
                                         <Input
-                                            id="s_gst"
-                                            name="s_gst"
-                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm  w-[10rem]"
-                                            placeholder="Product SGST"
-                                            type="number"
+                                            id="gujarati_tech_name"
+                                            name="tech_name.gujarati_tech_name"
+                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            placeholder="Product technical  name"
+                                            type="text"
                                             onChange={validation.handleChange}
                                             onBlur={validation.handleBlur}
-                                            value={validation.values.c_gst}
-                                            invalid={validation.touched.s_gst && validation.errors.s_gst ? true : false}
+                                            value={validation.values?.tech_name?.gujarati_tech_name || ""}
+                                            invalid={validation.touched?.tech_name?.gujarati_tech_name && validation.errors?.tech_name?.gujarati_tech_name ? true : false}
                                         />
-                                        {validation.touched.s_gst && validation.errors.s_gst ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.s_gst} </FormFeedback>) : null}
+                                        {validation.touched?.tech_name?.gujarati_tech_name && validation.errors?.tech_name?.gujarati_tech_name ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.tech_name?.gujarati_tech_name} </FormFeedback>) : null}
                                     </div>
-                                </div>
-                            </div>
-
-                            <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="Status">Status <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Select
-                                        className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-
-                                        value={selectedactiveOption}
-                                        onChange={(e) => { IsActivedata(e) }}
-                                        options={isactiveoption}
-                                        isClearable={true}
-                                    />
-                                    {validateactive == 1 ? (
-                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select status </FormFeedback>
-                                    ) : null}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="md:flex gap-x-[2rem]">
-                            <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="isBestSelling"> Show on Best Selling <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Select  className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-                                        value={selectedBestSellingOption}  onChange={(e) => { IsBestSellingdata(e) }}   options={yesnooption}   isClearable={true}   />
-                                    {validateBestSelling == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Best Selling </FormFeedback>  : null}
-                                </div>
-                            </div>
-
-                               <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="isMostpopular"> Show on Most Popular <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Select  className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-                                          value={selectedMostPopularOption}   onChange={(e) => { IsMostpopulardata(e) }} options={yesnooption}   isClearable={true}  />
-                                    {validateMostpopular == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Most Popular </FormFeedback>  : null}
-                                </div>
-                            </div>
-
-                               <div className="flex-1 mt-[1rem] ">
-                                <Label htmlFor="isShowonsite"> Show on Web <span className='text-red-500'>*</span> </Label>
-                                <div className="mt-1">
-                                    <Select
-                                        className="w-full dark:text-white"
-                                        classNames={{
-                                            control: () => "react-select__control",
-                                            singleValue: () => "react-select__single-value",
-                                            menu: () => "react-select__menu",
-                                            option: ({ isSelected }) =>
-                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
-                                            placeholder: () => "react-select__placeholder",
-                                        }}
-                                        value={selectedShowwebOption}  onChange={(e) => { IsShowwebdata(e) }}  options={yesnooption}   isClearable={true} />
-                                    {validateShowweb == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select status </FormFeedback>  : null}
                                 </div>
                             </div>
                         </div>
@@ -1078,6 +794,366 @@ const ProductAddPage: FC = function () {
                                 </div>
                             ))}
                         </div>
+
+                        <div className="md:flex gap-x-[2rem]">
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="packaging">Packing <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Input
+                                        id="packaging"
+                                        name="packaging"
+                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        placeholder="Product packing"
+                                        type="number"
+                                        onChange={validation.handleChange}
+                                        onBlur={validation.handleBlur}
+                                        value={validation.values.packaging ?? ""}
+                                        invalid={validation.touched.packaging && validation.errors.packaging ? true : false}
+                                    />
+                                    {validation.touched.packaging && validation.errors.packaging ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.packaging} </FormFeedback>) : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="Status">Packing Type <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1" onClick={() => packingTypeCall() }>
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedpackingTypeOption}
+                                        onChange={(e) => { IspackingTypedata(e) }}
+                                        options={packingtypeoption}
+                                        isClearable={true}
+                                    />
+                                    {validatepackingType == 1 ? (
+                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select packing type </FormFeedback>
+                                    ) : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="Status">Category <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1" onClick={() => CategoryCall() }>
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedCategoryOption}
+                                        onChange={(e) => { IsCategorydata(e) }}
+                                        options={categoryoption}
+                                        isClearable={true}
+                                    />
+                                    {validateCategory == 1 ? (
+                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select category </FormFeedback>
+                                    ) : null}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="md:flex gap-x-[2rem]">
+
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="Status">Crop  </Label>
+                                <div className="mt-1"  onClick={() => CropCall() }>
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedcropOption}
+                                        onChange={(e) => { IsCropdata(e) }}
+                                        options={cropoption}
+                                        isClearable={true}
+                                        isMulti={true}
+                                    />
+                                    {/* {validateCrop == 1 ? (
+                                    <FormFeedback type="invalid" className="text-Red text-sm"> Please Select crop </FormFeedback>
+                                ) : null} */}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="qty"> QTY <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Input
+                                        id="avl_qty"
+                                        name="avl_qty"
+                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        placeholder="Product QTY"
+                                        type="number"
+                                        min="0"
+                                        onChange={validation.handleChange}
+                                        onBlur={validation.handleBlur}
+                                        value={validation.values.avl_qty ?? ""}
+                                        invalid={validation.touched.avl_qty && validation.errors.avl_qty ? true : false}
+                                    />
+                                    {validation.touched.avl_qty && validation.errors.avl_qty ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.avl_qty} </FormFeedback>) : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="price"> Price <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Input
+                                        id="price"
+                                        name="price"
+                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        placeholder="Product Price"
+                                        type="number"
+                                        min="0"
+                                        onChange={validation.handleChange}
+                                        onBlur={validation.handleBlur}
+                                        value={validation.values.price ?? ""}
+                                        invalid={validation.touched.price && validation.errors.price ? true : false}
+                                    />
+                                    {validation.touched.price && validation.errors.price ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.price} </FormFeedback>) : null}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="md:flex gap-x-[2rem]">
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="discount"> Discount <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Input
+                                        id="discount"
+                                        name="discount"
+                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        placeholder="Product discount"
+                                        type="number"
+                                        min="0"
+                                        onChange={validation.handleChange}
+                                        onBlur={validation.handleBlur}
+                                        value={validation.values.discount ?? ""}
+                                        invalid={validation.touched.discount && validation.errors.discount ? true : false}
+                                    />
+                                    {validation.touched.discount && validation.errors.discount ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.discount} </FormFeedback>) : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem] ">
+                                <Label htmlFor="Status">Company <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1" onClick={() => CompanyCall() }>
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedCompanyOption}
+                                        onChange={(e) => { IsCompanydata(e) }}
+                                        options={companyoption}
+                                        isClearable={true}
+                                    />
+                                    {validateCompany == 1 ? (
+                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select company  </FormFeedback>
+                                    ) : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="batch_no"> Batch No <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Input
+                                        id="batch_no"
+                                        name="batch_no"
+                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        placeholder="Product batch no"
+                                        type="text"
+                                        onChange={validation.handleChange}
+                                        onBlur={validation.handleBlur}
+                                        value={validation.values.batch_no}
+                                        invalid={validation.touched.batch_no && validation.errors.batch_no ? true : false}
+                                    />
+                                    {validation.touched.batch_no && validation.errors.batch_no ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.batch_no} </FormFeedback>) : null}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="md:flex gap-x-[2rem]">
+                            <div className="flex-1 mt-[1rem]">
+                                <Label htmlFor="hsn_code"> HSN code <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Input
+                                        id="hsn_code"
+                                        name="hsn_code"
+                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        placeholder="Product hsn code"
+                                        type="text"
+                                        onChange={validation.handleChange}
+                                        onBlur={validation.handleBlur}
+                                        value={validation.values.hsn_code}
+                                        invalid={validation.touched.hsn_code && validation.errors.hsn_code ? true : false}
+                                    />
+                                    {validation.touched.hsn_code && validation.errors.hsn_code ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.hsn_code} </FormFeedback>) : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1">
+                                <div className="flex  gap-x-2">
+                                    <div className="flex-1 mt-[1rem] ">
+                                        <Label htmlFor="c_gst"> CGST <span className='text-red-500'>*</span> </Label>
+                                        <div className="mt-1">
+                                            <Input
+                                                id="c_gst"
+                                                name="c_gst"
+                                                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-[10rem]"
+                                                placeholder="Product CGST"
+                                                type="number"
+                                                onChange={validation.handleChange}
+                                                onBlur={validation.handleBlur}
+                                                value={validation.values.c_gst}
+                                                invalid={validation.touched.c_gst && validation.errors.c_gst ? true : false}
+                                            />
+                                            {validation.touched.c_gst && validation.errors.c_gst ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.c_gst} </FormFeedback>) : null}
+                                        </div>
+                                    </div>
+
+                                    <div className="flex-1 mt-[1rem] ">
+                                        <Label htmlFor="s_gst"> SGST <span className='text-red-500'>*</span> </Label>
+                                        <div className="mt-1">
+                                            <Input
+                                                id="s_gst"
+                                                name="s_gst"
+                                                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm  w-[10rem]"
+                                                placeholder="Product SGST"
+                                                type="number"
+                                                onChange={validation.handleChange}
+                                                onBlur={validation.handleBlur}
+                                                value={validation.values.c_gst}
+                                                invalid={validation.touched.s_gst && validation.errors.s_gst ? true : false}
+                                            />
+                                            {validation.touched.s_gst && validation.errors.s_gst ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors.s_gst} </FormFeedback>) : null}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem] ">
+                                <Label htmlFor="Status">Status <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+
+                                        value={selectedactiveOption}
+                                        onChange={(e) => { IsActivedata(e) }}
+                                        options={isactiveoption}
+                                        isClearable={true}
+                                    />
+                                    {validateactive == 1 ? (
+                                        <FormFeedback type="invalid" className="text-Red text-sm"> Please Select status </FormFeedback>
+                                    ) : null}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="md:flex grid grid-cols-3 gap-x-[2rem]">
+                            <div className="flex-1 mt-[1rem] ">
+                                <Label htmlFor="isBestSelling"> Show on Best Selling <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Select  className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedBestSellingOption}  onChange={(e) => { IsBestSellingdata(e) }}   options={yesnooption}   isClearable={true}   />
+                                    {validateBestSelling == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Best Selling </FormFeedback>  : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem] ">
+                                <Label htmlFor="isMostpopular"> Show on Most Popular <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Select  className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                          value={selectedMostPopularOption}   onChange={(e) => { IsMostpopulardata(e) }} options={yesnooption}   isClearable={true}  />
+                                    {validateMostpopular == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select Most Popular </FormFeedback>  : null}
+                                </div>
+                            </div>
+
+                            <div className="flex-1 mt-[1rem] ">
+                                <Label htmlFor="isShowonsite"> Show on Web <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedShowwebOption}  onChange={(e) => { IsShowwebdata(e) }}  options={yesnooption}   isClearable={true} />
+                                    {validateShowweb == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select status </FormFeedback>  : null}
+                                </div>
+                            </div>
+
+                            
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-y-2">
+                            <div className="flex-1 mt-[1rem] ">
+                                <Label htmlFor="isShowonsite"> Warehouse <span className='text-red-500'>*</span> </Label>
+                                <div className="mt-1">
+                                    <Select
+                                        className="w-full dark:text-white"
+                                        classNames={{
+                                            control: () => "react-select__control",
+                                            singleValue: () => "react-select__single-value",
+                                            menu: () => "react-select__menu",
+                                            option: ({ isSelected }) =>
+                                                isSelected ? "react-select__option--is-selected" : "react-select__option",
+                                            placeholder: () => "react-select__placeholder",
+                                        }}
+                                        value={selectedWarehouseOption}  onChange={(e) => { IsWarehousedata(e) }}  options={warehouseoption} isClearable={true} />
+                                    {validateWarehouse == 1 ?  <FormFeedback type="invalid" className="text-Red text-sm"> Please Select warehouse </FormFeedback>  : null}
+                                </div>
+                            </div>
+                        
+                        </div>
+
 
                         <div className="flex gap-x-3 justify-end mt-[1rem]">
                             <Button className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton" type="submit" > {id ? "Update Product" : "Add Product"} </Button>
