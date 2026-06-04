@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { BsCartCheckFill, BsFillStopwatchFill } from "react-icons/bs";
-import { FaCircleCheck, FaRegClock } from "react-icons/fa6";
+import { FaRegClock } from "react-icons/fa";
+import { FaCircleCheck } from "react-icons/fa6";
 import { MdReport } from "react-icons/md";
 
 export const genderoption = [
@@ -63,8 +65,44 @@ export const ManagerDashboardTabData = [
   { title: "Completed", icon: <FaCircleCheck size={20} /> },
 ];
 
-export const  FarmerDashboardTabData = [
-  { title: "Order", icon: <BsCartCheckFill  size={20} /> },
-  { title: "Complain", icon: <MdReport  size={20} /> },
-  { title: "Taglog", icon: <FaRegClock  size={20} /> },
-];
+export const FarmerDashboardTabData = [
+  { title: "Order", icon: <BsCartCheckFill size={20} /> },
+  { title: "Complain", icon: <MdReport size={20} /> },
+  { title: "Taglog", icon: <FaRegClock size={20} /> },
+]
+
+export const IrrigationSourceOptions= [
+  { label :"Well", value : "well"},
+  { label :"Borwell", value : "borwell"},
+  { label :"Canal", value : "canal"},
+  { label :"Other", value : "other"},
+  { label :"No source", value : "no source"},
+]
+
+export const IrrigationTypeOptions= [
+  { label :"Drip", value : "drip"},
+  { label :"Sprinkler", value : "sprinkler"},
+  { label :"Flood", value : "flood"},
+]
+
+export  const LandTypeOptions= [
+  { label :"Acre", value : "acre"},
+  { label :"Bigha", value : "bigha"},
+  { label :"Hacter", value : "hacter"},
+]
+
+export const HeardAboutOprions =  [
+  { label :"Newspaper", value : "newspaper"},
+  { label :"TV Ad", value : "tv add"},
+  { label :"Magazine", value : "magazine"},
+  { label :"Van campaign", value : "van campaign"},
+  { label :"Instagram", value : "instagram"},
+  { label :"Facebook", value : "facebook"},
+  { label :"What's App", value : "whatsapp"},
+  { label :"Linkedin", value : "linkedin"},
+  { label :"Youtube", value : "youtube"},
+  { label :"Brochure ", value : "brochure"},
+  { label :"Agro shop", value : "shop"},
+  { label :"Field office", value : "officer"},
+  { label :"Other farmer", value : "other farmer"},
+]

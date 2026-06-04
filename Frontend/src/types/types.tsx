@@ -181,6 +181,7 @@ export interface ProductDetails {
   tech_name: TechName;
   _id: string;
   crops ?: any;
+  warehouse ?: null| { name: string; _id: string };
 }
 
 export interface ProfileData {

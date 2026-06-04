@@ -1,12 +1,11 @@
 import { lazy,FC, Suspense, useEffect, useState, useMemo } from "react";
 import moment from "moment";
 import { Button } from "flowbite-react";
-import { HiTrash} from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { ChangeStatusCompanylist, DeleteWarehouselist,  getWarehouselist } from "../../Store/actions";
+import { DeleteWarehouselist,  getWarehouselist } from "../../Store/actions";
 import UseAccessList from "../../hooks/useAccessList";
-import { FaExchangeAlt } from "react-icons/fa";
+import { FaExchangeAlt, FaExclamationCircle } from "react-icons/fa";
 const DeleteModalPage = lazy(() => import("../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
@@ -94,6 +93,10 @@ const WarehousePage: FC = function () {
     navigate("/warehouse/add")
   }
 
+  const DetailsWarehouseCall = (id:any) =>{
+    navigate(`/warehouse/details/${id}`)
+  }
+
   let Name = "Warehouse List";
   let Searchplaceholder = "Search For Warehouse (Name)";
   let AddAccess = accessList?.add;
@@ -111,6 +114,7 @@ const WarehousePage: FC = function () {
         <div className="flex items-center gap-x-3">
           {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
           {/* {accessList?.delete && <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Warehouse </div> </Button>} */}
+           <Button gradientDuoTone="purpleToBlue" onClick={() => DetailsWarehouseCall(row._id)} > <div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Warehouse </div> </Button>
         </div>
       ),
     },
