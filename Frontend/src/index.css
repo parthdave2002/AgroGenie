@@ -138,6 +138,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   @apply text-white;
 }
 
+.farmerProfile{
+  @apply dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem];
+}
+
 @media print {
   .page-break {
     page-break-after: always;

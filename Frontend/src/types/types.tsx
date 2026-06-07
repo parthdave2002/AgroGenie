@@ -211,8 +211,9 @@ export interface CustomerDetails {
   land_type: string;
   mobile_number: number;
   pincode: string;
-  taluka: string;
-  village: string;
+  taluka: string | Location;
+  village: string | Location;
+  village_name: string;
   _id: string;
 }
 
@@ -267,6 +268,7 @@ export interface OrderDetailsType {
 
   export interface NearByFarmerProps {
     farmerId: string;
+    SelectedFarmerDetails : ProfileInfo;
     OpenFarmerDetailsModal : boolean;
     setisOpenConfirmModel : () => void;
   }

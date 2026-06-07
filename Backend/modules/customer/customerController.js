@@ -212,17 +212,14 @@ customerController.NearbyFarmerList = async (req, res, next) => {
       { path: 'district', model: 'District', select: 'name' },
     ];
 
+    const area_type = req.query.area_type || "village";
     const customer_id = req.query.customer_id;
-    if (!customer_id) {
-      return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Customer id is required', null);
-    }
+    if (!customer_id) otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Customer id is required', null);
 
     const customer = await customerSch.findById(customer_id);
-    if (!customer) {
-      return otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Customer not found', null);
-    }
+    if (!customer) otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Customer not found', null);
 
-    const nearbyQuery = { village: customer.village, _id: { $ne: customer_id } };
+    const nearbyQuery = { [area_type]: customer[area_type], _id: { $ne: customer_id } };
     const [sameVillageCustomers, totalData] = await Promise.all([
       customerSch
         .find(nearbyQuery)
@@ -237,16 +234,7 @@ customerController.NearbyFarmerList = async (req, res, next) => {
       customerSch.countDocuments(nearbyQuery),
     ]);
 
-    return otherHelper.paginationSendResponse(
-      res,
-      httpStatus.OK,
-      true,
-      sameVillageCustomers,
-      'Near By farmer found',
-      page,
-      size,
-      totalData
-    );
+    return otherHelper.paginationSendResponse( res, httpStatus.OK, true, sameVillageCustomers, 'Near By farmer found', page, size, totalData );
   } catch (err) {
     next(err);
   }
