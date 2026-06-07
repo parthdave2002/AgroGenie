@@ -106,3 +106,8 @@ export const HeardAboutOprions =  [
   { label :"Field office", value : "officer"},
   { label :"Other farmer", value : "other farmer"},
 ]
+
+export const NearByOptions= [
+  { label :"Village", value : "village"},
+  { label :"Taluka", value : "taluka"},
+]

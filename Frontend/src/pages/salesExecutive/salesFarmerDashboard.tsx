@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { FarmerDashboardPropsData } from '../../types/types';
 const NeaByFarmer = lazy(() => import("./nearByfarmer"));
+const AddReferralFarmer = lazy(() => import("./referralAdd"));
 const CartList = lazy(() => import("./cart"));
 const FarmerHistory = lazy(() => import("./farmerHistory"));
-const FarmeDashboard = lazy(() => import("./farmeDashboard"));
+const FarmeDashboardProfile = lazy(() => import("./farmeDashboard"));
 const SalesAddFarmer = lazy(() => import("./salesAddFarmer"));
 const LogoutModal = lazy(() => import("../../components/common/modal/logoutModal"));
 const OrderDetails = lazy(() => import("../../components/salesComponent/orderDetails"));
@@ -186,14 +187,18 @@ const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, M
                       <div className='flex-1 flex text-[2rem] dark:text-gray-400 font-bold self-end '> Personal Info</div>
                       <div className='flex-1 flex justify-end  self-end '> <div className='border border-indigo-500 text-indigo-500 dark:text-white hover:text-gray-100 font-semibold px-6 py-2 rounded-full  gap-3 hover:bg-indigo-800 transition flex text-center cursor-pointer  transition-all duration-500 ease-in-out' onClick={() => EditFarmerCall()}> <FaPencilAlt className='self-center h-5 w-5' />Update Farmer  </div> </div>
                     </div>
-                    <FarmeDashboard viewButton={true} classData="border dark:border-gray-600 rounded-xl w-full py-2 px-4 transition-all duration-800 ease-in-out" />
+                    <FarmeDashboardProfile viewButton={true} classData="border dark:border-gray-600 rounded-xl w-full py-2 px-4 transition-all duration-800 ease-in-out" />
 
                     <div className="flex gap-4 mt-[2rem]">
-                      <div className="w-[65%]">
-                        Left Content
+                       <div className="flex-1">
+                        <NeaByFarmer  />
                       </div>
 
-                      <div className="w-[35%] ">
+                       <div className="flex-1">
+                        <AddReferralFarmer  />
+                      </div>
+
+                      <div className="flex-1">
                         <NeaByFarmer  />
                       </div>
                     </div>

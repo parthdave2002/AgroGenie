@@ -7,7 +7,7 @@ import { NearByFarmerProps } from '../../types/types';
 import CommonTable from '../../components/common/table/commonTable';
 import ExamplePagination from '../../components/common/pagination/pagination';
 
-const NeaByFarmerDetails : FC  <NearByFarmerProps> = ({farmerId,OpenFarmerDetailsModal, setisOpenConfirmModel}) => {
+const NeaByFarmerDetails : FC  <NearByFarmerProps> = ({farmerId,OpenFarmerDetailsModal, setisOpenConfirmModel, SelectedFarmerDetails}) => {
     const dispatch = useDispatch()
     const [FarmerDataList, setFarmerDataList] = useState([]);    
 
@@ -25,14 +25,6 @@ const NeaByFarmerDetails : FC  <NearByFarmerProps> = ({farmerId,OpenFarmerDetail
       };
      const PageDataList = (data:any) =>{ setPageNo(data)}
   // ------------- Next button Code End -------------
-
-  // // ----------- next Button  Code Start -------------
-  //   const [TotalListData, setTotalListData] = useState(0);
-  //   const [CurrentPageNo, setCurrentPageNo] = useState(0);
-  //   const [PageNo, setPageNo] = useState(1);
-  //   const [RoePerPage, setRoePerPage] = useState(5);
-  //   const PageDataList = (data:any) =>{ setPageNo(data)}
-  // // ------------- Next button Code End -------------
 
   useEffect(() =>{
     let requser = {
@@ -120,13 +112,20 @@ const NeaByFarmerDetails : FC  <NearByFarmerProps> = ({farmerId,OpenFarmerDetail
           render: (row: any) => moment(row.added_at).format("DD-MM-YYYY hh:mm:ss"),
         },
     ],[]);
-    
+
   return (
     <>
        <Modal onClose={() => setisOpenConfirmModel()}  show={OpenFarmerDetailsModal} size="6xl">
         <Modal.Header> NearBy Order Details </Modal.Header>
         <Modal.Body>
           <div className='flex flex-col gap-y-3'>
+          <div className='flex grid grid-cols-3 gap-4 items-center justify-between dark:bg-gray-800 bg-gray-100 dark:text-gray-50 p-3 rounded-md'>
+            <p> Name : {SelectedFarmerDetails?.firstname} {SelectedFarmerDetails?.middlename} {SelectedFarmerDetails?.lastname} </p>
+            <p> Taluka : {SelectedFarmerDetails?.taluka?.name} </p>
+            <p> Village : {SelectedFarmerDetails?.village?.name} </p>
+            <p> Crops : {SelectedFarmerDetails?.crops?.map((crop: any) => crop.name).join(", ")} </p>
+          </div>
+
            <CommonTable columns={orderColumns} data={FarmerDataList || []} />
            <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
           </div>

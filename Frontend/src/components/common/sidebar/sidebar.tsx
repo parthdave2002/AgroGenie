@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import { HiShoppingBag, HiCube, HiPuzzle, HiUsers, HiChartPie, HiLibrary } from "react-icons/hi";
-import { FaAddressBook, FaClipboardList, FaWarehouse, FaUserTag  } from "react-icons/fa";
+import { FaAddressBook, FaClipboardList, FaWarehouse, FaUserTag, FaTasks  } from "react-icons/fa";
 import {  MdComputer, MdLeaderboard, MdRateReview } from "react-icons/md"; 
 import { TbReportSearch } from "react-icons/tb";
-import { GiWheat } from "react-icons/gi";
+import { GiTwoCoins, GiWheat } from "react-icons/gi";
 import { FaUser, FaTags  } from "react-icons/fa";
 import { FaSackDollar, FaBoxesPacking  } from "react-icons/fa6";
 import { BsCloudArrowUpFill, BsBuildingsFill } from "react-icons/bs";
@@ -156,6 +156,16 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       name: "Advisor Category",
       icon:  FaUserTag,
       to: "/users/category/list",
+    },
+    {
+      name: "Referral Rules",
+      icon: GiTwoCoins,
+      to: "/referral-rules/list",
+    },
+    {
+      name: "Task Management",
+      icon:  FaTasks,
+      to: "/kanban",
     },
   ]
 

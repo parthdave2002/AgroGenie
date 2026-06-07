@@ -26,6 +26,7 @@ import NoticeBoard from "./NoticeBoard/reducer";
 import Warehouse from "./Warehouse/reducer";
 import SalesDashboard from "./SalesExecutive/dashboard/reducer";
 import Kanban from "./Kanban/reducer";
+import Referral from "./Referral/reducer";
 
 const rootReducer = combineReducers({
     // public
@@ -56,6 +57,7 @@ const rootReducer = combineReducers({
     Location,
     Warehouse,
     Kanban,
+    Referral
 });
 
 export default rootReducer;

@@ -217,6 +217,12 @@ export const AddCouponlistApi = async (requserdata) => await api.create(url.ADD_
 export const DelCouponlistApi = async (requserdata) => await api.delete(url.DELETE_COUPON_LIST, requserdata);
 export const StatusCouponlistApi = async (requserdata) => await api.delete(url.CHANGE_STATUS_COUPON_LIST, requserdata);
 
+//  Referral Rules API
+export const ReferralRulesApi = (requserdata) => api.get(url.GET_REFERRAL_RULES_LIST, requserdata);
+export const AddReferralRulesApi = async (requserdata) => await api.create(url.ADD_REFERRAL_RULES_LIST, requserdata);
+export const DelReferralRulesApi = async (requserdata) => await api.delete(url.DELETE_REFERRAL_RULES_LIST, requserdata);
+export const StatusReferralRulesApi = async (requserdata) => await api.delete(url.CHANGE_STATUS_REFERRAL_RULES_LIST, requserdata);
+
 // NoticeBoard API
 export const NoticeBoardlistApi = (requserdata) => api.get(url.GET_NOTICE_BOARD_LIST, requserdata);
 export const AddNoticeBoardlistApi = async (requserdata) => await api.postMultipart(url.ADD_NOTICE_BOARD_LIST, requserdata);
