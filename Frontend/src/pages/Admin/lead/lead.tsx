@@ -1,18 +1,17 @@
 import { FC, lazy, useEffect, useState } from "react";
-import { Button, Modal } from "flowbite-react";
-import Select from "react-select";
-import { useDispatch, useSelector } from "react-redux";
-import { FormFeedback, Input } from "reactstrap";
-import { GiCheckMark } from "react-icons/gi";
 import moment from "moment";
+import Select from "react-select";
+import { GiCheckMark } from "react-icons/gi";
+import { Button, Modal } from "flowbite-react";
+import { FormFeedback, Input } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { getleadlist } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { LeadList } from "../../../types/types";
+import { leadoption } from "../../../types/dropdown";
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
-
-
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const LeadListPage: FC = function () {
   const dispatch = useDispatch();
@@ -55,6 +54,14 @@ const columnsContactUs = [
   { key: "status", label: "Status" },
 ];
 
+const columnsReferral = [
+  { key: "name", label: "Name" },
+  { key: "mobile_number", label: "Phone" },
+  { key: "referrer", label: "Referrer", render: (row: any) => <span className="truncate max-w-[15rem]">{row?.referrer?.customer_name}</span> },
+  { key: "added_at", label: "Created At", render: (row: any) => moment(row.added_at).format("DD-MM-YYYY hh:ss:mm") },
+  { key: "status", label: "Status" },
+];
+
   // -------- order open modal -------------
       const [ProductModal, setProductModal] = useState(false);
       const [ProductItemModal, setProductItemModal] = useState({});
@@ -77,12 +84,6 @@ const columnsContactUs = [
       setSelectedStatusOption(data);
     }
   };
-
-  const isactiveoption = [
-    { label: "Contact Us Page", value: "contactus" },
-    { label: "Help Page", value: "help" },
-    { label: "Order", value: "order" }
-  ];
 
   const Name = "Lead List";
   const Searchplaceholder = "Search For Lead";
@@ -125,9 +126,9 @@ const columnsContactUs = [
       <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
         <ExampleBreadcrumb Name={Name} Searchplaceholder={Searchplaceholder} searchData={searchData} Changename={Changename} />
 
-        <div className="bg-white dark:bg-gray-800 p-4 flex gap-x-4">
+        <div className="bg-White dark:bg-Cosmos p-4 flex gap-x-4">
           <Select
-            className="w-[15rem] dark:text-white"
+            className="w-[15rem] dark:text-White"
             classNames={{
               control: () => "react-select__control",
               singleValue: () => "react-select__single-value",
@@ -138,13 +139,13 @@ const columnsContactUs = [
             }}
             value={selectedStatusOption}
             onChange={(e) => { IsActivedata(e) }}
-            options={isactiveoption}
+            options={leadoption}
             isClearable={true}
           />
         </div>
 
 
-        <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+        <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
           {selectedStatusid === "order" && (
             <CommonTable columns={columnsOrder} data={UserDataList} emptyMessage="No order leads found" />
           )}
@@ -153,6 +154,9 @@ const columnsContactUs = [
           )}
           {selectedStatusid === "contactus" && (
             <CommonTable columns={columnsContactUs} data={UserDataList} emptyMessage="No contact us leads found" />
+          )}
+          {selectedStatusid === "referral" && (
+            <CommonTable columns={columnsReferral} data={UserDataList} emptyMessage="No referral leads found" />
           )}
         </div>
 
@@ -170,7 +174,7 @@ const columnsContactUs = [
               <Input
                 id="comment"
                 name="comment"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-[22rem]"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-[22rem]"
                 placeholder="Enter comment"
                 type="textarea"
                 onChange={(e) => { DataChange(e) }}
@@ -194,38 +198,38 @@ const columnsContactUs = [
                         className="font-sans"
                       >
       {/* Header */}
-                        <Modal.Header className="px-6 pt-6 pb-2 border-b border-gray-200 dark:border-gray-700">
-                          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        <Modal.Header className="px-6 pt-6 pb-2 border-b border-WhiteMarble dark:border-TranquilBlack">
+                          <h2 className="text-lg font-semibold text-DarkBackground dark:text-White">
                             Product Details
                           </h2>
                         </Modal.Header>
 
                         {/* Body */}
-                        <Modal.Body className="px-6 py-4 space-y-4 bg-gray-50 dark:bg-gray-900">
+                        <Modal.Body className="px-6 py-4 space-y-4 bg-White dark:bg-DarkBackground">
                           {Array.isArray(ProductItemModal) && ProductItemModal.length > 0 ? (
-                            <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                            <div className="divide-y divide-WhiteMarble dark:divide-TranquilBlack">
                               {ProductItemModal.map((item, k) => (
                                 <div
                                   key={k}
                                   className="py-3 grid grid-cols-2 md:grid-cols-4 gap-3 items-center"
                                 >
-                                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                  <p className="text-sm font-medium text-TranquilBlack dark:text-SoothingBlueGrey">
                                     {item?._id?.name?.englishname || "-"}
                                   </p>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                  <p className="text-sm text-Hydrocarbon dark:text-SilverSteel">
                                     {item?._id?.categories?.name_eng || "-"}
                                   </p>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                  <p className="text-sm text-Hydrocarbon dark:text-SilverSteel">
                                     {item?._id?.packaging || "-"}  {item?._id?.packagingtype?.type_eng || "-"}
                                   </p>
-                                  <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                  <p className="text-sm font-semibold text-Cosmos dark:text-WhiteMarble">
                                     Qty: {item?.quantity || 0}
                                   </p>
                                 </div>
                               ))}
                             </div>
                           ) : (
-                            <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
+                            <p className="text-sm text-SharkGray dark:text-SilverSteel text-center py-4">
                               No product details available.
                             </p>
                           )}

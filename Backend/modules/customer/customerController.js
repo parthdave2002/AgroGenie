@@ -2,7 +2,10 @@ const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const customerSch = require('../../schema/customerSchema');
 const orderSch = require("../../schema/orderSchema");
-const complainSch = require("../../schema/complainSchema")
+const complainSch = require("../../schema/complainSchema");
+const leadSch = require('../../schema/leadSchema');
+const WalletHelper = require('../../helper/wallet.helper');
+const WALLET_EVENTS = require('../constants/walletEvents');
 
 const customerController = {};
 
@@ -77,6 +80,15 @@ customerController.AddCustomerData = async (req, res, next) => {
       customerData.created_by = req.user.id;
       customerData.added_at = new Date();
       const newCustomer = await new customerSch(customerData).save();
+
+      if(customerData?.ref_name){
+        await WalletHelper.processReferral(newCustomer);
+      }else{
+        await WalletHelper.creditPoints({
+          customerId: newCustomer._id,
+          eventType: WALLET_EVENTS.CUSTOMER_REGISTERED
+        });
+      }
 
       const populatedCustomer  =  await customerSch
           .findById(newCustomer._id)
@@ -192,7 +204,16 @@ customerController.matchNumber = async (req, res, next) => {
         customer = await customerSch.findById(complain.customer_id).populate(populate);
       }
     }
-    if (!customer)   return otherHelper.sendResponse(res, httpStatus.OK, false, null, null, 'Customer not matched', null);
+
+    if (!customer) {
+      if (number) {
+        const referralLead = await leadSch.findOne({ mobile_number: Number(number), type: 'referral' }).populate([{ path: 'referrer', model: 'customer', select: 'firstname lastname middlename' }]).select('name mobile_number type referrer').lean();
+        if (referralLead) {
+          return otherHelper.sendResponse( res, httpStatus.OK, false, referralLead, null, 'Customer not matched', null,);
+        }
+      }
+      return otherHelper.sendResponse(res, httpStatus.OK, false, null, null, 'Customer not matched', null);
+    }
 
     return otherHelper.sendResponse(res, httpStatus.OK, true, customer, null, 'Customer found', null);
   } catch (err) {

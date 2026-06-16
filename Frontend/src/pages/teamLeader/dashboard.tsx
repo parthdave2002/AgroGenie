@@ -228,13 +228,13 @@ const TeamLeaderDashboard = () => {
       <div>
         <div className="md:flex flex-wrap gap-3">
             <div className="w-[calc(33%-6px)] md:w-[32%] w-full mt-[1.5rem] md:mt-0">
-              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-gray-800 dark:text-gray-50">
+              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaHandHoldingDollar className="text-white w-6 h-6" />
+                    <FaHandHoldingDollar className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
-                    <select className="border border-gray-300 rounded-full px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-50" defaultValue="daily" onChange={(e) => OrderDropDownCall(e)}>
+                    <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily" onChange={(e) => OrderDropDownCall(e)}>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
                       <option value="monthly">Monthly</option>
@@ -250,13 +250,13 @@ const TeamLeaderDashboard = () => {
             </div>
 
             <div className="w-[calc(33%-6px)] md:w-[32%] w-full mt-[1.5rem] md:mt-0">
-              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-gray-800 dark:text-gray-50">
+              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaRupeeSign className="text-white w-6 h-6" />
+                    <FaRupeeSign className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
-                    <select className="border border-gray-300 rounded-full px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-50" defaultValue="daily" onChange={(e) => revenueDropDownCall(e)}>
+                    <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily" onChange={(e) => revenueDropDownCall(e)}>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
                       <option value="monthly">Monthly</option>
@@ -289,13 +289,13 @@ const TeamLeaderDashboard = () => {
             </div>
 
             <div className="w-[calc(33%-6px)] md:w-[32%] w-full mt-[1.5rem] md:mt-0">
-              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-gray-800 dark:text-gray-50">
+              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaUser className="text-white w-6 h-6" />
+                    <FaUser className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
-                    <select className="border border-gray-300 rounded-full px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-50" defaultValue="daily" onChange={(e) => UserDropDownCall(e)}>
+                    <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily" onChange={(e) => UserDropDownCall(e)}>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
                       <option value="monthly">Monthly</option>
@@ -313,13 +313,13 @@ const TeamLeaderDashboard = () => {
         <div className="my-3">
           <div className="md:flex flex-wrap gap-3">
             <div className="w-[calc(33%-6px)] md:w-[32%] w-full mt-[1.5rem] md:mt-0">
-              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-gray-800 dark:text-gray-50">
+              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaAsterisk  className="text-white w-6 h-6" />
+                    <FaAsterisk  className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
-                    <select className="border border-gray-300 rounded-full px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-50" defaultValue="daily" onChange={(e) => returncountDropDownCall(e)}>
+                    <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily" onChange={(e) => returncountDropDownCall(e)}>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
                       <option value="monthly">Monthly</option>
@@ -335,13 +335,13 @@ const TeamLeaderDashboard = () => {
             </div>
 
             <div className="w-[calc(33%-6px)] md:w-[32%] w-full mt-[1.5rem] md:mt-0">
-              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-gray-800 dark:text-gray-50">
+              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaCloud  className="text-white w-6 h-6" />
+                    <FaCloud  className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
-                    <select className="border border-gray-300 rounded-full px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-50" defaultValue="daily"  onChange={(e) => returnrevenueDropDownCall(e)}>
+                    <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily"  onChange={(e) => returnrevenueDropDownCall(e)}>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
                       <option value="monthly">Monthly</option>
@@ -356,13 +356,13 @@ const TeamLeaderDashboard = () => {
             </div>
 
             <div className="w-[calc(33%-6px)] md:w-[32%] w-full mt-[1.5rem] md:mt-0">
-              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-gray-800 dark:text-gray-50">
+              <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaNoteSticky  className="text-white w-6 h-6" />
+                    <FaNoteSticky  className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
-                    <select className="border border-gray-300 rounded-full px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-50" defaultValue="daily"    onChange={(e) => complainDropDownCall(e)}>
+                    <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily"    onChange={(e) => complainDropDownCall(e)}>
                       <option value="daily">Daily</option>
                       <option value="weekly">Weekly</option>
                       <option value="monthly">Monthly</option>
@@ -379,13 +379,13 @@ const TeamLeaderDashboard = () => {
         </div>
 
         <div className="my-6">
-          <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6">
+          <div className="rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <div className="mb-2 text-md lg:text-xl font-bold text-gray-900 dark:text-white"> Latest Orders </div>
-                <span className="text-base font-normal text-gray-600 dark:text-gray-400 hidden md:block"> This is a list of latest transactions </span>
+                <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Latest Orders </div>
+                <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of latest transactions </span>
               </div>
-              {OrderAccessList?.view ?  <div className="inline-flex items-center rounded-lg p-2 text-sm font-medium text-primary-700 hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700 cursor-pointer" onClick={() => ViewAllCall("order")}>  View all </div> : null }
+              {OrderAccessList?.view ?  <div className="inline-flex items-center rounded-lg p-2 text-sm font-medium text-BrilliantBlue hover:bg-TitaniumWhite dark:text-Alexandra dark:hover:bg-TranquilBlack cursor-pointer" onClick={() => ViewAllCall("order")}>  View all </div> : null }
             </div>
             <div>
                 <CommonTable columns={orderColumns} data={OrderData || []} />
@@ -393,13 +393,13 @@ const TeamLeaderDashboard = () => {
           </div>
         </div>
         
-        <div className="my-6 rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6 xl:p-8">
-            {/* <div className="mb-4 h-full rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6">
+        <div className="my-6 rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6 xl:p-8">
+            {/* <div className="mb-4 h-full rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-xl font-bold leading-none text-gray-900 dark:text-white"> Latest Advisor </h3>
+                <h3 className="text-xl font-bold leading-none text-DarkBackground dark:text-White"> Latest Advisor </h3>
               </div>
               <div className="flow-root">
-                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                <ul className="divide-y divide-WhiteMarble dark:divide-TranquilBlack">
                   {UserData && UserData.map((item:any, k:number) =>(
                     <li className="py-3 sm:py-4" key={k}>
                     <div className="flex items-center space-x-4">
@@ -407,10 +407,10 @@ const TeamLeaderDashboard = () => {
                         <img className="h-8 w-8 rounded-full" src={item?.user_pic ? item?.user_pic : ""}  alt="" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium text-gray-900 dark:text-white"> {item.name} </p>
-                        <p className="truncate text-sm text-gray-500 dark:text-gray-400"> {item.email}  </p>
+                        <p className="truncate text-sm font-medium text-DarkBackground dark:text-White"> {item.name} </p>
+                        <p className="truncate text-sm text-SharkGray dark:text-SilverSteel"> {item.email}  </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-gray-400">{item.is_active == true ?  <Badge color="success">Active</Badge>  :  <Badge color="danger">Deactive</Badge>}</div>
+                      <div className="inline-flex items-center text-base font-semibold text-DarkBackground dark:text-SilverSteel">{item.is_active == true ?  <Badge color="success">Active</Badge>  :  <Badge color="danger">Deactive</Badge>}</div>
                     </div>
                     </li>
                   ))}
@@ -419,8 +419,8 @@ const TeamLeaderDashboard = () => {
             </div> */}
             <div className="mb-4 flex items-center justify-between">
                 <div>
-                    <div className="mb-2 text-md lg:text-xl font-bold text-gray-900 dark:text-white"> Your Team Advisors List </div>
-                    <span className="text-base font-normal text-gray-600 dark:text-gray-400 hidden md:block"> This is a list of advisors in your team </span>
+                    <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Your Team Advisors List </div>
+                    <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of advisors in your team </span>
                 </div>
             </div>
             <div>
@@ -429,24 +429,24 @@ const TeamLeaderDashboard = () => {
             </div>
         </div>
 
-        <div className=" my-6 rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6 xl:p-8">
+        <div className=" my-6 rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6 xl:p-8">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <div className="mb-2 text-md lg:text-xl font-bold text-gray-900 dark:text-white"> Latest Products </div>
-              <span className="text-base font-normal text-gray-600 dark:text-gray-400 hidden md:block"> This is a list of latest products </span>
+              <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Latest Products </div>
+              <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of latest products </span>
             </div>
-            {ProductAccessList?.view ? <div className="shrink-0"> <div className="rounded-lg p-2 text-sm font-medium text-primary-700 hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700 cursor-pointer" onClick={() =>ViewAllCall("product")}> View all  </div>  </div>  : null}
+            {ProductAccessList?.view ? <div className="shrink-0"> <div className="rounded-lg p-2 text-sm font-medium text-BrilliantBlue hover:bg-TitaniumWhite dark:text-Alexandra dark:hover:bg-TranquilBlack cursor-pointer" onClick={() =>ViewAllCall("product")}> View all  </div>  </div>  : null}
           </div>
            <div>
               <CommonTable columns={productColumns} data={ProductData || []} />
             </div>
         </div>
 
-        <div className=" my-6 rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6 xl:p-8">
+        <div className=" my-6 rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6 xl:p-8">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <div className="mb-2 text-md lg:text-xl font-bold text-gray-900 dark:text-white"> Latest Complain </div>
-              <span className="text-base font-normal text-gray-600 dark:text-gray-400 hidden md:block"> This is a list of latest complain </span>
+              <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Latest Complain </div>
+              <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of latest complain </span>
             </div>
           </div>
 

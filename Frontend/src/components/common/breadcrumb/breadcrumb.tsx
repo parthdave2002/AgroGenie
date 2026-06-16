@@ -62,21 +62,21 @@ const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = funct
 
   return (
     <>
-      <div className="block items-center justify-between border-b border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex">
+      <div className="block items-center justify-between border-b border-WhiteMarble bg-White p-4 dark:border-TranquilBlack dark:bg-Cosmos sm:flex">
           <div className="mb-1 w-full">
             <div className="mb-3">
               <Breadcrumb className="mb-4">
                 <Breadcrumb.Item  onClick={handleNavigationdashboard}>
                     <div className="flex items-center gap-x-3 cursor-pointer">
                       <HiHome className="text-xl" />
-                      <span className="dark:text-white">Home</span>
+                      <span className="dark:text-White">Home</span>
                     </div>
                 </Breadcrumb.Item>
 
                 {ParentName && ParentLink ?
                   <Breadcrumb.Item  onClick={handleNavigation} >
                     <div className="flex items-center gap-x-3 cursor-pointer">
-                      <span className="dark:text-white">{ParentName}</span>
+                      <span className="dark:text-White">{ParentName}</span>
                     </div>
                   </Breadcrumb.Item>
                 : null
@@ -84,18 +84,18 @@ const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = funct
                
                 <Breadcrumb.Item>{Name}</Breadcrumb.Item>
               </Breadcrumb>
-              <h1 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl"> {Name}  </h1>
+              <h1 className="text-xl font-semibold text-DarkBackground dark:text-White sm:text-2xl"> {Name}  </h1>
             </div>
             <div className="sm:flex">
               {Searchplaceholder && 
-                <div className="mb-3 hidden items-center dark:divide-gray-700 sm:mb-0 sm:flex sm:divide-x sm:divide-gray-100">
+                <div className="mb-3 hidden items-center dark:divide-TranquilBlack sm:mb-0 sm:flex sm:divide-x sm:divide-TitaniumWhite">
                 <form className="lg:pr-3">
                   
                   <div className="relative mt-1 lg:w-64 xl:w-96">
                     <Input
                       id="Search_Module"
                       name="Search_Module"
-                      className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                      className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                       placeholder={Searchplaceholder}
                       type="text"
                       onChange={DataChange}
@@ -107,28 +107,28 @@ const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = funct
                 <div className="mt-3 flex space-x-1 pl-0 sm:mt-0 sm:pl-2">
                   <a
                     href="#"
-                    className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="inline-flex cursor-pointer justify-center rounded p-1 text-SharkGray hover:bg-TitaniumWhite hover:text-DarkBackground dark:text-SilverSteel dark:hover:bg-TranquilBlack dark:hover:text-White"
                   >
                     <span className="sr-only">Configure</span>
                     <HiCog className="text-2xl" />
                   </a>
                   <a
                     href="#"
-                    className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="inline-flex cursor-pointer justify-center rounded p-1 text-SharkGray hover:bg-TitaniumWhite hover:text-DarkBackground dark:text-SilverSteel dark:hover:bg-TranquilBlack dark:hover:text-White"
                   >
                     <span className="sr-only">Delete</span>
                     <HiTrash className="text-2xl" />
                   </a>
                   <a
                     href="#"
-                    className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="inline-flex cursor-pointer justify-center rounded p-1 text-SharkGray hover:bg-TitaniumWhite hover:text-DarkBackground dark:text-SilverSteel dark:hover:bg-TranquilBlack dark:hover:text-White"
                   >
                     <span className="sr-only">Purge</span>
                     <HiExclamationCircle className="text-2xl" />
                   </a>
                   <a
                     href="#"
-                    className="inline-flex cursor-pointer justify-center rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="inline-flex cursor-pointer justify-center rounded p-1 text-SharkGray hover:bg-TitaniumWhite hover:text-DarkBackground dark:text-SilverSteel dark:hover:bg-TranquilBlack dark:hover:text-White"
                   >
                     <span className="sr-only">Settings</span>
                     <HiDotsVertical className="text-2xl" />

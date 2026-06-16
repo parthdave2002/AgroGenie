@@ -65,11 +65,11 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
                 <DarkThemeToggle />
                 <Menu as="div" className="relative">
                   <div>
-                    <Menu.Button className="flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-TranquilBlack">
                       <button
                         id="dropdownUserAvatarButton"
                         data-dropdown-toggle="dropdownAvatar"
-                        className="flex text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                        className="flex text-sm bg-Cosmos rounded-full md:mr-0 focus:ring-4 focus:ring-SoothingBlueGrey dark:focus:ring-Hydrocarbon"
                         type="button"
                       >
                         <span className="sr-only">Open user menu</span>
@@ -78,13 +78,13 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
                     </Menu.Button>
                   </div>
 
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none  dark:bg-black">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-White py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none  dark:bg-black">
                       <Menu.Item>
-                        <Button onClick={() => { Prodilefun()}} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100  min-w-full text-start dark:hover:bg-gray-600 dark:text-gray-200  dark:hover:text-white" > Profile </Button>
+                        <Button onClick={() => { Prodilefun()}} className="block px-4 py-2 text-sm text-TranquilBlack hover:bg-TitaniumWhite  min-w-full text-start dark:hover:bg-Hydrocarbon dark:text-WhiteMarble  dark:hover:text-White" > Profile </Button>
                       </Menu.Item>
                       
                       <Menu.Item>
-                        <Button onClick={() => { Logoutfun()}} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100  min-w-full text-start dark:hover:bg-gray-600 dark:text-gray-200  dark:hover:text-white" > Sign out </Button>
+                        <Button onClick={() => { Logoutfun()}} className="block px-4 py-2 text-sm text-TranquilBlack hover:bg-TitaniumWhite  min-w-full text-start dark:hover:bg-Hydrocarbon dark:text-WhiteMarble  dark:hover:text-White" > Sign out </Button>
                       </Menu.Item>
                     </Menu.Items>
                 </Menu>
@@ -100,12 +100,12 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
           <form>
             <div className="relative shadow-2xl">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <IoIosSearch  className="w-5 h-5 text-gray-500 dark:text-gray-400 "   />
+                <IoIosSearch  className="w-5 h-5 text-SharkGray dark:text-SilverSteel "   />
               </div>
               <input
                 type="search"
                 id="default-search"
-                className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full p-4 pl-10 text-sm text-DarkBackground border border-SoothingBlueGrey rounded-lg bg-White focus:ring-blue-500 focus:border-blue-500 dark:bg-TranquilBlack dark:border-Hydrocarbon dark:placeholder-SilverSteel dark:text-White dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search Mockups, Logos..."
                 required
               />
@@ -115,7 +115,7 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
                 onClick={() => {
                   setOpen(false);
                 }}
-                className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-White absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Cancel
               </button>

@@ -100,10 +100,10 @@ const CheckoutSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
+    <div className="min-h-screen bg-slate-50 py-8  bg-White  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
       <ToastMessage />
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+        <div className="mb-8 rounded-[2rem] border border-slate-200 bg-White p-8 shadow-sm">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <p className="text-md font-body uppercase tracking-[0.35em] text-slate-500">Checkout</p>
@@ -131,7 +131,7 @@ const CheckoutSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
 
         <form onSubmit={formik.handleSubmit} className="grid gap-8 lg:grid-cols-[1.8fr_1fr]">
           <div className="space-y-6">
-            <section className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="rounded-[2rem] border border-slate-200 bg-White p-6 shadow-sm">
               <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-md font-body uppercase tracking-[0.35em] text-slate-500">1. Account details</p>
@@ -164,7 +164,7 @@ const CheckoutSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
               </div>
             </section>
 
-            <section className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="rounded-[2rem] border border-slate-200 bg-White p-6 shadow-sm">
               <div className="mb-6">
                 <p className="text-md font-body uppercase tracking-[0.35em] text-slate-500">2. Delivery address</p>
                 <h2 className="mt-2 font-body text-2xl font-semibold text-slate-950">Where should we send it?</h2>
@@ -218,7 +218,7 @@ const CheckoutSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
           </div>
 
           <aside className="space-y-6">
-            <div className="sticky top-8 space-y-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="sticky top-8 space-y-6 rounded-[2rem] border border-slate-200 bg-White p-6 shadow-sm">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <p className="text-sm uppercase font-body tracking-[0.35em] text-slate-500">Order summary</p>
@@ -233,7 +233,7 @@ const CheckoutSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
                 <div className="space-y-4">
                   {cartData.map((item) => (
                     <div key={item._id} className="flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white shadow-sm">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-White shadow-sm">
                         {item.product_pics ? (
                           <LazyLoadImage
                             src={item.product_pics[0]}

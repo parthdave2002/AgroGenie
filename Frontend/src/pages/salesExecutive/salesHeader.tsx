@@ -29,12 +29,12 @@ const SalesHeaderPage : FC<PropsData> = function ({ active, setDatactive, openPr
             {menuItems.map((item:any, k:number) => (
               <div key={k} >
                 {openProfile ?
-                  <li  key={item.name}  className={`relative flex items-center gap-3 py-2 px-4 rounded-lg cursor-pointer transition-all font-medium text-sm ${ active === item.name  ? "bg-blue-100 text-blue-600"   : "text-gray-300 dark:text-gray-500 dark:hover:text-gray-600  dark:hover:bg-gray-800"  }`} >
+                  <li  key={item.name}  className={`relative flex items-center gap-3 py-2 px-4 rounded-lg cursor-pointer transition-all font-medium text-sm ${ active === item.name  ? "bg-blue-100 text-blue-600"   : "text-SoothingBlueGrey dark:text-SharkGray dark:hover:text-Hydrocarbon  dark:hover:bg-Cosmos"  }`} >
                     {item.icon}
                     <span className="text-[1rem]">{item.name}</span>
                   </li>
                   :
-                    <li key={item.name} className={`relative flex items-center gap-3 py-2 px-4 rounded-lg cursor-pointer transition-all font-medium text-sm ${active === item.name ? "bg-blue-100 text-blue-600" : "text-gray-600 dark:text-gray-100 dark:hover:text-blue-600 hover:bg-blue-100"}`}   onClick={() => setDatactive(item.name)}  >
+                    <li key={item.name} className={`relative flex items-center gap-3 py-2 px-4 rounded-lg cursor-pointer transition-all font-medium text-sm ${active === item.name ? "bg-blue-100 text-blue-600" : "text-Hydrocarbon dark:text-TitaniumWhite dark:hover:text-blue-600 hover:bg-blue-100"}`}   onClick={() => setDatactive(item.name)}  >
                       {item.icon}
                       <span className="text-[1rem]">{item.name}</span>
                     </li>

@@ -45,25 +45,25 @@ const TaglogDetailsPage: FC = function () {
     <>
       <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >
         <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink ={ParentLink} />
-        <div  className="mt-[2rem] bg-white dark:bg-gray-800 p-4"> 
+        <div  className="mt-[2rem] bg-White dark:bg-Cosmos p-4"> 
           <div>
             {SingleUserDataList && SingleUserDataList.map((data: any, index: number) => (
               <div key={index} className="grid grid-cols-3 gap-6">
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Name</h3>
-                  <p className="text-gray-900 dark:text-white">{data?.name || "N/A"}</p>
+                <div className="p-4 bg-TitaniumWhite dark:bg-Cosmos rounded-lg">
+                  <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Name</h3>
+                  <p className="text-DarkBackground dark:text-White">{data?.name || "N/A"}</p>
                 </div>
 
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Created Date</h3>
-                  <p className="text-gray-900 dark:text-white">
+                <div className="p-4 bg-TitaniumWhite dark:bg-Cosmos rounded-lg">
+                  <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Created Date</h3>
+                  <p className="text-DarkBackground dark:text-White">
                     {data?.created_at ? moment(data.created_at).format("DD-MM-YYYY HH:mm:ss") : "N/A"}
                   </p>
                 </div>
 
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Status</h3>
-                  <p className="text-white text-sm font-bold py-1 px-3 rounded-lg">
+                <div className="p-4 bg-TitaniumWhite dark:bg-Cosmos rounded-lg">
+                  <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Status</h3>
+                  <p className="text-White text-sm font-bold py-1 px-3 rounded-lg">
                     {data?.is_active ? "Active" : "Inactive"}
                   </p>
                 </div>

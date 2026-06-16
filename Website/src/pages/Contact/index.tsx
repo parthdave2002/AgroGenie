@@ -73,17 +73,17 @@ const ContactusSection = () => {
   return (
     <div>
       {is_loader ? <GlobalLoader /> :
-        <section className=" relative  py-10  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
+        <section className=" relative  py-10  bg-White  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
           <div className="flex flex-col space-y-8 relative z-10">
 
             <div className="mx:max-w-4xl mx-auto p-6 "   >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <aside className="rounded-lg p-8 bg-[#139354] text-white flex flex-col justify-between bg-cover" >
-                  <div className='text-gray-800  font-heading'>
-                      <h2 className="text-xl md:text-3xl font-bold font-heading text-white  flex justify-center gap-x-2 ">Contact Information  </h2>
-                      <p className="text-sm opacity-90 mb-6 flex justify-center text-white">Fill up the form and our Team will get back to you within 24 hours.</p>
+                <aside className="rounded-lg p-8 bg-[#139354] text-White flex flex-col justify-between bg-cover" >
+                  <div className='text-Cosmos  font-heading'>
+                      <h2 className="text-xl md:text-3xl font-bold font-heading text-White  flex justify-center gap-x-2 ">Contact Information  </h2>
+                      <p className="text-sm opacity-90 mb-6 flex justify-center text-White">Fill up the form and our Team will get back to you within 24 hours.</p>
 
-                    <ul className="space-y-5 text-sm text-white">
+                    <ul className="space-y-5 text-sm text-White">
 
                       {/* Phone */}
                       <li className="flex items-start gap-4">
@@ -128,19 +128,19 @@ const ContactusSection = () => {
                   </div>
                 </aside>
 
-                <main className="bg-white rounded-lg shadow p-8" >
-                                    <h2 className="text-xl md:text-3xl font-bold font-heading text-gray-900  flex justify-center gap-x-2 "> <span className="text-lime-500"> Contact Us </span> </h2>
+                <main className="bg-White rounded-lg shadow p-8" >
+                                    <h2 className="text-xl md:text-3xl font-bold font-heading text-DarkBackground  flex justify-center gap-x-2 "> <span className="text-lime-500"> Contact Us </span> </h2>
                       <p className="text-sm opacity-90 mb-6 flex justify-center">Fill up the form and our Team will get back to you within 24 hours.</p>
 
 
                   <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} className="space-y-5">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-heading">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">First name <span className='text-red-500'>*</span></label>
+                        <label htmlFor="name" className="block text-sm font-medium text-TranquilBlack">First name <span className='text-red-500'>*</span></label>
                         <Input
                           id="name"
                           name="name"
-                          className="mt-1 w-full  border-b px-4 py-1 border-gray-500 focus:outline-none focus:ring-0 focus:border-green-500 active:ring-0"
+                          className="mt-1 w-full  border-b px-4 py-1 border-SharkGray focus:outline-none focus:ring-0 focus:border-green-500 active:ring-0"
                           placeholder='Enter your name'
                           type="text"
                           onChange={validation.handleChange}
@@ -155,12 +155,12 @@ const ContactusSection = () => {
                       </div>
 
                       <div>
-                        <label htmlFor="user_type" className="block text-sm font-medium text-gray-700">Reason <span className='text-red-500'>*</span></label>
+                        <label htmlFor="user_type" className="block text-sm font-medium text-TranquilBlack">Reason <span className='text-red-500'>*</span></label>
                         <div className="mt-1">
                           <select
                             id="user_type"
                             name="user_type"
-                            className="w-full rounded-md border border-gray-200 py-2 px-3 focus:outline-none focus:border-green-500"
+                            className="w-full rounded-md border border-WhiteMarble py-2 px-3 focus:outline-none focus:border-green-500"
                             onChange={validation.handleChange}
                             onBlur={validation.handleBlur}
                             value={validation.values.user_type || ''}
@@ -180,11 +180,11 @@ const ContactusSection = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-heading">
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-TranquilBlack">Email</label>
                         <Input
                           id="email"
                           name="email"
-                          className="mt-1 w-full  border-b px-4 py-1 border-gray-500 focus:outline-none focus:ring-0 focus:border-green-500 active:ring-0"
+                          className="mt-1 w-full  border-b px-4 py-1 border-SharkGray focus:outline-none focus:ring-0 focus:border-green-500 active:ring-0"
                           placeholder="Enter your email"
                           type="email"
                           onChange={validation.handleChange}
@@ -195,11 +195,11 @@ const ContactusSection = () => {
                       </div>
 
                       <div>
-                        <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone <span className='text-red-500'>*</span></label>
+                        <label htmlFor="phone_number" className="block text-sm font-medium text-TranquilBlack">Phone <span className='text-red-500'>*</span></label>
                         <Input
                           id="phone_number"
                           name="phone_number"
-                          className="mt-1 w-full  border-b px-4 py-1 border-gray-500 focus:outline-none focus:ring-0 focus:border-green-500 active:ring-0"
+                          className="mt-1 w-full  border-b px-4 py-1 border-SharkGray focus:outline-none focus:ring-0 focus:border-green-500 active:ring-0"
                           placeholder="Enter your contect"
                           type="tel"
                           onChange={validation.handleChange}
@@ -215,12 +215,12 @@ const ContactusSection = () => {
                     </div>
 
                     <div className='font-heading'>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message <span className='text-red-500'>*</span></label>
+                      <label htmlFor="message" className="block text-sm font-medium text-TranquilBlack">Message <span className='text-red-500'>*</span></label>
                       <textarea
                         id="message"
                         name="message"
                         placeholder="Enter your message"
-                        className="mt-1 w-full rounded-md border border-gray-200 p-3 focus:outline-none focus:border-green-500 min-h-[120px]"
+                        className="mt-1 w-full rounded-md border border-WhiteMarble p-3 focus:outline-none focus:border-green-500 min-h-[120px]"
                         value={messageData}
                         onChange={(e: any) => { setMessageData(e.target.value); }}
                         aria-invalid={messageError ? 'true' : 'false'}
@@ -231,7 +231,7 @@ const ContactusSection = () => {
                     </div>
 
                     <div className="pt-2 flex justify-center">
-                      <button type="submit" className="bg-gradient-to-r from-green-700 to-lime-500 text-white w-[15rem] px-4 py-2 rounded-full text-lg   hover:shadow-lg hover:scale-105 transition-all duration-100">  Submit    </button>
+                      <button type="submit" className="bg-gradient-to-r from-green-700 to-lime-500 text-White w-[15rem] px-4 py-2 rounded-full text-lg   hover:shadow-lg hover:scale-105 transition-all duration-100">  Submit    </button>
                     </div>
                   </Form>
                 </main>

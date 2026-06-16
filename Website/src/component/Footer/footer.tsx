@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
 
   /* -------------------- JSX -------------------- */
   return (
-    <footer className=" relative bg-[#1d4a34] text-gray-100  overflow-hidden">
+    <footer className=" relative bg-[#1d4a34] text-TitaniumWhite  overflow-hidden">
 
       <img src="/images/shape-15.png" alt="" className="absolute top-18 right-0 origin-center rotate-45 w-40 md:w-56 opacity-70 pointer-events-none" />
       <img src="/images/shape-14.png" alt="" className="absolute bottom-0 left-0 w-20 md:w-24 opacity-70 pointer-events-none bottom-12" />
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
 
             <div>
               <h2 className="text-2xl font-semibold mb-3 tracking-wide"> AgroGenie Seeds </h2>
-              <p className="text-sm text-gray-300 leading-relaxed max-w-sm">
+              <p className="text-sm text-SoothingBlueGrey leading-relaxed max-w-sm">
                 Every seed packet is filled with magical
                 innovation — designed to transform fields into thriving farms.
                 Quality you can trust, results you can see.
@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className=" relative z-10 border-t border-white/10 text-center text-sm text-gray-300 py-4">
+      <div className=" relative z-10 border-t border-white/10 text-center text-sm text-SoothingBlueGrey py-4">
         © {year}. All Rights Reserved.
       </div>
     </footer>

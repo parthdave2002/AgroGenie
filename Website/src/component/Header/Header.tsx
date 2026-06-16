@@ -60,9 +60,9 @@
 
 //   return (
 //     <>
-//       <div className="w-full  bg-white ">
+//       <div className="w-full  bg-White ">
 
-//         <div className="flex flex-wrap justify-between items-center bg-gray-50 px-6 py-2 text-gray-600">
+//         <div className="flex flex-wrap justify-between items-center bg-White px-6 py-2 text-Hydrocarbon">
 //           <div className="flex flex-wrap items-center gap-4 font-heading">
 //             <div className="flex items-center gap-2">
 //               <FaMapMarkerAlt className="text-lime-500" />
@@ -91,7 +91,7 @@
 //           </div>
 //         </div>
 
-//         <div className="container border-b border-gray-100 mx-auto  py-3">
+//         <div className="container border-b border-TitaniumWhite mx-auto  py-3">
 //           <div className="md:flex flex-wrap items-center justify-between gap-4">
 //             <div className="text-center sm:text-left">  <div className="cursor-pointer"  onClick={ () =>RedirectCall("/")}>   <LazyLoadImage effect="blur" src="/images/logo.webp" alt="logo" className="h-[3.5rem] mx-auto sm:mx-0" /> </div> </div>
   
@@ -104,13 +104,13 @@
 //             </nav>
 
 //             <div className="flex gap-x-4">
-//               <li  className="relative flex gap-x-3 rounded-full bg-green-600 hover:bg-green-500 p-2.5 mx-1 cursor-pointer text-gray-50"  onClick={() => CartCall()}> 
+//               <li  className="relative flex gap-x-3 rounded-full bg-green-600 hover:bg-green-500 p-2.5 mx-1 cursor-pointer text-White"  onClick={() => CartCall()}> 
 //                   <MdOutlineShoppingCart size={24} />
-//                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"> {cartCount}</span>
+//                   <span className="absolute -top-1 -right-1 bg-red-500 text-White text-xs w-5 h-5 flex items-center justify-center rounded-full"> {cartCount}</span>
 //                 </li>
-//               <button onClick={OpenBrochure} className="flex items-center gap-2 bg-gradient-to-r from-green-700 to-lime-500 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
+//               <button onClick={OpenBrochure} className="flex items-center gap-2 bg-gradient-to-r from-green-700 to-lime-500 text-White font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200">
 //                 <span className="text-lg font-chilanka">Download Brochure</span>
-//                 {/* <FaArrowRightLong size={18} className="text-white transition-transform duration-200 group-hover:translate-x-1" /> */}
+//                 {/* <FaArrowRightLong size={18} className="text-White transition-transform duration-200 group-hover:translate-x-1" /> */}
 //               </button>
 //             </div>
 
@@ -240,8 +240,8 @@ const Header: React.FC = () => {
   return (
     <>
 
-      <div className="w-full bg-white">
-        <div className="flex flex-col md:flex-row md:justify-between gap-3 bg-gray-50 px-4 md:px-6 py-2 text-gray-600 text-sm">
+      <div className="w-full bg-White">
+        <div className="flex flex-col md:flex-row md:justify-between gap-3 bg-White px-4 md:px-6 py-2 text-Hydrocarbon text-sm">
           <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
             <div className="flex items-center gap-2">
               <FaMapMarkerAlt className="text-lime-500" />
@@ -274,7 +274,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* ================= MAIN HEADER ================= */}
-        <div className="container mx-auto border-b border-gray-100 px-4 py-3">
+        <div className="container mx-auto border-b border-TitaniumWhite px-4 py-3">
           <div className="flex items-center justify-between">
             {/* LOGO */}
             <div className="cursor-pointer" onClick={() => RedirectCall("/")}>
@@ -295,7 +295,7 @@ const Header: React.FC = () => {
                     <span onClick={() => RedirectCall(path)}  className="cursor-pointer hover:text-lime-600 flex items-center gap-1" > {label} </span>
 
                     {/* DROPDOWN (DESKTOP ONLY) */}
-                    <div  className=" absolute left-0 top-full mt-3 w-56  bg-white border border-gray-100  shadow-lg rounded-lg opacity-0 invisible  group-hover:opacity-100 group-hover:visible transition-all duration-200 hidden md:block z-50 ">
+                    <div  className=" absolute left-0 top-full mt-3 w-56  bg-White border border-TitaniumWhite  shadow-lg rounded-lg opacity-0 invisible  group-hover:opacity-100 group-hover:visible transition-all duration-200 hidden md:block z-50 ">
                       {categoryList && categoryList?.map((item) => (
                         <div key={item?._id} onClick={() => DropdownRedirect(item?.name_eng, item?._id)}  className="px-4 py-2 text-sm cursor-pointer hover:bg-lime-50 hover:text-lime-600 flex gap-x-3" >
                            <div className=" flex items-center justify-center  transition "><LazyLoadImage effect="blur"   src={item?.category_pic} alt={item?.name_eng} className=" object-contain rounded-full  h-[2rem] w-[2rem]" />  </div>
@@ -310,14 +310,14 @@ const Header: React.FC = () => {
 
             {/* ================= DESKTOP ACTIONS ================= */}
             <div className="hidden md:flex items-center gap-4">
-              <div className="relative bg-green-600 hover:bg-green-700 p-2.5 rounded-full cursor-pointer text-white" onClick={() => setCartOpen(true)}>
+              <div className="relative bg-green-600 hover:bg-green-700 p-2.5 rounded-full cursor-pointer text-White" onClick={() => setCartOpen(true)}>
                 <MdOutlineShoppingCart size={24} />
                 <span className="absolute -top-1 -right-1 bg-red-500 text-xs w-5 h-5 flex items-center justify-center rounded-full">
                   {cartCount}
                 </span>
               </div>
 
-              <button onClick={OpenBrochure}  className="bg-gradient-to-r from-green-700 to-lime-500 text-white px-4 py-2 rounded-full text-sm  hover:shadow-lg hover:scale-105 transition-all duration-100" > Download Brochure </button>
+              <button onClick={OpenBrochure}  className="bg-gradient-to-r from-green-700 to-lime-500 text-White px-4 py-2 rounded-full text-sm  hover:shadow-lg hover:scale-105 transition-all duration-100" > Download Brochure </button>
             </div>
 
             {/* ================= MOBILE MENU BUTTON ================= */}
@@ -326,7 +326,7 @@ const Header: React.FC = () => {
 
           {/* ================= MOBILE MENU ================= */}
           {menuOpen && (
-            <div className="md:hidden mt-4 bg-white shadow-lg rounded-lg p-4 space-y-4">
+            <div className="md:hidden mt-4 bg-White shadow-lg rounded-lg p-4 space-y-4">
               {menuItems.map(({ label, path }) => (
                 <div  key={path}  onClick={() => { RedirectCall(path);  setMenuOpen(false); }}  className="cursor-pointer hover:text-lime-600"  >
                   {label}
@@ -334,12 +334,12 @@ const Header: React.FC = () => {
               ))}
 
               <div className="flex gap-4 pt-4">
-                <button  onClick={() => setCartOpen(true)} className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-full" >
+                <button  onClick={() => setCartOpen(true)} className="flex items-center gap-2 bg-green-600 text-White px-4 py-2 rounded-full" >
                   <MdOutlineShoppingCart />
                   {cartCount}
                 </button>
 
-                <button  onClick={OpenBrochure} className="bg-lime-600 text-white px-4 py-2 rounded-full"  >
+                <button  onClick={OpenBrochure} className="bg-lime-600 text-White px-4 py-2 rounded-full"  >
                   Brochure
                 </button>
               </div>

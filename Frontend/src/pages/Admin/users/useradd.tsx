@@ -406,7 +406,7 @@ const AddUserPage : FC = function () {
         <>  
             <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
                 <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink={ParentLink}  />
-                <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+                <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
                     <Form onSubmit={(e) => {  e.preventDefault();  validation.handleSubmit(); return false; }}>
 
                         <ImageUploadPreview onFileSelect={setFile}  defaultImage={UserDataList?.user_pic ? `${IMG_URL}/public/user/${UserDataList?.user_pic}` : ""}/>
@@ -445,7 +445,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="email">Gender <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -470,7 +470,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="role">Role <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -558,7 +558,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="email"> Status <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -606,7 +606,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="password">Aadhar card <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -628,7 +628,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="pan_card">Pan card <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -650,7 +650,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="bank_passbook">Bank passbook <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -674,7 +674,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="bank_passbook"> Advisor Category <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -695,7 +695,7 @@ const AddUserPage : FC = function () {
                                 <Label htmlFor="bank_passbook"> Advisor TeamLeader <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",

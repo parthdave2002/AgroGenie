@@ -28,15 +28,15 @@ const ExampleRightSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
 
               <List>
 
-                <Link to="/dialer"> <ListItem title="User" className="dark:hover:bg-white-600 dark:text-gray-200  dark:hover:text-indigo-600"> <UserCircleIcon className="h-5 w-5" /> </ListItem> </Link>
+                <Link to="/dialer"> <ListItem title="User" className="dark:hover:bg-White-600 dark:text-WhiteMarble  dark:hover:text-indigo-600"> <UserCircleIcon className="h-5 w-5" /> </ListItem> </Link>
 
                 <Link to="/planner">
-                  <ListItem title="Shopping Bag" className="dark:hover:bg-white-600 dark:text-gray-200  dark:hover:text-indigo-600" >
+                  <ListItem title="Shopping Bag" className="dark:hover:bg-White-600 dark:text-WhiteMarble  dark:hover:text-indigo-600" >
                       <ShoppingBagIcon className="h-5 w-5" />
                   </ListItem>
                 </Link>
 
-                <ListItem className="dark:hover:bg-white-600 dark:text-gray-200  dark:hover:text-indigo-600">
+                <ListItem className="dark:hover:bg-White-600 dark:text-WhiteMarble  dark:hover:text-indigo-600">
                   <ListItemPrefix>
                     <PresentationChartBarIcon className="h-5 w-5" />
                   </ListItemPrefix>
@@ -44,19 +44,19 @@ const ExampleRightSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
 
                 <hr className="my-2 border-blue-gray-50" />
 
-                <ListItem className="dark:hover:bg-white-600 dark:text-gray-200  dark:hover:text-indigo-600">
+                <ListItem className="dark:hover:bg-White-600 dark:text-WhiteMarble  dark:hover:text-indigo-600">
                   <ListItemPrefix>
                     <InboxIcon className="h-5 w-5" />
                   </ListItemPrefix>
                 </ListItem>
 
-                <ListItem className="dark:hover:bg-white-600 dark:text-gray-200  dark:hover:text-indigo-600">
+                <ListItem className="dark:hover:bg-White-600 dark:text-WhiteMarble  dark:hover:text-indigo-600">
                   <ListItemPrefix>
                     <Cog6ToothIcon className="h-5 w-5" />
                   </ListItemPrefix>
                 </ListItem>
 
-                <ListItem className="dark:hover:bg-white-600 dark:text-gray-200  dark:hover:text-indigo-600">
+                <ListItem className="dark:hover:bg-White-600 dark:text-WhiteMarble  dark:hover:text-indigo-600">
                   <ListItemPrefix>
                     <PowerIcon className="h-5 w-5" />
                   </ListItemPrefix>

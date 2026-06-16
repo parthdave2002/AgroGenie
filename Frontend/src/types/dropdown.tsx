@@ -111,3 +111,77 @@ export const NearByOptions= [
   { label :"Village", value : "village"},
   { label :"Taluka", value : "taluka"},
 ]
+
+export const priorityoption =[
+  {  label :"High", value : "high"  },
+  {  label :"Medium", value : "medium" },
+  {  label :"Low",   value : "low" },
+]
+
+export const leadoption = [
+    { label: "Contact Us Page", value: "contactus" },
+    { label: "Help Page", value: "help" },
+    { label: "Order", value: "order" },
+    { label: "Referral", value : "referral" }
+  ];
+
+export const WalletRuletypeoption = [
+  {
+    label: 'Customer Registered',
+    value: 'CUSTOMER_REGISTERED'
+  },
+  {
+    label: 'Referral Success',
+    value: 'REFERRAL_SUCCESS'
+  },
+  {
+    label: 'Order Completed',
+    value: 'ORDER_COMPLETED'
+  },
+  {
+    label: 'First Order Completed',
+    value: 'FIRST_ORDER_COMPLETED'
+  },
+  {
+    label: 'Profile Completed',
+    value: 'PROFILE_COMPLETED'
+  },
+  {
+    label: 'Birthday Reward',
+    value: 'BIRTHDAY_REWARD'
+  },
+  {
+    label: 'Review Added',
+    value: 'REVIEW_ADDED'
+  }
+]
+
+export const WalletPerson = [
+  {
+    label: 'Customer',
+    value: 'CUSTOMER'
+  },
+  {
+    label: 'Referrer',
+    value: 'REFERRER'
+  },
+  {
+    label: 'Referred User',
+    value: 'REFERRED_USER'
+  },
+  {
+    label: 'Both',
+    value: 'BOTH'
+  }
+]
+
+export const WalletAmtType= [
+  {
+    label: 'Fixed Points',
+    value: 'FIXED'
+  },
+  {
+    label: 'Percentage',
+    value: 'PERCENTAGE'
+  }
+]

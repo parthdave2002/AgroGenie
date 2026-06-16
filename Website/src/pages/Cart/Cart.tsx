@@ -123,7 +123,7 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
   return (
     <>
       <div
-        className={`fixed top-0 right-0 z-[9999] h-full w-full  md:w-[25rem] bg-white shadow-lg transition-transform duration-300 ${
+        className={`fixed top-0 right-0 z-[9999] h-full w-full  md:w-[25rem] bg-White shadow-lg transition-transform duration-300 ${
           cartOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-labelledby="My Cart"
@@ -137,7 +137,7 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
           </h4>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-SharkGray hover:text-TranquilBlack"
             aria-label="Close"
           >
             <IoClose size={24} />
@@ -149,9 +149,9 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
             {CartData.length > 0 ? (
               <div className="space-y-4">
                 {CartData &&  CartData.map((item: any, k: number) => (
-                    <div   key={k} className="flex gap-4 items-center p-4 border rounded-xl shadow-sm bg-white hover:shadow-md transition"   >
+                    <div   key={k} className="flex gap-4 items-center p-4 border rounded-xl shadow-sm bg-White hover:shadow-md transition"   >
                       {/* Product Image */}
-                      <div className="w-16 h-16 flex items-center justify-center rounded-lg border bg-gray-50">
+                      <div className="w-16 h-16 flex items-center justify-center rounded-lg border bg-White">
                         <LazyLoadImage
                           effect="blur"
                           src={item?.product_pics[0]}
@@ -162,11 +162,11 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
 
                       {/* Product Info */}
                       <div className="flex-1">
-                        <p className="text-md font-semibold font-heading  max-w-[12rem] truncate text-gray-900 truncate">
+                        <p className="text-md font-semibold font-heading  max-w-[12rem] truncate text-DarkBackground truncate">
                           {item?.name?.englishname.toUpperCase()}
                         </p>
 
-                        <div className="flex items-center gap-2 mt-1 text-sm text-gray-700">
+                        <div className="flex items-center gap-2 mt-1 text-sm text-TranquilBlack">
                           <span>₹{item?.price}</span>
                           <span className="font-medium">×</span>
                           <span>{item?.quantity}</span>
@@ -195,9 +195,9 @@ const CartSection: React.FC<CartProps> = ({ cartOpen, onClose }) => {
         
           <div className="p-4 border-t">
             { CartData.length > 0  ?
-              <button onClick={Checkoutcall} className="w-full bg-green-600 text-white py-2 rounded-lg text-xl hover:bg-green-700 transition font-Body" > Checkout : {totalAmount.toFixed(0)} Rs.  </button>
+              <button onClick={Checkoutcall} className="w-full bg-green-600 text-White py-2 rounded-lg text-xl hover:bg-green-700 transition font-Body" > Checkout : {totalAmount.toFixed(0)} Rs.  </button>
               :
-              <div className="w-full bg-green-300 text-white py-2 rounded-lg text-xl text-center transition font-Body" > Checkout : {totalAmount.toFixed(0)} Rs.  </div>
+              <div className="w-full bg-green-300 text-White py-2 rounded-lg text-xl text-center transition font-Body" > Checkout : {totalAmount.toFixed(0)} Rs.  </div>
             }
           </div>
         </div>

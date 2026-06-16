@@ -164,7 +164,7 @@ const BannerAddPage: FC = function () {
         <>
             <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
                 <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink={ParentLink} />
-                <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+                <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
                         
                         {(selectedBannerTypeid  === "image"  || selectedBannerTypeid === "video")  &&
@@ -178,7 +178,7 @@ const BannerAddPage: FC = function () {
                             <Label htmlFor="Status"> Banner Type </Label>
                             <div className="mt-1">
                                 <Select
-                                    className="w-full dark:text-white"
+                                    className="w-full dark:text-White"
                                     classNames={{
                                         control: () => "react-select__control",
                                         singleValue: () => "react-select__single-value",
@@ -253,7 +253,7 @@ const BannerAddPage: FC = function () {
                             <Label htmlFor="Status">Status</Label>
                             <div className="mt-1">
                                 <Select
-                                    className="w-full dark:text-white"
+                                    className="w-full dark:text-White"
                                     classNames={{
                                         control: () => "react-select__control",
                                         singleValue: () => "react-select__single-value",
@@ -276,7 +276,7 @@ const BannerAddPage: FC = function () {
                             <Label htmlFor="Status"> Is Promotional </Label>
                             <div className="mt-1">
                                 <Select
-                                    className="w-full dark:text-white"
+                                    className="w-full dark:text-White"
                                     classNames={{
                                         control: () => "react-select__control",
                                         singleValue: () => "react-select__single-value",

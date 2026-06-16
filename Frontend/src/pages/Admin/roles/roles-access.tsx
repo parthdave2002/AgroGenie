@@ -92,19 +92,19 @@ const RolesAccessPage: FC = function () {
   return (
     <NavbarSidebarLayout  isSidebar={true} isNavbar={true} >
       <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink={ParentLink} />
-      <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+      <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
         <div className="overflow-x-auto">
-          <table className="w-full border-none dark:bg-gray-800 rounded-lg shadow-md dark:text-gray-50">
+          <table className="w-full border-none dark:bg-Cosmos rounded-lg shadow-md dark:text-White">
             <thead>
-              <tr className="bg-gray-100 dark:bg-gray-800 text-left">
-                <th className="p-3 border border-gray-200 dark:border-gray-700">Name</th>
+              <tr className="bg-TitaniumWhite dark:bg-Cosmos text-left">
+                <th className="p-3 border border-WhiteMarble dark:border-TranquilBlack">Name</th>
                 {permissions.map((perm) => (
-                  <th key={perm} className="p-3 border border-gray-200 dark:border-gray-700 text-center">
+                  <th key={perm} className="p-3 border border-WhiteMarble dark:border-TranquilBlack text-center">
                     <div className="flex gap-x-3 justify-center items-center">
                       <span>{perm}</span>
                       <input
                         type="checkbox"
-                        className="w-5 h-5 border-gray-300 focus:ring-0 focus:border-none rounded-md"
+                        className="w-5 h-5 border-SoothingBlueGrey focus:ring-0 focus:border-none rounded-md"
                         checked={roles.every((role) => selectedPermissions[role]?.[perm])} // Check if all are selected
                         onChange={() => handleSelectAll(perm)}
                       />
@@ -116,13 +116,13 @@ const RolesAccessPage: FC = function () {
 
             <tbody>
               {roles.map((role: string, index: number) => (
-                <tr key={role} className={index % 2 === 0 ? "bg-gray-50 dark:bg-gray-800" : "bg-white dark:bg-gray-800"}>
-                  <td className="p-3 border border-gray-200 dark:border-gray-700">{role}</td>
+                <tr key={role} className={index % 2 === 0 ? "bg-White dark:bg-Cosmos" : "bg-White dark:bg-Cosmos"}>
+                  <td className="p-3 border border-WhiteMarble dark:border-TranquilBlack">{role}</td>
                   {permissions.map((perm, permIndex) => (
-                    <td key={permIndex} className="p-3 border border-gray-200 dark:border-gray-700 text-center">
+                    <td key={permIndex} className="p-3 border border-WhiteMarble dark:border-TranquilBlack text-center">
                       <input
                         type="checkbox"
-                        className="w-5 h-5 border-gray-300 focus:ring-0 focus:border-none rounded-md"
+                        className="w-5 h-5 border-SoothingBlueGrey focus:ring-0 focus:border-none rounded-md"
                         checked={!!selectedPermissions[role]?.[perm]}
                         onChange={() => handleCheckboxChange(role, perm)}
                       />

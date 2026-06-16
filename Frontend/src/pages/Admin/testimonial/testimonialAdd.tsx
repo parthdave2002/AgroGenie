@@ -85,7 +85,7 @@ const TestimonialAddPage : FC = function () {
         <>  
             <NavbarSidebarLayout  isSidebar={true} isNavbar={true}>
                 <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink={ParentLink}  />
-                <div className="mt-[1rem] bg-white dark:bg-gray-800 p-4">
+                <div className="mt-[1rem] bg-White dark:bg-Cosmos p-4">
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
 
                         <div className="my-3">  

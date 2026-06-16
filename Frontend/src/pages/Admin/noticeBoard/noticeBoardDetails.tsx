@@ -38,12 +38,12 @@ const NoticeBoardDetailsPage: FC = function () {
     <>
       <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
         <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink={ParentLink} />
-        <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+        <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
           <div>
 
             {Boardlist?.document_pics &&
               <>
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Document Image</h3>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Document Image</h3>
                 {isPdf ? 
                   <div className=" text-red-600 hover:text-red-700 p-2" onClick={handleOpenModal}> <FaFilePdf style={{ fontSize: "48px" }} />  <p className="text-xs mt-1">View PDF</p> </div>
                 :  <img src={Boardlist?.document_pics} alt="Uploaded Document" className=" object-cover p-2" />}
@@ -52,30 +52,30 @@ const NoticeBoardDetailsPage: FC = function () {
 
             <div className="grid grid-cols-3 gap-6 mt-4">
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Name</h3>
-                <p className="text-gray-900 dark:text-white">{Boardlist?.name || "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Name</h3>
+                <p className="text-DarkBackground dark:text-White">{Boardlist?.name || "N/A"}</p>
               </div>
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Document Type</h3>
-                <p className="text-gray-900 dark:text-white">{Boardlist?.type_document && Boardlist?.type_document.charAt(0).toUpperCase() + Boardlist?.type_document.slice(1).toLowerCase() || "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold"> Document Type</h3>
+                <p className="text-DarkBackground dark:text-White">{Boardlist?.type_document && Boardlist?.type_document.charAt(0).toUpperCase() + Boardlist?.type_document.slice(1).toLowerCase() || "N/A"}</p>
               </div>
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Document URL</h3>
-                <p className="text-gray-900 dark:text-white break-words whitespace-pre-line">{Boardlist?.document_text || "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold"> Document URL</h3>
+                <p className="text-DarkBackground dark:text-White break-words whitespace-pre-line">{Boardlist?.document_text || "N/A"}</p>
               </div>
 
 
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Whom to Send</h3>
-                <p className="text-gray-900 dark:text-white">{Boardlist?.send_to && Boardlist?.send_to.charAt(0).toUpperCase() + Boardlist?.send_to.slice(1).toLowerCase() || "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold"> Whom to Send</h3>
+                <p className="text-DarkBackground dark:text-White">{Boardlist?.send_to && Boardlist?.send_to.charAt(0).toUpperCase() + Boardlist?.send_to.slice(1).toLowerCase() || "N/A"}</p>
               </div>
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> List of Employee</h3>
-                <p className="text-gray-900 dark:text-white">{Boardlist?.employee || "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold"> List of Employee</h3>
+                <p className="text-DarkBackground dark:text-White">{Boardlist?.employee || "N/A"}</p>
               </div>
 
               <div>
@@ -83,33 +83,33 @@ const NoticeBoardDetailsPage: FC = function () {
               </div>
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Duration </h3>
-                <p className="text-gray-900 dark:text-white">{Boardlist?.duration && Boardlist?.duration.charAt(0).toUpperCase() + Boardlist?.duration.slice(1).toLowerCase() || "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Duration </h3>
+                <p className="text-DarkBackground dark:text-White">{Boardlist?.duration && Boardlist?.duration.charAt(0).toUpperCase() + Boardlist?.duration.slice(1).toLowerCase() || "N/A"}</p>
               </div>
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold"> Start Time</h3>
-                <p className="text-gray-900 dark:text-white"> {Boardlist?.start_date ? moment(Boardlist.start_date).format("DD-MM-YYYY HH:mm:ss") : "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold"> Start Time</h3>
+                <p className="text-DarkBackground dark:text-White"> {Boardlist?.start_date ? moment(Boardlist.start_date).format("DD-MM-YYYY HH:mm:ss") : "N/A"}</p>
               </div>
 
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold">End Time</h3>
-                <p className="text-gray-900 dark:text-white"> {Boardlist?.end_date ? moment(Boardlist.end_date).format("DD-MM-YYYY HH:mm:ss") : "N/A"}</p>
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">End Time</h3>
+                <p className="text-DarkBackground dark:text-White"> {Boardlist?.end_date ? moment(Boardlist.end_date).format("DD-MM-YYYY HH:mm:ss") : "N/A"}</p>
               </div>
 
 
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Created Date</h3>
-                <p className="text-gray-900 dark:text-white">
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Created Date</h3>
+                <p className="text-DarkBackground dark:text-White">
                   {Boardlist?.createdAt ? moment(Boardlist.createdAt).format("DD-MM-YYYY HH:mm:ss") : "N/A"}
                 </p>
               </div>
 
               <div className="p-2 rounded-lg">
-                <h3 className="text-gray-600 dark:text-gray-300 font-semibold">Status</h3>
-                <p className="text-gray-900 dark:text-white ">
+                <h3 className="text-Hydrocarbon dark:text-SoothingBlueGrey font-semibold">Status</h3>
+                <p className="text-DarkBackground dark:text-White ">
                   {Boardlist?.is_active == true ? "Active" : "Inactive"}
                 </p>
               </div>

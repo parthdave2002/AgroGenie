@@ -4,24 +4,24 @@
 
 /* User Module Modal input type  */
 .userinput{
-  @apply bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full;
+  @apply bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full;
 }
 
 /* invoice Code start */
 .heading {
-  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold  text-gray-500 lg:w-[7rem] dark:text-white
+  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold  text-SharkGray lg:w-[7rem] dark:text-White
 }
 
 .heading2 {
-  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold  text-gray-500 lg:w-[8rem] dark:text-white
+  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold  text-SharkGray lg:w-[8rem] dark:text-White
 }
 
 .invodata {
-  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold  lg:w-[15rem] dark:text-white
+  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold  lg:w-[15rem] dark:text-White
 }
 
 .invodata2 {
-  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold text-end lg:w-[10rem] dark:text-white
+  @apply lg:text-[0.9rem] lg:font-semibold xl:text-[0.9rem] xl:font-semibold text-end lg:w-[10rem] dark:text-White
 }
 /* invoice Code end */
 
@@ -31,10 +31,21 @@
 }
 /* Add Profile page Code End */
 
+.detailswrapper {
+  @apply rounded-xl p-4 shadow-sm;
+}
 
+.detailslebel,
+.detailslabel {
+  @apply text-sm font-semibold uppercase tracking-wide text-SharkGray dark:text-SilverSteel;
+}
+
+.detailsvalue {
+  @apply mt-1 break-words text-[1rem] text-DarkBackground dark:text-WhiteMarble;
+}
 
 .Card{ 
-  @apply bg-white shadow-md shadow-gray-400/50 hover:bg-gray-200 border border-gray-200 rounded-md lg:mt-[0.5rem] xl:mt-[1rem] text-gray-600 lg:px-1 dark:bg-gray-900 dark:border dark:border-gray-600 dark:text-white dark:shadow-gray-400 
+  @apply bg-White shadow-md shadow-gray-400/50 hover:bg-WhiteMarble border border-WhiteMarble rounded-md lg:mt-[0.5rem] xl:mt-[1rem] text-Hydrocarbon lg:px-1 dark:bg-DarkBackground dark:border dark:border-Hydrocarbon dark:text-White dark:shadow-SilverSteel 
 }
 /* Card  Code End */
 
@@ -44,27 +55,27 @@
 
 /* Search btn Code start */
 .Search{
-  @apply block w-full pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg  focus:ring-blue-500 focus:border-blue-500 
+  @apply block w-full pl-10 text-sm text-DarkBackground border border-SoothingBlueGrey rounded-lg  focus:ring-blue-500 focus:border-blue-500 
 }
 /* Search Code End */
 
 /* Multiple Select button Code Start */
 .SelectBtn{
-  @apply bg-white text-green-500 hover:bg-gradient-to-b from-yellow-500 to-yellow-700 hover:text-white border-2 border-green-500 rounded-md lg:w-[10rem] xl:w-[10rem] self-center lg:text-[0.8rem] lg:font-semibold font-sans text-center lg:m-2 lg:p-1 cursor-pointer
+  @apply bg-White text-green-500 hover:bg-gradient-to-b from-yellow-500 to-yellow-700 hover:text-White border-2 border-green-500 rounded-md lg:w-[10rem] xl:w-[10rem] self-center lg:text-[0.8rem] lg:font-semibold font-sans text-center lg:m-2 lg:p-1 cursor-pointer
 }
 /* Multiple Select button Code End */
 
 /* DeafultCard Code start */
 .DeafultCard{
-  @apply xl:w-[26rem] lg:w-[19rem] lg:mt-2 shadow-inner shadow-indigo-500/50 hover:shadow-indigo-500/40 rounded-md dark:bg-gray-900 dark:text-white dark:shadow-gray-600
+  @apply xl:w-[26rem] lg:w-[19rem] lg:mt-2 shadow-inner shadow-indigo-500/50 hover:shadow-indigo-500/40 rounded-md dark:bg-DarkBackground dark:text-White dark:shadow-Hydrocarbon
 }
 
 .ViewAllButton{
-  @apply lg:text-[0.7rem] lg:font-bold lg:h-4 xl:h-5 xl:text-[0.9rem] xl:font-bold rounded-md bg-white text-gray-600 cursor-pointer hover:text-gray-700
+  @apply lg:text-[0.7rem] lg:font-bold lg:h-4 xl:h-5 xl:text-[0.9rem] xl:font-bold rounded-md bg-White text-Hydrocarbon cursor-pointer hover:text-TranquilBlack
 }
 
 .DeafultCardButton {
-  @apply border-l border-blue-200 rounded-r-md bg-blue-200 text-gray-600 lg:w-12 xl:w-14 text-center cursor-pointer
+  @apply border-l border-blue-200 rounded-r-md bg-blue-200 text-Hydrocarbon lg:w-12 xl:w-14 text-center cursor-pointer
 }
 
 /* DeafultCard Code start */
@@ -115,31 +126,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .react-select__control {
-  @apply border-gray-700 bg-white text-black dark:bg-gray-800 dark:border-gray-700 dark:text-white;
+  @apply border-TranquilBlack bg-White text-black dark:bg-Cosmos dark:border-TranquilBlack dark:text-White;
 }
 
 .react-select__menu {
-  @apply bg-white text-black dark:bg-gray-800 dark:text-white;
+  @apply bg-White text-black dark:bg-Cosmos dark:text-White;
 }
 
 .react-select__option {
-  @apply bg-white text-black dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700;
+  @apply bg-White text-black dark:bg-Cosmos dark:text-White hover:bg-WhiteMarble dark:hover:bg-TranquilBlack;
 }
 
 .react-select__option--is-selected {
-  @apply bg-gray-300 text-black dark:bg-gray-700 dark:text-white;
+  @apply bg-SoothingBlueGrey text-black dark:bg-TranquilBlack dark:text-White;
 }
 
 .react-select__placeholder {
-  @apply text-gray-500 dark:text-gray-400;
+  @apply text-SharkGray dark:text-SilverSteel;
 }
 
 .dark .react-select__single-value {
-  @apply text-white;
+  @apply text-White;
 }
 
 .farmerProfile{
-  @apply dark:text-gray-200 flex gap-x-3 mt-2 text-[1.1rem];
+  @apply dark:text-WhiteMarble flex gap-x-3 mt-2 text-[1.1rem];
 }
 
 @media print {

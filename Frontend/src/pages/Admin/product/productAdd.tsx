@@ -589,7 +589,7 @@ const ProductAddPage: FC = function () {
         <>
             <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
                 <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink={ParentLink} />
-                <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+                <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
                     <Form onSubmit={(e) => {
                         e.preventDefault();
                         validation.handleSubmit();
@@ -597,14 +597,14 @@ const ProductAddPage: FC = function () {
                     }} >
 
                         <div className="mb-4">
-                            <label className="dark:text-gray-100 text-[1.2rem]"> Product Image <span className='text-red-500'>*</span> </label>
+                            <label className="dark:text-TitaniumWhite text-[1.2rem]"> Product Image <span className='text-red-500'>*</span> </label>
                             <MultiImageUploadPreview onFileSelect={setFile} defaultImage={productImage} onDefaultImageChange={setProductImage} />
                             {validateProduct == 1 ? (<FormFeedback type="invalid" className="text-Red text-sm"> Please select product photo </FormFeedback>) : null}
                         </div>
 
 
-                        <div className="dark:bg-gray-800 flex-1 p-4 rounded-lg border border-gray-300 dark:border-gray-500 space-y-3 mb-4">
-                            <div className="text-[1.2rem] font-bold dark:text-gray-100"> Product Name</div>
+                        <div className="dark:bg-Cosmos flex-1 p-4 rounded-lg border border-SoothingBlueGrey dark:border-SharkGray space-y-3 mb-4">
+                            <div className="text-[1.2rem] font-bold dark:text-TitaniumWhite"> Product Name</div>
                             <div className="grid lg:grid-cols-2 gap-4">
                                 <div className="flex-1 mt-[1rem] ">
                                     <Label htmlFor="Name">Name ( Eng ) <span className='text-red-500'>*</span> </Label>
@@ -612,7 +612,7 @@ const ProductAddPage: FC = function () {
                                         <Input
                                             id="englishname"
                                             name="name.englishname"
-                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                             placeholder="Product english name"
                                             type="text"
                                             onChange={validation.handleChange}
@@ -630,7 +630,7 @@ const ProductAddPage: FC = function () {
                                         <Input
                                             id="gujaratiname"
                                             name="name.gujaratiname"
-                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                             placeholder="Product gujarati name"
                                             type="text"
                                             onChange={validation.handleChange}
@@ -644,8 +644,8 @@ const ProductAddPage: FC = function () {
                             </div>
                         </div>
 
-                        <div className="dark:bg-gray-800  flex-1 p-4 rounded-lg border border-gray-300  dark:border-gray-500 space-y-3 mb-4">
-                            <div className="text-[1.2rem] font-bold dark:text-gray-100"> Technical Name</div>
+                        <div className="dark:bg-Cosmos  flex-1 p-4 rounded-lg border border-SoothingBlueGrey  dark:border-SharkGray space-y-3 mb-4">
+                            <div className="text-[1.2rem] font-bold dark:text-TitaniumWhite"> Technical Name</div>
                             <div className="grid lg:grid-cols-2 gap-4">
                                 <div className="flex-1 mt-[1rem] ">
                                     <Label htmlFor="tech_name">Technical Name ( Eng )</Label>
@@ -653,7 +653,7 @@ const ProductAddPage: FC = function () {
                                         <Input
                                             id="tech_name_eng"
                                             name="tech_name.english_tech_name"
-                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                             placeholder="Product technical name"
                                             type="text"
                                             onChange={validation.handleChange}
@@ -671,7 +671,7 @@ const ProductAddPage: FC = function () {
                                         <Input
                                             id="gujarati_tech_name"
                                             name="tech_name.gujarati_tech_name"
-                                            className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                            className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                             placeholder="Product technical  name"
                                             type="text"
                                             onChange={validation.handleChange}
@@ -685,17 +685,17 @@ const ProductAddPage: FC = function () {
                             </div>
                         </div>
 
-                        <div className=" text-white r w-full mt-[2rem] mx-auto">
+                        <div className=" text-White r w-full mt-[2rem] mx-auto">
                             <div className="flex justify-between">
-                                <div className="mb-4 dark:text-gray-100 text-gray-900 text-[1.5rem] font-semibold"> Product Description</div>
-                                <div onClick={handleAddField} className="mb-4 px-2 py-1 w-[12rem] text-center bg-blue-500 hover:bg-blue-600 text-white rounded-lg cursor-pointer"> Add New Description </div>
+                                <div className="mb-4 dark:text-TitaniumWhite text-DarkBackground text-[1.5rem] font-semibold"> Product Description</div>
+                                <div onClick={handleAddField} className="mb-4 px-2 py-1 w-[12rem] text-center bg-blue-500 hover:bg-blue-600 text-White rounded-lg cursor-pointer"> Add New Description </div>
                             </div>
 
                             {inputs.map((item, index) => (
-                                <div key={item.id} className="dark:bg-gray-800 p-4 rounded-lg border border-gray-300  dark:ring-gray-500 space-y-3 mb-4">
+                                <div key={item.id} className="dark:bg-Cosmos p-4 rounded-lg border border-SoothingBlueGrey  dark:ring-SharkGray space-y-3 mb-4">
                                     <div className="grid lg:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium mb-1 dark:text-gray-100 text-gray-700">English Header</label>
+                                            <label className="block text-sm font-medium mb-1 dark:text-TitaniumWhite text-TranquilBlack">English Header</label>
                                             <Input
                                                 type="text"
                                                 placeholder="Header"
@@ -709,7 +709,7 @@ const ProductAddPage: FC = function () {
                                                         }));
                                                     }
                                                 }}
-                                                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white  bg-gray-200 text-gray-700"
+                                                className="w-full p-2 border border-SoothingBlueGrey dark:border-Hydrocarbon rounded-lg dark:bg-TranquilBlack dark:text-White  bg-WhiteMarble text-TranquilBlack"
                                             />
                                             {descriptionErrors?.[item.id]?.englishHeader && (
                                                 <p className="text-red-500 text-sm mt-1">{descriptionErrors[item.id]?.englishHeader}</p>
@@ -717,7 +717,7 @@ const ProductAddPage: FC = function () {
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium mb-1 dark:text-gray-100 text-gray-700">Gujarati Header</label>
+                                            <label className="block text-sm font-medium mb-1 dark:text-TitaniumWhite text-TranquilBlack">Gujarati Header</label>
                                             <Input
                                                 type="text"
                                                 placeholder="Header"
@@ -731,7 +731,7 @@ const ProductAddPage: FC = function () {
                                                         }));
                                                     }
                                                 }}
-                                                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white  bg-gray-200 text-gray-700"
+                                                className="w-full p-2 border border-SoothingBlueGrey dark:border-Hydrocarbon rounded-lg dark:bg-TranquilBlack dark:text-White  bg-WhiteMarble text-TranquilBlack"
                                             />
                                             {descriptionErrors?.[item.id]?.gujaratiHeader && (
                                                 <p className="text-red-500 text-sm mt-1">{descriptionErrors[item.id]?.gujaratiHeader}</p>
@@ -741,7 +741,7 @@ const ProductAddPage: FC = function () {
 
                                     <div className="grid lg:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium mb-1 dark:text-gray-100 text-gray-700">English Value</label>
+                                            <label className="block text-sm font-medium mb-1 dark:text-TitaniumWhite text-TranquilBlack">English Value</label>
                                             <Input
                                                 type="textarea"
                                                 placeholder="Value"
@@ -755,7 +755,7 @@ const ProductAddPage: FC = function () {
                                                         }));
                                                     }
                                                 }}
-                                                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white bg-gray-200 text-gray-800"
+                                                className="w-full p-2 border border-SoothingBlueGrey dark:border-Hydrocarbon rounded-lg dark:bg-TranquilBlack dark:text-White bg-WhiteMarble text-Cosmos"
                                             />
                                             {descriptionErrors?.[item.id]?.englishValue && (
                                                 <p className="text-red-500 text-sm mt-1">{descriptionErrors[item.id]?.englishValue}</p>
@@ -763,7 +763,7 @@ const ProductAddPage: FC = function () {
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium mb-1 dark:text-gray-100 text-gray-700">Gujarati Value</label>
+                                            <label className="block text-sm font-medium mb-1 dark:text-TitaniumWhite text-TranquilBlack">Gujarati Value</label>
                                             <Input
                                                 type="textarea"
                                                 placeholder="Value"
@@ -777,7 +777,7 @@ const ProductAddPage: FC = function () {
                                                         }));
                                                     }
                                                 }}
-                                                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white bg-gray-200 text-gray-800"
+                                                className="w-full p-2 border border-SoothingBlueGrey dark:border-Hydrocarbon rounded-lg dark:bg-TranquilBlack dark:text-White bg-WhiteMarble text-Cosmos"
                                             />
                                             {descriptionErrors?.[item.id]?.gujaratiValue && (
                                                 <p className="text-red-500 text-sm mt-1">{descriptionErrors[item.id]?.gujaratiValue}</p>
@@ -802,7 +802,7 @@ const ProductAddPage: FC = function () {
                                     <Input
                                         id="packaging"
                                         name="packaging"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Product packing"
                                         type="number"
                                         onChange={validation.handleChange}
@@ -818,7 +818,7 @@ const ProductAddPage: FC = function () {
                                 <Label htmlFor="Status">Packing Type <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1" onClick={() => packingTypeCall() }>
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -842,7 +842,7 @@ const ProductAddPage: FC = function () {
                                 <Label htmlFor="Status">Category <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1" onClick={() => CategoryCall() }>
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -869,7 +869,7 @@ const ProductAddPage: FC = function () {
                                 <Label htmlFor="Status">Crop  </Label>
                                 <div className="mt-1"  onClick={() => CropCall() }>
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -896,7 +896,7 @@ const ProductAddPage: FC = function () {
                                     <Input
                                         id="avl_qty"
                                         name="avl_qty"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Product QTY"
                                         type="number"
                                         min="0"
@@ -915,7 +915,7 @@ const ProductAddPage: FC = function () {
                                     <Input
                                         id="price"
                                         name="price"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Product Price"
                                         type="number"
                                         min="0"
@@ -936,7 +936,7 @@ const ProductAddPage: FC = function () {
                                     <Input
                                         id="discount"
                                         name="discount"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Product discount"
                                         type="number"
                                         min="0"
@@ -953,7 +953,7 @@ const ProductAddPage: FC = function () {
                                 <Label htmlFor="Status">Company <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1" onClick={() => CompanyCall() }>
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -979,7 +979,7 @@ const ProductAddPage: FC = function () {
                                     <Input
                                         id="batch_no"
                                         name="batch_no"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Product batch no"
                                         type="text"
                                         onChange={validation.handleChange}
@@ -999,7 +999,7 @@ const ProductAddPage: FC = function () {
                                     <Input
                                         id="hsn_code"
                                         name="hsn_code"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Product hsn code"
                                         type="text"
                                         onChange={validation.handleChange}
@@ -1019,7 +1019,7 @@ const ProductAddPage: FC = function () {
                                             <Input
                                                 id="c_gst"
                                                 name="c_gst"
-                                                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-[10rem]"
+                                                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-[10rem]"
                                                 placeholder="Product CGST"
                                                 type="number"
                                                 onChange={validation.handleChange}
@@ -1037,7 +1037,7 @@ const ProductAddPage: FC = function () {
                                             <Input
                                                 id="s_gst"
                                                 name="s_gst"
-                                                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm  w-[10rem]"
+                                                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm  w-[10rem]"
                                                 placeholder="Product SGST"
                                                 type="number"
                                                 onChange={validation.handleChange}
@@ -1055,7 +1055,7 @@ const ProductAddPage: FC = function () {
                                 <Label htmlFor="Status">Status <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -1081,7 +1081,7 @@ const ProductAddPage: FC = function () {
                             <div className="flex-1 mt-[1rem] ">
                                 <Label htmlFor="isBestSelling"> Show on Best Selling <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
-                                    <Select  className="w-full dark:text-white"
+                                    <Select  className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -1098,7 +1098,7 @@ const ProductAddPage: FC = function () {
                             <div className="flex-1 mt-[1rem] ">
                                 <Label htmlFor="isMostpopular"> Show on Most Popular <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
-                                    <Select  className="w-full dark:text-white"
+                                    <Select  className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -1116,7 +1116,7 @@ const ProductAddPage: FC = function () {
                                 <Label htmlFor="isShowonsite"> Show on Web <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -1138,7 +1138,7 @@ const ProductAddPage: FC = function () {
                                 <Label htmlFor="isShowonsite"> Warehouse <span className='text-red-500'>*</span> </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",

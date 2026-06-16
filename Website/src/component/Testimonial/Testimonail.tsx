@@ -59,7 +59,7 @@ const TestimonialSection: React.FC = () => {
   return (
     <section className="py-10" ref={ref}>
       <div className="max-w-1600 mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 text-center">  Farmer <span className="text-lime-500">Testimonial</span>  </h2>
+        <h2 className="text-4xl md:text-5xl font-bold font-heading text-DarkBackground my-5 text-center">  Farmer <span className="text-lime-500">Testimonial</span>  </h2>
 
         <div className="max-w-7xl mx-auto md:px-4 pt-6">
           <Swiper {...swiperConfig}>
@@ -71,13 +71,13 @@ const TestimonialSection: React.FC = () => {
                   <div className="flex items-center gap-4 mb-4">
                     <LazyLoadImage effect="blur" src={testimonial?.testimonial_pic}  alt={testimonial?.name_eng}   className="w-14 h-14 rounded-full object-cover border border-green-500" />
                     <div>
-                      <h4 className="text-lg text-gray-900">  {testimonial?.name_eng} </h4>
-                      <p className="text-sm text-gray-500">  {testimonial?.village_eng}  </p>
+                      <h4 className="text-lg text-DarkBackground">  {testimonial?.name_eng} </h4>
+                      <p className="text-sm text-SharkGray">  {testimonial?.village_eng}  </p>
                     </div>
                   </div>
 
                   {/* Body */}
-                  <p className="text-gray-700 text-base leading-relaxed mb-4 line-clamp-5">
+                  <p className="text-TranquilBlack text-base leading-relaxed mb-4 line-clamp-5">
                     <span className="text-2xl text-green-500 mr-1">“</span>
                     {testimonial?.body_eng}
                   </p>
@@ -88,7 +88,7 @@ const TestimonialSection: React.FC = () => {
                       i < testimonial.rating ? (
                         <FaStar key={i} className="text-green-500" />
                       ) : (
-                        <FaRegStar key={i} className="text-gray-300" />
+                        <FaRegStar key={i} className="text-SoothingBlueGrey" />
                       )
                     )}
                   </div>

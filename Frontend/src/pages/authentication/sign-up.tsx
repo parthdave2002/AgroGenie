@@ -13,7 +13,7 @@ const SignUpPage: FC = function () {
           src={LOGO}
           className="mr-3 h-12"
         />
-        {/* <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+        {/* <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-White">
           Flowbite
         </span> */}
       </div>
@@ -23,7 +23,7 @@ const SignUpPage: FC = function () {
         imgAlt=""
         className="w-full md:max-w-screen-lg [&>img]:hidden md:[&>img]:w-96 md:[&>img]:p-0 md:[&>*]:w-full md:[&>*]:p-16 lg:[&>img]:block"
       >
-        <h1 className="mb-3 text-2xl font-bold dark:text-white md:text-3xl">
+        <h1 className="mb-3 text-2xl font-bold dark:text-White md:text-3xl">
           Create a Free Account
         </h1>
         <form>
@@ -58,7 +58,7 @@ const SignUpPage: FC = function () {
             <Checkbox id="acceptTerms" name="acceptTerms" />
             <Label htmlFor="acceptTerms">
               I accept the&nbsp;
-              <a href="#" className="text-primary-700 dark:text-primary-200">
+              <a href="#" className="text-BrilliantBlue dark:text-CrystalBlue">
                 Terms and Conditions
               </a>
             </Label>
@@ -68,9 +68,9 @@ const SignUpPage: FC = function () {
               Create account
             </Button>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-300">
+          <p className="text-sm text-SharkGray dark:text-SoothingBlueGrey">
             Already have an account?&nbsp;
-            <a href="#" className="text-primary-600 dark:text-primary-200">
+            <a href="#" className="text-Alexandra dark:text-CrystalBlue">
               Login here
             </a>
           </p>

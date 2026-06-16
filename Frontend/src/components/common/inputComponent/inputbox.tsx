@@ -26,7 +26,7 @@ const Inputbox:FC <InputProps>= ( { label, required, className, id, name, placeh
                   <Input
                       id={id}
                       name={name}
-                      className={className ? className : "bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"}
+                      className={className ? className : "bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"}
                       placeholder= {placeholder}
                       type= {type ?? "text"}
                       onChange={validation.handleChange}

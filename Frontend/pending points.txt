@@ -33,21 +33,222 @@ Warehouse
 Confirmation 
 => manage lead data 
 
-================================================ Changes =================================
-Near by farmer	Add dropdown for taluka and village filter
-	remove no info and add village name 
-	description : farmer details add in single line
-	
+================================================ Changes Done  =================================
+Near by farmer : Add dropdown for taluka and village filter
+				remove no info and add village name 
+				description : farmer details add in single line
+
+Centerlize css remove extra code.  
+
+Farmer Dashboard add referral section and that added number show in lead table.
+
+Cart Cart : page redesign, 
+			remove customer section
+			show coupon list  
+
+Wallet  :   Wallet Design : Done
+			wallet amount deduction : Done 
+			when point amount more then order amount. customer wallet point deduction : Done
+			after success order update cookies data of wallet.
+
+Referral Lead Show in Admin panel.
+Referral Lead show on lead manager.
+
+184 file Changes ================
+
+=================== file changes ===================
+Backend : helper, modules (customer, lead, order, wallet) , schema(customer,lead, order, wallet), routes
+Frontend : src , tailwind.config.cjs
+Website  : src , tailwind.config.cjs
+
+================================================ Changes Pending  =================================
+
 Offer	"Dist, Taluka, Village, State, Land, Crop, Referral, Total confirm Order Amount, Successfull order, 
 Complain, New Farmer (0$ purchase)"
-	
-Cart 	Cart page redesign, remove customer section and show coupon list 
-	
-Farmer Dashboard	add referral section and that added number show in lead table
-	show referral point 
-	after first success order point will be credited to referrar
-	
-	show Offers list
+
+Wallet : how to add wallet points 
+		 wallet rules manage ( single or both). ( referee and referrer)	
+
+Farmer Dashboard show Offers list beside Referral
 	
 Admin panel	admin can add referral point 
 	admin can add offers based on filters
+
+===========================Flow ========================
+Flow : 
+	after first success order point will be credited to referrar.
+	wallet points credited.
+	each point has 1rs. ( 100 point == 100rs).
+	wallet points can be apply on product buy and deduct price from order amount. and after success points will be minus from wallet. 
+
+Question : 
+	Admin can manually add points ??
+	in referral  : referrer and referee both get points ??. how we manange in admin panel.   // wallet point has type based on that we can fix 
+	when customer use points while create and return that order due to damage product then what about points ?? 
+
+
+
+The ideal approach is to think of wallet points as a result of business events, not as part of registration/order/referral code.
+
+Recommended Flow
+Step 1: Business Action Happens
+
+Examples:
+
+Customer registers
+Referral becomes successful
+Order is completed
+Profile is completed
+
+These are events.
+
+Customer Registered
+Referral Success
+Order Completed
+Step 2: Event is Created
+
+Instead of immediately crediting points:
+
+Event: USER_REGISTERED
+Event: REFERRAL_SUCCESS
+Event: ORDER_COMPLETED
+
+Your system says:
+
+"An event occurred. Now let's see if any wallet rules apply."
+
+Step 3: Wallet Rule Engine Checks Active Rules
+
+Admin may configure:
+
+Event	                 Points	  Receiver
+CUSTOMER_REGISTERED	  50	   User
+REFERRAL_SUCCESS          100	   Referrer
+REFERRAL_SUCCESS          100	   Referred User
+ORDER_COMPLETED	        20	   User
+
+The engine loads all active rules matching the event.
+
+Step 4: Validate Conditions
+
+Before crediting:
+Check:
+
+Rule active?
+User eligible?
+Already rewarded?
+Referral valid?
+Order completed?
+
+Only then continue.
+
+Step 6: Update Wallet Balance
+After transaction is successfully created:
+Current Balance = 500
+Reward = 100
+
+New Balance = 600
+Example Scenario
+Admin Rules
+Registration = 50
+Referral = 100
+Order = 20
+Customer B Registers Through Customer A Referral
+
+Flow:
+
+Customer B Registration
+       |
+       V
+USER_REGISTERED Event
+       |
+       V
+Wallet Rule Engine
+       |
+       V
++50 to Customer B
+
+Then:
+
+Referral Found?
+       |
+      YES
+       |
+       V
+REFERRAL_SUCCESS Event
+       |
+       V
+Wallet Rule Engine
+       |
+       +----> +100 Customer A
+       |
+       +----> +100 Customer B
+
+Result:
+
+Customer A = +100
+
+Customer B = +150
+(50 Registration + 100 Referral)
+Why This Design Is Better
+
+Your registration API should only care about:
+
+Create Customer
+
+Your order API should only care about:
+
+Complete Order
+
+Neither API should know:
+
+Give 50 points
+Give 100 points
+Give 500 points
+
+Those values belong to admin-configured wallet rules.
+
+Enterprise-Grade Flow
+Business Action
+      |
+      V
+Event Generated
+      |
+      V
+Reward Engine
+      |
+      V
+Load Active Rules
+      |
+      V
+Validate Conditions
+      |
+      V
+Create Wallet Transaction
+      |
+      V
+Update Wallet Balance
+      |
+      V
+Send Notification (Optional)
+
+This separation is usually the cleanest architecture because tomorrow the admin can add:
+
+Registration Reward
+Referral Reward
+First Order Reward
+Birthday Reward
+Review Reward
+
+without changing registration or order logic. The application only emits events; the reward engine decides who gets points and how many.
+
+======================
+module.exports = {
+    CUSTOMER_REGISTERED: 'CUSTOMER_REGISTERED',  // Done
+    REFERRAL_SUCCESS: 'REFERRAL_SUCCESS',  // Done
+    ORDER_COMPLETED: 'ORDER_COMPLETED',   // Done
+    FIRST_ORDER_COMPLETED: 'FIRST_ORDER_COMPLETED',
+    PROFILE_COMPLETED: 'PROFILE_COMPLETED',
+    BIRTHDAY_REWARD: 'BIRTHDAY_REWARD',
+    REVIEW_ADDED: 'REVIEW_ADDED'
+};

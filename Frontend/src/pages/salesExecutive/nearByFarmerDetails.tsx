@@ -119,7 +119,7 @@ const NeaByFarmerDetails : FC  <NearByFarmerProps> = ({farmerId,OpenFarmerDetail
         <Modal.Header> NearBy Order Details </Modal.Header>
         <Modal.Body>
           <div className='flex flex-col gap-y-3'>
-          <div className='flex grid grid-cols-3 gap-4 items-center justify-between dark:bg-gray-800 bg-gray-100 dark:text-gray-50 p-3 rounded-md'>
+          <div className='flex grid grid-cols-3 gap-4 items-center justify-between dark:bg-Cosmos bg-TitaniumWhite dark:text-White p-3 rounded-md'>
             <p> Name : {SelectedFarmerDetails?.firstname} {SelectedFarmerDetails?.middlename} {SelectedFarmerDetails?.lastname} </p>
             <p> Taluka : {SelectedFarmerDetails?.taluka?.name} </p>
             <p> Village : {SelectedFarmerDetails?.village?.name} </p>

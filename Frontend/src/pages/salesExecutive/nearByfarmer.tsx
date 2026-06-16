@@ -79,11 +79,11 @@ const NeaByFarmer : FC  = () => {
 
   return (
     <>
-      <div className="w-full rounded-2xl border dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-sm">
+      <div className="w-full rounded-2xl border dark:border-TranquilBlack bg-White dark:bg-Cosmos p-4 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-md font-semibold text-gray-800 dark:text-gray-100"> Nearby Farmers <span className="text-xs text-gray-400"> ({FarmerDataList?.length || 0} results)</span> </h2>
+          <h2 className="text-md font-semibold text-Cosmos dark:text-TitaniumWhite"> Nearby Farmers <span className="text-xs text-SilverSteel"> ({FarmerDataList?.length || 0} results)</span> </h2>
           <Select  
-            className="w-[8rem] text-gray-900 dark:text-white "
+            className="w-[8rem] text-DarkBackground dark:text-White "
             classNames={{
               control: () => "react-select__control",
               singleValue: () => "react-select__single-value",
@@ -101,15 +101,15 @@ const NeaByFarmer : FC  = () => {
         {FarmerDataList && FarmerDataList.length > 0 ? (
           <div className="space-y-3">
             {FarmerDataList.map((item: any, index: number) => (
-              <div  key={index} className="flex items-center justify-between rounded-xl bg-gray-50 dark:bg-gray-700 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 transition cursor-pointer" onClick={() => OpenFarmerDetails(item)}>
+              <div  key={index} className="flex items-center justify-between rounded-xl bg-White dark:bg-TranquilBlack px-4 py-3 hover:bg-TitaniumWhite dark:hover:bg-Hydrocarbon transition cursor-pointer" onClick={() => OpenFarmerDetails(item)}>
                 <div>
-                  <p className="text-md text-gray-800 dark:text-gray-100"> {item?.firstname} {item?.lastname}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400"> {item?.taluka?.name } | {item?.village?.name} </p>
+                  <p className="text-md text-Cosmos dark:text-TitaniumWhite"> {item?.firstname} {item?.lastname}</p>
+                  <p className="text-xs text-SharkGray dark:text-SilverSteel"> {item?.taluka?.name } | {item?.village?.name} </p>
                 </div>
 
                 <div className="text-right">
-                  <p className="text-md text-gray-700 dark:text-gray-200"> {item.mobile_number} </p>
-                  <p className="text-xs text-gray-400"> {moment(item.added_at).format("DD MMM YYYY")} </p>
+                  <p className="text-md text-TranquilBlack dark:text-WhiteMarble"> {item.mobile_number} </p>
+                  <p className="text-xs text-SilverSteel"> {moment(item.added_at).format("DD MMM YYYY")} </p>
                 </div>
               </div>
             ))}
@@ -117,7 +117,7 @@ const NeaByFarmer : FC  = () => {
             <SmallPagination PageData={PageDataList} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
           </div>
         ):(
-          <div className="flex flex-col items-center justify-center py-10 text-gray-400 dark:text-gray-500">
+          <div className="flex flex-col items-center justify-center py-10 text-SilverSteel dark:text-SharkGray">
             <p className="text-sm">No nearby farmers found</p>
           </div>
         )}

@@ -3,8 +3,8 @@ import "./loader.css";
 
 const GlobalLoader: React.FC = () => {
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center bg-gray-600/50 backdrop-blur-sm">
-      {/* <div className="absolute inset-0 bg-gray-100 blur-sm" /> */}
+    <div className="fixed inset-0 z-20 flex items-center justify-center bg-Hydrocarbon/50 backdrop-blur-sm">
+      {/* <div className="absolute inset-0 bg-TitaniumWhite blur-sm" /> */}
 
       {/* <div className="w-[200px] h-[100px] flex flex-col relative items-center justify-end overflow-x-hidden z-10 ">
         <div className="w-[130px] mb-[6px] animate-truckMotion">

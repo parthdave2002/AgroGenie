@@ -77,7 +77,7 @@ const UserDetailsPage: FC = function () {
               ParentName={ParentName}
               ParentLink={ParentLink}
             />
-            <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+            <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
               <div>
                 <div className="grid grid-cols-3 gap-x-4 gap-y-8">
                   <img
@@ -87,7 +87,7 @@ const UserDetailsPage: FC = function () {
                   />
 
                   {details.map((item, index) => (
-                    <div key={index} className="detailswrapper dark:text-gray-50">
+                    <div key={index} className="detailswrapper dark:text-White">
                       <h3 className="detailslebel">{item.label}</h3>
                       <p className="detailsvalue">{item.value || "N/A"}</p>
                     </div>

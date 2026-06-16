@@ -10,9 +10,9 @@ const PromoBannerSection: React.FC = () => {
             <div className="relative bg-[#f9ebe7] rounded-lg overflow-hidden mb-3" >
               {/* <div className="p-[4rem]">
                 <div className="text-yellow-400 text-2xl font-bold mb-2"> Upto 25% Off </div>
-                <h3 className="text-gray-900 font-heading text-xl md:text-2xl font-semibold mb-2"> Luxa Dark Chocolate  </h3>
-                <p className="text-gray-900 md:text-[1.2rem] mb-4"> Very tasty & creamy vanilla flavour creamy muffins. </p>
-                <a  href="#" className="inline-block bg-black text-white uppercase text-sm font-semibold px-4 py-2 rounded hover:bg-gray-800 transition"  > Show Now</a>
+                <h3 className="text-DarkBackground font-heading text-xl md:text-2xl font-semibold mb-2"> Luxa Dark Chocolate  </h3>
+                <p className="text-DarkBackground md:text-[1.2rem] mb-4"> Very tasty & creamy vanilla flavour creamy muffins. </p>
+                <a  href="#" className="inline-block bg-black text-White uppercase text-sm font-semibold px-4 py-2 rounded hover:bg-Cosmos transition"  > Show Now</a>
               </div> */}
               <img src="/images/banner/Research.webp" />
             </div>
@@ -24,8 +24,8 @@ const PromoBannerSection: React.FC = () => {
               {/* <div className="p-[4rem]">
                 <div className="text-yellow-600 text-2xl font-bold mb-2">  Upto 25% Off </div>
                 <h3 className="text-geay-900 font-heading text-xl md:text-2xl font-semibold mb-2"> Creamy Muffins </h3>
-                <p className="text-gray-900 md:text-[1.2rem] mb-4"> Very tasty & creamy vanilla flavour creamy muffins. </p>
-                <a href="#" className="inline-block bg-black text-white uppercase text-sm font-semibold px-4 py-2 rounded hover:bg-gray-800 transition"  >  Show Now </a>
+                <p className="text-DarkBackground md:text-[1.2rem] mb-4"> Very tasty & creamy vanilla flavour creamy muffins. </p>
+                <a href="#" className="inline-block bg-black text-White uppercase text-sm font-semibold px-4 py-2 rounded hover:bg-Cosmos transition"  >  Show Now </a>
               </div> */}
                <img src="/images/banner/Promotion.webp" />
             </div>

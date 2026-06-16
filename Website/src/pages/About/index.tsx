@@ -69,13 +69,13 @@ const ImageTextSection = ({
     </div>
 
     <div className="w-full md:w-1/2 flex flex-col justify-center">
-      <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 mb-6">
+      <h2 className="text-4xl md:text-5xl font-bold font-heading text-DarkBackground mb-6">
         {title} <span className="text-lime-500">{highlight}</span>
       </h2>
-      <p className="text-gray-600 mb-6 font-body">
+      <p className="text-Hydrocarbon mb-6 font-body">
         We are a leading agricultural company dedicated to revolutionizing modern farming practices. Our mission is to empower farmers with innovative solutions that enhance productivity, sustainability, and profitability. With a strong commitment to research and development, we provide cutting-edge technologies and services tailored to meet the evolving needs of the agricultural industry.
       </p>
-      <p className="text-gray-600 font-body">
+      <p className="text-Hydrocarbon font-body">
         Our team of experts works closely with farmers to understand their challenges and deliver customized solutions that drive success. From advanced seed varieties to precision farming techniques, we are at the forefront of agricultural innovation. Join us on our journey to transform agriculture and create a brighter future for farmers worldwide.
       </p>
     </div>
@@ -90,7 +90,7 @@ const AboutSection: React.FC = () => {
   }, []);
 
   return (
-    <section className=" relative  py-10  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
+    <section className=" relative  py-10  bg-White  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
       <div className="relative z-10">
 
         {/* About / History / Why We */}
@@ -109,7 +109,7 @@ const AboutSection: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-10 font-body">
             {SERVICES.map(service => (
-              <div key={service.id} className="bg-gray-50 rounded-3xl shadow hover:shadow-xl transition font-body">
+              <div key={service.id} className="bg-White rounded-3xl shadow hover:shadow-xl transition font-body">
                 <div className="flex justify-center pt-8">
                   <LazyLoadImage
                     src={service.image}
@@ -120,8 +120,8 @@ const AboutSection: React.FC = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold">{service.title}</h3>
-                  <p className="text-gray-600 text-sm my-3">{service.description}</p>
-                  <span className="text-gray-500 text-sm">{service.person}</span>
+                  <p className="text-Hydrocarbon text-sm my-3">{service.description}</p>
+                  <span className="text-SharkGray text-sm">{service.person}</span>
                 </div>
               </div>
             ))}

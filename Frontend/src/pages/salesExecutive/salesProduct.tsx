@@ -30,9 +30,9 @@ const SalesProduct : FC <SalesProPropsData> = function ({ setDatactive})  {
           <div className='flex justify-between'>
             <div className='flex flex-col self-center'>
               <div className="text-[0.9rem] text-blue-500 flex gap-x-3 cursor-pointer w-fit " onClick={() => DashboardCall("Dashboard")}  >  <FaArrowLeft style={{ alignSelf: "center" }} /> Back to Dashboard  </div>
-              <div className="text-[2rem] font-semibold text-gray-900 dark:text-gray-100"> Products   </div>
+              <div className="text-[2rem] font-semibold text-DarkBackground dark:text-TitaniumWhite"> Products   </div>
             </div>
-            <SalesMobileInput datatype='text' className="py-2 px-6 border-0  rounded-full text-[2rem] text-gray-500 font-bold relative shadow-xl dark:shadow-xl  shadow-inner shadow-indigo-200  dark:shadow-gray-500/50 dark:bg-gray-700 dark:text-gray-100"  value={searchData} handleChange={(data) =>handleChange(data)} handleClickCall={handleClickCall} placeholder="Search Product"  />
+            <SalesMobileInput datatype='text' className="py-2 px-6 border-0  rounded-full text-[2rem] text-SharkGray font-bold relative shadow-xl dark:shadow-xl  shadow-inner shadow-indigo-200  dark:shadow-SharkGray/50 dark:bg-TranquilBlack dark:text-TitaniumWhite"  value={searchData} handleChange={(data) =>handleChange(data)} handleClickCall={handleClickCall} placeholder="Search Product"  />
           </div>
           
           <div>

@@ -142,12 +142,12 @@ const UserListPage: FC = function () {
       </NavbarSidebarLayout>
 
       {isOpenDelteModel && (
-          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"> <div className="text-white">Loading...</div> </div> }>
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"user"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DelRole} />
           </Suspense>
       )}
       
-      <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"> <div className="text-white">Loading...</div> </div> }>
+      <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
         <ToastMessage />
       </Suspense>
     </>

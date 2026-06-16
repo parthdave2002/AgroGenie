@@ -14,9 +14,9 @@ const PageNotFound: FC = function () {
   return (
     <>
         <div className="block items-center p-6 justify-between  sm:flex">
-          <div className="flex-1 dark:text-gray-50 text-[3rem] font-semibold text-center"> 
+          <div className="flex-1 dark:text-White text-[3rem] font-semibold text-center"> 
             <p> Page Not Found!!</p>
-            <div className="justify-self-center border rounded-full text-[1rem] px-4 py-2 bg-blue-800 text-gray-100 cursor-pointer" onClick={() => DashboardCall()}> Back to Home</div>
+            <div className="justify-self-center border rounded-full text-[1rem] px-4 py-2 bg-blue-800 text-TitaniumWhite cursor-pointer" onClick={() => DashboardCall()}> Back to Home</div>
           </div>
           <img alt="Flowbite logo" src={LOGO}  className="flex-1 max-h-[36rem] w-9"  />
           

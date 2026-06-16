@@ -3,7 +3,11 @@ const otherHelper = require('../../helper/others.helper');
 const orderSch = require('../../schema/orderSchema');
 const productSch = require('../../schema/productSchema');
 const complainSch = require('../../schema/complainSchema');
-const couponSch = require("../../schema/couponSchema")
+const couponSch = require("../../schema/couponSchema");
+const customerSch = require("../../schema/customerSchema");
+const WalletHelper = require('../../helper/wallet.helper');
+const WALLET_EVENTS = require('../constants/walletEvents');
+
 const orderController = {};
 
 orderController.getAllOrderList = async (req, res, next) => {
@@ -231,6 +235,40 @@ orderController.AddOrUpdateOrderData = async (req, res, next) => {
         }
         order.coupon = coupon._id;
       }
+
+      if (order.order_type === 'confirm' && Number(order.wallet_points) > 0) {
+        const customerData = await customerSch.findOne({ _id: order.customer }).session(session);
+        if (!customerData) {
+          await session.abortTransaction();
+          return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Customer not found for wallet redemption', null);
+        }
+
+        const redeemPoints = Math.min(Number(order.wallet_points), customerData.wallet_points, totalAmount);
+        if (redeemPoints <= 0) {
+          await session.abortTransaction();
+          return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Wallet Points can not Redeem', null);
+        }
+
+        totalAmount -= redeemPoints;
+        customerData.wallet_points -= redeemPoints;
+        await customerSch.updateOne({ _id: order.customer }, { $set: { wallet_points: customerData.wallet_points } }).session(session);
+        order.wallet_points = redeemPoints;
+      }
+
+      const firstOrder = await orderSch.findOne({customer : order.customer});
+      if(firstOrder){
+        await WalletHelper.creditPoints({
+          customerId: order.customer,
+          orderAmount : order.total_amount,
+          eventType: WALLET_EVENTS.ORDER_COMPLETED
+        });
+      }else{
+        await WalletHelper.creditPoints({
+          customerId: order.customer,
+          eventType: WALLET_EVENTS.FIRST_ORDER_COMPLETED
+        });
+      }
+
       order.products = updatedProducts;
       order.total_amount = totalAmount;
       order.advisor_name = req.user.id;

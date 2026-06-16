@@ -114,11 +114,11 @@ const AddCropsPage : FC = function () {
         <>  
             <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >
                 <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink={ParentLink}  />
-                <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+                <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
 
                     <div className="mb-4">
-                            <label className="dark:text-gray-100 text-[1.2rem]"> Crop Image <span className='text-red-500'>*</span> </label>
+                            <label className="dark:text-TitaniumWhite text-[1.2rem]"> Crop Image <span className='text-red-500'>*</span> </label>
                             <MultiImageUploadPreview onFileSelect={setFile} defaultImage={cropImage} onDefaultImageChange={setcropImage} />
                             {validateCrop == 1 ? ( <FormFeedback type="invalid" className="text-Red text-sm"> Please select Crop photo </FormFeedback> ) : null}
                     </div>
@@ -203,7 +203,7 @@ const AddCropsPage : FC = function () {
                             <Label htmlFor="Status">Status <span className='text-red-500'>*</span> </Label>
                             <div className="mt-1">
                             <Select
-                                className="w-full dark:text-white"
+                                className="w-full dark:text-White"
                                 classNames={{
                                     control: () => "react-select__control",
                                     singleValue: () => "react-select__single-value",

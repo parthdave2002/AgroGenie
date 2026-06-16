@@ -134,10 +134,10 @@ export const ADD_COUPON_LIST = "/api/coupon/add-coupon";
 export const DELETE_COUPON_LIST = "/api/coupon/remove-coupon";
 export const CHANGE_STATUS_COUPON_LIST = "/api/coupon/status-coupon";
 
-export const GET_REFERRAL_RULES_LIST = "/api/referral/get-referral-rules";
-export const ADD_REFERRAL_RULES_LIST = "/api/referral/add-referral-rules";
-export const DELETE_REFERRAL_RULES_LIST = "/api/referral/remove-referral-rules";
-export const CHANGE_STATUS_REFERRAL_RULES_LIST = "/api/referral/status-referral-rules";
+export const GET_WALLET_RULES_LIST = "/api/wallet/get-wallet-rules";
+export const ADD_WALLET_RULES_LIST = "/api/wallet/add-wallet-rules";
+export const DELETE_WALLET_RULES_LIST = "/api/wallet/remove-wallet-rules";
+export const CHANGE_STATUS_WALLET_RULES_LIST = "/api/wallet/status-wallet-rules";
 
 export const GET_LEAD_LIST = "/api/lead/get-lead";
 export const ADD_LEAD_LIST = "/api/lead/add-lead";

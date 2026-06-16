@@ -12,7 +12,8 @@ import {ProfileAddModalData, ProfileInfo} from "../../types/types"
 import { AddCustomerDatalist, getCroplist, getdistrictdata, getstatedatalist, gettalukadata, getvillagedata, ResetCustomerDatalist, UpdateCustomerDatalist } from '../../Store/actions';
 import { HeardAboutOprions, IrrigationSourceOptions, IrrigationTypeOptions, LandTypeOptions } from '../../types/dropdown';
 
-const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, handleAccept, Mobile_number, CloseAddmodal}) => {
+const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, handleAccept, Mobile_number,Referrerdata, CloseAddmodal}) => {
+  console.log("Referrerdata", Referrerdata)
   const dispatch = useDispatch();
   const [data, setData] = useState<ProfileInfo | null>()
   
@@ -308,7 +309,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
         heard_about_agribharat : selectedheaderaboutid,
         smart_phone: true,
         crops:selectedcropid,
-        ref_name : values?.ref_name
+        ref_name : Referrerdata?._id
       }
 
       if(isEditFarmer){
@@ -490,8 +491,8 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
   return (
    <div className='mt-[2rem]'>
       <div className='flex justify-between'>
-        <div className="text-[2rem] font-semibold text-gray-900 dark:text-gray-100"> {isEditFarmer == true ? "Update Farmer"  : "Add Farmer" }  </div>
-        <div className="text-[2rem] font-semibold text-gray-900 dark:text-gray-100 flex self-center cursor-pointer " onClick={() => CloseCall()}> <FaWindowClose /> </div>
+        <div className="text-[2rem] font-semibold text-DarkBackground dark:text-TitaniumWhite"> {isEditFarmer == true ? "Update Farmer"  : "Add Farmer" }  </div>
+        <div className="text-[2rem] font-semibold text-DarkBackground dark:text-TitaniumWhite flex self-center cursor-pointer " onClick={() => CloseCall()}> <FaWindowClose /> </div>
       </div>
 
       <Form onSubmit={(e) => {  
@@ -507,14 +508,14 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
         if (!selectedDistrictOption) setValidateDistrict(1)
         if (!selectedStateOption) setValidateState(1)
       }} >
-        <div className="dark:bg-gray-800 p-4 rounded-lg border border-gray-300 dark:border-gray-500 space-y-3  md:grid grid-cols-3 gap-[1rem]">
+        <div className="dark:bg-Cosmos p-4 rounded-lg border border-SoothingBlueGrey dark:border-SharkGray space-y-3  md:grid grid-cols-3 gap-[1rem]">
           <div className='mt-3'>
             <Label htmlFor="Name"> First Name <span className='text-red-500'>*</span> </Label>
             <div className="mt-1">
               <Input
                 id="firstname"
                 name="firstname"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter firstname"
                 type="text"
                 onChange={validation.handleChange}
@@ -532,7 +533,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Input
                 id="middlename"
                 name="middlename"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter middlename"
                 type="text"
                 onChange={validation.handleChange}
@@ -550,7 +551,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Input
                 id="lastname"
                 name="lastname"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter lastname"
                 type="text"
                 onChange={validation.handleChange}
@@ -568,7 +569,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Input
                 id="mobile_number"
                 name="mobile_number"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter mobile"
                 type="tel"
                 value={Mobile_number|| validation.values.mobile_number}
@@ -584,7 +585,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Input
                 id="alternate_number"
                 name="alternate_number"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter alternate mobile no"
                 type="number"
                 onChange={validation.handleChange}
@@ -600,7 +601,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="crops"> Crops <span className='text-red-500'>*</span></Label>
             <div className="mt-1" onClick={ () => handleCropLoad ()} >
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -625,7 +626,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Input
                 id="address"
                 name="address"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter address"
                 type="text"
                 onChange={validation.handleChange}
@@ -641,7 +642,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="Status"> State <span className='text-red-500'>*</span></Label>
             <div className="mt-1" onClick={ () => handleStateLoad ()}>
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -663,7 +664,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="district"> District <span className='text-red-500'>*</span></Label>
             <div className="mt-1">
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -685,7 +686,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="taluka"> Taluka <span className='text-red-500'>*</span></Label>
             <div className="mt-1">
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -707,7 +708,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="village"> Village <span className='text-red-500'>*</span></Label>
             <div className="mt-1">
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -731,7 +732,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Input
                 id="pincode"
                 name="pincode"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter pincode"
                 type="text"
                 onChange={validation.handleChange}
@@ -749,7 +750,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Input
                 id="post_office"
                 name="post_office"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter post office"
                 type="text"
                 onChange={validation.handleChange}
@@ -768,7 +769,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
                 <Input
                   id="land_area"
                   name="land_area"
-                  className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                  className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                   placeholder="Enter land area"
                   type="number"
                   onChange={validation.handleChange}
@@ -784,7 +785,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
               <Label htmlFor="land_type"> Land Type <span className='text-red-500'>*</span></Label>
               <div className="mt-1">
                 <Select
-                  className="w-full dark:text-white"
+                  className="w-full dark:text-White"
                   classNames={{
                     control: () => "react-select__control",
                     singleValue: () => "react-select__single-value",
@@ -807,7 +808,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="landarea"> Irrigation Source <span className='text-red-500'>*</span></Label>
             <div className="mt-1">
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -829,7 +830,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="irrigation_type"> Irrigation Type <span className='text-red-500'>*</span></Label>
             <div className="mt-1">
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -851,7 +852,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
             <Label htmlFor="heard_aboutus"> Heard About us <span className='text-red-500'>*</span></Label>
             <div className="mt-1">
               <Select
-                className="w-full dark:text-white"
+                className="w-full dark:text-White"
                 classNames={{
                   control: () => "react-select__control",
                   singleValue: () => "react-select__single-value",
@@ -870,18 +871,19 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
           </div>
 
           <div>
-            <Label htmlFor="ref_name"> Refrence Number </Label>
+            <Label htmlFor="ref_name"> Refrence Name (Number) </Label>
             <div className="mt-1">
               <Input
                 id="ref_name"
                 name="ref_name"
-                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                 placeholder="Enter refrence number"
                 type="tel"
                 onChange={validation.handleChange}
                 onBlur={validation.handleBlur}
-                value={validation.values?.ref_name || ""}
+                value={ [ Referrerdata?.firstname,Referrerdata?.middlename, Referrerdata?.lastname,].filter(Boolean) .join(" ")  || validation.values?.ref_name || ""}
                 invalid={validation.touched?.ref_name && validation.errors?.ref_name ? true : false}
+                disabled
               />
               {validation.touched.ref_name && validation.errors?.ref_name ? (<FormFeedback type="invalid" className="text-Red text-sm"> {validation.errors?.ref_name} </FormFeedback>) : null}
             </div>
@@ -889,7 +891,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
         </div>
 
           <div className="flex gap-x-3 justify-end flex-end self-end mt-[1rem]">
-            <Button className="bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl  border-0" type="submit" ><div className="flex items-center gap-x-3 text-[1.2rem]"> <FaUser className="text-xl" />  {isEditFarmer == true ? "Update Farmer" : "Add Farmer"} </div> </Button>
+            <Button className="bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl  border-0" type="submit" ><div className="flex items-center gap-x-3 text-[1.2rem]"> <FaUser className="text-xl" />  {isEditFarmer == true ? "Update Farmer" : "Add Farmer"} </div> </Button>
           </div>
       </Form>
       

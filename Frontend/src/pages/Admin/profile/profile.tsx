@@ -37,11 +37,11 @@ const ProfilePage : FC = function () {
         <>  
             <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >
                 <ExampleBreadcrumb  Name={Name}  />
-                <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4 flex flex-col ">
+                <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4 flex flex-col ">
                         <ImageUploadPreview onFileSelect={setFile1}  defaultImage={userData?.user_pic ? `${userData?.user_pic}` : ""}  />
 
                         <div>
-                            <div className="flex justify-between dark:text-gray-50 w-full mt-[3rem]">
+                            <div className="flex justify-between dark:text-White w-full mt-[3rem]">
                                 <div> Name : {userData ? userData?.name : "N/A"}</div>
                                 <div> Email : {userData ? userData?.email : "N/A"} </div>
                                 <div> Role : {userData ? userData?.email : "N/A"} </div>

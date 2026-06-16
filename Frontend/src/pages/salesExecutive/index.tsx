@@ -41,7 +41,7 @@ const SalesCRMPage : FC = function () {
 
     return (
         <>  
-            <div className="p-3 bg-[#f4f9fd] dark:bg-gray-800 min-h-screen">
+            <div className="p-3 bg-[#f4f9fd] dark:bg-Cosmos min-h-screen">
                 <div className="py-2 px-4  shadow shadow-lg shadow-indigo-400/40 rounded-xl"> <SalesHeaderPage openProfile={openProfile} setDatactive={ActiveData} active={active} />  </div>
                     
                     <div className="flex flex-col p-3 "> 

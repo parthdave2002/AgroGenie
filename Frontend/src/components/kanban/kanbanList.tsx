@@ -298,7 +298,7 @@ export default function KanbanBoard() {
           </button>
           {!showOtherUsersTasks && ( <span className="text-sm text-slate-500"> Showing tasks assigned to {login?.data?.name || currentUser.name} </span>)}
         </div> */}
-        <button onClick={() => setShowNewColumnInput(true)} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors" >
+        <button onClick={() => setShowNewColumnInput(true)} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-White rounded-lg font-medium transition-colors" >
           <PlusIcon className="w-5 h-5" />
           Add Column
         </button>
@@ -320,7 +320,7 @@ export default function KanbanBoard() {
           />
           <button
             onClick={handleAddColumn}
-            className="p-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+            className="p-2 bg-green-600 hover:bg-green-700 text-White rounded-lg transition-colors"
           >
             <CheckIcon className="w-5 h-5" />
           </button>
@@ -329,7 +329,7 @@ export default function KanbanBoard() {
               setShowNewColumnInput(false);
               setNewColumnTitle("");
             }}
-            className="p-2 bg-slate-400 hover:bg-slate-500 text-white rounded-lg transition-colors"
+            className="p-2 bg-slate-400 hover:bg-slate-500 text-White rounded-lg transition-colors"
           >
             <XMarkIcon className="w-5 h-5" />
           </button>
@@ -342,7 +342,7 @@ export default function KanbanBoard() {
 
           const selectedPriority = newTaskPriority[column.id] || "medium";
           return (
-            <div key={column.id} className="bg-white rounded-2xl border border-slate-200 flex flex-col min-h-[560px] shadow-sm hover:shadow-md transition-shadow flex-shrink-0 w-72">
+            <div key={column.id} className="bg-White rounded-2xl border border-slate-200 flex flex-col min-h-[560px] shadow-sm hover:shadow-md transition-shadow flex-shrink-0 w-72">
             <div draggable onDragStart={(e) => handleColumnDragStart(e, column.id)} onDragOver={handleDragOver} onDrop={(e) => handleColumnDrop(e, column.id)}
               className="flex items-center justify-between p-4 border-b border-slate-200 cursor-move bg-slate-50/50 hover:bg-slate-100/50 transition-colors rounded-t-2xl"
             >
@@ -380,7 +380,7 @@ export default function KanbanBoard() {
                         {/* Assignee Avatar */}
                         {task.assignedTo && (
                           <div className="flex -space-x-2">
-                            <div className="w-6 h-6 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-xs font-medium text-white" title={task.assignedTo.name}>
+                            <div className="w-6 h-6 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-xs font-medium text-White" title={task.assignedTo.name}>
                               {task.assignedTo.name.charAt(0).toUpperCase()}
                             </div>
                           </div>
@@ -433,7 +433,7 @@ export default function KanbanBoard() {
                         })
                       }
                       placeholder="What needs to be done?"
-                      className="w-full px-4 py-3 text-sm border border-slate-300 rounded-2xl bg-slate-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-3 text-sm border border-slate-300 rounded-2xl bg-slate-50 text-TranquilBlack focus:outline-none focus:ring-2 focus:ring-blue-500"
                       autoFocus
                       onKeyPress={(e) => {
                         if (e.key === "Enter") handleAddTask(column.id);
@@ -443,7 +443,7 @@ export default function KanbanBoard() {
 
                   <div className="flex flex-col gap-2">
                     <span className="text-sm font-medium text-slate-700">Priority</span>
-                    <div className="flex gap-2 rounded-2xl border border-slate-200 p-1 bg-white">
+                    <div className="flex gap-2 rounded-2xl border border-slate-200 p-1 bg-White">
                       {(["low", "medium", "high"] as Task["priority"][]).map((level) => (
                         <button
                           key={level}
@@ -457,10 +457,10 @@ export default function KanbanBoard() {
                           className={`rounded-full px-3 py-2 text-xs font-semibold transition ${
                             selectedPriority === level
                               ? level === "low"
-                                ? "bg-blue-600 text-white"
+                                ? "bg-blue-600 text-White"
                                 : level === "medium"
-                                ? "bg-yellow-500 text-white"
-                                : "bg-red-600 text-white"
+                                ? "bg-yellow-500 text-White"
+                                : "bg-red-600 text-White"
                               : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                           }`}
                         >
@@ -471,7 +471,7 @@ export default function KanbanBoard() {
                   </div>
 
                   <div className="flex gap-2">
-                    <button onClick={() => handleAddTask(column.id)} className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-sm font-medium transition-colors">
+                    <button onClick={() => handleAddTask(column.id)} className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-White rounded-2xl text-sm font-medium transition-colors">
                       <CheckIcon className="w-4 h-4" />
                       Add task
                     </button>

@@ -161,7 +161,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
   return (
     <>
         <Modal onClose={() => setisOpenComplainCreateModel(false)} show={isOpenComplainCreateModel} size="6xl" className="backdrop-blur-sm p-3" >
-            <Modal.Header> <div className='text-[2rem] dark:text-gray-200 font-bold'> Complain Create  </div>   </Modal.Header>
+            <Modal.Header> <div className='text-[2rem] dark:text-WhiteMarble font-bold'> Complain Create  </div>   </Modal.Header>
             <div className='p-3'>
                 <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
                     <div className='my-[2rem] mx-[1rem] '>
@@ -172,7 +172,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
                                     <Input
                                         id="title"
                                         name="title"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Enter title"
                                         type="text"
                                         onChange={validation.handleChange}
@@ -188,7 +188,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
                                 <Label className='text-[1.2rem]' htmlFor="priority"> Priority </Label>
                                 <div className="mt-1">
                                     <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                             control: () => "react-select__control",
                                             singleValue: () => "react-select__single-value",
@@ -212,7 +212,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
                                     <Label className='text-[1.2rem]' htmlFor="priority"> Product </Label>
                                     <div className="mt-1">
                                         <Select
-                                            className="w-full dark:text-white"
+                                            className="w-full dark:text-White"
                                             classNames={{
                                                 control: () => "react-select__control",
                                                 singleValue: () => "react-select__single-value",
@@ -241,7 +241,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
                                     <Input
                                         id="comment"
                                         name="comment"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Enter comment"
                                         type="text"
                                         onChange={validation.handleChange}
@@ -253,7 +253,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
                                 </div>
                             </div>
 
-                        <div className=' justify-end flex'><Button type='submit' className='mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl border-0 text-[1.2rem]' > <div className="flex items-center gap-x-3"> <FaAddressCard className="text-xl" /> Create Complain  </div></Button> </div>
+                        <div className=' justify-end flex'><Button type='submit' className='mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0 text-[1.2rem]' > <div className="flex items-center gap-x-3"> <FaAddressCard className="text-xl" /> Create Complain  </div></Button> </div>
                     </div>
                 </Form>
             </div>

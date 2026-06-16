@@ -43,7 +43,7 @@ const ProductCarousel: FC <PropsData>= ({data}) => {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full bg-white ${
+            className={`w-3 h-3 rounded-full bg-White ${
               index === currentIndex ? "opacity-100" : "opacity-50"
             }`}
           ></button>
