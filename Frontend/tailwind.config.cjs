@@ -9,90 +9,35 @@ module.exports = {
   theme: {
     
     colors: {
-      primary: {
-        50: "#eff6ff",
-        100: "#dbeafe",
-        200: "#bfdbfe",
-        300: "#93c5fd",
-        400: "#60a5fa",
-        500: "#3b82f6",
-        600: "#2563eb",
-        700: "#1d4ed8",
-        800: "#1e40af",
-        900: "#1e3a8a",
-      },
-      regalblue: '#243c5a',
-      Cultured : "#F5F5FA",
-      GhostWhite : "#f6f6fb",
-      CardBgcolor:"#f6f7f9",
-      Gainsboro: "#e8e9f7",
-      AntiWhite:"#F0F0F0 ",
-      Black: "#000",
-      Backgroundcolor:"#111827",
-      CardColor:"#1f2937",
-      Red:"#e71616",
-      danger:"#f87171",
-      deletebutton:"#ff6969",
-      addbutton:"#5db55d",
-      aqua:"#00FFFF",
-      LightGreen:"#49e35cb8",
-      LightYellow: "#ffefd5",
-      yellowgreen:"#9acd32",
-      CartBgColor:"#E2DDDD",
-      Ivory :"#FEFFED",
-      Platinum:"#e3e3e3",
-      lightblue:"#e2f3fb",
-      inprogress:"#edf8e8",
-      done:"#eaebff",
-      LightBlack:"#7c7d88",
-      SemiTransparent : "#00000080"
+      // Blue color
+      CrystalBlue:      "#bfdbfe", 
+      Alexandra:        "#3b82f6",
+      BrilliantBlue:    "#1d4ed8",
 
+      // Dark Background color and Text color  ( Gray color)
+      White :           "#ffffff",    // white
+      LuxuryWhite :     "#f9fafb",    // gray-50
+      TitaniumWhite:    "#f3f4f6",    // gray-100
+      WhiteMarble :     "#e5e7eb",    // gray-200
+      SoothingBlueGrey: "#d1d5db",    // gray-300
+      SilverSteel :     "#9ca3af",    // gray-400
+      SharkGray :       "#6b7280",    // gray-500
+      Hydrocarbon :     "#4b5563",    // gray-600
+      TranquilBlack :   "#374151",    // gray-700
+      Cosmos :          "#1f2937",    // gray-800
+      DarkBackground :  "#111827",    // gray-900
+
+      Cultured:         "#F5F5FA",
+      Red:              "#e71616",
+      danger:           "#f87171",
+      deletebutton:     "#ff6969",
+      addbutton:        "#5db55d",
+      Platinum:         "#e3e3e3",
     },
     fontFamily: {
-      sans: [
-        "Inter",
-        "ui-sans-serif",
-        "system-ui",
-        "-apple-system",
-        "system-ui",
-        "Segoe UI",
-        "Roboto",
-        "Helvetica Neue",
-        "Arial",
-        "Noto Sans",
-        "sans-serif",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji",
-      ],
-      body: [
-        "Inter",
-        "ui-sans-serif",
-        "system-ui",
-        "-apple-system",
-        "system-ui",
-        "Segoe UI",
-        "Roboto",
-        "Helvetica Neue",
-        "Arial",
-        "Noto Sans",
-        "sans-serif",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji",
-      ],
-      mono: [
-        "ui-monospace",
-        "SFMono-Regular",
-        "Menlo",
-        "Monaco",
-        "Consolas",
-        "Liberation Mono",
-        "Courier New",
-        "monospace",
-      ],
+      sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+      body: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+      mono: ["ui-monospace", "Menlo", "Monaco", "monospace"],
     },
     extend: {
       animation: {

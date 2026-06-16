@@ -13,7 +13,7 @@ const RoleDetailsPage: FC = function () {
     <>
       <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >
         <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink ={ParentLink} />
-        <div className="dark:text-gray-200"> Role Details Page </div>
+        <div className="dark:text-WhiteMarble"> Role Details Page </div>
       </NavbarSidebarLayout>
     </>
   );

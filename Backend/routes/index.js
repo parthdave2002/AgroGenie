@@ -78,8 +78,8 @@ router.use('/chat', Chatdata);
 const kanbanRoutes = require('./api/kanban');
 router.use('/kanban', kanbanRoutes);
 
-const referralRoutes = require('./api/referral');
-router.use('/referral', referralRoutes);
+const walletRoutes = require('./api/wallet');
+router.use('/wallet', walletRoutes);
 
 
 // const paymentRoutes = require('./api/payment');

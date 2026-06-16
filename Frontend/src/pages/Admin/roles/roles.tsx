@@ -69,7 +69,7 @@ const RolesPage: FC = function () {
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
           {accessList?.add && (
-            <Button gradientDuoTone="greenToBlue" className="whitespace-nowrap text-base font-normal text-gray-900 dark:text-dark" onClick={() => ModuleListFuncall(row?._id)}> <div className="flex items-center gap-x-2"> <HiKey className="text-lg" /> Role Access List </div>  </Button>
+            <Button gradientDuoTone="greenToBlue" className="whitespace-nowrap text-base font-normal text-DarkBackground dark:text-dark" onClick={() => ModuleListFuncall(row?._id)}> <div className="flex items-center gap-x-2"> <HiKey className="text-lg" /> Role Access List </div>  </Button>
           )}
         </div>
       ),
@@ -146,7 +146,7 @@ const RolesPage: FC = function () {
       </NavbarSidebarLayout>
 
       {isOpenDelteModel && (
-        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"> <div className="text-white">Loading...</div> </div>}>
+        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
           <DeleteModalPage isOpenDelteModel={isOpenDelteModel} name={"role"} setisOpenDelteModel={setisOpenDelteModel} DelCall={DelRole} />
         </Suspense>
       )}

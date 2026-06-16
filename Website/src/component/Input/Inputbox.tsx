@@ -21,12 +21,12 @@ const Inputbox:FC <InputProps>= ( { label, required, className, id, name, placeh
   return (
       <div>
           <div className="flex-1">
-              <Label className='text-gray-900 font-body'> {label}  {required ? <span className='text-red-500'>*</span> : ""} </Label>
+              <Label className='text-DarkBackground font-body'> {label}  {required ? <span className='text-red-500'>*</span> : ""} </Label>
               <div className="mt-1">
                   <Input
                       id={id}
                       name={name}
-                      className={className ? className : "bg-gray-50 border border-gray-300  disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900  w-full"}
+                      className={className ? className : "bg-White border border-SoothingBlueGrey  disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground  w-full"}
                       placeholder= {placeholder}
                       type= {type ?? "text"}
                       onChange={validation.handleChange}

@@ -33,7 +33,7 @@ const WarehouseDetailsPage: FC = function () {
     <>
       <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
         <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink ={ParentLink} />
-        <div  className="mt-[2rem] bg-white dark:bg-gray-800 p-4"> 
+        <div  className="mt-[2rem] bg-White dark:bg-Cosmos p-4"> 
           <div className="overflow-x-auto"> 
             <div>
               <h2 className="text-xl font-bold mb-4">Warehouse Details</h2>

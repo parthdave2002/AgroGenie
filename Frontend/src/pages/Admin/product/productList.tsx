@@ -113,7 +113,7 @@ const ProductListPage: FC = function () {
       key: "name",
       label: "Name",
       render: (row: any) => (
-        <span className="whitespace-nowrap max-w-[35rem] truncate text-ellipsis text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer" onClick={() => DetailsPageCall(row?._id)}> {row?.name?.englishname || "-"} </span>
+        <span className="whitespace-nowrap max-w-[35rem] truncate text-ellipsis text-base font-medium text-DarkBackground dark:text-White py-0 cursor-pointer" onClick={() => DetailsPageCall(row?._id)}> {row?.name?.englishname || "-"} </span>
       )
     },
 
@@ -167,7 +167,7 @@ const ProductListPage: FC = function () {
       </NavbarSidebarLayout>
     
         {isOpenDelteModel && (
-          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"> <div className="text-white">Loading...</div> </div> }>
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Product"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={Deleteproduct} />
           </Suspense>
         )}

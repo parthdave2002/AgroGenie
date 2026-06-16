@@ -21,7 +21,7 @@ const Tooltips: FC<Props> = ({ children, tooltip }): JSX.Element => {
       {children}
       {tooltip ? (
         <div className="">
-          <span ref={tooltipRef} className="invisible z-10 p-2 group-hover:visible opacity-0 group-hover:opacity-100 transition bg-gray-400 text-white p-1 rounded absolute top-full whitespace-nowrap dark:bg-gray-900 dark:text-white" >
+          <span ref={tooltipRef} className="invisible z-10 p-2 group-hover:visible opacity-0 group-hover:opacity-100 transition bg-Hydrocarbon text-White p-1 rounded absolute top-full whitespace-nowrap dark:bg-DarkBackground dark:text-White" >
            <div >  {tooltip}</div> 
           </span>
         

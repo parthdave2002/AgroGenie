@@ -21,6 +21,7 @@ const orderSchema = new schema({
   order_type: { type: String, default: 'confirm', enum: ['confirm', 'future'] },
   future_order_date: { type: Date, required: false },
   coupon: { type: mongoose.Schema.Types.ObjectId, ref: 'coupon' },
+  wallet_points : {type : Number, required: true, default : 0},
   mark_as_done:{type:Boolean},
   mark_as_return:{type:Boolean,default:false},
   status: { type: String, default: 'confirm', required: false, enum: ['confirm', 'cancel', 'return', null] },

@@ -55,16 +55,16 @@ const ExampleNotification: FC = function () {
   return (
     <div>
       <Popover className="relative">
-        <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+        <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-DarkBackground">
 
           <div className="relative inline-flex w-fit">
-            <div className="absolute bottom-auto left-1/2 right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-4/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-1 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
+            <div className="absolute bottom-auto left-1/2 right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-4/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-1 py-1 text-center align-baseline text-xs font-bold leading-none text-White">
             9+
             </div>
             <button
               type="button"
               data-dropdown-toggle="notification-dropdown"
-              className="p-2 text-gray-500 rounded-lg hover: hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-0 focus:ring-gray-300 dark:focus:ring-gray-600"
+              className="p-2 text-SharkGray rounded-lg hover: hover:bg-TitaniumWhite dark:text-SilverSteel dark:hover:text-White dark:hover:bg-TranquilBlack focus:ring-0 focus:ring-SoothingBlueGrey dark:focus:ring-Hydrocarbon"
             >
               <svg
                 aria-hidden="true"
@@ -89,20 +89,20 @@ const ExampleNotification: FC = function () {
           leaveTo="opacity-0 translate-y-1"
         >
           <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
-            <div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white  dark:bg-black text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+            <div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-White  dark:bg-black text-sm leading-6 shadow-lg ring-1 ring-DarkBackground/5">
               <div className="p-4">
                 {solutions.map((item) => (
                   <div
                     key={item.name}
-                    className="group relative flex gap-x-6 rounded-lg p-4 dark:hover:text-white dark:hover:bg-black hover:bg-gray-50"
+                    className="group relative flex gap-x-6 rounded-lg p-4 dark:hover:text-White dark:hover:bg-black hover:bg-White"
                   >
-                    <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50  dark:hover:text-white group-hover:bg-white">
+                    <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-White  dark:hover:text-White group-hover:bg-White">
                       <item.icon
-                        className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                        className="h-6 w-6 text-Hydrocarbon group-hover:text-indigo-600"
                         aria-hidden="true"
                       />
                     </div>
-                    <div className=" dark:hover:bg-white-600 dark:text-gray-200  dark:hover:text-indigo-600">
+                    <div className=" dark:hover:bg-White-600 dark:text-WhiteMarble  dark:hover:text-indigo-600">
                       <a href={item.href} className="font-semibold ">
                         {item.name}
                         <span className="absolute inset-0" />
@@ -112,15 +112,15 @@ const ExampleNotification: FC = function () {
                   </div>
                 ))}
               </div>
-              <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+              <div className="grid grid-cols-2 divide-x divide-DarkBackground/5 bg-White">
                 {callsToAction.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100"
+                    className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-DarkBackground hover:bg-TitaniumWhite"
                   >
                     <item.icon
-                      className="h-5 w-5 flex-none text-gray-400"
+                      className="h-5 w-5 flex-none text-SilverSteel"
                       aria-hidden="true"
                     />
                     {item.name}

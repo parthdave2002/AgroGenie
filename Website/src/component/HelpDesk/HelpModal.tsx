@@ -84,19 +84,19 @@ const HelpModal: FC<HelpModalProps>= ({isOpenDelteModel, setisOpenDelteModel}) =
           <div>
 
                 <Dialog open={isOpenDelteModel} onClose={setisOpenDelteModel} className="relative z-50">
-                    <DialogBackdrop   transition  className="fixed inset-0 bg-gray-800/90 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"  />
+                    <DialogBackdrop   transition  className="fixed inset-0 bg-Cosmos/90 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"  />
 
                     <div className="fixed inset-0 z-50 w-screen overflow-y-auto">
                       <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <DialogPanel transition  className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-[60rem] data-closed:sm:translate-y-0 data-closed:sm:scale-95">
-                              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <DialogPanel transition  className="relative transform overflow-hidden rounded-lg bg-White text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-[60rem] data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+                              <div className="bg-White px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 
                                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
 
                                     <div className="mt-2">
                                             <div className="flex flex-col md:flex-row items-start">
                                               <div className="w-full md:w-1/2 p-5">
-                                                <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }}  className="bg-white rounded-lg p-6 text-gray-900 ">
+                                                <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }}  className="bg-White rounded-lg p-6 text-DarkBackground ">
                                                   <div className="mb-4">
                                                     <label className="text-md block uppercase tracking-wide text-left"> {t("First name")}  <span className='text-red-500'>*</span></label>
                                                       <div className="mt-1">
@@ -139,7 +139,7 @@ const HelpModal: FC<HelpModalProps>= ({isOpenDelteModel, setisOpenDelteModel}) =
                                                                 {messageError ?  <FormFeedback type="invalid" className="text-red-500 text-sm"> Please Enter message  </FormFeedback>  : null }
                                                           </div>
                                                   
-                                                  <button className="w-full bg-black text-white py-3 text-lg font-semibold rounded hover:bg-gray-800 transition"> {t("Submit")}  </button>
+                                                  <button className="w-full bg-black text-White py-3 text-lg font-semibold rounded hover:bg-Cosmos transition"> {t("Submit")}  </button>
                                                 </Form>
                                               </div>
 

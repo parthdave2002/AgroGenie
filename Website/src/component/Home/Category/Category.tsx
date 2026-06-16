@@ -53,14 +53,14 @@ const CategoryCarouselSection: React.FC = () => {
     <section className="py-10 overflow-hidden" ref={ref}>
       <div className=" max-w-1600 mx-auto px-4">
           
-          <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center "> List of  <span className="text-lime-500">  Category </span> </h2>
+          <h2 className="text-4xl md:text-5xl font-bold font-heading text-DarkBackground my-5 flex justify-center "> List of  <span className="text-lime-500">  Category </span> </h2>
           <div className="flex justify-end"><button  onClick={() => redirect()} className="mt-4 text-green-600 hover:text-green-500 font-medium flex  justify-end"  >  View All  </button> </div>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-6 max-w-1600">
           {cropList?.map((item:any, idx:number) => (
             <div key={idx} className="flex flex-col items-center text-center group cursor-pointer" onClick={() => RedirectCall(item?.name_eng, item?._id)}>
-              <div className="bg-gray-100 flex items-center justify-center group-hover:shadow-md transition rounded-full p-1"><LazyLoadImage effect="blur"   src={item?.category_pic} alt={item?.name_eng} className=" object-contain rounded-full border-2 border-green-600 h-[10rem] w-[10rem]" />  </div>
-              <div className='mt-2 text-md md:text-[1rem] font-heading font-semibold   text-gray-800'>  {item?.name_eng} </div>
+              <div className="bg-TitaniumWhite flex items-center justify-center group-hover:shadow-md transition rounded-full p-1"><LazyLoadImage effect="blur"   src={item?.category_pic} alt={item?.name_eng} className=" object-contain rounded-full border-2 border-green-600 h-[10rem] w-[10rem]" />  </div>
+              <div className='mt-2 text-md md:text-[1rem] font-heading font-semibold   text-Cosmos'>  {item?.name_eng} </div>
             </div>
           ))}
         </div>

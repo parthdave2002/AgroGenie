@@ -31,14 +31,14 @@ const CommonSidebarPage: FC = function () {
     <>
      
      <div className="flex ">
-      <div className={` ${ open ? "w-14" : "w-6"  } bg-dark-purple h-screen p-1 pt-8 relative duration-300 border-r-2 border-gray-200  rounded-md ` }>
+      <div className={` ${ open ? "w-14" : "w-6"  } bg-dark-purple h-screen p-1 pt-8 relative duration-300 border-r-2 border-WhiteMarble rounded-md ` }>
 
         <HiChevronLeft  className={`absolute cursor-pointer -right-3 top-9 w-7 bg-Platinum h-[2rem]  ${!open && "rotate-180"}`}  onClick={() => setOpen(!open)}/>
         <ul className="pt-16">
           {Menus.map((Menu, index) => (
             <li
               key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 pt-3
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-SoothingBlueGrey text-sm items-center gap-x-4 pt-3
               ${Menu.gap ? "mt-9" : "mt-2"} ${
                 index === 0 && "bg-light-white"
               } `}

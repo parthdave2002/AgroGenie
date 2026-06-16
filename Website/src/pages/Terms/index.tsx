@@ -19,18 +19,18 @@ const Termspagesection = () => {
   }, [])
 
   return (
-    <section className=" relative  py-10  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
+    <section className=" relative  py-10  bg-White  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
       <div className=' relative z-10 py-6 px-6 md:px-12 lg:px-24 max-w-1600 mx-auto'>
 
         <div className="flex justify-center w-full px-4">
-          <div className="flex flex-wrap justify-center bg-gray-200 rounded-xl overflow-hidden w-full sm:w-auto">
+          <div className="flex flex-wrap justify-center bg-WhiteMarble rounded-xl overflow-hidden w-full sm:w-auto">
             {tabs.map((tab, index) => (
-              <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg font-medium transition-colors duration-300   ${activeTab === tab.id ? "bg-[#1d4a34] text-white" : "text-gray-700 hover:bg-gray-300"}  ${index === 0 ? "rounded-l-xl" : ""}  ${index === tabs.length - 1 ? "rounded-r-xl" : ""}`} >  {tab.label} </button>
+              <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg font-medium transition-colors duration-300   ${activeTab === tab.id ? "bg-[#1d4a34] text-White" : "text-TranquilBlack hover:bg-SoothingBlueGrey"}  ${index === 0 ? "rounded-l-xl" : ""}  ${index === tabs.length - 1 ? "rounded-r-xl" : ""}`} >  {tab.label} </button>
             ))}
           </div>
         </div>
 
-        <div className="w-full  mt-8 text-gray-700">
+        <div className="w-full  mt-8 text-TranquilBlack">
           {activeTab === "terms" && (
             <div className='font-body'>
               <h2 className="text-[1.5rem] md:text-[2rem]  font-semibold my-5">Terms & Conditions </h2>

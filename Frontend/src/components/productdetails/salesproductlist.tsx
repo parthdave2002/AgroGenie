@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
-import {  Button, Table} from "flowbite-react";
+import React, { lazy, FC, useEffect, useMemo, useState } from 'react'
+import { Button } from "flowbite-react";
 import { getProductlist } from '../../Store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaCartArrowDown } from 'react-icons/fa';
-import ExamplePagination from '../common/pagination/pagination';
-import LoaderPage from '../common/loader/loader';
+const ExamplePagination = lazy(() => import("../common/pagination/pagination"));
+const CommonTable = lazy(() => import("../../components/common/table/commonTable"));
+const LoaderPage = lazy(() => import("../common/loader/loader"));
 
 interface PorductData  {
     searchData ?: string;
@@ -49,51 +50,69 @@ const Salesproductlist : FC <PorductData> = ({searchData, ProductDetailsCall, is
       setLoader(false)
     }, [Productlist]);
 
+    const ProductColumns  = useMemo(() => [
+        {
+          key: "order_id",
+          label: "Name",
+          render: (row: any) => (
+             <span className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0 cursor-pointer max-w-[35rem]" onClick={() => ProductDetailsCall(row?._id)} >
+              <div className='flex gap-x-2'>
+                <img className='w-[3rem] h-[3rem] flex self-center rounded-md' src={row?.product_pics?.[0]} alt='product' />
+                  <div className='flex flex-col'>
+                    <span className='truncate max-w-[30rem] overflow-hidden  text-ellipsis'>{row?.name?.englishname}  ( {row?.company?.name_eng} )  </span>
+                    <span className='dark:text-SilverSteel  text-SharkGray text-[0.9rem] truncate max-w-[30rem]'>{row?.tech_name?.english_tech_name} </span>
+                  </div>
+              </div>
+            </span>
+          )
+        },
+        {
+          key: "added_at",
+          label: "Packing size",
+          render: (row: any) => <span> {row?.packaging} {row?.packagingtype?.type_eng} </span>
+        },
+        {
+          key: "avl_qty",
+          label: "Qty",
+          render: (row: any) => row?.avl_qty ? row?.avl_qty  : 0
+        },
+        {
+          key: "price",
+          label: "price (RS.)",
+          render: (row: any) => row?.price ? Math.round(row?.price) :  0,
+        },
+        {
+          key: "discount",
+          label: "discount (RS.)",
+          render: (row: any) => row?.discount ? Math.round(row?.discount) : 0
+        },
+        {
+          key: "final_price",
+          label: "final price",
+          render: (row: any) =>  Math.round((row?.price || 0) - (row?.discount || 0)),
+        },
+        ...(isLoggedin? [
+            { key: "action", label: "Action",
+              render: (item: any) => item?.avl_qty !== 0 ? (
+                  <span className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">
+                    <Button className="bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0" onClick={() => AddtoCartCall(item)} >
+                      <div className="flex items-center gap-x-3"> <FaCartArrowDown className="text-xl" />  Add to Cart </div>
+                    </Button>
+                  </span>
+                ) : (
+                  <div className="text-center flex justify-center self-center p-4"> -  </div>
+                ),
+            },
+          ]
+        : [])
+      ],[]);
+
   return (
     <>
       {Loader ? <LoaderPage /> :
  
         <div className="mt-[2rem]">
-          
-          <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 ">
-            <Table.Head className="bg-gray-100 dark:bg-gray-700">
-              <Table.HeadCell>Name</Table.HeadCell>
-              <Table.HeadCell>Packing size</Table.HeadCell>
-              <Table.HeadCell>Qty</Table.HeadCell>
-              <Table.HeadCell>price (RS.)</Table.HeadCell>
-              <Table.HeadCell>discount (RS.)</Table.HeadCell>
-              <Table.HeadCell>final price	</Table.HeadCell>
-              {isLoggedin ? <Table.HeadCell> action</Table.HeadCell> : null}
-            </Table.Head>
-
-            <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-              {ProductData && ProductData.map((item: any, k) => (
-                <Table.Row key={k} className="hover:bg-gray-100 dark:hover:bg-gray-700" >
-                  <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer max-w-[35rem]" onClick={() => ProductDetailsCall(item?._id)} >
-                    <div className='flex gap-x-2'>
-                      <img className='w-[3rem] h-[3rem] flex self-center rounded-md' src={item?.product_pics?.[0]} alt='product' />
-                      <div className='flex flex-col'>
-                        <span className='truncate max-w-[30rem] overflow-hidden  text-ellipsis'>{item?.name?.englishname}  ( {item?.company?.name_eng} )  </span>
-                        <span className='dark:text-gray-400  text-gray-500 text-[0.9rem] truncate max-w-[30rem]'>{item?.tech_name?.english_tech_name} </span>
-                      </div>
-                    </div>
-                  </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item?.packaging} {item?.packagingtype?.type_eng} </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item?.avl_qty ? item?.avl_qty  : 0} </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item?.price ? Math.round(item?.price) :  0} </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.discount ? Math.round(item?.discount) : 0}</Table.Cell>
-                  <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.price - item?.discount ? Math.round(item?.price - item?.discount) : 0}  </Table.Cell>
-                  {isLoggedin  ?  
-                  <>
-                      {item?.avl_qty  != 0?
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> <Button className=' bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl border-0' onClick={() => AddtoCartCall(item)} > <div className="flex items-center gap-x-3"> <FaCartArrowDown className='text-xl'  /> Add to Cart </div> </Button> </Table.Cell>
-                      : <div className='text-center flex justify-center  self-center p-4'> - </div>}
-                  </> : null}
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-
+          <CommonTable columns={ProductColumns} data={ProductData || []} />
           <ExamplePagination  PageData={PageDataList} RowPerPage={RowPerPage}   RowsPerPageValue={RoePerPage}  PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
         </div>
       }

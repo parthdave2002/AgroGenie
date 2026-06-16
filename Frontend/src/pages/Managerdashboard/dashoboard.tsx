@@ -116,12 +116,12 @@ const ManagerDashboardPage: FC = function () {
     return(
         <>
             <div className="mt-[4rem]">
-                    <h3 className="mb-4 text-[2rem] font-bold leading-none text-gray-900 dark:text-white"> Lead List </h3>
+                    <h3 className="mb-4 text-[2rem] font-bold leading-none text-DarkBackground dark:text-White"> Lead List </h3>
 
-                    <div className="flex items-center gap-x-6 bg-gray-100 dark:bg-gray-900 p-3 rounded-xl">
+                    <div className="flex items-center gap-x-6 bg-TitaniumWhite dark:bg-DarkBackground p-3 rounded-xl">
                         <ul className="flex items-center gap-x-6">
                             {ManagerDashboardTabData.map((data: any, k: number) => (
-                            <li key={k} className={`relative flex flex-col items-center justify-center gap-1 py-2 px-2 cursor-pointer transition-all duration-300 ease-in-out font-medium text-sm ${selectedTabbar === data.title ? "text-green-500 font-semibold" : "text-gray-500 dark:text-gray-400"}`} onClick={() => TabSelection(data.title)} >
+                            <li key={k} className={`relative flex flex-col items-center justify-center gap-1 py-2 px-2 cursor-pointer transition-all duration-300 ease-in-out font-medium text-sm ${selectedTabbar === data.title ? "text-green-500 font-semibold" : "text-SharkGray dark:text-SilverSteel"}`} onClick={() => TabSelection(data.title)} >
                                 <span className="flex items-center text-[1rem] font-semibold gap-x-4">{data.icon} {data.title.charAt(0).toUpperCase() + data.title.slice(1)}</span>
                                 {selectedTabbar === data.title && (<span className="px-2 absolute bottom-[-4px] left-0 w-full h-[2px] bg-green-500">
                                 </span>)}
@@ -133,7 +133,7 @@ const ManagerDashboardPage: FC = function () {
                     <div className='mt-[1.5rem] px-4'>
                         {leadData && leadData.length > 0 ?
                             <CommonTable columns={Columns} data={leadData || []} />
-                            : <div className='text-center py-4 dark:text-gray-50'>No DataFound </div>
+                            : <div className='text-center py-4 dark:text-White'>No DataFound </div>
                         }
                         <ExamplePagination PageData={LeadPageDataList} RowPerPage={LeadRowPerPage} RowsPerPageValue={RowLeadPerPage} PageNo={LeadPageNo} CurrentPageNo={leadCurrentPageNo} TotalListData={TotalLeadListData} />
                     </div>
@@ -143,7 +143,7 @@ const ManagerDashboardPage: FC = function () {
                     <Modal onClose={() => setConfirmationModal(false)} show={confirmationModal} size="md">
                         <Modal.Header className="px-6 pt-6 pb-0"> <span className="sr-only"> Change status</span></Modal.Header>
                         <Modal.Body className="px-6 pt-0 pb-6">
-                        <div className="flex flex-col items-center gap-y-6 text-center"> <HiOutlineExclamationCircle className="text-7xl text-red-500" /> <p className="text-xl text-gray-500"> Are you sure you want to chnage status ? </p>
+                        <div className="flex flex-col items-center gap-y-6 text-center"> <HiOutlineExclamationCircle className="text-7xl text-red-500" /> <p className="text-xl text-SharkGray"> Are you sure you want to chnage status ? </p>
                             <div className="flex items-center gap-x-3">
                             <Button color="failure" onClick={() => DelCall()}>  Yes, I'm sure </Button>
                             <Button color="gray" onClick={() => setConfirmationModal(false)}> No, cancel </Button>
@@ -155,21 +155,21 @@ const ManagerDashboardPage: FC = function () {
 
             {ProductModal == true ?
                 <Modal onClose={() => setProductModal(false)} show={ProductModal} size="2xl" className="font-sans" >
-                        <Modal.Header className="px-6 pt-6 pb-2 border-b border-gray-200 dark:border-gray-700"> <h2 className="text-lg font-semibold text-gray-900 dark:text-white"> Product Details </h2> </Modal.Header>
-                        <Modal.Body className="px-6 py-4 space-y-4 bg-gray-50 dark:bg-gray-900">
+                        <Modal.Header className="px-6 pt-6 pb-2 border-b border-WhiteMarble dark:border-TranquilBlack"> <h2 className="text-lg font-semibold text-DarkBackground dark:text-White"> Product Details </h2> </Modal.Header>
+                        <Modal.Body className="px-6 py-4 space-y-4 bg-White dark:bg-DarkBackground">
                             {Array.isArray(ProductItemModal) && ProductItemModal.length > 0 ? (
-                                <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                                <div className="divide-y divide-WhiteMarble dark:divide-TranquilBlack">
                                 {ProductItemModal.map((item, k) => (
                                     <div key={k} className="py-3 grid grid-cols-2 md:grid-cols-4 gap-3 items-center">
-                                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300"> {item?._id?.name?.englishname || "-"} </p>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400"> {item?._id?.categories?.name_eng || "-"}</p>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400"> {item?._id?.packaging || "-"}  {item?._id?.packagingtype?.type_eng || "-"}</p>
-                                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200"> Qty: {item?.quantity || 0}  </p>
+                                    <p className="text-sm font-medium text-TranquilBlack dark:text-SoothingBlueGrey"> {item?._id?.name?.englishname || "-"} </p>
+                                    <p className="text-sm text-Hydrocarbon dark:text-SilverSteel"> {item?._id?.categories?.name_eng || "-"}</p>
+                                    <p className="text-sm text-Hydrocarbon dark:text-SilverSteel"> {item?._id?.packaging || "-"}  {item?._id?.packagingtype?.type_eng || "-"}</p>
+                                    <p className="text-sm font-semibold text-Cosmos dark:text-WhiteMarble"> Qty: {item?.quantity || 0}  </p>
                                     </div>
                                 ))}
                                 </div>
                             ) : (
-                                <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">  No product details available. </p>
+                                <p className="text-sm text-SharkGray dark:text-SilverSteel text-center py-4">  No product details available. </p>
                             )}
                         </Modal.Body>
                 </Modal>

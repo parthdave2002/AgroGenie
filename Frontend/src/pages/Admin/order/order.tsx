@@ -185,18 +185,18 @@ const OrderListPage : FC = function () {
         </NavbarSidebarLayout>
 
         <Modal onClose={() => setparcelModal(false)} show={parcelModal} size="xl" dismissible>
-          <Modal.Header className="flex justify-between items-center px-6 py-3 border-b border-gray-200 ">
+          <Modal.Header className="flex justify-between items-center px-6 py-3 border-b border-WhiteMarble ">
             <div className="flex items-center gap-4">
               <h2 className="text-lg font-semibold">COD Parcel Invoice</h2>
-              <button onClick={Downloadcall} className="inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-3 py-1.5 rounded hover:bg-blue-700 transition" >   Download  </button>
-              <button onClick={printPDF} className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-medium px-6 py-1.5 rounded hover:bg-green-700 transition" >   Print  </button>
+              <button onClick={Downloadcall} className="inline-flex items-center gap-2 bg-blue-600 text-White text-sm font-medium px-3 py-1.5 rounded hover:bg-blue-700 transition" >   Download  </button>
+              <button onClick={printPDF} className="inline-flex items-center gap-2 bg-green-600 text-White text-sm font-medium px-6 py-1.5 rounded hover:bg-green-700 transition" >   Print  </button>
             </div>
           </Modal.Header>
 
-          <Modal.Body className="px-6 py-4 bg-gray-50 max-h-[30rem] overflow-scroll">
+          <Modal.Body className="px-6 py-4 bg-White max-h-[30rem] overflow-scroll">
             <div
               ref={invoiceRef}
-              className="bg-white shadow-md rounded-lg overflow-hidden p-6 text-sm text-black font-[sans-serif] mx-auto max-w-2xl"
+              className="bg-White shadow-md rounded-lg overflow-hidden p-6 text-sm text-black font-[sans-serif] mx-auto max-w-2xl"
             >
               {/* Top Notice */}
               <div className="text-red-600 mb-4 text-[0.9rem] space-y-1 font-semibold">

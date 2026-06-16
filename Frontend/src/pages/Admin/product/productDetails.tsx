@@ -89,7 +89,7 @@ const ProductDetailsPage: FC = function () {
               ParentLink={ParentLink}
             />
 
-            <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+            <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
               <div>
                 <div className="flex gap-x-5">
                   {ProductDatalist &&
@@ -116,12 +116,12 @@ const ProductDetailsPage: FC = function () {
 
                 {ProductDatalist?.description.map((item: any, k: number) => (
                   <div className="my-4" key={k}>
-                    <h2 className="dark:text-gray-200">
+                    <h2 className="dark:text-WhiteMarble">
                       Product Description : {item.id}
                     </h2>
                     <div
                       key={k}
-                      className="dark:text-gray-300  border dark:border-gray-500 rounded-xl"
+                      className="dark:text-SoothingBlueGrey  border dark:border-SharkGray rounded-xl"
                     >
                       <div className="p-2 flex">
                         <div className="flex-1">

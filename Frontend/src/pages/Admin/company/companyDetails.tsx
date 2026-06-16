@@ -59,7 +59,7 @@ const CompanyDetailsPage: FC = function () {
     <>
       <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
         <ExampleBreadcrumb Name={Name} ParentName={ParentName} ParentLink ={ParentLink} />
-        <div  className="mt-[2rem] bg-white dark:bg-gray-800 p-4"> 
+        <div  className="mt-[2rem] bg-White dark:bg-Cosmos p-4"> 
           <CommonTable columns={companyColumns} data={ProductList || []} />
           <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
         </div>

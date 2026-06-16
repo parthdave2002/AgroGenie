@@ -106,8 +106,9 @@ export const adminRoutes = [
   { path: "/coupon/list", component: lazyImport(() => import("../pages/Admin/coupon/couponList")) },
   { path: "/coupon/add", component: lazyImport(() => import("../pages/Admin/coupon/couponAdd")) },
 
-  { path: "/referral-rules/list", component: lazyImport(() => import("../pages/Admin/referralRules/referralRulesList")) },
-  { path: "/referral-rules/add", component: lazyImport(() => import("../pages/Admin/referralRules/referralRulesAdd")) },
+  { path: "/wallet-rules/list", component: lazyImport(() => import("../pages/Admin/walletRules/walletRulesList")) },
+  { path: "/wallet-rules/add", component: lazyImport(() => import("../pages/Admin/walletRules/walletRulesAdd")) },
+  { path: "/wallet-rules/edit/:id", component: lazyImport(() => import("../pages/Admin/walletRules/walletRulesAdd")) },
 
   // Misc
   { path: "/sales-crm", component: lazyImport(() => import("../pages/salesExecutive")) },

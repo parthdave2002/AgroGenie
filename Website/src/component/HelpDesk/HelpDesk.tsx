@@ -31,11 +31,11 @@ const HelpDesk = () => {
       <div className="fixed bottom-28 right-6 z-[9998] flex flex-col items-end space-y-2">
         {isOpen && (
           <>
-            <button className="flex items-center w-[12rem] space-x-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-full shadow-md" onClick={() => OpenModal()}>  <MdOutlineQuestionMark /> <span> {t("Need Help")}</span> </button>
-            <button className="flex items-center w-[12rem] space-x-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-full shadow-md" onClick={() => RedirectCall("/contactus")}>  <TfiHeadphoneAlt /> <span> {t("Contact Us")}</span>  </button>
+            <button className="flex items-center w-[12rem] space-x-2 bg-green-600 hover:bg-green-700 text-White font-medium py-2 px-4 rounded-full shadow-md" onClick={() => OpenModal()}>  <MdOutlineQuestionMark /> <span> {t("Need Help")}</span> </button>
+            <button className="flex items-center w-[12rem] space-x-2 bg-green-600 hover:bg-green-700 text-White font-medium py-2 px-4 rounded-full shadow-md" onClick={() => RedirectCall("/contactus")}>  <TfiHeadphoneAlt /> <span> {t("Contact Us")}</span>  </button>
           </>
         )}
-        <button className="fixed bottom-6 right-6 rounded-full bg-green-600 hover:bg-green-700 p-0.5 shadow-lg text-white transition animate-bounce" onClick={() => setIsOpen(!isOpen)} >    {isOpen ? <IoCloseSharp className='text-[2.5rem]' /> : <img src='/images/support-icon-2.webp' className='rounded-full'  height={50} width={50} />}   </button>
+        <button className="fixed bottom-6 right-6 rounded-full bg-green-600 hover:bg-green-700 p-0.5 shadow-lg text-White transition animate-bounce" onClick={() => setIsOpen(!isOpen)} >    {isOpen ? <IoCloseSharp className='text-[2.5rem]' /> : <img src='/images/support-icon-2.webp' className='rounded-full'  height={50} width={50} />}   </button>
 
       </div>
       {isOpenDelteModel ? <HelpModal isOpenDelteModel={isOpenDelteModel} setisOpenDelteModel={Closemodal} /> : null}

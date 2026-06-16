@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Button, Label, Modal, Table } from 'flowbite-react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { Button, Label, Modal } from 'flowbite-react';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -8,51 +8,19 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetComplainlist, UpdateComplainlist } from '../../Store/actions';
 import { FaPuzzlePiece, FaQuestionCircle } from 'react-icons/fa';
-
-interface ComplainProps{
-    isComplainData : any;
-    setisOpenComplainModel :  ( value :  boolean ) => void;
-    isOpenComplainModel ? : boolean;
-} 
-
-interface Namedata{
-    _id: string;
-    name :string;
-}
-
-interface CommentData {
-    comment : string;
-    comment_date  : string;
-    name: Namedata;
-    _id  : string;
-}
-
-interface ComplainData{
-    Comment : CommentData[]
-    complain_id :string;
-    created_at    :string;
-    order_id  :string;
-    _id :string;
-    is_resolved_by :boolean;
-    resolution : string;
-}
+import CommonTable from '../../components/common/table/commonTable';
+import { ComplainProps, ComplainData } from '../../types/types';
+import { priorityoption } from '../../types/dropdown';
 
 const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComplainModel, isComplainData }) => {
 
     const dispatch = useDispatch();
     const [complainResolution, setComplainResolution] = useState("");
-
     const [UserComplainDataList, setUserComplainDataList] = useState<ComplainData>();
 
     useEffect(() => {
       setUserComplainDataList(  isComplainData ? isComplainData  : [])
     }, [isComplainData]);
-
-    const priorityoption =[
-        {  label :"High",  value : "high"  },
-        {   label :"Medium",   value : "medium" },
-        {   label :"Low",   value : "low" },
-    ]
 
     const [selectedactiveOption, setSelectedactiveOption] = useState(null);
     const [selectedactiveid, setSelectedactiveid] = useState("");
@@ -116,10 +84,17 @@ const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComp
         }, [ComplainUpdatedlist])
     // --------------- Update Complainlist code end --------------------
 
+    const complainColumns = useMemo(() => [
+        { key: "comment_date", label: "Date", render: (row: any) => moment(row?.comment_date).format("DD-MM-YYYY hh:mm:ss") },
+        { key: "name", label: "Name", render: (row: any) => row?.name?.name },
+        { key: "comment", label: "Comment" },
+        { key: "resolution", label: "Status", render: (row: any) => row?.resolution.charAt(0).toUpperCase() + row?.resolution.slice(1).toLowerCase()},
+    ],[]);
+
   return (
     <div>
         <Modal onClose={() => setisOpenComplainModel(false)} show={isOpenComplainModel} size="6xl" className="backdrop-blur-sm p-3" >
-            <Modal.Header>   <div className='text-[2rem] dark:text-gray-200 font-bold'> Complain Details  </div>   </Modal.Header>
+            <Modal.Header>   <div className='text-[2rem] dark:text-WhiteMarble font-bold'> Complain Details  </div>   </Modal.Header>
             <div className='p-3'>
                 
             {UserComplainDataList?.resolution == "open" ?
@@ -132,7 +107,7 @@ const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComp
                                       <Input
                                           id="comment"
                                           name="comment"
-                                          className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                          className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                           placeholder="Enter comment"
                                           type="text"
                                           onChange={validation.handleChange}
@@ -148,7 +123,7 @@ const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComp
                                   <Label htmlFor="priority"> Priority </Label>
                                   <div className="mt-1">
                                       <Select
-                                          className="w-full dark:text-white"
+                                          className="w-full dark:text-White"
                                           classNames={{
                                               control: () => "react-select__control",
                                               singleValue: () => "react-select__single-value",
@@ -168,9 +143,9 @@ const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComp
                               </div>
                           </div>
                           <div className='flex gap-x-3 justify-end'>
-                             <Button type='submit' className='mt-3 mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl border-0' onClick={() => setComplainResolution("open") } ><div className='flex items-center gap-x-3'> <FaQuestionCircle  className="text-xl "  /> Add Comment </div> </Button>
+                             <Button type='submit' className='mt-3 mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0' onClick={() => setComplainResolution("open") } ><div className='flex items-center gap-x-3'> <FaQuestionCircle  className="text-xl "  /> Add Comment </div> </Button>
                             {UserComplainDataList?.is_resolved_by == true ?  
-                            <Button type='submit' className='mt-3 mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl border-0' onClick={() => setComplainResolution("close") } ><div className='flex items-center gap-x-3'> <FaPuzzlePiece  className="text-xl "/> Resolved   </div>   </Button> 
+                            <Button type='submit' className='mt-3 mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0' onClick={() => setComplainResolution("close") } ><div className='flex items-center gap-x-3'> <FaPuzzlePiece  className="text-xl "/> Resolved   </div>   </Button> 
                               : null  }  
                           </div>                
                       </div>
@@ -178,25 +153,7 @@ const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComp
             : null}
 
                 <div className='max-h-[18rem] overflow-scroll'>
-                      <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 ">
-                          <Table.Head className="bg-gray-100 dark:bg-gray-700">
-                              <Table.HeadCell> Date</Table.HeadCell>
-                              <Table.HeadCell>Name </Table.HeadCell>
-                              <Table.HeadCell> Comment</Table.HeadCell>
-                              <Table.HeadCell> Status</Table.HeadCell>
-                          </Table.Head>
-
-                          <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                              {UserComplainDataList?.Comment && UserComplainDataList?.Comment.map((item: any, k: number) => (
-                                  <Table.Row key={k} className="hover:bg-gray-100 dark:hover:bg-gray-700" >
-                                      <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {moment(item?.comment_date).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
-                                      <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item?.name?.name} </Table.Cell>
-                                      <Table.Cell className=" text-base font-medium text-gray-900 dark:text-white py-0  max-w-[15rem]">  {item?.comment} </Table.Cell>
-                                      <Table.Cell className=" text-base font-medium text-gray-900 dark:text-white py-0  max-w-[15rem]">  {UserComplainDataList?.resolution.charAt(0).toUpperCase() + UserComplainDataList?.resolution.slice(1).toLowerCase() } </Table.Cell>
-                                  </Table.Row>
-                              ))}
-                          </Table.Body>
-                      </Table>
+                    <CommonTable columns={complainColumns} data={UserComplainDataList?.Comment || []} />
                 </div>
             </div>
         </Modal>

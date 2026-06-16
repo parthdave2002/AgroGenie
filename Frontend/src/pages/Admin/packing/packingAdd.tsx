@@ -82,7 +82,7 @@ const AddpackingPage : FC = function () {
         <>  
             <NavbarSidebarLayout isSidebar={true} isNavbar={true} >
                 <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink={ParentLink}  />
-                <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+                <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
                         <div>
                             <Inputbox
@@ -100,7 +100,7 @@ const AddpackingPage : FC = function () {
                             <Label htmlFor="Status">Status</Label>
                             <div className="mt-1">
                             <Select
-                                className="w-full dark:text-white"
+                                className="w-full dark:text-White"
                                 classNames={{
                                     control: () => "react-select__control",
                                     singleValue: () => "react-select__single-value",

@@ -53,13 +53,14 @@ const FarmeDashboardProfile : FC <DashboardProps> = ({classData, viewButton}) =>
               <div className="farmerProfile">  <div className="w-[10rem]"  >Crops </div>  <div>: {data?.crops ? data?.crops?.map((crop:any) => crop?.name_eng).join(', ') : "-"}</div>   </div>
               <div className="farmerProfile">  <div className="w-[10rem]" >Heard about us </div> <div>: {data?.heard_about_agribharat ? data?.heard_about_agribharat.charAt(0).toUpperCase() + data?.heard_about_agribharat.slice(1).toLowerCase() : "-"} </div>   </div>
               <div className="farmerProfile">  <div className="w-[10rem]" >Ref. No </div> <div>: {data?.ref_name ? data?.ref_name :  "-"} </div>   </div>
+              <div className="farmerProfile">  <div className="w-[10rem]" > Wallet Points </div> <div>: {data?.wallet_points ? data?.wallet_points :  0} </div>   </div>
             </>
           )}
         </div>
         
         {viewButton ?
           <div className='flex justify-end'>
-            <div className="group  border border-indigo-500 text-indigo-500 dark:text-white hover:text-gray-100 font-semibold px-6 py-2 rounded-full  gap-2 hover:bg-indigo-800 transition flex  justify-end text-center w-[12rem] cursor-pointer  transition-all duration-500 ease-in-out" onClick={toggleExpand}>   {expanded ? "VIEW LESS" : "VIEW MORE"}
+            <div className="group  border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full  gap-2 hover:bg-indigo-800 transition flex  justify-end text-center w-[12rem] cursor-pointer  transition-all duration-500 ease-in-out" onClick={toggleExpand}>   {expanded ? "VIEW LESS" : "VIEW MORE"}
               {expanded ?
                 <MdKeyboardArrowUp className="h-6 w-6 self-center " />
                 :

@@ -116,7 +116,7 @@ const MultiImageUploadPreview: React.FC<MultiImageUploadPreviewProps> = ({
     <>
       <div className="w-full flex flex-wrap gap-4 justify-start">
        
-        <div className="w-full h-32 mb-4 flex border-dashed items-center justify-center border-2 border-gray-300 dark:border-gray-700 rounded-md overflow-hidden cursor-pointer"  onClick={handleImageClick} >
+        <div className="w-full h-32 mb-4 flex border-dashed items-center justify-center border-2 border-SoothingBlueGrey dark:border-TranquilBlack rounded-md overflow-hidden cursor-pointer"  onClick={handleImageClick} >
           <input
             type="file"
             className="hidden"
@@ -127,7 +127,7 @@ const MultiImageUploadPreview: React.FC<MultiImageUploadPreviewProps> = ({
           />
           
           {previewSrcs.length < 4 ? (
-            <div className="flex flex-col items-center text-gray-500">
+            <div className="flex flex-col items-center text-SharkGray">
               <svg  xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 mb-2"  fill="none"  viewBox="0 0 24 24"  stroke="currentColor"  strokeWidth={1.5}  >
                 <path  strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
               </svg>
@@ -135,7 +135,7 @@ const MultiImageUploadPreview: React.FC<MultiImageUploadPreviewProps> = ({
               <span className="text-xs truncate block w-full text-center"> {fileNames.length > 0 ? fileNames.join(", ") : "No file chosen"} </span>
             </div>
           ) : (
-            <p className="text-sm text-gray-500">Maximum 4 images selected</p>
+            <p className="text-sm text-SharkGray">Maximum 4 images selected</p>
           )}
         </div>
 
@@ -144,7 +144,7 @@ const MultiImageUploadPreview: React.FC<MultiImageUploadPreviewProps> = ({
             {previewSrcs.map((src, index) => (
               <div key={index} className="relative w-20 h-20 mb-4">
                 <img src={src}  alt={`Selected ${index}`}  className="w-full h-full object-cover rounded-full" />
-                <button type="button" onClick={(e) => handleRemoveImage(index, e)} className="absolute top-0 right-0 bg-red-600 text-white w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-red-700 transition" >  x </button>
+                <button type="button" onClick={(e) => handleRemoveImage(index, e)} className="absolute top-0 right-0 bg-red-600 text-White w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-red-700 transition" >  x </button>
               </div>
             ))}
           </div>

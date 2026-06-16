@@ -92,7 +92,7 @@ const CompanyAddPage : FC = function () {
         <>  
             <NavbarSidebarLayout   isSidebar={true} isNavbar={true} >
                 <ExampleBreadcrumb  Name={Name} ParentName={ParentName} ParentLink={ParentLink}  />
-                <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+                <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
                     <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
                         
                         <div className="flex gap-x-[2rem]">
@@ -127,7 +127,7 @@ const CompanyAddPage : FC = function () {
                             <Input
                                 id="description"
                                 name="description"
-                                className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                 placeholder="description"
                                 type="text"
                                 onChange={validation.handleChange}
@@ -153,7 +153,7 @@ const CompanyAddPage : FC = function () {
                             <Label htmlFor="Status">Status <span className='text-red-500'>*</span> </Label>
                             <div className="mt-1">
                             <Select
-                                className="w-full dark:text-white"
+                                className="w-full dark:text-White"
                                 classNames={{
                                     control: () => "react-select__control",
                                     singleValue: () => "react-select__single-value",

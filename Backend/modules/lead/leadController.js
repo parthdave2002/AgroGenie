@@ -1,7 +1,8 @@
 const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const leadSch = require('../../schema/leadSchema');
-const productSch = require("../../schema/productSchema")
+const customerSch = require("../../schema/customerSchema");
+const productSch = require("../../schema/productSchema");
 const leadController = {};
 
 leadController.getAlllead = async (req, res, next) => {
@@ -9,10 +10,12 @@ leadController.getAlllead = async (req, res, next) => {
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req);
     searchQuery = { ...searchQuery };
     populate = [
-      {
-        path: 'products._id', model: 'product', populate: [{ path: 'categories', model: 'categories', select: 'name_eng name_guj' },
-        { path: 'packagingtype', model: 'packing-type', select: 'type_eng type_guj' },],
-        select: 'name price product_pics packaging packagingtype categories '
+      { path:'referrer',model: 'customer',select: 'firstname lastname middlename'},
+      { path:'products._id', model: 'product', populate: [
+          { path: 'categories', model: 'categories', select: 'name_eng name_guj' },
+          { path: 'packagingtype', model: 'packing-type', select: 'type_eng type_guj' },
+        ],
+        select: 'name price product_pics packaging packagingtype categories referrer'
       },
     ];
     if (req.query.id) {
@@ -71,6 +74,26 @@ leadController.addlead = async (req, res, next) => {
           return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Product required for order type lead', null);
         }
       }
+
+      if(req.body.type && req.body.type === 'referral') {
+        const mobile_number = req.body.mobile_number;
+        if (!mobile_number) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Mobile number not valid', null);
+        const existingReffernce = await leadSch.findOne({
+          $or: [
+            { mobile_number: mobile_number }
+          ]
+        });
+        if(existingReffernce) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Mobile number already exist', null);
+
+        const existingCustomer = await customerSch.findOne({
+          $or: [
+            { mobile_number: mobile_number },
+            { alternate_number: mobile_number }
+          ]
+        });
+        if(existingCustomer) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Mobile number already register', null);
+      }
+
       const lead = new leadSch(req.body);
       await lead.save();
       return otherHelper.sendResponse(res, httpStatus.OK, true, lead, null, 'Lead  created successfully', null);

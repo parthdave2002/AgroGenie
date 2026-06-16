@@ -47,7 +47,7 @@ const ExampleSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
 
             <button
               title="Menu"
-              className="fixed z-90 bottom-10 right-8 bg-blue-600 xl:w-14 xl:h-14 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl hover:animate-bounce duration-300"
+              className="fixed z-90 bottom-10 right-8 bg-blue-600 xl:w-14 xl:h-14 rounded-full drop-shadow-lg flex justify-center items-center text-White text-4xl hover:bg-blue-700 hover:drop-shadow-2xl hover:animate-bounce duration-300"
             >
              <Cog6ToothIcon className="xl:h-6 xl:w-6"/>
             </button>

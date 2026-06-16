@@ -259,10 +259,10 @@ const farmerColumns = useMemo(() => [
       <NavbarSidebarLayout  isSidebar={true} isNavbar={true}>
         <div className="min-h-screen">
           <ExampleBreadcrumb Name={Name} />
-          <div className="bg-white dark:bg-gray-800 p-4 flex gap-x-4 ">
+          <div className="bg-White dark:bg-Cosmos p-4 flex gap-x-4 ">
 
             <div>
-              <Select className="w-[15rem] dark:text-white"
+              <Select className="w-[15rem] dark:text-White"
               classNames={{
                 control: () => "react-select__control",
                 singleValue: () => "react-select__single-value",
@@ -294,10 +294,10 @@ const farmerColumns = useMemo(() => [
                     },
                   },
                 ] as any}          
-                className="w-full pl-10 py-2 px-5 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                className="w-full pl-10 py-2 px-5 border border-SoothingBlueGrey rounded-lg shadow-sm focus:ring focus:ring-blue-300 text-TranquilBlack dark:bg-Cosmos dark:text-WhiteMarble"
                 placeholderText="Select Date Range"
               />
-              <IoCalendarNumberSharp className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
+              <IoCalendarNumberSharp className="absolute left-3 top-2.5 w-5 h-5 text-SilverSteel" />
             </div>
 
             {selectedStatusid != "" ? 
@@ -309,14 +309,14 @@ const farmerColumns = useMemo(() => [
             : null}
           </div>
 
-          <div className="mt-[2rem] bg-white dark:bg-gray-800 p-4">
+          <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
             {showReportData && selectedStatusid == "advisor" ? (
               <CommonTable columns={userColumns} data={Userdata || []}/>
             ) : showReportData && selectedStatusid == "farmer" ? (
                <CommonTable columns={farmerColumns} data={Customerdata || []}/>
             ) : showReportData && selectedStatusid == "lead" ? 
-              // <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-              //   <Table.Head className="bg-gray-100 dark:bg-gray-700">
+              // <Table className="min-w-full divide-y divide-WhiteMarble dark:divide-Hydrocarbon">
+              //   <Table.Head className="bg-TitaniumWhite dark:bg-TranquilBlack">
               //     <Table.HeadCell> <Checkbox id="select-all" name="select-all" /> </Table.HeadCell>
               //     <Table.HeadCell>Name</Table.HeadCell>
               //     <Table.HeadCell>Company</Table.HeadCell>
@@ -329,20 +329,20 @@ const farmerColumns = useMemo(() => [
               //     <Table.HeadCell>created at</Table.HeadCell>
               //   </Table.Head>
 
-              //   <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
+              //   <Table.Body className="divide-y divide-WhiteMarble bg-White dark:divide-TranquilBlack dark:bg-Cosmos">
               //     {Productdata &&
               //       Productdata.map((item: any, k: any) => (
-              //         <Table.Row  key={k} className="hover:bg-gray-100 dark:hover:bg-gray-700"  >
+              //         <Table.Row  key={k} className="hover:bg-TitaniumWhite dark:hover:bg-TranquilBlack"  >
               //           <Table.Cell className="w-4 py-0" style={{ paddingTop: "1", paddingBottom: "1" }} >  <Checkbox /> </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item.name}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item?.company?.name}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item.avl_qty} </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item.c_gst}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item.s_gst} </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">  {item.price}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">   {item.discount}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">    {item.categories?.name}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {moment(item.added_at).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.name}  </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item?.company?.name}  </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.avl_qty} </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.c_gst}  </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.s_gst} </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.price}  </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">   {item.discount}  </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">    {item.categories?.name}  </Table.Cell>
+              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0"> {moment(item.added_at).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
               //         </Table.Row>
               //       ))}
               //   </Table.Body>

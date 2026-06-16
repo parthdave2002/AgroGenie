@@ -62,11 +62,11 @@ const ExampleAppbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
       <div>
         {isAppbar == true ? (
           <Popover className="relative">
-            <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-DarkBackground">
               <button
                 type="button"
                 data-dropdown-toggle="apps-dropdown"
-                className="p-2 text-gray-500 rounded-lg hover: hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                className="p-2 text-SharkGray rounded-lg hover: hover:bg-TitaniumWhite dark:text-SilverSteel dark:hover:text-White dark:hover:bg-TranquilBlack focus:ring-4 focus:ring-SoothingBlueGrey dark:focus:ring-Hydrocarbon"
               >
                 <span className="sr-only">View notifications</span>
 
@@ -91,7 +91,7 @@ const ExampleAppbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute  z-10 mt-5 flex w-screen max-w-max -translate-x-3/4 px-4">
-                <div className=" flex-auto overflow-hidden rounded-3xl bg-white  dark:bg-black text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                <div className=" flex-auto overflow-hidden rounded-3xl bg-White  dark:bg-black text-sm leading-6 shadow-lg ring-1 ring-DarkBackground/5">
                   <div className=" grid grid-cols-3">
                     {solutions && solutions.map((item:any) => (
                       <div
@@ -99,13 +99,13 @@ const ExampleAppbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
                         className="group relative  rounded-lg p-2 hover:text-indigo-600"
                       >
                         <Link to={item.target}>
-                          <div className="mt-1 flex h-11 flex-none items-center justify-center rounded-lg bg-gray-50  dark:bg-black  ">
+                          <div className="mt-1 flex h-11 flex-none items-center justify-center rounded-lg bg-White  dark:bg-black  ">
                             <item.icon
-                              className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                              className="h-6 w-6 text-Hydrocarbon group-hover:text-indigo-600"
                               aria-hidden="true"
                             />
                           </div>
-                          <div className="text-center lg:max-w-[6rem]  dark:text-gray-200  dark:hover:text-white">
+                          <div className="text-center lg:max-w-[6rem]  dark:text-WhiteMarble  dark:hover:text-White">
                             {item.name}
                             <span className="absolute inset-0" />
                           </div>

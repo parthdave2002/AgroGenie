@@ -158,9 +158,9 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
       to: "/users/category/list",
     },
     {
-      name: "Referral Rules",
+      name: "Wallet Rules",
       icon: GiTwoCoins,
-      to: "/referral-rules/list",
+      to: "/wallet-rules/list",
     },
     {
       name: "Task Management",
@@ -176,38 +176,38 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
 
   return (
     <div className="hidden lg:block">
-        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-r-xl text-gray-800"> 
-          <Sidebar className="bg-gray-500 dark:bg-gray-800 text-gray-800 w-[15rem] ">
+        <div className="bg-TitaniumWhite dark:bg-Cosmos p-3 rounded-r-xl text-Cosmos"> 
+          <Sidebar className="bg-Hydrocarbon dark:bg-Cosmos text-Cosmos w-[15rem] ">
             <Sidebar.Items className="pb-[6rem]">
               <Sidebar.ItemGroup className="p-0">
                 {filteredSidebarData.map((item, k) => (
                   <NavLink to={item.to} key={k}>
-                    <Sidebar.Item icon={item.icon}  className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                    <Sidebar.Item icon={item.icon}  className={item.to === currentPage ? "dark:bg-TranquilBlack" : ""} >  {item.name} </Sidebar.Item>
                   </NavLink>
                 ))}
               </Sidebar.ItemGroup> 
 
               {filteredSubMasterMenu.length > 0 &&
                 <Sidebar.ItemGroup>
-                  <h4 className="dark:text-gray-400"> Master:</h4>
+                  <h4 className="dark:text-SilverSteel"> Master:</h4>
                   <Sidebar.Collapse icon={HiShoppingBag} label="Master">
                     {filteredSubMasterMenu.map((item, k) => (
                       <NavLink to={item.to} key={k}>
-                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-TranquilBlack" : ""} >  {item.name} </Sidebar.Item>
                       </NavLink>
                     ))}
                   </Sidebar.Collapse>
                   <Sidebar.Collapse icon={MdComputer} label="Manage Website">
                     {filteredWebsiteMenu.map((item, k) => (
                       <NavLink to={item.to} key={k}>
-                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-TranquilBlack" : ""} >  {item.name} </Sidebar.Item>
                       </NavLink>
                     ))}
                   </Sidebar.Collapse>
                    <Sidebar.Collapse icon={IoIosSettings} label="Setting">
                     {filteredSubSettingMenu.map((item, k) => (
                       <NavLink to={item.to} key={k}>
-                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-gray-700" : ""} >  {item.name} </Sidebar.Item>
+                        <Sidebar.Item icon={item.icon} className={item.to === currentPage ? "dark:bg-TranquilBlack" : ""} >  {item.name} </Sidebar.Item>
                       </NavLink>
                     ))}
                   </Sidebar.Collapse>

@@ -45,8 +45,8 @@ const ChangeProfilePassword = () => {
 
   return (
     <div>
-          <form onSubmit={validation.handleSubmit} className="mt-8 bg-white dark:bg-gray-900 p-3 rounded-xl shadow shadow-xl" autoComplete="off">
-              <h2 className="text-2xl font-semibold mb-1 text-gray-900 dark:text-gray-100">Update Your Password</h2>
+          <form onSubmit={validation.handleSubmit} className="mt-8 bg-White dark:bg-DarkBackground p-3 rounded-xl shadow shadow-xl" autoComplete="off">
+              <h2 className="text-2xl font-semibold mb-1 text-DarkBackground dark:text-TitaniumWhite">Update Your Password</h2>
               <div className="flex flex-col gap-5 mt-3">
 
                     <div className="flex justify-between gap-4">
@@ -85,8 +85,8 @@ const ChangeProfilePassword = () => {
                         </div>
                     </div>
                   <div className="flex justify-end gap-3 mt-2">
-                      {/* <button type="button" className="py-2 px-5 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors" onClick={() => validation.resetForm()} disabled={validation.isSubmitting} > Cancel </button> */}
-                      <button type="submit" className="py-2 px-5 rounded bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" > Save Changes </button>
+                      {/* <button type="button" className="py-2 px-5 rounded border border-SoothingBlueGrey dark:border-Hydrocarbon bg-White dark:bg-TranquilBlack text-TranquilBlack dark:text-WhiteMarble font-medium hover:bg-TitaniumWhite dark:hover:bg-Hydrocarbon transition-colors" onClick={() => validation.resetForm()} disabled={validation.isSubmitting} > Cancel </button> */}
+                      <button type="submit" className="py-2 px-5 rounded bg-blue-600 text-White font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" > Save Changes </button>
                   </div>
               </div>
           </form>

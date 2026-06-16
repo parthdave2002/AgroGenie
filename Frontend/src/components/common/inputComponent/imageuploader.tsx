@@ -51,17 +51,17 @@ const ImageUploadPreview: React.FC<ImageUploadPreviewProps> = ({ onFileSelect, d
   };
 
   return (
-    <div onClick={handleImageClick} className="w-32 h-32 flex border-dashed items-center justify-center border-2 border-gray-300 dark:border-gray-700 rounded-full overflow-hidden cursor-pointer">
+    <div onClick={handleImageClick} className="w-32 h-32 flex border-dashed items-center justify-center border-2 border-SoothingBlueGrey dark:border-TranquilBlack rounded-full overflow-hidden cursor-pointer">
       <input type="file" className="hidden" accept={accept} ref={fileInputRef} onChange={handleFileChange} />
       
       {previewSrc ? (
         <div className="relative w-full h-full">
           <img src={previewSrc} className="w-full h-full object-cover" alt="Preview" />
-          {/* <button onClick={handleRemoveImage} className="absolute -top-2 -right-2 bg-red-600 border-none text-white w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-red-700 transition" > x </button> */}
+          {/* <button onClick={handleRemoveImage} className="absolute -top-2 -right-2 bg-red-600 border-none text-White w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-red-700 transition" > x </button> */}
         </div>
       )
       :(
-        <div className="flex flex-col items-center text-gray-500">
+        <div className="flex flex-col items-center text-SharkGray">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-8 h-8 mb-2"

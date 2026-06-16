@@ -40,6 +40,9 @@ import Cookies from "js-cookie";
 function* onGetCustomerDatalist({ payload: requstuser }) {
   try {
     const response = yield call(CustomerlistApi, requstuser);
+    if(requstuser?.type === "order"){
+      Cookies.set('customer_data', JSON.stringify(response?.data[0]), { expires: 1 });
+    }
     yield put(getCustomerDatalistSuccess(GET_CUSTOMER_DATA_LIST, response));
   } catch (error) {
     yield put(getCustomerDatalistFail(error));

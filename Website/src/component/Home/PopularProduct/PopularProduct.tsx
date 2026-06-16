@@ -108,8 +108,8 @@ const PopularProductSection: React.FC = () => {
         {/* Product Grid */}
         {/* <div className="md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {productList && productList.map(product => (
-            <article key={product._id} className="relative p-4 bg-white shadow-md rounded-2xl mb-7 hover:shadow-lg transition-shadow">
-              <figure className="bg-white rounded-xl text-center mb-4">
+            <article key={product._id} className="relative p-4 bg-White shadow-md rounded-2xl mb-7 hover:shadow-lg transition-shadow">
+              <figure className="bg-White rounded-xl text-center mb-4">
                 <Swiper {...swiperConfig}>
                   {product.product_pics.map((img, index) => (
                     <SwiperSlide key={index}>
@@ -121,9 +121,9 @@ const PopularProductSection: React.FC = () => {
 
               <div className="text-center"> <h3 className="font-semibold text-[16px] truncate cursor-pointer text-uppercase my-3" onClick={() => goToDetails(product?._id)} > {product?.name?.englishname.toUpperCase()} </h3> </div>
               <div className=" items-center text-md space-y-1">
-                <div className="text-gray-700 font-body font-semibold">  Category :  <span > {product?.categories?.name_eng} </span> </div>
-                <div className="text-gray-700 font-body font-semibold"> Company :  <span > {product?.company?.name_eng} </span></div>
-                <div className="text-gray-700 font-body font-semibold"> Packing :  <span > {product?.packaging} {product?.packagingtype?.type_eng} </span></div>
+                <div className="text-TranquilBlack font-body font-semibold">  Category :  <span > {product?.categories?.name_eng} </span> </div>
+                <div className="text-TranquilBlack font-body font-semibold"> Company :  <span > {product?.company?.name_eng} </span></div>
+                <div className="text-TranquilBlack font-body font-semibold"> Packing :  <span > {product?.packaging} {product?.packagingtype?.type_eng} </span></div>
               </div>
             </article>
           ))}
@@ -131,8 +131,8 @@ const PopularProductSection: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {productList?.map((product) => (
-            <article key={product._id} className="group relative bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden" >
-              <figure className="bg-gray-50 p-4">
+            <article key={product._id} className="group relative bg-White rounded-2xl border border-TitaniumWhite shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden" >
+              <figure className="bg-White p-4">
                 <Swiper {...swiperConfig}>
                   {product.product_pics?.map((img, index) => (
                     <SwiperSlide key={index}>
@@ -144,12 +144,12 @@ const PopularProductSection: React.FC = () => {
 
               {/* Content */}
               <div className="p-4 space-y-3">
-                <h3 className="text-[15px] font-semibold text-gray-800 text-center truncate cursor-pointer hover:text-green-600 transition" onClick={() => goToDetails(product._id)} title={product?.name?.englishname} >
+                <h3 className="text-[15px] font-semibold text-Cosmos text-center truncate cursor-pointer hover:text-green-600 transition" onClick={() => goToDetails(product._id)} title={product?.name?.englishname} >
                   {product?.name?.englishname.toUpperCase()}
                 </h3>
 
                 {/* Meta Info */}
-                <div className="text-sm text-gray-600 space-y-1">
+                <div className="text-sm text-Hydrocarbon space-y-1">
                   <p className="flex justify-between">
                     <span className="font-medium">Category</span>
                     <span className="truncate">{product?.categories?.name_eng}</span>
@@ -167,7 +167,7 @@ const PopularProductSection: React.FC = () => {
                 </div>
 
                 {/* CTA */}
-                <button onClick={() => goToDetails(product?._id)} className="w-full mt-3 py-2 text-sm font-semibold text-white bg-green-600 rounded-xl hover:bg-green-700 transition"  > View Details  </button>
+                <button onClick={() => goToDetails(product?._id)} className="w-full mt-3 py-2 text-sm font-semibold text-White bg-green-600 rounded-xl hover:bg-green-700 transition"  > View Details  </button>
               </div>
             </article>
           ))}

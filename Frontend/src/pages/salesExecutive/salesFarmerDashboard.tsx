@@ -18,7 +18,7 @@ const SalesMobileInput = lazy(() => import("../../components/common/inputCompone
 const ProductDetailData = lazy(() => import("../../components/productdetails/salesproductDetails"));
 const Salesproductlist = lazy(() => import("../../components/productdetails/salesproductlist"));
 
-const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, Mobile_number, openComplain, setOpenComplain, orderId, set_OrderId }) => {
+const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, Mobile_number,Referrerdata, openComplain, setOpenComplain, orderId, set_OrderId }) => {
   const [farmedAdded, setFarmerAdded] = useState(false);
   const [isLoading, setisLoading] = useState(true);
   const [ isEditFarmer, setIsEditFarmer] = useState(false);
@@ -152,7 +152,7 @@ const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, M
     {isLoading  ?   <LoaderPage /> : null  }
 
     {farmedAdded && !isLoading && (
-      <SalesAddFarmer  isEditFarmer={isEditFarmer} Mobile_number={Mobile_number} setFarmerAdded={setFarmerAdded} handleAccept={handleAccept} CloseAddmodal={CloseAddmodal} /> 
+      <SalesAddFarmer  isEditFarmer={isEditFarmer} Mobile_number={Mobile_number} Referrerdata={Referrerdata} setFarmerAdded={setFarmerAdded} handleAccept={handleAccept} CloseAddmodal={CloseAddmodal} /> 
     )}
       
       { farmedAdded == false && !isLoading ?
@@ -164,16 +164,16 @@ const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, M
             :
             <div className='flex flex-col'>
               <div className='flex justify-end gap-x-[2rem] my-3'>
-                <div className="relative cursor-pointer flex gap-x-3 items-center dark:text-gray-100 font-bold text-lg" onClick={() => OpenCartCall()}>
+                <div className="relative cursor-pointer flex gap-x-3 items-center dark:text-TitaniumWhite font-bold text-lg" onClick={() => OpenCartCall()}>
                   <div>
-                    <TiShoppingCart className="h-8 w-8 dark:text-white relative text-indigo-500" />
-                    <div className="absolute top-0 right-12 transform translate-x-2 -translate-y-2 bg-indigo-500 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-md"> {cartItem?.length} </div>
+                    <TiShoppingCart className="h-8 w-8 dark:text-White relative text-indigo-500" />
+                    <div className="absolute top-0 right-12 transform translate-x-2 -translate-y-2 bg-indigo-500 text-White text-xs font-semibold px-2 py-1 rounded-full shadow-md"> {cartItem?.length} </div>
                   </div>
                   <div> Cart </div>
                 </div>
 
-                <div className=" cursor-pointer flex gap-x-3 items-center  text-red-500 dark:text-gray-100 font-bold text-lg" onClick={() => LogOutCall()}>
-                  <FaPowerOff className="h-6 w-6 dark:text-white " />
+                <div className=" cursor-pointer flex gap-x-3 items-center  text-red-500 dark:text-TitaniumWhite font-bold text-lg" onClick={() => LogOutCall()}>
+                  <FaPowerOff className="h-6 w-6 dark:text-White " />
                   <div> Logout </div>
                 </div>
               </div>
@@ -184,10 +184,10 @@ const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, M
                   :
                   <>
                     <div className='flex mt-[2rem] mb-2'>
-                      <div className='flex-1 flex text-[2rem] dark:text-gray-400 font-bold self-end '> Personal Info</div>
-                      <div className='flex-1 flex justify-end  self-end '> <div className='border border-indigo-500 text-indigo-500 dark:text-white hover:text-gray-100 font-semibold px-6 py-2 rounded-full  gap-3 hover:bg-indigo-800 transition flex text-center cursor-pointer  transition-all duration-500 ease-in-out' onClick={() => EditFarmerCall()}> <FaPencilAlt className='self-center h-5 w-5' />Update Farmer  </div> </div>
+                      <div className='flex-1 flex text-[2rem] dark:text-SilverSteel font-bold self-end '> Personal Info</div>
+                      <div className='flex-1 flex justify-end  self-end '> <div className='border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full  gap-3 hover:bg-indigo-800 transition flex text-center cursor-pointer  transition-all duration-500 ease-in-out' onClick={() => EditFarmerCall()}> <FaPencilAlt className='self-center h-5 w-5' />Update Farmer  </div> </div>
                     </div>
-                    <FarmeDashboardProfile viewButton={true} classData="border dark:border-gray-600 rounded-xl w-full py-2 px-4 transition-all duration-800 ease-in-out" />
+                    <FarmeDashboardProfile viewButton={true} classData="border dark:border-Hydrocarbon rounded-xl w-full py-2 px-4 transition-all duration-800 ease-in-out" />
 
                     <div className="flex gap-4 mt-[2rem]">
                        <div className="flex-1">
@@ -203,12 +203,12 @@ const SalesFarmerDashboard : FC<FarmerDashboardPropsData> = ( {setOpenProfile, M
                       </div>
                     </div>
 
-                    <div className='mt-[2rem] text-[2rem] dark:text-gray-400 font-bold'> History </div>
+                    <div className='mt-[2rem] text-[2rem] dark:text-SilverSteel font-bold'> History </div>
                     <FarmerHistory setOpenDetailId={setOpenDetailId} openComplain={openComplain} setOpenComplain={setOpenComplain}  setOpenDetailIData={setOpenDetailIData}  setOpenDetailsmodal={setOpenDetailsmodal}  AddtoCartCall={AddtoCartCall} setCartOrderid={setCartOrderid} FuturOrderDate={setfuture_date}   orderId={orderId} set_OrderId={set_OrderId} />
 
                     <div className='flex mt-[1rem]'>
-                      <div className='flex-1 self-end text-[2rem] dark:text-gray-400 font-bold'> Products Data</div>
-                      <SalesMobileInput datatype='text' mainclassname="flex self-center mt-[3rem] justify-end gap-x-3 border-0" className="py-2 px-6 border-0  rounded-xl text-[1.5rem] text-gray-500 font-normal relative  dark:bg-gray-700 dark:text-gray-100" buttonCss="px-[2rem] py-[0.5rem] bg-gray-800 dark:bg-gray-700 rounded-r-full text-[1.6rem] text-gray-50 absolute  dark:text-gray-400" value={searchData} handleChange={(data) => handleChange(data)} handleClickCall={handleClickCall} placeholder="Search Product" />
+                      <div className='flex-1 self-end text-[2rem] dark:text-SilverSteel font-bold'> Products Data</div>
+                      <SalesMobileInput datatype='text' mainclassname="flex self-center mt-[3rem] justify-end gap-x-3 border-0" className="py-2 px-6 border-0  rounded-xl text-[1.5rem] text-SharkGray font-normal relative  dark:bg-TranquilBlack dark:text-TitaniumWhite" buttonCss="px-[2rem] py-[0.5rem] bg-Cosmos dark:bg-TranquilBlack rounded-r-full text-[1.6rem] text-White absolute  dark:text-SilverSteel" value={searchData} handleChange={(data) => handleChange(data)} handleClickCall={handleClickCall} placeholder="Search Product" />
                     </div>
                     <Salesproductlist searchData={searchData} ProductDetailsCall={ProductDetailsCall} isLoggedin={true}  AddtoCartCall={AddtoCartCall}/>
                   </>

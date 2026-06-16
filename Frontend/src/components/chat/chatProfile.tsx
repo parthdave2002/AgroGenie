@@ -24,11 +24,11 @@ const ChatProfilePage = ({ setOpenProfileModal }: ChatProfileProps) => {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Profile</p>
           <h2 className="mt-1 text-xl font-semibold text-slate-900">Your information</h2>
         </div>
-        <button className="rounded-full bg-gray-100 px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-100" onClick={() => setOpenProfileModal(false)}> Close </button>
+        <button className="rounded-full bg-TitaniumWhite px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-100" onClick={() => setOpenProfileModal(false)}> Close </button>
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-6">
-        <div className="mx-auto max-w-lg rounded-[32px] bg-gray-100 p-6 shadow-sm">
+        <div className="mx-auto max-w-lg rounded-[32px] bg-TitaniumWhite p-6 shadow-sm">
           <div className="flex flex-col items-center gap-4 text-center">
             <div className="relative">
               <img
@@ -42,11 +42,11 @@ const ChatProfilePage = ({ setOpenProfileModal }: ChatProfileProps) => {
           </div>
 
           <div className="mt-8 space-y-6">
-            <div className="rounded-3xl bg-white p-4 shadow-sm">
+            <div className="rounded-3xl bg-White p-4 shadow-sm">
               <p className="text-sm text-slate-500">Full Name</p>
               <p className="mt-2 text-base font-medium text-slate-900">{LoginUsername}</p>
             </div>
-            <div className="rounded-3xl bg-white p-4 shadow-sm">
+            <div className="rounded-3xl bg-White p-4 shadow-sm">
               <p className="text-sm text-slate-500">Email Address</p>
               <p className="mt-2 text-base font-medium text-slate-900">{LoginUseremail}</p>
             </div>

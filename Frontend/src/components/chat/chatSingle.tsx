@@ -112,7 +112,7 @@ const ChatingList = ({ socket, UserId, setOpenUserChat }: ChatUserProps) => {
     <div className="flex h-full flex-col">
       <div className="flex items-center justify-between gap-3 border-b border-slate-200 bg-slate-50 px-5 py-4">
         <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-500 shadow-sm transition hover:bg-slate-100"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-White text-slate-500 shadow-sm transition hover:bg-slate-100"
           onClick={() => setOpenUserChat(false)}
         >
           <IoChevronBack className="h-5 w-5" />
@@ -123,7 +123,7 @@ const ChatingList = ({ socket, UserId, setOpenUserChat }: ChatUserProps) => {
           <p className="text-xs text-slate-500">{isTyping ? "typing..." : "Online"}</p>
         </div>
 
-        <div className="h-12 w-12 rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold shadow-sm">
+        <div className="h-12 w-12 rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-White font-semibold shadow-sm">
           {UserId?.name?.charAt(0)}
         </div>
       </div>
@@ -146,8 +146,8 @@ const ChatingList = ({ socket, UserId, setOpenUserChat }: ChatUserProps) => {
                   <div
                     className={`max-w-[80%] break-all rounded-3xl px-4 py-3 text-sm shadow-sm ${
                       isFromMe
-                        ? "bg-green-500 text-white rounded-br-[8px] rounded-bl-3xl rounded-tl-3xl rounded-tr-3xl"
-                        : "bg-gray-200 text-slate-800 rounded-bl-[8px] rounded-br-3xl rounded-tl-3xl rounded-tr-3xl"
+                        ? "bg-green-500 text-White rounded-br-[8px] rounded-bl-3xl rounded-tl-3xl rounded-tr-3xl"
+                        : "bg-WhiteMarble text-slate-800 rounded-bl-[8px] rounded-br-3xl rounded-tl-3xl rounded-tr-3xl"
                     }`}
                   >
                     <p>{messageItem.message}</p>
@@ -160,7 +160,7 @@ const ChatingList = ({ socket, UserId, setOpenUserChat }: ChatUserProps) => {
         )}
       </div>
 
-      <div className="border-t border-slate-200 bg-white px-5 py-4">
+      <div className="border-t border-slate-200 bg-White px-5 py-4">
         <div className="flex items-center gap-3 rounded-full border border-slate-200 bg-slate-100 px-3 py-2">
           <input
             value={message}
@@ -170,7 +170,7 @@ const ChatingList = ({ socket, UserId, setOpenUserChat }: ChatUserProps) => {
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-slate-400"
           />
           <button
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-green-500 text-white transition hover:bg-green-600 disabled:opacity-50"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-green-500 text-White transition hover:bg-green-600 disabled:opacity-50"
             onClick={handleSendMessage}
             disabled={!message.trim()}
           >

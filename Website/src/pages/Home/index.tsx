@@ -39,7 +39,7 @@ useEffect(() => {
   return (
     <div>
 
-      <section  className=" relative  py-10  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
+      <section  className=" relative  py-10  bg-White  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
         <div className="flex flex-col space-y-8 relative z-10">
         
           <BannerSection />
@@ -57,7 +57,7 @@ useEffect(() => {
 
       {modal && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-3xl p-8 text-center relative animate-fadeIn">
+          <div className="bg-White rounded-2xl shadow-2xl w-[90%] max-w-3xl p-8 text-center relative animate-fadeIn">
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               {/* --- Left Section --- */}
@@ -68,14 +68,14 @@ useEffect(() => {
                   </svg>
                 </div>
 
-                <h2 className="text-2xl font-semibold mb-2 text-gray-800"> Visit Current Website </h2>
-                <p className="text-gray-500 mb-6 max-w-sm"> This will open the selected website in a new browser tab.  </p>
-                <button onClick={() => setModal(false)} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"  >   Visit Website  </button>
+                <h2 className="text-2xl font-semibold mb-2 text-Cosmos"> Visit Current Website </h2>
+                <p className="text-SharkGray mb-6 max-w-sm"> This will open the selected website in a new browser tab.  </p>
+                <button onClick={() => setModal(false)} className="bg-blue-600 hover:bg-blue-700 text-White px-6 py-2 rounded-lg transition"  >   Visit Website  </button>
               </div>
 
               {/* --- Divider Line --- */}
-              <div className="hidden md:block w-px h-40 bg-gray-300"></div>
-              <div className="block md:hidden w-40 h-px bg-gray-300 my-4"></div>
+              <div className="hidden md:block w-px h-40 bg-SoothingBlueGrey"></div>
+              <div className="block md:hidden w-40 h-px bg-SoothingBlueGrey my-4"></div>
 
               {/* --- Right Section --- */}
               <div className="flex-1 flex flex-col items-center">
@@ -86,9 +86,9 @@ useEffect(() => {
                   </svg>
                 </div>
 
-                <h2 className="text-2xl font-semibold mb-2 text-gray-800">   Download Brochure </h2>
-                <p className="text-gray-500 mb-6 max-w-sm">   This will take you to the official browser download page. </p>
-                <button onClick={OpenBrochure} className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition" >   Download Brochure</button>
+                <h2 className="text-2xl font-semibold mb-2 text-Cosmos">   Download Brochure </h2>
+                <p className="text-SharkGray mb-6 max-w-sm">   This will take you to the official browser download page. </p>
+                <button onClick={OpenBrochure} className="bg-red-600 hover:bg-red-700 text-White px-6 py-2 rounded-lg transition" >   Download Brochure</button>
               </div>
             </div>
           </div>

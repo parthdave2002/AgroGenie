@@ -1,13 +1,13 @@
 import { lazy,FC, useEffect, useMemo, useRef, useState } from "react";
-import { FaHandHoldingDollar } from "react-icons/fa6";
-import { FaAngleDown, FaRupeeSign, FaUser, FaUserCircle } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
-import { DarkThemeToggle } from "flowbite-react";
-import userphoto from "/images/users/roberta-casas.png";
-import Cookies from "js-cookie";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 import moment from "moment";
+import Cookies from "js-cookie";
+import { FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router";
+import { DarkThemeToggle } from "flowbite-react";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import userphoto from "/images/users/roberta-casas.png";
+import { useDispatch, useSelector } from "react-redux";
+import { FaAngleDown, FaRupeeSign, FaUser, FaUserCircle } from "react-icons/fa";
 import { getNoticeBoardlist, getsalesDashboard, getSalesExecutiveOrderlist, resetinsertlogin } from "../../Store/actions";
 import { DashboardCardProps, DashboardCount, DashboardPropsData } from "../../types/types";
 const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
@@ -15,6 +15,7 @@ const CommonTable = lazy(() => import("../../components/common/table/commonTable
 const BoardSection = lazy(() => import("../../components/salesComponent/boardData"));
 const SalesProfile = lazy(() => import("./salesProfile"));
 const SalesFarmerDashboard = lazy(() => import("./salesFarmerDashboard"));
+const ManagerDashboardPage = lazy(() => import("../../pages/Managerdashboard/dashoboard"));
 
 const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  openProfile,setOpenProfile})  {
 
@@ -310,14 +311,14 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
 
       return (
         <div className="flex-1 mt-[1.5rem] md:mt-0">
-          <div className="h-24 p-3 rounded-xl w-full flex justify-between bg-red-200 dark:bg-gray-700 dark:text-gray-50">
+          <div className="h-24 p-3 rounded-xl w-full flex justify-between bg-red-200 dark:bg-TranquilBlack dark:text-White">
             <div className="flex w-full justify-between items-center">
               <div className="p-3 rounded-full bg-purple-500">
-                <Icon className="text-white w-6 h-6" />
+                <Icon className="text-White w-6 h-6" />
               </div>
 
               <select
-                className="border border-gray-300 rounded-full px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-50"
+                className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White"
                 defaultValue="daily"
                 onChange={onChange}
               >
@@ -379,32 +380,32 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
 
             <div className="flex justify-between">
               <div className="flex flex-col self-center mt-3">
-                <div className="text-[0.9rem] text-gray-500 dark:text-gray-100 dark:text-gray-200"> Welcome back, {data ? data : ""}!</div>
-                <div className="text-[1rem] font-semibold text-gray-900 dark:text-gray-100"> Today's Goal :  {TotalRevenue?.daily} / {MyGoal} </div>
-                <div className="text-[2.5rem] font-semibold text-gray-900 dark:text-gray-100"> {isProfileData == false ? "Dashboard" : "Profile" }  </div>
+                <div className="text-[0.9rem] text-SharkGray dark:text-TitaniumWhite dark:text-WhiteMarble"> Welcome back, {data ? data : ""}!</div>
+                <div className="text-[1rem] font-semibold text-DarkBackground dark:text-TitaniumWhite"> Today's Goal :  {TotalRevenue?.daily} / {MyGoal} </div>
+                <div className="text-[2.5rem] font-semibold text-DarkBackground dark:text-TitaniumWhite"> {isProfileData == false ? "Dashboard" : "Profile" }  </div>
               </div>
 
               <div className="relative flex ">
-                <button onClick={() => setIsOpen(!isOpen)} className="flex items-center text-sm px-3 py-0.5 font-medium text-gray-900 hover:text-blue-600 md:me-0  dark:text-white  dark:hover:text-gray-100" type="button"  >
+                <button onClick={() => setIsOpen(!isOpen)} className="flex items-center text-sm px-3 py-0.5 font-medium text-DarkBackground hover:text-blue-600 md:me-0  dark:text-White  dark:hover:text-TitaniumWhite" type="button"  >
                   <img className="w-8 h-8 me-2 rounded-full" src={LoginUserimg ? LoginUserimg : userphoto} alt="user photo" />
                   <span> {data ? data : ""}  </span>
                   <FaAngleDown className="w-4 h-4 ms-3" />
                 </button>
 
                 {isOpen && (
-                  <div ref={dropdownRef} className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 right-0 mt-[4rem]" >
-                    <div onClick={handleClick} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-x-2 cursor-pointer  text-sm text-gray-700 dark:text-gray-200"  >
-                      <DarkThemeToggle className="hover:bg-gray-100 dark:hover:bg-gray-700 " style={{ padding: "0" }} />
+                  <div ref={dropdownRef} className="absolute z-10 bg-White divide-y divide-TitaniumWhite rounded-lg shadow-sm w-44 dark:bg-TranquilBlack dark:divide-Hydrocarbon right-0 mt-[4rem]" >
+                    <div onClick={handleClick} className="block px-4 py-2 hover:bg-TitaniumWhite dark:hover:bg-Hydrocarbon dark:hover:text-White flex gap-x-2 cursor-pointer  text-sm text-TranquilBlack dark:text-WhiteMarble"  >
+                      <DarkThemeToggle className="hover:bg-TitaniumWhite dark:hover:bg-TranquilBlack " style={{ padding: "0" }} />
                       <div className="self-center">Dark mode</div>
                     </div>
 
-                    <div  onClick={() => Profilefun()} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex gap-x-2 cursor-pointer  text-sm text-gray-700 dark:text-gray-200"  >
-                      <FaUserCircle size={20} className="text-gray-600 dark:text-gray-400" />
+                    <div  onClick={() => Profilefun()} className="block px-4 py-2 hover:bg-TitaniumWhite dark:hover:bg-Hydrocarbon dark:hover:text-White flex gap-x-2 cursor-pointer  text-sm text-TranquilBlack dark:text-WhiteMarble"  >
+                      <FaUserCircle size={20} className="text-Hydrocarbon dark:text-SilverSteel" />
                       <div className="self-center">Prodile </div>
                     </div>
 
-                    <div className="cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex gap-x-2" onClick={() => Logoutfun()}>
-                      <FiLogOut size={20} className="text-gray-600 dark:text-gray-400" />
+                    <div className="cursor-pointer px-4 py-2 text-sm text-TranquilBlack hover:bg-TitaniumWhite dark:hover:bg-Hydrocarbon dark:text-WhiteMarble dark:hover:text-White flex gap-x-2" onClick={() => Logoutfun()}>
+                      <FiLogOut size={20} className="text-Hydrocarbon dark:text-SilverSteel" />
                       <div className="self-center"> Sign out </div>
                     </div>
                   </div>
@@ -422,19 +423,19 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
 
                 <div className=" flex flex-col xl:flex-row gap-[1rem]  justify-between">
                   {FarmerData && FarmerData.length ?
-                    <div className="bg-[#ffff] dark:bg-gray-800 rounded-xl p-4 ">
+                    <div className="bg-[#ffff] dark:bg-Cosmos rounded-xl p-4 ">
                       <div className="flex justify-between ">
-                        <div className="text-[1.4rem] font-semibold text-gray-900 dark:text-gray-200"> Farmer Profile  ({TotalFarmerListData})</div>
+                        <div className="text-[1.4rem] font-semibold text-DarkBackground dark:text-WhiteMarble"> Farmer Profile  ({TotalFarmerListData})</div>
                         {/* <div className="flex  self-center align-center text-blue-500 hover:text-blue-800 cursor-pointer" onClick={() => ViweAllCall("Farmer")}> <div> View all  </div>  <MdKeyboardArrowRight style={{ alignSelf: "center" }} /></div> */}
                       </div>
 
                       <div className="grid grid-cols-2 my-6  xl:grid-cols-5 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-3">
                         {FarmerData && FarmerData.map((item: any, k: number) => (
-                          <div className="bg-[#f4f9fd] w-[12rem] dark:bg-gray-700 px-[2rem] py-3 rounded-xl flex flex-col gap-y-2" key={k}>
+                          <div className="bg-[#f4f9fd] w-[12rem] dark:bg-TranquilBlack px-[2rem] py-3 rounded-xl flex flex-col gap-y-2" key={k}>
                             <img src={imagesForFarmers[k] ?? "/images/farmer/11.webp"} alt="" className="h-16 w-16 rounded-full self-center border-2 border-blue-600 p-1" />
-                            <div className="text-gray-500 dark:text-gray-100 text-[0.9rem] text-center max-w-[15rem] truncate"> {item?.firstname} {item?.middlename} {item?.lastname} </div>
-                            <div className="text-gray-500 dark:text-gray-100 text-[0.9rem] text-center"> {item?.mobile_number}</div>
-                            {/* <div className="text-gray-500 dark:text-gray-100 text-[0.8rem] text-center border border-gray-500 rounded-md size-fit px-2 cursor-pointer self-center" onClick={() => handleClickCall()}> View </div> */}
+                            <div className="text-SharkGray dark:text-TitaniumWhite text-[0.9rem] text-center max-w-[15rem] truncate"> {item?.firstname} {item?.middlename} {item?.lastname} </div>
+                            <div className="text-SharkGray dark:text-TitaniumWhite text-[0.9rem] text-center"> {item?.mobile_number}</div>
+                            {/* <div className="text-SharkGray dark:text-TitaniumWhite text-[0.8rem] text-center border border-SharkGray rounded-md size-fit px-2 cursor-pointer self-center" onClick={() => handleClickCall()}> View </div> */}
                           </div>
                         ))}
                       </div>
@@ -449,7 +450,7 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
 
                 {SalesOrderData && SalesOrderData.length > 0 ?
                   <div className="mt-[4rem]">
-                    <h3 className="mb-4 text-xl font-bold leading-none text-gray-900 dark:text-white"> Order List </h3>
+                    <h3 className="mb-4 text-xl font-bold leading-none text-DarkBackground dark:text-White"> Order List </h3>
                     {SalesOrderData && SalesOrderData.length > 0 ?
                       <>
                         <CommonTable columns={orderColumns} data={SalesOrderData || []} />
@@ -461,7 +462,7 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
 
                 {ComplainData && ComplainData.length > 0 ?
                   <div className="mt-[4rem]">
-                    <h3 className="mb-4 text-xl font-bold leading-none text-gray-900 dark:text-white"> Complain List  ({ComplainData.length})</h3>
+                    <h3 className="mb-4 text-xl font-bold leading-none text-DarkBackground dark:text-White"> Complain List  ({ComplainData.length})</h3>
                     {ComplainData && ComplainData.length > 0 ?
                       <>
                         <CommonTable columns={complainColumns} data={complainVisibleData || []} />
@@ -470,6 +471,12 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
                     : null}
                   </div>
                   : null}
+
+                { 
+
+                }
+                  <ManagerDashboardPage />
+
               </>
             : <SalesProfile  CloseProfile={CloseProfile} />}
           </>

@@ -110,7 +110,7 @@ const LeaveListPage: FC = function () {
       <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
         <div className="mb-4 flex justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-2xl font-semibold text-DarkBackground dark:text-White mb-4">
               Leave Management
             </h1>
             <div className="mt-2 flex space-x-2">
@@ -118,8 +118,8 @@ const LeaveListPage: FC = function () {
                 onClick={() => setSelectedTab("Attendance")}
                 className={`px-4 py-2 rounded-md ${
                   selectedTab === "Attendance"
-                    ? "bg-white dark:bg-gray-800 text-blue-600 font-semibold shadow"
-                    : "text-gray-600 dark:text-gray-300"
+                    ? "bg-White dark:bg-Cosmos text-blue-600 font-semibold shadow"
+                    : "text-Hydrocarbon dark:text-SoothingBlueGrey"
                 }`}
               >
                 
@@ -129,8 +129,8 @@ const LeaveListPage: FC = function () {
                 onClick={() => setSelectedTab("Leave")}
                 className={`px-4 py-2 rounded-md ${
                   selectedTab === "Leave"
-                    ? "bg-white dark:bg-gray-800 text-blue-600 font-semibold shadow"
-                    : "text-gray-600 dark:text-gray-300"
+                    ? "bg-White dark:bg-Cosmos text-blue-600 font-semibold shadow"
+                    : "text-Hydrocarbon dark:text-SoothingBlueGrey"
                 }`}
               >
                 Leave
@@ -163,7 +163,7 @@ const LeaveListPage: FC = function () {
                 
                 <FaArrowLeft />
               </button>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-semibold text-DarkBackground dark:text-White">
                 
                 {currentMonth.format("MMMM YYYY")}
               </h2>
@@ -180,10 +180,10 @@ const LeaveListPage: FC = function () {
               {leavelist &&
                 leavelist.map((person: any, index: number) => (
                   <Accordion.Panel key={index}>
-                    <Accordion.Title className="bg-gray-200 dark:bg-gray-800">
+                    <Accordion.Title className="bg-WhiteMarble dark:bg-Cosmos">
                       {person.name}
                     </Accordion.Title>
-                    <Accordion.Content className="transition-all ease-in-out duration-300 rounded-lg shadow-lg bg-white dark:bg-gray-700">
+                    <Accordion.Content className="transition-all ease-in-out duration-300 rounded-lg shadow-lg bg-White dark:bg-TranquilBlack">
                       <CommonTable
                         columns={leaveColumns}
                         data={person?.leaves}

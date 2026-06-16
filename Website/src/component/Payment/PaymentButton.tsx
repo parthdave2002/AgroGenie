@@ -126,7 +126,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ amount, cartData, validat
       type="button"
       disabled={isLoading}
       onClick={handlePayment}
-      className="w-full rounded-3xl bg-slate-950 px-5 py-2 text-xl font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+      className="w-full rounded-3xl bg-slate-950 px-5 py-2 text-xl font-semibold text-White transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
     >
       {isLoading ? "Redirecting to payment..." : "Place Order"}
     </button>

@@ -25,7 +25,7 @@ export * from "./Testimonial/action";
 export * from "./NoticeBoard/action";
 export * from "./Warehouse/action";
 export * from "./Kanban/action";
-export * from "./Referral/action";
+export * from "./Wallet/action";
 
 //  ==========   sales exective =========================
 export * from "./SalesExecutive/dashboard/action";

@@ -147,7 +147,7 @@ const LogoutModal : FC <PoropsData> = ({openModal, handleClose, handleAccept}) =
                                     <Label htmlFor="taglog"> Taglog <span className='text-red-500'>*</span></Label>
                                     <div className="mt-1">
                                       <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                           control: () => "react-select__control",
                                           singleValue: () => "react-select__single-value",
@@ -169,7 +169,7 @@ const LogoutModal : FC <PoropsData> = ({openModal, handleClose, handleAccept}) =
                                     <Label htmlFor="Subtaglog">Sub Taglog <span className='text-red-500'>*</span></Label>
                                     <div className="mt-1">
                                       <Select
-                                        className="w-full dark:text-white"
+                                        className="w-full dark:text-White"
                                         classNames={{
                                           control: () => "react-select__control",
                                           singleValue: () => "react-select__single-value",
@@ -193,7 +193,7 @@ const LogoutModal : FC <PoropsData> = ({openModal, handleClose, handleAccept}) =
                                       <Input
                                         id="comment"
                                         name="comment"
-                                        className="bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full"
+                                        className="bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full"
                                         placeholder="Enter comment"
                                         type="text"
                                         onChange={validation.handleChange}
@@ -207,7 +207,7 @@ const LogoutModal : FC <PoropsData> = ({openModal, handleClose, handleAccept}) =
                     </div>
               </Modal.Body>
               <Modal.Footer className='py-2 flex gapx-3 justify-end'>
-                <Button type='submit' className='w-[8rem] bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl border-0'> <div className="flex items-center gap-x-3 text-[1.2rem]">  <FaUserTag  className='text-xl'  />  Submit  </div> </Button>
+                <Button type='submit' className='w-[8rem] bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0'> <div className="flex items-center gap-x-3 text-[1.2rem]">  <FaUserTag  className='text-xl'  />  Submit  </div> </Button>
                 <Button color="gray" className='w-[8rem]' onClick={() => handleClose()}> Close  </Button>
               </Modal.Footer>
             </Form>

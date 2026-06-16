@@ -161,7 +161,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                 <Label htmlFor="Status"> Leave Type </Label>
                 <div className="mt-1">
                   <Select
-                    className="w-full dark:text-white"
+                    className="w-full dark:text-White"
                     classNames={{
                       control: () => "react-select__control",
                       singleValue: () => "react-select__single-value",
@@ -210,7 +210,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                           },
                         ] as any
                       }
-                      className="w-full pl-10 py-2 px-5 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                      className="w-full pl-10 py-2 px-5 border border-SoothingBlueGrey rounded-lg shadow-sm focus:ring focus:ring-blue-300 text-TranquilBlack dark:bg-Cosmos dark:text-WhiteMarble"
                       placeholderText={
                         startDate
                           ? `${moment(startDate).format("dd/MM/yyyy")} - ${
@@ -221,7 +221,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                           : "Select Date Range"
                       }
                     />
-                    <IoCalendarNumberSharp className="absolute left-3 top-2.5 w-5 h-5 text-gray-400 pointer-events-none" />
+                    <IoCalendarNumberSharp className="absolute left-3 top-2.5 w-5 h-5 text-SilverSteel pointer-events-none" />
                   </div>
                   {!startDateData || !endDateData ? (
                     <FormFeedback
@@ -240,7 +240,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                 <Label htmlFor="user"> Leave Plan </Label>
                 <div className="mt-1">
                   <Select
-                    className="w-full dark:text-white"
+                    className="w-full dark:text-White"
                     classNames={{
                       control: () => "react-select__control",
                       singleValue: () => "react-select__single-value",
@@ -268,7 +268,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                 <Label htmlFor="user"> Advisor Name </Label>
                 <div className="mt-1">
                   <Select
-                    className="w-full dark:text-white"
+                    className="w-full dark:text-White"
                     classNames={{
                       control: () => "react-select__control",
                       singleValue: () => "react-select__single-value",

@@ -83,14 +83,14 @@ const SalesProductDetailData : FC<PropsData> = ({ProductDetails, ProductCLoseCal
     <>
         {/* <div>SalesProductDetailData ,{ ProductDetails }</div> */}
         <div className='flex justify-between px-4'>
-            <div className="text-[2rem] font-semibold text-gray-900 dark:text-gray-100"> Product Details   </div>
-            <div className="text-[2rem] font-semibold text-gray-900 dark:text-gray-100 flex self-center cursor-pointer " onClick={ProductCLoseCall}> <FaWindowClose /> </div>
+            <div className="text-[2rem] font-semibold text-DarkBackground dark:text-TitaniumWhite"> Product Details   </div>
+            <div className="text-[2rem] font-semibold text-DarkBackground dark:text-TitaniumWhite flex self-center cursor-pointer " onClick={ProductCLoseCall}> <FaWindowClose /> </div>
         </div>
         
         <div className='flex px-3 mt-[2rem]'>
             <div className='flex-1'>
                   <div className="relative w-full">
-                      <div className="relative h-56 overflow-hidden rounded-lg md:h-96 bg-white">
+                      <div className="relative h-56 overflow-hidden rounded-lg md:h-96 bg-White">
                           {Product_data?.product_pics && Product_data?.product_pics.map((src:any, index:number) => (
                               <img
                                   key={index}
@@ -109,30 +109,30 @@ const SalesProductDetailData : FC<PropsData> = ({ProductDetails, ProductCLoseCal
 
               <div className='flex-1 px-[3rem]'>
 
-                  <div className='dark:text-gray-100 text-[1.5rem] font-bold'> {Product_data?.name?.englishname} </div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3'> {Product_data?.tech_name?.english_tech_name} </div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Packing </div> : {Product_data?.packaging}  {Product_data?.packagingtype?.type_eng}  </div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> Available Qty </div> : {Product_data?.avl_qty} </div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Company </div> : {Product_data?.company?.name_eng} </div>
+                  <div className='dark:text-TitaniumWhite text-[1.5rem] font-bold'> {Product_data?.name?.englishname} </div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3'> {Product_data?.tech_name?.english_tech_name} </div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Packing </div> : {Product_data?.packaging}  {Product_data?.packagingtype?.type_eng}  </div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> Available Qty </div> : {Product_data?.avl_qty} </div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Company </div> : {Product_data?.company?.name_eng} </div>
 
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Price (₹) </div> :  {Product_data?.price}</div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Discount </div> : {Product_data?.discount}</div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Batch No </div>  : {Product_data?.batch_no.replace(/"/g, '')}</div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> HSN Code </div> : {Product_data?.hsn_code.replace(/"/g, '')}</div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> SGST </div> : {Product_data?.s_gst}</div>
-                  <div className='dark:text-gray-400 text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> CGST </div> : {Product_data?.c_gst}</div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Price (₹) </div> :  {Product_data?.price}</div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Discount </div> : {Product_data?.discount}</div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'>Batch No </div>  : {Product_data?.batch_no.replace(/"/g, '')}</div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> HSN Code </div> : {Product_data?.hsn_code.replace(/"/g, '')}</div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> SGST </div> : {Product_data?.s_gst}</div>
+                  <div className='dark:text-SilverSteel text-[1rem] mt-3 flex gap-x-3'> <div className='w-[8rem]'> CGST </div> : {Product_data?.c_gst}</div>
 
               </div> 
         </div>
 
           <div className="mt-12 px-3">
-          <h3 className="text-[1.5rem] font-semibold text-gray-700 mb-2 dark:text-gray-100">Description</h3>
+          <h3 className="text-[1.5rem] font-semibold text-TranquilBlack mb-2 dark:text-TitaniumWhite">Description</h3>
               {Product_data?.description && Product_data?.description.map((data:any, index:number) => (
                   <div key={index} className="mb-4 p-4 rounded-lg shadow-sm">
                     
                       <div className="flex flex-col gap-2 ">
-                          <div className="font-bold text-gray-600 dark:text-gray-100 text-[1.2rem] flex gap-x-3"> <IoArrowRedoSharp className='self-center' /> {data.englishHeader} </div>
-                          <div className="font-medium text-gray-600 dark:text-gray-100  flex gap-x-3"> <div className='h-4 w-4 flex self-top pt-1'> <SiBattledotnet /> </div> <div className='text-[0.9rem]'> {data.englishValue} </div> </div>
+                          <div className="font-bold text-Hydrocarbon dark:text-TitaniumWhite text-[1.2rem] flex gap-x-3"> <IoArrowRedoSharp className='self-center' /> {data.englishHeader} </div>
+                          <div className="font-medium text-Hydrocarbon dark:text-TitaniumWhite  flex gap-x-3"> <div className='h-4 w-4 flex self-top pt-1'> <SiBattledotnet /> </div> <div className='text-[0.9rem]'> {data.englishValue} </div> </div>
                       </div>
                   </div>
               ))}

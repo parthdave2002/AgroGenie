@@ -83,7 +83,7 @@ const SalesProfile : FC <SalesProfilePropsData> = function ()  {
     
         <div className="mt-[4rem]">
           <div className='flex justify-between mb-6 self-center'>
-            <h3 className="self-center text-2xl font-bold leading-none text-gray-900 dark:text-white"> Leave History </h3>
+            <h3 className="self-center text-2xl font-bold leading-none text-DarkBackground dark:text-White"> Leave History </h3>
             <Button gradientDuoTone="purpleToPink" onClick={ () =>  RequestLeave()}> Request Leave </Button>
           </div>
 

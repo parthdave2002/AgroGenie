@@ -28,7 +28,7 @@ const EyeInputbox:FC <EyeInputProps> = ({ label, required, className, id, name, 
                     <Input
                       id={id}
                       name={name}
-                      className={className ? className : "bg-gray-50 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-gray-900 text-sm w-full pr-10"}
+                      className={className ? className : "bg-White border border-SoothingBlueGrey dark:bg-TranquilBlack dark:border-Hydrocarbon dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:placeholder-SilverSteel dark:text-White disabled:cursor-not-allowed disabled:opacity-50 focus:border-blue-500 focus:ring-blue-500 p-2.5 rounded-lg text-DarkBackground text-sm w-full pr-10"}
                       placeholder={placeholder}
                       type={inputType ?? "text"}
                       onChange={validation?.handleChange}
@@ -42,7 +42,7 @@ const EyeInputbox:FC <EyeInputProps> = ({ label, required, className, id, name, 
                         type="button"
                         onClick={() => setShow(s => !s)}
                         aria-label={show ? "Hide password" : "Show password"}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-300 p-1 focus:outline-none"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-Hydrocarbon dark:text-SoothingBlueGrey p-1 focus:outline-none"
                       >
                         {show ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
                       </button>

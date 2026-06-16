@@ -28,7 +28,7 @@ const Selectinput : FC<SelectInputProps> = ({ id, name,  label,  required, place
             <Label> {label}  {required ? <span className='text-red-500'>*</span> : ""} </Label>
           <div className="mt-1">
               <Select  
-                  className="w-full dark:text-white"
+                  className="w-full dark:text-White"
                   classNames={{
                       control: () => "react-select__control",
                       singleValue: () => "react-select__single-value",

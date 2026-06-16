@@ -120,11 +120,11 @@ export default function TaskModal({ task, users, currentUser, onClose, onUpdate 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
+      <div className="bg-White rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-3 border-b border-slate-200">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-medium">
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-White font-medium">
               {editedTask.createdBy?.avatar|| "U"}
             </div>
             <div>
@@ -226,7 +226,7 @@ export default function TaskModal({ task, users, currentUser, onClose, onUpdate 
             <h3 className="text-sm font-medium text-slate-700 mb-3">Assigned to</h3>
             {editedTask.assignedTo ? (
               <div className="flex items-center gap-2 bg-blue-50 px-3 py-2 rounded-lg mb-3">
-                <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-medium">{editedTask.assignedTo.name.charAt(0).toUpperCase()}</div>
+                <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-White text-xs font-medium">{editedTask.assignedTo.name.charAt(0).toUpperCase()}</div>
                 <span className="text-sm text-slate-700">{editedTask.assignedTo.name}</span>
                 <button onClick={() => setEditedTask({ ...editedTask, assignedTo: undefined })} className="p-1 hover:bg-blue-100 rounded transition-colors">
                   <XMarkIcon className="w-3 h-3 text-blue-600" />
@@ -238,7 +238,7 @@ export default function TaskModal({ task, users, currentUser, onClose, onUpdate 
             <div className="flex flex-wrap gap-2">
               {users.filter(user => !editedTask.assignedTo || user.id !== editedTask.assignedTo.id).map((user) => (
                 <button key={user.id} onClick={() => handleAssignUser(user)} className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition-colors">
-                  <div className="w-6 h-6 rounded-full bg-slate-400 flex items-center justify-center text-white text-xs font-medium">{user.name.charAt(0).toUpperCase()}</div>
+                  <div className="w-6 h-6 rounded-full bg-slate-400 flex items-center justify-center text-White text-xs font-medium">{user.name.charAt(0).toUpperCase()}</div>
                   <span className="text-sm text-slate-700">{user.name}</span>
                   <PlusIcon className="w-4 h-4 text-slate-500" />
                 </button>
@@ -261,14 +261,14 @@ export default function TaskModal({ task, users, currentUser, onClose, onUpdate 
                   value={newSubTaskTitle}
                   onChange={(e) => setNewSubTaskTitle(e.target.value)}
                   placeholder="Enter sub-task title..."
-                  className="flex-1 px-3 py-2 text-sm text-gray-700 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 px-3 py-2 text-sm text-TranquilBlack border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   autoFocus
                   onKeyPress={(e) => {
                     if (e.key === "Enter") handleAddSubTask();
                   }}
                 />
-                <button onClick={handleAddSubTask} className="p-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors cursor-pointer"> <CheckIcon className="w-4 h-4" /> </button>
-                <button className="p-2 bg-slate-300 hover:bg-slate-400 text-white rounded-lg transition-colors cursor-pointer" onClick={() => { setShowSubTaskInput(false);   setNewSubTaskTitle(""); }}> <XMarkIcon className="w-4 h-4" />  </button>
+                <button onClick={handleAddSubTask} className="p-2 bg-green-600 hover:bg-green-700 text-White rounded-lg transition-colors cursor-pointer"> <CheckIcon className="w-4 h-4" /> </button>
+                <button className="p-2 bg-slate-300 hover:bg-slate-400 text-White rounded-lg transition-colors cursor-pointer" onClick={() => { setShowSubTaskInput(false);   setNewSubTaskTitle(""); }}> <XMarkIcon className="w-4 h-4" />  </button>
               </div>
             )}
 
@@ -276,7 +276,7 @@ export default function TaskModal({ task, users, currentUser, onClose, onUpdate 
             <div className="space-y-2">
               {(editedTask.subTasks || []).map((subTask) => (
                 <div key={subTask.id} className="flex items-center gap-3 p-2 hover:bg-slate-50 rounded-lg transition-colors">
-                  <button onClick={() => handleToggleSubTask(subTask.id)} className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${  subTask.completed ? "bg-green-500 border-green-500" : "border-slate-300 hover:border-slate-400" }`}> {subTask.completed && <CheckIcon className="w-3 h-3 text-white" /> } </button>
+                  <button onClick={() => handleToggleSubTask(subTask.id)} className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${  subTask.completed ? "bg-green-500 border-green-500" : "border-slate-300 hover:border-slate-400" }`}> {subTask.completed && <CheckIcon className="w-3 h-3 text-White" /> } </button>
                   <span className={`flex-1 text-sm ${ subTask.completed ? "line-through text-slate-500" : "text-slate-900" }`} > {subTask.title} </span>
                   <button onClick={() => handleDeleteSubTask(subTask.id)} className="p-1 hover:bg-red-50 text-slate-400 hover:text-red-600 rounded transition-colors cursor-pointer"> <TrashIcon className="w-4 h-4" /></button>
                 </div>
@@ -314,7 +314,7 @@ export default function TaskModal({ task, users, currentUser, onClose, onUpdate 
         {/* Footer */}
         <div className="flex items-center justify-end gap-3 px-6 py-3 border-t border-slate-200 bg-slate-50">
           <button onClick={onClose} className="px-4 py-2 text-slate-600 hover:bg-slate-200 rounded-lg transition-colors"> Cancel </button>
-          <button onClick={handleSave} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors" > Save Changes </button>
+          <button onClick={handleSave} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-White rounded-lg transition-colors" > Save Changes </button>
         </div>
       </div>
     </div>

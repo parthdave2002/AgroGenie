@@ -40,6 +40,7 @@ export interface ProfileInfo {
   smart_phone: boolean;
   ref_name: number | string;
   state: { name: string; _id: string }
+  wallet_points : number
 }
 
 export type DashboardCardProps = {
@@ -301,12 +302,20 @@ export interface OrderDetailsType {
     set_OrderId  ?: (value: string) => void;
   }
 
+  export interface Referdata{
+    firstname? : string;
+    middlename? : string;
+    lastname? : string;
+    _id ? : string;
+  } 
+
   export interface ProfileAddModalData{
     isEditFarmer ?: boolean;
     setFarmerAdded : (value: boolean) => void;
     CloseAddmodal: (value: any) => void;
     handleAccept : (value: boolean) => void;
     Mobile_number ?: string;
+    Referrerdata ?: Referdata;
   }
 
   export interface ProfilePropsData{
@@ -318,6 +327,7 @@ export interface OrderDetailsType {
   export interface FarmerDashboardPropsData{
     setOpenProfile : (value: boolean) => void;
     Mobile_number ?: string;
+    Referrerdata ?: Referdata;
     openComplain ?: string;
     setOpenComplain ?: (value: string) => void;
     orderId ?: string;
@@ -344,4 +354,27 @@ export interface OrderDetailsType {
       openProfile : boolean;
       setOpenProfile : (value : boolean) => void;
       setOpenComplain : (value : string) => void;
+  }
+
+  export interface ComplainProps{
+    isComplainData : any;
+    setisOpenComplainModel :  ( value :  boolean ) => void;
+    isOpenComplainModel ? : boolean;
+  } 
+
+  export interface CommentData {
+      comment : string;
+      comment_date  : string;
+      name: Location;
+      _id  : string;
+  }
+
+  export interface ComplainData{
+      Comment : CommentData[]
+      complain_id :string;
+      created_at    :string;
+      order_id  :string;
+      _id :string;
+      is_resolved_by :boolean;
+      resolution : string;
   }

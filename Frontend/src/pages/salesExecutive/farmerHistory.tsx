@@ -1,7 +1,7 @@
-import React, { FC, lazy, useEffect, useState } from 'react';
+import { FC, lazy, useEffect, useMemo, useState } from 'react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
-import { Button, Table } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCustomerTagloglist, getFarmerComplainlist, getFarmerOrderlist } from '../../Store/actions';
 import { FarmerHistoryProps } from '../../types/types';
@@ -10,7 +10,7 @@ const CommonTable = lazy(() => import("../../components/common/table/commonTable
 const ComplainDetails = lazy(() => import("../../components/salesComponent/complainDetails"));
 const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
 
-const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetailsmodal, setOpenDetailIData, AddtoCartCall, FuturOrderDate, setCartOrderid, openComplain, setOpenComplain, orderId, set_OrderId}) => {
+const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetailsmodal, setOpenDetailIData, AddtoCartCall, FuturOrderDate, setCartOrderid, openComplain, setOpenComplain}) => {
   const dispatch = useDispatch()
 
   // ----------- Tabnavbar code start --------------------
@@ -67,7 +67,7 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
 
   // ------------complain details page ------------------
 
-    const ComplainCall = ( id:string,data: any) =>{
+    const ComplainCall = ( _id:string,data: any) =>{
       setisOpenComplainModel(true);
       setisComplainData(data);
     }
@@ -170,14 +170,105 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
     }
   // -------------  Future Order  to Cart Call end -------------------
 
+    const orderColumns = useMemo(() => [
+      { key: "order_id", label: "Order ID",
+        render: (row: any) => (
+          <>
+            {row?.order_type == "future" && row?.status == null ? 
+              <span className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0 cursor-pointer" onClick={() => FuturaOrderCall(row?.order_id, row)}>  {row?.order_id} </span>
+            : 
+              <span className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0 cursor-pointer" onClick={() => OderDetailsCall(row?.order_id, row)}>  {row?.order_id} </span>
+            }
+          </>
+        )                
+      },
+      { key: "added_at", label: "Order Date",
+        render: (row: any) => moment(row?.added_at).format("DD-MM-YYYY hh:mm:ss")
+      },
+      { key: "order_type", label: "Order Type",
+        render: (row: any) => row?.order_type ? row?.order_type.charAt(0).toUpperCase() + row?.order_type.slice(1).toLowerCase() : "-"
+      },
+      { key: "future_order_date", label: "Callback Date",
+        render: (row: any) => row?.order_type == "future" && row?.future_order_date != null ? moment(row?.future_order_date).format("DD-MM-YYYY") : "-"
+      },
+      { key: "total_amount",  label: "COD Amount",
+        render: (row: any) => Math.round(row?.total_amount)
+      },
+      { key: "advisor_name", label: "Created By",
+        render: (row: any) => row?.advisor_name?.name
+      },
+      { key: "status", label: "Status",
+        render: (row: any) => row?.status ? row?.status.charAt(0).toUpperCase() + row?.status.slice(1).toLowerCase() : "-"
+      },
+      { key: "action", label: "Action",
+        render: (row: any) => (
+          <>
+            {row?.order_type == "future" && row?.status == null ?
+              <Button className='bg-gradient-to-br from-purple-700 to-blue-400 text-White hover:bg-gradient-to-bl focus:ring-blue-300 dark:focus:ring-blue-800 border-0 ' onClick={() => FuturaOrderCall(row?.order_id, row)}> Confirm Order</Button>
+            : "-"}
+          </>
+        )
+      }
+    ],[FuturaOrderCall, OderDetailsCall]);
+
+    const complainColumns = useMemo(() => [
+      { key: "complain_id", label: "Complain id",
+        render: (row: any) => (
+          <span className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0 cursor-pointer" onClick={() => ComplainCall(row?.complain_id, row)}>  {row?.complain_id} </span>
+        )
+      },
+      { key: "created_at", label: "Complain Date",
+        render: (row: any) => moment(row?.created_at).format("DD-MM-YYYY hh:mm:ss")
+      },
+      { key: "product_id", label: "Product",
+        render: (row: any) => (
+          <>
+            {row?.product_id?.map((product: any, index: number) => (
+              <div key={index}>{product?.name?.englishname}</div>
+            ))}
+          </>
+        )
+      },
+      { key: "resolution", label: "Status",
+        render: (row: any) => row?.resolution.charAt(0).toUpperCase() + row?.resolution.slice(1).toLowerCase()
+      },
+      { key: "priority", label: "Type",
+        render: (row: any) => row?.priority.charAt(0).toUpperCase() + row?.priority.slice(1).toLowerCase()
+      },
+      { key: "created_by", label: "Created By",
+        render: (row: any) => row?.created_by?.name
+      }
+    ],[ComplainCall]);
+
+    const taglogColumns = useMemo(() => [
+      { key: "taglog", label: "Taglog",
+        render: (row: any) => row?.taglog?.taglog_name
+      },
+      { key: "subtaglog", label: "SubTaglog",
+        render: (row: any) => row?.subtaglog?.name
+      },
+      { key: "comment", label: "Comment",
+        render: (row: any) => (
+          <span className="max-w-[20rem] truncate text-base font-medium text-DarkBackground dark:text-White py-0 "> {row?.comment} </span>
+        )
+      },
+      { key: "added_by", label: "Advisor Name",
+        render: (row: any) => (
+          <span className="max-w-[15rem] truncate text-base font-medium text-DarkBackground dark:text-White py-0 "> {row?.added_by?.name ? row?.added_by?.name : "-"} </span>
+        )
+      },
+      { key: "created_at", label: "Created Date",
+        render: (row: any) => moment(row?.created_at).format("DD-MM-YYYY hh:mm:ss")
+      }
+    ],[]);
+    
   return (
     <>
-
-      <div className='mt-3 border dark:border-gray-600 rounded-xl w-full py-2 px-5'>
-        <div className="flex items-center gap-x-6 bg-gray-100 dark:bg-gray-900 p-3 rounded-xl">
+      <div className='mt-3 border dark:border-Hydrocarbon rounded-xl w-full py-2 px-5'>
+        <div className="flex items-center gap-x-6 bg-TitaniumWhite dark:bg-DarkBackground p-3 rounded-xl">
           <ul className="flex items-center gap-x-6">
             {FarmerDashboardTabData.map((data: any, k: number) => (
-              <li key={k} className={`relative flex flex-col items-center justify-center gap-1 py-2 px-2 cursor-pointer transition-all duration-300 ease-in-out font-medium text-sm ${selectedTabbar === data.title ? "text-blue-500 font-semibold" : "text-gray-500 dark:text-gray-400"}`} onClick={() => TabSelection(data.title)} >
+              <li key={k} className={`relative flex flex-col items-center justify-center gap-1 py-2 px-2 cursor-pointer transition-all duration-300 ease-in-out font-medium text-sm ${selectedTabbar === data.title ? "text-blue-500 font-semibold" : "text-SharkGray dark:text-SilverSteel"}`} onClick={() => TabSelection(data.title)} >
                 <span className="flex items-center text-[1rem] font-semibold gap-x-4">{data.icon} {data.title}</span>
                 {selectedTabbar === data.title && (<span className="px-2 absolute bottom-[-4px] left-0 w-full h-[2px] bg-blue-500"></span>)}
               </li>
@@ -187,105 +278,28 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
 
         <div className='mt-[1.5rem] px-4'>
           {selectedTabbar == "Order" ?
-            <>
-              {UserOrderDataList && UserOrderDataList.length > 0 ?
-                <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 ">
-                  <Table.Head className="bg-gray-100 dark:bg-gray-700">
-                    <Table.HeadCell>Order id</Table.HeadCell>
-                    <Table.HeadCell>Order Date</Table.HeadCell>
-                    <Table.HeadCell> Order Type</Table.HeadCell>
-                    <Table.HeadCell>Callback Date</Table.HeadCell>
-                    <Table.HeadCell>COD Amt</Table.HeadCell>
-                    <Table.HeadCell>Created By</Table.HeadCell>
-                    <Table.HeadCell>Status</Table.HeadCell>
-                    <Table.HeadCell> Action</Table.HeadCell>
-                  </Table.Head>
-
-                  <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                    {UserOrderDataList && UserOrderDataList.map((item: any, k: number) => (
-                      <Table.Row key={k} className="hover:bg-gray-100 dark:hover:bg-gray-700" >
-                            {item?.order_type == "future" && item?.status == null ? 
-                                <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer" onClick={() => FuturaOrderCall(item?.order_id, item)}>  {item?.order_id} </Table.Cell>
-                            : 
-                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer" onClick={() => OderDetailsCall(item?.order_id, item)}>  {item?.order_id} </Table.Cell>
-                          }
-                        <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {moment(item?.added_at).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.order_type ? item?.order_type.charAt(0).toUpperCase() + item?.order_type.slice(1).toLowerCase() : "-"} </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.order_type == "future" && item?.future_order_date != null ? moment(item?.future_order_date).format("DD-MM-YYYY") : "-"} </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {Math.round(item?.total_amount)} </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.advisor_name?.name} </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.status ? item?.status.charAt(0).toUpperCase() + item?.status.slice(1).toLowerCase() : "-"} </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.order_type == "future" && item?.status == null ?
-                          <Button className='bg-gradient-to-br from-purple-700 to-blue-400 text-white hover:bg-gradient-to-bl focus:ring-blue-300 dark:focus:ring-blue-800 border-0 ' onClick={() => FuturaOrderCall(item?.order_id, item)}> Confirm Order</Button>
-                          : "-"}
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-                : <div className='text-center py-4 dark:text-gray-50'>No DataFound </div>}
-            </>
+              <>
+                {UserOrderDataList && UserOrderDataList.length > 0 ?
+                  <CommonTable columns={orderColumns} data={UserOrderDataList} />
+                  : <div className='text-center py-4 dark:text-White'>No DataFound </div>}
+              </>
 
             : selectedTabbar == "Complain" ?
               <>
                 {UserComplainDataList && UserComplainDataList.length > 0 ?
-                  <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 ">
-                    <Table.Head className="bg-gray-100 dark:bg-gray-700">
-                      <Table.HeadCell>Complain id</Table.HeadCell>
-                      <Table.HeadCell>Complain Date</Table.HeadCell>
-                      <Table.HeadCell> Product </Table.HeadCell>
-                      <Table.HeadCell> Status </Table.HeadCell>
-                      <Table.HeadCell> Type </Table.HeadCell>
-                      <Table.HeadCell>Created By</Table.HeadCell>
-                    </Table.Head>
-
-                    <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                      {UserComplainDataList && UserComplainDataList.map((item: any, k: number) => (
-                        <Table.Row key={k} className="hover:bg-gray-100 dark:hover:bg-gray-700" >
-                          <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0 cursor-pointer" onClick={() => ComplainCall(item?.complain_id ,item)}>  {item?.complain_id} </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {moment(item?.created_at).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0">{item?.product_id?.map((product: any, index: number) => (<div key={index}>{product?.name?.englishname}</div>))}</Table.Cell>
-                          <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.resolution.charAt(0).toUpperCase() + item?.resolution.slice(1).toLowerCase()} </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.priority.charAt(0).toUpperCase() + item?.priority.slice(1).toLowerCase()} </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.created_by?.name} </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table>
-                  : <div className='text-center py-4 dark:text-gray-50'>No DataFound </div>}
+                  <CommonTable columns={complainColumns} data={UserComplainDataList} />
+                  : <div className='text-center py-4 dark:text-White'>No DataFound </div>}
               </>
 
-              : selectedTabbar == "Taglog" ?
-                <>
+            : selectedTabbar == "Taglog" ?
+              <>
                   {UserTaglogDataList && UserTaglogDataList.length > 0 ?
-                    <Table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 ">
-                      <Table.Head className="bg-gray-100 dark:bg-gray-700">
-                        <Table.HeadCell> Taglog </Table.HeadCell>
-                        <Table.HeadCell> SubTaglog </Table.HeadCell>
-                        <Table.HeadCell> Comment </Table.HeadCell>
-                        <Table.HeadCell>Advisor Name</Table.HeadCell>
-                        <Table.HeadCell>Created Date</Table.HeadCell>
-                      </Table.Head>
-
-                      <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                        {UserTaglogDataList && UserTaglogDataList.map((item: any, k: number) => (
-                          <Table.Row key={k} className="hover:bg-gray-100 dark:hover:bg-gray-700" >
-                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.taglog?.taglog_name} </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {item?.subtaglog?.name} </Table.Cell>
-                            <Table.Cell className="max-w-[20rem] truncate text-base font-medium text-gray-900 dark:text-white py-0 "> {item?.comment} </Table.Cell>
-                              <Table.Cell className="max-w-[15rem] truncate text-base font-medium text-gray-900 dark:text-white py-0 "> {item?.added_by?.name ? item?.added_by?.name : "-"} </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap text-base font-medium text-gray-900 dark:text-white py-0"> {moment(item.created_at).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
-                          </Table.Row>
-                        ))}
-                      </Table.Body>
-                    </Table>
-                    : <div className='text-center py-4 dark:text-gray-50'>No DataFound </div>}
-                </>
-
-                : null
+                    <CommonTable columns={taglogColumns} data={UserTaglogDataList} />
+                    : <div className='text-center py-4 dark:text-White'>No DataFound </div>}
+              </>
+            : null
           }
         </div>
-
         <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
       </div>
 

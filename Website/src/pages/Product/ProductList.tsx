@@ -152,12 +152,12 @@ const ProductList = () => {
   return (
     <div>
               {is_loader ?   <GlobalLoader /> : 
-                  <section  className=" relative  py-10  bg-gray-50  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
+                  <section  className=" relative  py-10  bg-White  bg-[url('/images/ad-bg-pattern.png')]  bg-repeat bg-[length:600px_600px] ">
                       <div className="flex flex-col space-y-8 relative z-10">
                           <div className=" max-w-1600 mx-auto px-4">
-                              <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center  gap-x-2"> Product List of  <span className="text-lime-500">  {params?.['name']} </span> </h2>
+                              <h2 className="text-4xl md:text-5xl font-bold font-heading text-DarkBackground my-5 flex justify-center  gap-x-2"> Product List of  <span className="text-lime-500">  {params?.['name']} </span> </h2>
                                 {productList?.length === 0 ? (
-                                  <div className="text-center py-10 text-gray-500 text-lg font-medium">
+                                  <div className="text-center py-10 text-SharkGray text-lg font-medium">
                                     No items found
                                   </div>
                                 ) : (
@@ -165,8 +165,8 @@ const ProductList = () => {
                                         {productList?.map((product: any, k: number) => {
                                           const cartItem = cartItems.find((item: any) => item._id === product._id);
                                           return (
-                                            <article key={product._id} className="group relative bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden" >
-                                              <figure className="bg-gray-50 p-4">
+                                            <article key={product._id} className="group relative bg-White rounded-2xl border border-TitaniumWhite shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden" >
+                                              <figure className="bg-White p-4">
                                                 <Swiper {...swiperConfig}>
                                                   {product.product_pics?.map((img: any, index: number) => (
                                                     <SwiperSlide key={index}>
@@ -178,12 +178,12 @@ const ProductList = () => {
 
                                               {/* Content */}
                                               <div className="p-4 space-y-3">
-                                                <h3 className="text-[15px] font-semibold text-gray-800 text-center truncate cursor-pointer hover:text-green-600 transition" onClick={() => goToDetails(product._id)} title={product?.name?.englishname} >
+                                                <h3 className="text-[15px] font-semibold text-Cosmos text-center truncate cursor-pointer hover:text-green-600 transition" onClick={() => goToDetails(product._id)} title={product?.name?.englishname} >
                                                   {product?.name?.englishname.toUpperCase()}
                                                 </h3>
 
                                                 {/* Meta Info */}
-                                                <div className="text-sm text-gray-600 space-y-1">
+                                                <div className="text-sm text-Hydrocarbon space-y-1">
                                                   <p className="flex justify-between">
                                                     <span className="font-medium">Category</span>
                                                     <span className="truncate">{product?.categories?.name_eng}</span>
@@ -201,20 +201,20 @@ const ProductList = () => {
                                                 </div>
 
                                                 {/* CTA */}
-                                                {/* <button onClick={() => goToDetails(product?._id)} className="w-full mt-3 py-2 text-sm font-semibold text-white bg-green-600 rounded-xl hover:bg-green-700 transition"  > View Details  </button> */}
+                                                {/* <button onClick={() => goToDetails(product?._id)} className="w-full mt-3 py-2 text-sm font-semibold text-White bg-green-600 rounded-xl hover:bg-green-700 transition"  > View Details  </button> */}
 
                                                 <div className="flex items-center justify-between">
                                                   {!cartItem && (
                                                     <div className="flex items-center border border-[#E2E2E2] rounded w-[85px] overflow-hidden">
-                                                      <button onClick={() => decrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-white border-r border-[#E2E2E2] text-[#222222]"> − </button>
+                                                      <button onClick={() => decrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-White border-r border-[#E2E2E2] text-[#222222]"> − </button>
                                                       <input id="quantity" value={productQuantities[product._id] || 1} type="text" defaultValue="1" className="w-[28px] text-center border-none m-0 p-0 focus:outline-none" />
-                                                      <button onClick={() => incrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-white border-l border-[#E2E2E2] text-[#222222]"> + </button>
+                                                      <button onClick={() => incrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-White border-l border-[#E2E2E2] text-[#222222]"> + </button>
                                                     </div>
                                                   )}
 
                                                   {cartItem ?
                                                     <button className="text-red-600 px-4 py-2 text-md flex items-end ml-[7rem] rounded-full justify-end border border-[#d8d8d8] hover:bg-red-100 transition-all duration-300 mt-4" onClick={() => removeFromCart(product?._id)} > Remove from cart </button>
-                                                    : <button className="text-gray-50 px-4 py-2 text-md flex items-center gap-1 rounded-full flex items-center justify-center bg-gradient-to-r from-green-700 to-lime-500 hover:scale-105 border border-[#d8d8d8] hover:bg-green-500 hover:text-white transition-all duration-300" onClick={() => AddCall(product)}> Add to Cart <FaCartShopping />  </button>
+                                                    : <button className="text-White px-4 py-2 text-md flex items-center gap-1 rounded-full flex items-center justify-center bg-gradient-to-r from-green-700 to-lime-500 hover:scale-105 border border-[#d8d8d8] hover:bg-green-500 hover:text-White transition-all duration-300" onClick={() => AddCall(product)}> Add to Cart <FaCartShopping />  </button>
                                                   }
                                                 </div>
 

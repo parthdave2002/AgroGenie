@@ -140,8 +140,8 @@ const ProductDetailsSection = () => {
         <div className='mt-3'>
           <div>
             <div className='flex justify-between px-4'>
-              <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center gap-x-3"> Product <span className="text-lime-500">  Details </span> </h2>
-              <div className="text-[2rem] font-semibold text-gray-900 flex self-center cursor-pointer" onClick={() => CloseCall()} > <FaWindowClose /> </div>
+              <h2 className="text-4xl md:text-5xl font-bold font-heading text-DarkBackground my-5 flex justify-center gap-x-3"> Product <span className="text-lime-500">  Details </span> </h2>
+              <div className="text-[2rem] font-semibold text-DarkBackground flex self-center cursor-pointer" onClick={() => CloseCall()} > <FaWindowClose /> </div>
             </div>
 
             <div className='flex flex-col md:flex-row px-3 mt-[2rem]'>
@@ -174,73 +174,73 @@ const ProductDetailsSection = () => {
 
               {/* RIGHT - Details */}
               <div className='flex-1 px-[1rem] md:px-[3rem]'>
-                <div className='text-gray-900 text-[1.5rem] font-bold'>  {productsData?.name?.englishname.toUpperCase()} </div>
+                <div className='text-DarkBackground text-[1.5rem] font-bold'>  {productsData?.name?.englishname.toUpperCase()} </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3'>
                   {productsData?.tech_name?.english_tech_name}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>Packing</div> :   {productsData?.packaging} {productsData?.packagingtype?.type_eng}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>Available Qty</div> :  {productsData?.avl_qty}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>Company</div> :  { productsData?.company?.name_eng}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>Price (₹)</div> : {productsData?.price}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>Discount</div> :  {productsData?.discount}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>Batch No</div> :  {productsData?.batch_no}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>HSN Code</div> :  {productsData?.hsn_code}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>SGST</div> :  {productsData?.s_gst}
                 </div>
 
-                <div className='text-gray-900 text-[1rem] mt-3 flex gap-x-3'>
+                <div className='text-DarkBackground text-[1rem] mt-3 flex gap-x-3'>
                   <div className='w-[8rem] font-heading text-[1rem]'>CGST</div> :   {productsData?.c_gst}
                 </div>
 
                 {/* Quantity + Add to Cart */}
                 <div className="md:flex  items-center gap-x-[4rem] mt-[2rem]">
                   <div className="flex items-center border border-green-600 rounded-lg w-[100px] overflow-hidden">
-                    <button className="w-[60px] h-[35px] text-center bg-gray-200 hover:bg-green-600 border-r border-green-600 text-[#222222]" onClick={() => decrementQty(productsData!._id)}>−</button>
+                    <button className="w-[60px] h-[35px] text-center bg-WhiteMarble hover:bg-green-600 border-r border-green-600 text-[#222222]" onClick={() => decrementQty(productsData!._id)}>−</button>
                     <input id="quantity" value={productQuantities[productsData?._id || ''] || 1} type="text" defaultValue="1" className="w-[40px] text-center border-none m-0 p-0 focus:outline-none" />
-                    <button className="w-[60px] h-[35px] text-center bg-gray-200 hover:bg-green-600 border-l border-green-600 text-[#222222]" onClick={() => incrementQty(productsData!._id)}>+</button>
+                    <button className="w-[60px] h-[35px] text-center bg-WhiteMarble hover:bg-green-600 border-l border-green-600 text-[#222222]" onClick={() => incrementQty(productsData!._id)}>+</button>
                   </div>
 
                   {!cartItems ?
                     <button className="text-red-600 px-4 py-2 text-md flex items-end ml-[7rem] rounded-full justify-end border border-[#d8d8d8] hover:bg-red-100 transition-all duration-300 mt-4" onClick={() => productsData && removeFromCart(productsData?._id)} > Remove from cart </button>
                     :
-                    <button className="text-gray-50 px-4 py-2 text-md flex items-center gap-1 rounded-full bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-white transition-all duration-300 mt-3 md:mt-0" onClick={() => productsData && AddCall(productsData)}>   Add to Cart <FaCartShopping /> </button>
+                    <button className="text-White px-4 py-2 text-md flex items-center gap-1 rounded-full bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-White transition-all duration-300 mt-3 md:mt-0" onClick={() => productsData && AddCall(productsData)}>   Add to Cart <FaCartShopping /> </button>
                   }
                 </div>
               </div>
             </div>
 
             <div className="mt-12 px-3">
-              <h3 className="text-[1.5rem] font-semibold text-gray-700 mb-2 ">Description</h3>
+              <h3 className="text-[1.5rem] font-semibold text-TranquilBlack mb-2 ">Description</h3>
               {productsData?.description && productsData?.description.map((data: any, index: number) => (
                 <div key={index} className="mb-4 p-4 rounded-lg shadow-sm">
 
                   <div className="flex flex-col gap-2 ">
-                    <div className="font-bold text-gray-600 text-[1.2rem] flex gap-x-3"> <IoArrowRedoSharp className='self-center' />  {data?.englishHeader} </div>
-                    <div className="font-medium text-gray-600  flex gap-x-3"> <div className='h-4 w-4 flex self-top pt-1'> <SiBattledotnet /> </div> <div className='text-[0.9rem]'>  {data?.englishValue} </div> </div>
+                    <div className="font-bold text-Hydrocarbon text-[1.2rem] flex gap-x-3"> <IoArrowRedoSharp className='self-center' />  {data?.englishHeader} </div>
+                    <div className="font-medium text-Hydrocarbon  flex gap-x-3"> <div className='h-4 w-4 flex self-top pt-1'> <SiBattledotnet /> </div> <div className='text-[0.9rem]'>  {data?.englishValue} </div> </div>
                   </div>
                 </div>
               ))}
@@ -248,13 +248,13 @@ const ProductDetailsSection = () => {
           </div>
 
           <div className='my-[3rem]'>
-            <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 my-5 flex justify-center gap-x-3"> Relevant <span className="text-lime-500">  Category Products </span> </h2>
+            <h2 className="text-4xl md:text-5xl font-bold font-heading text-DarkBackground my-5 flex justify-center gap-x-3"> Relevant <span className="text-lime-500">  Category Products </span> </h2>
 
             <div className="md:grid  md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-1600">
               {relatedproductsData && relatedproductsData.map((product: any, k: number) => {
                 const cartItem = cartItems.find((item: any) => item._id === product._id);
                 return (
-                  <div key={product._id || k} className="relative p-4 bg-white border border-[#FBFBFB] shadow-[0px_5px_22px_rgba(0,0,0,0.04)] rounded-2xl mb-7 hover:shadow-[0px_21px_44px_rgba(0,0,0,0.08)] transition-shadow duration-300">
+                  <div key={product._id || k} className="relative p-4 bg-White border border-[#FBFBFB] shadow-[0px_5px_22px_rgba(0,0,0,0.04)] rounded-2xl mb-7 hover:shadow-[0px_21px_44px_rgba(0,0,0,0.08)] transition-shadow duration-300">
                     <div className='flex-1'>
 
                       <figure className="bg-[#F9F9F9] rounded-[12px] text-center mb-4 w-full max-w-[400px] mx-auto">
@@ -295,15 +295,15 @@ const ProductDetailsSection = () => {
                     <div className="flex items-center justify-between">
                       {!cartItem && (
                         <div className="flex items-center border border-[#E2E2E2] rounded w-[85px] overflow-hidden">
-                          <button onClick={() => decrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-white border-r border-[#E2E2E2] text-[#222222]"> − </button>
+                          <button onClick={() => decrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-White border-r border-[#E2E2E2] text-[#222222]"> − </button>
                           <input id="quantity" value={productQuantities[product._id] || 1} type="text" defaultValue="1" className="w-[28px] text-center border-none m-0 p-0 focus:outline-none" />
-                          <button onClick={() => incrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-white border-l border-[#E2E2E2] text-[#222222]"> + </button>
+                          <button onClick={() => incrementQty(product._id)} className="w-[26px] h-[26px] text-center bg-White border-l border-[#E2E2E2] text-[#222222]"> + </button>
                         </div>
                       )}
 
                       {cartItem ?
                         <button className="text-red-600 px-4 py-2 text-md flex items-end ml-[7rem] rounded-full justify-end border border-[#d8d8d8] hover:bg-red-100 transition-all duration-300 mt-4" onClick={() => removeFromCart(product?._id)} > Remove from cart </button>
-                        : <button className="text-gray-50 px-4 py-2 text-md flex items-center gap-1 rounded-full flex items-center justify-center bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-white transition-all duration-300" onClick={() => AddCall(product)}> Add to Cart <FaCartShopping />  </button>
+                        : <button className="text-White px-4 py-2 text-md flex items-center gap-1 rounded-full flex items-center justify-center bg-green-600 border border-[#d8d8d8] hover:bg-green-500 hover:text-White transition-all duration-300" onClick={() => AddCall(product)}> Add to Cart <FaCartShopping />  </button>
                       }
                     </div>
                   </div>
