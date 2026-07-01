@@ -29,3 +29,5 @@ export * from "./Wallet/action";
 
 //  ==========   sales exective =========================
 export * from "./SalesExecutive/dashboard/action";
+
+export * from "./HR/action";

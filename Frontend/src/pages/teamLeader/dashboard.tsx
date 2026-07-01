@@ -1,4 +1,4 @@
-import { lazy, useEffect, useMemo, useState, type FC } from "react";
+import React, { lazy, useEffect, useMemo, useState, type FC } from "react";
 import { Badge } from "flowbite-react";
 import { FaUser, FaRupeeSign, FaAsterisk, FaCloud  } from "react-icons/fa";
 import { FaHandHoldingDollar, FaNoteSticky } from "react-icons/fa6";
@@ -6,6 +6,8 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Cookies from "js-cookie";
+import ReactApexChart from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
 import LoaderPage from "../../components/common/loader/loader";
 import NavbarSidebarLayout from "../../layouts/navbar-sidebar";
 import {getDashboarddatalist } from "../../Store/actions";
@@ -17,45 +19,11 @@ const TeamLeaderDashboard = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  //------------ Access Data Code start------------
-  const [AccessList, setAccessList] = useState<AccessData>();
-  const [ProductAccessList, setProductAccessList] = useState<AccessData>();
-  const [OrderAccessList, setOrderAccessList] = useState<AccessData>();
-  const [CustomerAccessList, setCustomerAccessList] = useState<AccessData>();
-  //--------- Access Data Code end------------------
-
+  
   const { DashboardDataList, permissionsdata } = useSelector((state: any) => ({
     DashboardDataList: state.AdminDashboard.Dashboardlist,
     permissionsdata: state.Login.permissionsdata
   }))
-
-  useEffect(() => {
-    const user = Cookies.get("userType");
-    const fullAccess: AccessData = {
-      add: true,
-      view: true,
-      edit: true,
-      delete: true
-    };
-    if (user === "admin") {
-      setAccessList(fullAccess);
-      setProductAccessList(fullAccess);
-      setOrderAccessList(fullAccess);
-      setCustomerAccessList(fullAccess);
-    }
-    else {
-      const productPermissions = permissionsdata && permissionsdata?.find((item: any) => item.module_name === "Product")?.permissions;
-      const userPermissions = permissionsdata && permissionsdata?.find((item: any) => item.module_name === "User")?.permissions;
-      const orderPermissions = permissionsdata && permissionsdata?.find((item: any) => item.module_name === "Order")?.permissions;
-      const customerPermissions = permissionsdata && permissionsdata?.find((item: any) => item.module_name === "Customer")?.permissions;
-
-      setAccessList(userPermissions || [])
-      setProductAccessList(productPermissions || [])
-      setOrderAccessList(orderPermissions || [])
-      setCustomerAccessList(customerPermissions || [])
-    }
-  }, [permissionsdata]);
 
   // ------------------ Pagination code start -----------------------
   const [TotalListData, setTotalListData] = useState(0);
@@ -180,38 +148,6 @@ const TeamLeaderDashboard = () => {
     },
   ],[]);
 
-  const complainColumns  = useMemo(() => [
-    {
-      key: "complain_id",
-      label: "Complain Id",
-    },
-    {
-      key: "product_id",
-      label: "Product",
-      render: (row: any) => row?.product_id[0]?.name?.englishname || "-"
-    },
-    {
-      key: "priority",
-      label: "Priority",
-    },
-    {
-      key: "resolution",
-      label: "Resolution",
-    },
-    {
-      key: "Created Date",
-      label: "Created Date",
-      render: (row: any) => moment(row?.created_at).format("DD-MM-YYYY hh:mm:ss"),
-    }
-  ],[]);
-
-  const productColumns = useMemo(() => [
-    { key: "name", label: "Name", render: (row: any) => row?.name?.englishname },
-    { key: "categories", label: "Category", render: (row: any) => row?.categories?.name_eng || "N/A" },
-    { key: "avl_qty", label: "Qty" },
-    { key: "price", label: "Price", render: (row: any) => Math.round(row?.price) },
-  ],[]);
-
    const advisorColumns = useMemo(() => [
     { key: "user_pic", label: "Image", render: (row: any) => <img className="h-8 w-8 rounded-full" src={row?.user_pic ? row?.user_pic : ""}  alt="" /> },
     { key: "name", label: "Name"},   
@@ -219,6 +155,21 @@ const TeamLeaderDashboard = () => {
     { key: "goal_amt", label: "Goal Amount", render: (row: any) => row?.user_category?.goal_amt || "N/A" },
     { key: "achieved_amt", label: "Achieved Amount" },
   ],[]);
+
+  const series = [44, 33, 54, 45];
+  const options: ApexOptions  = {
+  chart: { width: 380, type: "pie" },
+  colors: ["#298ade", "#d4801a", "#139bd5", "#acd213"],
+  fill: { opacity: 0.85 },
+  stroke: { width: 0 },
+  responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: { width: 200 },
+        legend: { position: "bottom" },
+      },
+  },],
+};
 
   return (
     <div>
@@ -378,14 +329,26 @@ const TeamLeaderDashboard = () => {
           </div>
         </div>
 
+
+        <div>
+          <div id="chart">
+            <ReactApexChart
+              options={options}
+              series={series}
+              type="pie"
+              width={380}
+            />
+          </div>
+          <div id="html-dist"></div>
+        </div>
+
         <div className="my-6">
           <div className="rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6">
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Latest Orders </div>
                 <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of latest transactions </span>
-              </div>
-              {OrderAccessList?.view ?  <div className="inline-flex items-center rounded-lg p-2 text-sm font-medium text-BrilliantBlue hover:bg-TitaniumWhite dark:text-Alexandra dark:hover:bg-TranquilBlack cursor-pointer" onClick={() => ViewAllCall("order")}>  View all </div> : null }
+              </div>              
             </div>
             <div>
                 <CommonTable columns={orderColumns} data={OrderData || []} />
@@ -394,64 +357,13 @@ const TeamLeaderDashboard = () => {
         </div>
         
         <div className="my-6 rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6 xl:p-8">
-            {/* <div className="mb-4 h-full rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-xl font-bold leading-none text-DarkBackground dark:text-White"> Latest Advisor </h3>
-              </div>
-              <div className="flow-root">
-                <ul className="divide-y divide-WhiteMarble dark:divide-TranquilBlack">
-                  {UserData && UserData.map((item:any, k:number) =>(
-                    <li className="py-3 sm:py-4" key={k}>
-                    <div className="flex items-center space-x-4">
-                      <div className="shrink-0">
-                        <img className="h-8 w-8 rounded-full" src={item?.user_pic ? item?.user_pic : ""}  alt="" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium text-DarkBackground dark:text-White"> {item.name} </p>
-                        <p className="truncate text-sm text-SharkGray dark:text-SilverSteel"> {item.email}  </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-DarkBackground dark:text-SilverSteel">{item.is_active == true ?  <Badge color="success">Active</Badge>  :  <Badge color="danger">Deactive</Badge>}</div>
-                    </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div> */}
             <div className="mb-4 flex items-center justify-between">
-                <div>
-                    <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Your Team Advisors List </div>
-                    <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of advisors in your team </span>
-                </div>
+              <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Your Team Advisors List </div>
+              <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of advisors in your team </span>
             </div>
             <div>
               <CommonTable columns={advisorColumns} data={UserData || []} />
               <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
-            </div>
-        </div>
-
-        <div className=" my-6 rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6 xl:p-8">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Latest Products </div>
-              <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of latest products </span>
-            </div>
-            {ProductAccessList?.view ? <div className="shrink-0"> <div className="rounded-lg p-2 text-sm font-medium text-BrilliantBlue hover:bg-TitaniumWhite dark:text-Alexandra dark:hover:bg-TranquilBlack cursor-pointer" onClick={() =>ViewAllCall("product")}> View all  </div>  </div>  : null}
-          </div>
-           <div>
-              <CommonTable columns={productColumns} data={ProductData || []} />
-            </div>
-        </div>
-
-        <div className=" my-6 rounded-lg bg-White p-4 shadow dark:bg-Cosmos sm:p-6 xl:p-8">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <div className="mb-2 text-md lg:text-xl font-bold text-DarkBackground dark:text-White"> Latest Complain </div>
-              <span className="text-base font-normal text-Hydrocarbon dark:text-SilverSteel hidden md:block"> This is a list of latest complain </span>
-            </div>
-          </div>
-
-            <div>
-              <CommonTable columns={complainColumns} data={total_complain_list || []} />
             </div>
         </div>
       </div>

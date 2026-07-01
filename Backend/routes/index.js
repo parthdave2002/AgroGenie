@@ -81,6 +81,8 @@ router.use('/kanban', kanbanRoutes);
 const walletRoutes = require('./api/wallet');
 router.use('/wallet', walletRoutes);
 
+const humanResourceRoutes = require('./api/hr');
+router.use('/hr', humanResourceRoutes);
 
 // const paymentRoutes = require('./api/payment');
 // router.use('/payment', paymentRoutes);

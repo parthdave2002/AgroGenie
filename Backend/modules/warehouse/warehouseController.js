@@ -2,14 +2,18 @@ const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const warehouseSch = require('../../schema/warehouseSchema');
 const productSchema = require('../../schema/productSchema');
+const mongoose = require('mongoose');
 const warehouseController = {};
 
 warehouseController.getAllWarehouseList = async (req, res, next) => {
   try {
     const getid = req.query.id;
     if(getid){
-      const user = await warehouseSch.findById(getid);
-      return otherHelper.sendResponse(res, httpStatus.OK, true, user, null, 'Warehouse Data Found', null);
+      const warehouse = await warehouseSch.findById(getid);
+      // if(!warehouse) otherHelper.sendResponse(res, httpStatus.OK, true, user, null, 'Warehouse Data Found', null);
+      const products = await productSchema.find({ warehouse : warehouse._id });
+      const sampleProduct = await productSchema.findOne().lean();
+      return otherHelper.sendResponse(res, httpStatus.OK, true, {warehouse, products}, null, 'Warehouse Data Found', null);
     }
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
     searchQuery = { ...searchQuery};

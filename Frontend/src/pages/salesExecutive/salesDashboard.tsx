@@ -15,7 +15,7 @@ const CommonTable = lazy(() => import("../../components/common/table/commonTable
 const BoardSection = lazy(() => import("../../components/salesComponent/boardData"));
 const SalesProfile = lazy(() => import("./salesProfile"));
 const SalesFarmerDashboard = lazy(() => import("./salesFarmerDashboard"));
-const ManagerDashboardPage = lazy(() => import("../../pages/Managerdashboard/dashoboard"));
+const LeadManagerDashboardPage = lazy(() => import("../leadManager/dashoboard"));
 
 const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  openProfile,setOpenProfile})  {
 
@@ -475,7 +475,7 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
                 { 
 
                 }
-                  <ManagerDashboardPage />
+                <LeadManagerDashboardPage />
 
               </>
             : <SalesProfile  CloseProfile={CloseProfile} />}

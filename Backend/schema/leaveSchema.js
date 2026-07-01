@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const leaveSchema = new schema({
-  start_date : { type: String },
-  end_date : { type: String },
+  start_date : { type: Date },
+  end_date : { type: Date },
   request_for : { type: schema.Types.ObjectId, ref: 'users' },
-  leave_type: { type: String, enum: ['casual', 'lwp', 'sick', 'emergency'] },
+  leave_type: { type: schema.Types.ObjectId, ref: 'leave_management' },
   leave_plan : {type: String },
   reason: { type: String },
   days: { type: Number, default: 1 },
@@ -16,4 +16,4 @@ const leaveSchema = new schema({
   approved_date : { type: Date, default: Date.now , default: null},
 },{ timestamps: { createdAt: 'requested_at' }});
 
-module.exports = Leave = mongoose.model('Leave', leaveSchema);
+module.exports = Leave = mongoose.model('user_leaves', leaveSchema);

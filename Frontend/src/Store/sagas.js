@@ -28,6 +28,7 @@ import WarehouseSaga from "./Warehouse/saga.js";
 import SalesDashboardSaga from "./SalesExecutive/dashboard/saga";
 import KanbanSaga from "./Kanban/saga";
 import WalletSaga from "./Wallet/saga";
+import HRSaga from "./HR/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -59,5 +60,6 @@ export default function* rootSaga() {
     fork(WarehouseSaga),
     fork(KanbanSaga),
     fork(WalletSaga),
+    fork(HRSaga)
   ]);
 }

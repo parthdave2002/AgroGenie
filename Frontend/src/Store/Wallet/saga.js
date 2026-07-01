@@ -1,5 +1,7 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import {
+  getWalletHistorylistSuccess,
+  getWalletHistorylistFail,
   getWalletRulelistSuccess,
   getWalletRulelistFail,
   AddWalletRulelistSuccess,
@@ -12,14 +14,25 @@ import {
   ResetWalletRulelistSuccess
 } from "./action";
 import {
+  GET_WALLET_HISTORY_LIST,
   GET_WALLET_RULES_LIST,
   ADD_WALLET_RULES_LIST,
   CHANGE_STATUS_WALLET_RULES_LIST,
   DELETE_WALLET_RULES_LIST,
   REST_WALLET_RULES_LIST
 } from "./actionType";
-import { WalletRulesApi, AddWalletRulesApi, DelWalletRulesApi, StatusWalletRulesApi,   } from "../../helper/Demo_helper";
+import { WalletHistoryApi, WalletRulesApi, AddWalletRulesApi, DelWalletRulesApi, StatusWalletRulesApi,   } from "../../helper/Demo_helper";
 import { toast } from "react-toastify";
+
+function* onGetWalletHistoryList({ payload: requstuser }) {
+  try {
+    const response = yield call(WalletHistoryApi, requstuser);
+    yield put(getWalletHistorylistSuccess(GET_WALLET_HISTORY_LIST, response));
+  } catch (error) {
+    toast.error(error?.msg);
+    yield put(getWalletHistorylistFail(error));
+  }
+}
 
 function* onGetWalletRulesList({ payload: requstuser }) {
   try {
@@ -90,5 +103,6 @@ function* WalletSaga() {
   yield takeEvery(DELETE_WALLET_RULES_LIST, onDelWalletRulesList);
   yield takeEvery(CHANGE_STATUS_WALLET_RULES_LIST, onStatusWalletRulesList);
   yield takeEvery(REST_WALLET_RULES_LIST, onResetWalletRulesList);
+  yield takeEvery(GET_WALLET_HISTORY_LIST, onGetWalletHistoryList);
 }
 export default WalletSaga;

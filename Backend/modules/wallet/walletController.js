@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const walletSchema = require('../../schema/walletSchema');
-
+const walletHistorySchema = require('../../schema/walletTransactionSchema');
 const walletController = {};
 
 walletController.getAllWalletRulesList = async (req, res, next) => {
@@ -71,6 +71,21 @@ walletController.changeStatus = async (req, res, next) => {
 
     const updatedWalletRule = await walletSchema.findByIdAndUpdate(id, { $set: { is_active: !walletRule.is_active } }, { new: true });
     return otherHelper.sendResponse(res, httpStatus.OK, true, updatedWalletRule, null, 'Wallet Rule status updated successfully', null);
+  } catch (err) {
+    next(err);
+  }
+};
+
+walletController.getWalletHistory = async (req, res, next) => {
+  try {
+    const {customer_id} = req.query || req.body;
+    let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req);
+    searchQuery = { ...searchQuery, customer_id };
+
+    if (!customer_id) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'ID is required', null);
+    const pulledData = await otherHelper.getQuerySendResponse(walletHistorySchema, page, size, sortQuery, searchQuery, selectQuery, next, populate);
+
+    return otherHelper.paginationSendResponse(res, httpStatus.OK, true, pulledData.data, 'Wallet history get successfully', page, size, pulledData.totalData);
   } catch (err) {
     next(err);
   }

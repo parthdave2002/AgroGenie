@@ -27,6 +27,7 @@ import Warehouse from "./Warehouse/reducer";
 import SalesDashboard from "./SalesExecutive/dashboard/reducer";
 import Kanban from "./Kanban/reducer";
 import Wallet from "./Wallet/reducer";
+import HR from "./HR/reducer";
 
 const rootReducer = combineReducers({
     // public
@@ -57,7 +58,8 @@ const rootReducer = combineReducers({
     Location,
     Warehouse,
     Kanban,
-    Wallet
+    Wallet,
+    HR
 });
 
 export default rootReducer;

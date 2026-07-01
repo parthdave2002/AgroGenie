@@ -63,9 +63,9 @@ const CustomerListPage : FC = function () {
   //  ------------- Get  Data From Reducer Code end --------------
 
     useEffect(() =>{
-      let requserdata: { page: number; size: number; search?: string } = {
+      let requserdata: { page: number; size: number; search?: string, } = {
         page: PageNo,
-        size: RoePerPage
+        size: RoePerPage,
       };
       if (searchData)  requserdata.search = searchData;
       dispatch(getCustomerDatalist(requserdata))
@@ -100,19 +100,22 @@ const CustomerListPage : FC = function () {
          {
           key: "district_name",
           label: "District",
+          render: (row: any) => (row?.district?.name)
         },
         {
           key: "taluka_name",
           label: "Taluka",
+          render: (row: any) => (row?.taluka?.name)
         },
         {
           key: "village_name",
           label: "Village",
+          render: (row: any) => (row?.village?.name)
         },
         {
-          key: "is_active",
+          key: "is_deleted",
           label: "Status",
-          render: (row: any) => row.is_active ? <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> : <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div>
+          render: (row: any) => row.is_deleted ?  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div> :  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div>
         },
         {
           key: "added_at",

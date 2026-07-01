@@ -8,5 +8,6 @@ router.get("/get-wallet-rules",authentication, walletModule.getAllWalletRulesLis
 router.post("/add-wallet-rules",authentication, walletModule.AddWalletRules)
 router.delete("/remove-wallet-rules",authentication, walletModule.DeleteWalletRules)
 router.delete("/status-wallet-rules",authentication, walletModule.changeStatus)
+router.get("/get-wallet-history",authentication, walletModule.getWalletHistory)
 
 module.exports = router;

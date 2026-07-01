@@ -10,4 +10,4 @@ const referralRulesSchema = new Schema({
     updated_at: { type: Date,  default: Date.now},
 });
 
-module.exports = ReferralRules = mongoose.model('referral-rules', referralRulesSchema);
+module.exports = ReferralRules = mongoose.model('referral_rules', referralRulesSchema);

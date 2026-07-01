@@ -11,20 +11,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { IoCalendarNumberSharp } from 'react-icons/io5';
-import { isleaveoption, isleaveplanoption } from '../../types/dropdown';
+import { isleaveplanoption } from '../../types/dropdown';
 import { LeavePropsData } from '../../types/types';
 
 const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) => {
         const dispatch = useDispatch();
         const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
         const [startDate, endDate] = dateRange;
-        const [startDateData, setStartDateData] = useState<string | null>(null);
-        const [endDateData, setEndDateData] = useState<string | null>(null);
+        const [startDateData, setStartDateData] = useState<Date | null>(null);
+        const [endDateData, setEndDateData] = useState<Date | null>(null);
         const [userDataList, setUserDataList] = useState<{ label: string; value: string }[]>([]);
+
+        const LeaveOptionList = useSelector((state: any) => state.Leave.LeaveManagementdatalist?.data || []);
+        const isleaveoption = LeaveOptionList && LeaveOptionList.map((leave : any) => ({  label: leave.leave_type,  value: leave._id  }));
         
         useEffect(() => {
-            setStartDateData(startDate ? moment(startDate).format("YYYY-MM-DD") : null);
-            setEndDateData(endDate ? moment(endDate).format("YYYY-MM-DD") : null);
+            setStartDateData(startDate ? startDate : null);
+            setEndDateData(endDate ? endDate : null);
         }, [startDate, endDate]);
         
           // Handle date selection
@@ -50,7 +53,6 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
             }
         }, [UserList]);
   //  ------------- Get User Data From Reducer Code Start --------------
-
 
         // ------ leave User code start ------
             const [UserleaveOption, setUserleaveOption] = useState(null);
@@ -135,7 +137,6 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                    leave_plan : leaveplanid,
                    days : startDate && endDate ? Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1 : 1,
                 }
-                console.log("requser >>>>>", requser);
                 dispatch(addleavelist(requser));
                 CloseProfile()
             },
@@ -155,7 +156,6 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
               return false;
             }}
           >
-
             <div className="flex gap-x-4 mt-[1rem]">
               <div className="flex-1">
                 <Label htmlFor="Status"> Leave Type </Label>
@@ -173,17 +173,11 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                       placeholder: () => "react-select__placeholder",
                     }}
                     value={selectedleaveTypeOption}
-                    onChange={(e) => {
-                      IsActiveBannerdata(e);
-                    }}
+                    onChange={(e) => { IsActiveBannerdata(e);}}
                     options={isleaveoption}
                     isClearable={true}
                   />
-                  {validateleaveType == 1 ? (
-                    <FormFeedback type="invalid" className="text-Red  text-sm">
-                      Please select leave type
-                    </FormFeedback>
-                  ) : null}
+                  {validateleaveType == 1 ? ( <FormFeedback type="invalid" className="text-Red  text-sm"> Please select leave type </FormFeedback>) : null}
                 </div>
               </div>
 
@@ -200,16 +194,10 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                       minDate={type !== "A" ? new Date() : undefined}
                       popperPlacement="bottom-start"
                       dateFormat="dd/MM/yyyy"
-                      popperModifiers={
-                        [
-                          {
+                      popperModifiers={[{
                             name: "preventOverflow",
-                            options: {
-                              boundary: "viewport",
-                            },
-                          },
-                        ] as any
-                      }
+                            options: { boundary: "viewport", },
+                        },] as any}
                       className="w-full pl-10 py-2 px-5 border border-SoothingBlueGrey rounded-lg shadow-sm focus:ring focus:ring-blue-300 text-TranquilBlack dark:bg-Cosmos dark:text-WhiteMarble"
                       placeholderText={
                         startDate
@@ -223,14 +211,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                     />
                     <IoCalendarNumberSharp className="absolute left-3 top-2.5 w-5 h-5 text-SilverSteel pointer-events-none" />
                   </div>
-                  {!startDateData || !endDateData ? (
-                    <FormFeedback
-                      type="invalid"
-                      className="text-red-500 text-sm d-block"
-                    >
-                      Please select both start and end dates
-                    </FormFeedback>
-                  ) : null}
+                  {!startDateData || !endDateData ? ( <FormFeedback type="invalid" className="text-red-500 text-sm d-block" > Please select both start and end dates </FormFeedback>) : null}
                 </div>
               </div>
             </div>
@@ -286,11 +267,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
                     options={userDataList}
                     isClearable={true}
                   />
-                  {validateUser == 1 ? (
-                    <FormFeedback type="invalid" className="text-Red  text-sm">
-                      Please select advisor{" "}
-                    </FormFeedback>
-                  ) : null}
+                  {validateUser == 1 ? ( <FormFeedback type="invalid" className="text-Red text-sm"> Please select advisor </FormFeedback> ) : null}
                 </div>
               </div>
             )}
@@ -308,20 +285,8 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
             </div>
 
             <div className="flex gap-x-3 justify-end mt-[1rem]">
-              <Button
-                className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton"
-                type="submit"
-              >
-                {" "}
-                Request Leave{" "}
-              </Button>
-              <Button
-                className="bg-deletebutton hover:bg-deletebutton dark:bg-deletebutton dark:hover:bg-deletebutton"
-                onClick={() => CloseProfile()}
-              >
-                {" "}
-                Close{" "}
-              </Button>
+              <Button className="bg-addbutton hover:bg-addbutton dark:bg-addbutton dark:hover:bg-addbutton" type="submit"> Request Leave </Button>
+              <Button className="bg-deletebutton hover:bg-deletebutton dark:bg-deletebutton dark:hover:bg-deletebutton" onClick={() => CloseProfile()}> Close </Button>
             </div>
           </Form>
         </Modal.Body>

@@ -144,12 +144,12 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
   const SubSettingMenu = [
     {
       name: "Advisor Leave",
-      icon:  FaAddressBook,
+      icon: FaAddressBook,
       to: "/leave/list",
     },
     {
       name: "Notice Board",
-      icon:  FaClipboardList,
+      icon: FaClipboardList,
       to: "/notice-board/list",
     },
     {
@@ -164,6 +164,16 @@ const LeftSidebar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = function ()
     },
     {
       name: "Task Management",
+      icon:  FaTasks,
+      to: "/kanban",
+    },
+    {
+      name: "Leave Management",
+      icon: FaAddressBook,
+      to: "/leave/management/list",
+    },
+    {
+      name: "Advisor Report",
       icon:  FaTasks,
       to: "/kanban",
     },

@@ -1,4 +1,8 @@
 import {
+  GET_WALLET_HISTORY_LIST,
+  GET_WALLET_HISTORY_LIST_SUCCESS,
+  GET_WALLET_HISTORY_LIST_ERROR,
+
   GET_WALLET_RULES_LIST,
   GET_WALLET_RULES_LIST_SUCCESS,
   GET_WALLET_RULES_LIST_ERROR,
@@ -19,6 +23,22 @@ import {
   REST_WALLET_RULES_LIST_SUCCESS,
   REST_WALLET_RULES_LIST_ERROR
 } from "./actionType";
+
+export const getWalletHistorylist = (requserdata) => ({
+  type: GET_WALLET_HISTORY_LIST,
+  payload: requserdata,
+});
+
+export const getWalletHistorylistSuccess = (actionType, data) => ({
+  type: GET_WALLET_HISTORY_LIST_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const getWalletHistorylistFail = (actionType, error) => ({
+  type: GET_WALLET_HISTORY_LIST_ERROR,
+  payload: { actionType, error },
+});
+
 
 export const getWalletRulelist = (requserdata) => ({
   type: GET_WALLET_RULES_LIST,

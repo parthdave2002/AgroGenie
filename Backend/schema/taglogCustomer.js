@@ -11,4 +11,4 @@ const taglogCustomerSchema = new schema({
   created_at: { type: Date, default: new Date() },
 });
 
-module.exports = TaglogCustomer = mongoose.model('taglogcustomer', taglogCustomerSchema)
+module.exports = TaglogCustomer = mongoose.model('customer_taglog', taglogCustomerSchema)

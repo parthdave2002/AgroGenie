@@ -16,7 +16,7 @@ import Cookies from "js-cookie";
 import LoaderPage from "../../components/common/loader/loader";
 
 const SignInPage: FC = function () {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setisLoading] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -51,6 +51,7 @@ const SignInPage: FC = function () {
 
   const [Login, setLogin] = useState(false);
   const [LoginRols, setLoginRols] = useState("");
+  const [LoginUserRole, setLoginUserRole] = useState("");
 
   const { login,error,  CheckUserList} = useSelector((state:any) => ({
     login: state.Login.Logincode,
@@ -62,6 +63,7 @@ const SignInPage: FC = function () {
     setisLoading(false)
     setLogin(login ? login.success : null);
     setLoginRols(login ? login?.data?.user_type : null);
+    setLoginUserRole(login ? login?.data?.role : null);
   }, [login]);
 
   useEffect(() =>{      
@@ -78,11 +80,24 @@ const SignInPage: FC = function () {
     if (Login == true) {  
       validation.resetForm();
       if(LoginRols !== "admin" ){
-        navigation("/sales-crm");
+        navigate("/sales-crm");
         location.reload();
       }
       else if( LoginRols == "admin"){
-        navigation("/dashboard");
+        console.log(LoginUserRole)
+        switch (LoginUserRole) {
+          case "6a06c4b734e0d36b60eb13f3":
+            navigate("/team-leader");
+            break;
+
+          case "6a39164785e08a7bd44b7981":
+            navigate("/hr-dashboard");
+            break;
+
+          default:
+            navigate("/dashboard");
+        }
+        navigate("/dashboard");
         location.reload();
       }
     }else if(error){
@@ -114,9 +129,9 @@ const SignInPage: FC = function () {
       const role = Cookies.get("userType");
       const token = Cookies.get("token");
       if(token  && role  == "admin" || token  && role == "subadmin"){
-          navigation("/dashboard");
+          navigate("/dashboard");
       }else if(token  && role == "csr" || token  && role == "sales_executive" || token  && role == "lead_manager"){
-        navigation("/sales-crm");
+        navigate("/sales-crm");
       }
     },[])
   //--------------  if User Alredy login redirect to their page code end --------------
