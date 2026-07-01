@@ -3,7 +3,7 @@ const lazyImport = (importFn: () => Promise<any>) => lazy(importFn);
 
 export const adminRoutes = [
   { path: "/dashboard", component: lazyImport(() => import("../pages/Admin/adminDashboard/index")) },
-  { path: "/manager-dashboard", component: lazyImport(() => import("../pages/Managerdashboard/dashoboard")) },
+  { path: "/manager-dashboard", component: lazyImport(() => import("../pages/leadManager/dashoboard")) },
 
   // Users
   { path: "/users/list", component: lazyImport(() => import("../pages/Admin/users/list")) },
@@ -92,6 +92,9 @@ export const adminRoutes = [
   { path: "/testimonial/add", component: lazyImport(() => import("../pages/Admin/testimonial/testimonialAdd")) },
 
   // leave Management
+  { path: "/leave/management/list", component: lazyImport(() => import("../pages/Admin/leave/leaveManagementList")) },
+  { path: "/leave/management/add", component: lazyImport(() => import("../pages/Admin/leave/leaveManagementAdd")) },
+  { path: "/leave/management/:id", component: lazyImport(() => import("../pages/Admin/leave/leaveManagementAdd")) },
   { path: "/leave/list", component: lazyImport(() => import("../pages/Admin/leave/leaves")) },
 
   // Notice Board
@@ -114,7 +117,7 @@ export const adminRoutes = [
   { path: "/sales-crm", component: lazyImport(() => import("../pages/salesExecutive")) },
   { path: "/chat", component: lazyImport(() => import("../components/chat/chatButton")) },
   { path: "/team-leader", component: lazyImport(() => import("../pages/teamLeader/dashboard")) },
-
+  { path: "/HR", component: lazyImport(() => import("../pages/HR/dashboard")) },
 
   { path: "/warehouse/list", component: lazyImport(() => import("../pages/warehouse/warehouse")) },
   { path: "/warehouse/add", component: lazyImport(() => import("../pages/warehouse/warehouseAdd")) },

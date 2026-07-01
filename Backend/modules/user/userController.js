@@ -29,12 +29,17 @@ userController.GetAllUser = async (req, res, next) => {
   try {
    
     let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
-    searchQuery = { ...searchQuery, is_deleted: false, user_type: { $ne: 'admin' }  };
+    searchQuery = { ...searchQuery, is_deleted: false, user_type: { $ne: 'superadmin' }  };
     selectQuery = 'name email password gender mobile_no date_of_joining date_of_birth address emergency_mobile_no emergency_contact_person added_at role pan_card bank_passbook aadhar_card user_id is_active user_pic';
     populate = [{ path: 'role',  model: 'roles', select: 'role_title' }, { path: 'user_category', model: 'user_categories', select: 'category_name' }];
 
     if(req.query.id){
       const user = await userSch.findById(req.query.id).select(selectQuery).populate(populate);;
+      return otherHelper.paginationSendResponse(res, httpStatus.OK, true, user,  null, " Search Data found", page, size, user.length);
+    }
+
+    if(req.query.user_type){
+      const user = await userSch.find({ is_deleted: false, user_type: req.query.user_type}).select(selectQuery).populate(populate);
       return otherHelper.paginationSendResponse(res, httpStatus.OK, true, user,  null, " Search Data found", page, size, user.length);
     }
 

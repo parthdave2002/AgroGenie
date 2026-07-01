@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { BsCartCheckFill, BsFillStopwatchFill } from "react-icons/bs";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaWallet } from "react-icons/fa";
 import { FaCircleCheck } from "react-icons/fa6";
 import { MdReport } from "react-icons/md";
 
@@ -49,11 +49,6 @@ export const isDurationoption = [
   { label: "Part Time", value: "part-time" },
 ];
 
-export const isleaveoption = [
-  { label: "Casual Leave", value: "casual" },
-  { label: "Leave without pay", value: "lwp" },
-];
-
 export const isleaveplanoption = [
   { label: "Full Day", value: "full-day" },
   { label: "Half day (1st half)", value: "fist-half" },
@@ -69,6 +64,7 @@ export const FarmerDashboardTabData = [
   { title: "Order", icon: <BsCartCheckFill size={20} /> },
   { title: "Complain", icon: <MdReport size={20} /> },
   { title: "Taglog", icon: <FaRegClock size={20} /> },
+  { title: "Wallet", icon: <FaWallet size={20} /> },
 ]
 
 export const IrrigationSourceOptions= [
@@ -127,7 +123,7 @@ export const leadoption = [
 
 export const WalletRuletypeoption = [
   {
-    label: 'Customer Registered',
+    label: 'Farmer Registered',
     value: 'CUSTOMER_REGISTERED'
   },
   {

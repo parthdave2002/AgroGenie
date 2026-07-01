@@ -9,7 +9,6 @@ const WalletHelper = {};
 WalletHelper.creditPoints = async ({ customerId, eventType, orderAmount = 0 }) => {
 
     try {
-        console.log("ffff >>>>>>",customerId, eventType, orderAmount )
         const rule = await walletRuleSch.findOne({ event_type: eventType, is_active: true,is_deleted: false });
         if (!rule)  return;
 

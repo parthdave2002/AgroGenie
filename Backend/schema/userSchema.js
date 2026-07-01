@@ -25,6 +25,7 @@ const userSchema = new schema({
   deleted_by: { type: schema.Types.ObjectId},
   deleted_at: {type: Date},
   user_type: { type: String, default: 'subadmin' },
+  teamleader : { type: schema.Types.ObjectId, ref: 'user' },
   user_category: { type: schema.Types.ObjectId, ref: 'user_category' },
 });
 

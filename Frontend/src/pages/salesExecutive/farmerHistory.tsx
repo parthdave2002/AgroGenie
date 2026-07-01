@@ -3,9 +3,9 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 import { Button } from "flowbite-react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCustomerTagloglist, getFarmerComplainlist, getFarmerOrderlist } from '../../Store/actions';
+import { getCustomerTagloglist, getFarmerComplainlist, getFarmerOrderlist, getWalletHistorylist } from '../../Store/actions';
 import { FarmerHistoryProps } from '../../types/types';
-import { FarmerDashboardTabData } from '../../types/dropdown';
+import { FarmerDashboardTabData, WalletRuletypeoption } from '../../types/dropdown';
 const CommonTable = lazy(() => import("../../components/common/table/commonTable"));
 const ComplainDetails = lazy(() => import("../../components/salesComponent/complainDetails"));
 const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
@@ -18,6 +18,7 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
     const [UserOrderDataList, setUserOrderDataList] = useState([]);
     const [UserComplainDataList, setUserComplainDataList] = useState([]);
     const [UserTaglogDataList, setUserTaglogDataList] = useState([]);
+    const [UserWalletDataList, setUserWalletDataList] = useState([]);
     const [isOpenComplainModel , setisOpenComplainModel ]  = useState(false);
     const [isComplainData , setisComplainData ]  = useState([]);
 
@@ -121,6 +122,9 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
       }else if(selectedTabbar == "Taglog"){
         dispatch(getCustomerTagloglist(requser));
       }
+      else if(selectedTabbar == "Wallet"){
+        dispatch(getWalletHistorylist(requser))
+      }
     }
   },[dispatch, selectedTabbar, PageNo, RoePerPage ])
 
@@ -129,7 +133,12 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
     const Orderlist = useSelector((state: any) => state.Order.SingleFarmerOrderlist );
     const Complainlist = useSelector((state: any) => state.Complain.SinglefarmerComplainlist );
     const Tagloglist = useSelector((state: any) => state.Taglog.CustomerTagloglist );
-    
+    const { WalletHistorylist, TotalWalletHistoryData, CurrentPage } = useSelector((state: any) => ({
+        WalletHistorylist: state.Wallet.WalletHistorylist,
+        TotalWalletHistoryData: state.Wallet.TotalWalletHistoryData,
+        CurrentPage : state.Wallet.CurrentPage
+    }));
+
     useEffect(() => {
       if(selectedTabbar == "Order"){
         setUserOrderDataList(Orderlist? Orderlist?.data : []);
@@ -146,7 +155,12 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
         setTotalListData(Tagloglist? Tagloglist?.totalData : []);
         setCurrentPageNo(Tagloglist? Tagloglist?.page : []);
       }
-    }, [Orderlist, Complainlist, Tagloglist]);
+      else if(selectedTabbar == "Wallet"){
+        setUserWalletDataList(WalletHistorylist ? WalletHistorylist : [])
+        setTotalListData(TotalWalletHistoryData? TotalWalletHistoryData : []);
+        setCurrentPageNo(CurrentPage? CurrentPage : []);
+      }
+    }, [Orderlist, Complainlist, Tagloglist, WalletHistorylist,TotalWalletHistoryData ]);
 
   //  ------------- Get  Data From Reducer Code end --------------
 
@@ -261,6 +275,14 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
         render: (row: any) => moment(row?.created_at).format("DD-MM-YYYY hh:mm:ss")
       }
     ],[]);
+
+    const walletColumns = useMemo(() => [
+      { key: "event_type", label: "Wallet Rules", render: (row) => WalletRuletypeoption.find(item => item.value === row.event_type)?.label || row.event_type },
+      { key: "points", label: "Points" },
+      { key: "transaction_type", label: "Type"},
+      { key: "added_by", label: "Advisor Name", render: (row: any) => ( <span className="max-w-[15rem] truncate text-base font-medium text-DarkBackground dark:text-White py-0 "> {row?.added_by?.name ? row?.added_by?.name : "-"} </span>)},
+      { key: "added_at", label: "Created Date", render: (row: any) => moment(row?.added_at).format("DD-MM-YYYY hh:mm:ss")}
+    ],[]);
     
   return (
     <>
@@ -295,6 +317,12 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
               <>
                   {UserTaglogDataList && UserTaglogDataList.length > 0 ?
                     <CommonTable columns={taglogColumns} data={UserTaglogDataList} />
+                    : <div className='text-center py-4 dark:text-White'>No DataFound </div>}
+              </>
+            : selectedTabbar == "Wallet" ?
+              <>
+                  {UserWalletDataList && UserWalletDataList.length > 0 ?
+                    <CommonTable columns={walletColumns} data={UserWalletDataList || []} />
                     : <div className='text-center py-4 dark:text-White'>No DataFound </div>}
               </>
             : null

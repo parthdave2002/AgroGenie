@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import { getUserlist, DeleteUserlist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 import LoaderPage from "../../../components/common/loader/loader";
+import moment from "moment";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
@@ -116,7 +117,7 @@ const UserListPage: FC = function () {
     { key: "role",   label: "Role", render: (row: any) => row?.role?.role_title || "-"},
     { key: "gender", label: "Gender", render: (row: any) => row?.gender.charAt(0).toUpperCase() + row?.gender.slice(1).toLowerCase() || "-" },
     { key: "mobile_no",  label: "Mobile No" },
-    { key: "date_of_joining", label: "Date of joining" },
+    { key: "date_of_joining", label: "Date of joining", render: (row: any) => row?.date_of_joining ? moment(row?.date_of_joining).format("DD-MM-YYYY") : "-" },
     { key: "is_active",  label: "Status",  render: (row: any) => row.is_active ?  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> :  <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div>},
     { key: "actions",  label: "Actions",
        render: (row: any) => (

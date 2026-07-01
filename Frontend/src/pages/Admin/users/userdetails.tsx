@@ -41,8 +41,8 @@ const UserDetailsPage: FC = function () {
     },
     { label: "Mobile Number", value: UserDataList?.mobile_no },
     { label: "Role", value: UserDataList?.role?.role_title },
-    { label: "Date of Joining", value: UserDataList?.date_of_joining },
-    { label: "Date of Birth", value: UserDataList?.date_of_birth },
+    { label: "Date of Joining", value: UserDataList?.date_of_joining, render : (row :any) => ( <div> {moment(row?.date_of_joining).format("DD-MM-YYYY hh:mm:ss")} </div>) },
+    { label: "Date of Birth", value: UserDataList?.date_of_birth,render : (row :any) => ( <div> {moment(row?.date_of_birth).format("DD-MM-YYYY hh:mm:ss")} </div>) },
     { label: "Address", value: UserDataList?.address },
     {
       label: "Emergency Contact Person",
@@ -79,7 +79,7 @@ const UserDetailsPage: FC = function () {
             />
             <div className="mt-[2rem] bg-White dark:bg-Cosmos p-4">
               <div>
-                <div className="grid grid-cols-3 gap-x-4 gap-y-8">
+                <div className="grid grid-cols-3 gap-x-4 gap-y-3">
                   <img
                     className="w-20 h-20 rounded-full"
                     src={UserDataList?.user_pic ? UserDataList?.user_pic : ""}

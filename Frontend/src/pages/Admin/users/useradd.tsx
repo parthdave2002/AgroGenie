@@ -7,7 +7,7 @@ import Select from "react-select";
 import { Form, FormFeedback } from "reactstrap";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { AddUserlist, getRoleslist, getUserCategoryView, getUserView, ResetUserdatalist, UpdateUserdatalist } from "../../../Store/actions";
+import { AddUserlist, getRoleslist, getUserCategoryView,getUserlist, getUserView, ResetUserdatalist, UpdateUserdatalist } from "../../../Store/actions";
 import { toast } from "react-toastify";
 import { UserData } from "types/types";
 import { yesnooption, genderoption, isactiveoption } from "../../../types/dropdown";
@@ -19,12 +19,6 @@ const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar")
 const IMG_URL = import.meta.env["VITE_API_URL"];
 
 const AddUserPage : FC = function () {
-
-    const teamLeaderOption =[
-        { label: "No Team Leader", value: "" },
-        { label: "Self", value: "self" }
-    ]
-
     const { id } = useParams();
     const dispatch = useDispatch();
     const [file, setFile] = useState<File | null |  string>(null);
@@ -32,7 +26,7 @@ const AddUserPage : FC = function () {
     // ---------- get default users list ----------
     useEffect(() => {
        dispatch(ResetUserdatalist())
-        
+        dispatch(getUserlist({ user_type : "admin" }))
         if(id){
             let requserdata = {  id: id };
             dispatch(getUserView(requserdata))
@@ -60,6 +54,8 @@ const AddUserPage : FC = function () {
         setUserDataList(UserView ? UserView.data  : null);
       }, [UserView]);
     // ---------- get default users list ----------
+    const  UserList = useSelector((state: any) => state.User.UserList?.data || [])
+    const teamLeaderOption = UserList && UserList.map((data : any) => ({  label: data.name,  value: data._id  }));
     
     //---------------- Role option code start ----------------
         const [selectedRoleOption, setSelectedRoleOption] = useState<any>(null);
@@ -329,7 +325,7 @@ const AddUserPage : FC = function () {
      },[UserAddedList, UpdateUserList])
  //  -------------- Get Role Data list -------------------
 
- useEffect(() => { 
+    useEffect(() => { 
     if(UserDataList){
         setinitialValues(prev => ({
             ...prev,
@@ -392,7 +388,7 @@ const AddUserPage : FC = function () {
             setSelectedTeamLeaderId(selectedTeamLeader?.value ?? null);
         }
     }
-  },[UserDataList]);
+    },[UserDataList]);
 
     const today = new Date();
     const minDate = new Date(today.setFullYear(today.getFullYear() - 18));

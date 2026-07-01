@@ -1,10 +1,10 @@
 import {FC, lazy, Suspense, useEffect, useState } from "react";
 import { Accordion, Button } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeleavestatuslist, getleavelist } from "../../../Store/actions";
 import moment from "moment";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import LoaderPage from "../../../components/common/loader/loader";
+import { changeleavestatuslist, getleavelist } from "../../../Store/actions";
 const NavbarSidebarLayout = lazy(() =>import("../../../layouts/navbar-sidebar"));
 const LeaveAdd = lazy(() => import("../../../components/salesComponent/leaveAdd"));
 const AttendanceCalendar = lazy(() => import("../../../components/admin/attendanceCalendar"));
@@ -55,37 +55,13 @@ const LeaveListPage: FC = function () {
       )
     },
     { key: 'days', label: 'Leave Days' },
-    {
-      key: 'leave_plan',
-      label: 'Leave Plan',
-      render: (leave: any) => leave?.leave_plan ? leave?.leave_plan.charAt(0).toUpperCase() + leave?.leave_plan.slice(1).toLowerCase() : "-"
-    },
-    {
-      key: 'leave_type',
-      label: 'Leave Type',
-      render: (leave: any) => leave?.leave_type ? leave?.leave_type.charAt(0).toUpperCase() + leave?.leave_type.slice(1).toLowerCase() : "-"
-    },
-    {
-      key: 'status',
-      label: 'Status',
-      render: (leave: any) => leave?.status ? leave?.status.charAt(0).toUpperCase() + leave?.status.slice(1).toLowerCase() : "-"
-    },
+    { key: 'leave_plan', label: 'Leave Plan', render: (leave: any) => leave?.leave_plan ? leave?.leave_plan.charAt(0).toUpperCase() + leave?.leave_plan.slice(1).toLowerCase() : "-" },
+    { key: 'leave_type', label: 'Leave Type', render: (leave: any) => leave?.leave_type ? leave?.leave_type.charAt(0).toUpperCase() + leave?.leave_type.slice(1).toLowerCase() : "-" },
+    { key: 'status', label: 'Status', render: (leave: any) => leave?.status ? leave?.status.charAt(0).toUpperCase() + leave?.status.slice(1).toLowerCase() : "-"},
     { key: 'reason', label: 'Reason' },
-    {
-      key: 'requested_by',
-      label: 'Requested By',
-      render: (leave: any) => leave?.requested_by?.name
-    },
-    {
-      key: 'approved_by',
-      label: 'Approved By',
-      render: (leave: any) => leave?.approved_by?.name ? leave?.approved_by?.name : "-"
-    },
-    {
-      key: 'approved_date',
-      label: 'Approved Date',
-      render: (leave: any) => leave?.approved_date ? moment(leave?.approved_date).format("DD-MM-YYYY") : "-"
-    },
+    { key: 'requested_by', label: 'Requested By', render: (leave: any) => leave?.requested_by?.name},
+    { key: 'approved_by', label: 'Approved By', render: (leave: any) => leave?.approved_by?.name ? leave?.approved_by?.name : "-"},
+    { key: 'approved_date', label: 'Approved Date', render: (leave: any) => leave?.approved_date ? moment(leave?.approved_date).format("DD-MM-YYYY") : "-" },
     {
       key: 'action',
       label: 'Action',
@@ -110,23 +86,18 @@ const LeaveListPage: FC = function () {
       <NavbarSidebarLayout isSidebar={true} isNavbar={true}>
         <div className="mb-4 flex justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-DarkBackground dark:text-White mb-4">
-              Leave Management
-            </h1>
+            <h1 className="text-2xl font-semibold text-DarkBackground dark:text-White mb-4"> Leave Management </h1>
             <div className="mt-2 flex space-x-2">
-              <button
-                onClick={() => setSelectedTab("Attendance")}
+              <button  onClick={() => setSelectedTab("Attendance")}
                 className={`px-4 py-2 rounded-md ${
                   selectedTab === "Attendance"
                     ? "bg-White dark:bg-Cosmos text-blue-600 font-semibold shadow"
                     : "text-Hydrocarbon dark:text-SoothingBlueGrey"
                 }`}
               >
-                
                 Attendance
               </button>
-              <button
-                onClick={() => setSelectedTab("Leave")}
+              <button onClick={() => setSelectedTab("Leave")}
                 className={`px-4 py-2 rounded-md ${
                   selectedTab === "Leave"
                     ? "bg-White dark:bg-Cosmos text-blue-600 font-semibold shadow"
@@ -138,56 +109,27 @@ const LeaveListPage: FC = function () {
             </div>
           </div>
           <div className="self-center">
-            
-            <Button
-              gradientDuoTone="purpleToPink"
-              onClick={() => RequestLeave()}
-            >
-              Add Leave Request
-            </Button>
+            <Button gradientDuoTone="purpleToPink" onClick={() => RequestLeave()} > Add Leave Request </Button>
           </div>
         </div>
 
         {selectedTab === "Attendance" ? (
-          <div className="mt-4">
-            
-            <AttendanceCalendar users={leavelist || []} />
-          </div>
+          <div className="mt-4"> <AttendanceCalendar users={leavelist || []} /></div>
         ) : (
           <>
             <div className="flex gap-x-3  mb-4">
-              <button
-                onClick={prevMonth}
-                className="p-2 rounded-lg bg-purple-200 text-purple-700"
-              >
-                
-                <FaArrowLeft />
-              </button>
-              <h2 className="text-xl font-semibold text-DarkBackground dark:text-White">
-                
-                {currentMonth.format("MMMM YYYY")}
-              </h2>
-              <button
-                onClick={nextMonth}
-                className="p-2 rounded-lg bg-purple-200 text-purple-700"
-              >
-                
-                <FaArrowRight />
-              </button>
+              <button onClick={prevMonth} className="p-2 rounded-lg bg-purple-200 text-purple-700"> <FaArrowLeft /> </button>
+              <h2 className="text-xl font-semibold text-DarkBackground dark:text-White"> {currentMonth.format("MMMM YYYY")}</h2>
+              <button onClick={nextMonth} className="p-2 rounded-lg bg-purple-200 text-purple-700" ><FaArrowRight /> </button>
             </div>
 
             <Accordion alwaysOpen={true}>
               {leavelist &&
                 leavelist.map((person: any, index: number) => (
                   <Accordion.Panel key={index}>
-                    <Accordion.Title className="bg-WhiteMarble dark:bg-Cosmos">
-                      {person.name}
-                    </Accordion.Title>
+                    <Accordion.Title className="bg-WhiteMarble dark:bg-Cosmos"> {person.name} </Accordion.Title>
                     <Accordion.Content className="transition-all ease-in-out duration-300 rounded-lg shadow-lg bg-White dark:bg-TranquilBlack">
-                      <CommonTable
-                        columns={leaveColumns}
-                        data={person?.leaves}
-                      />
+                      <CommonTable columns={leaveColumns} data={person?.leaves}  />
                     </Accordion.Content>
                   </Accordion.Panel>
                 ))}
@@ -196,11 +138,7 @@ const LeaveListPage: FC = function () {
         )}
 
         {AdminaddLeaveModal ? (
-          <LeaveAdd
-            CloseProfile={() => setAdminAddLeaveModal(false)}
-            confirmationModal={AdminaddLeaveModal}
-            type="A"
-          />
+          <LeaveAdd CloseProfile={() => setAdminAddLeaveModal(false)} confirmationModal={AdminaddLeaveModal} type="A" />
         ) : null}
       </NavbarSidebarLayout>
     </Suspense>

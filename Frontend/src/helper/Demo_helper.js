@@ -218,6 +218,7 @@ export const DelCouponlistApi = async (requserdata) => await api.delete(url.DELE
 export const StatusCouponlistApi = async (requserdata) => await api.delete(url.CHANGE_STATUS_COUPON_LIST, requserdata);
 
 //  wallet Rules API
+export const WalletHistoryApi = (requserdata) => api.get(url.GET_WALLET_HISTORY_LIST, requserdata);
 export const WalletRulesApi = (requserdata) => api.get(url.GET_WALLET_RULES_LIST, requserdata);
 export const AddWalletRulesApi = async (requserdata) => await api.create(url.ADD_WALLET_RULES_LIST, requserdata);
 export const DelWalletRulesApi = async (requserdata) => await api.delete(url.DELETE_WALLET_RULES_LIST, requserdata);
@@ -249,6 +250,10 @@ export const LeavelistApi = (requserdata) => api.get(url.GET_LEAVE_LIST, requser
 export const AdddLeavelistApi = (requserdata) => api.create(url.ADD_LEAVE_LIST, requserdata);
 export const ChangeLeavelistApi = (requserdata) => api.create(url.GET_CHANGE_LEAVE_STATUS, requserdata);
 
+export const LeaveManagementlistApi = (requserdata) => api.get(url.GET_LEAVE_MANAGEMENT_LIST, requserdata);
+export const AdddLeaveManagementlistApi = (requserdata) => api.create(url.ADD_LEAVE_MANAGEMENT_LIST, requserdata);
+export const ChangeLeaveManagementlistApi = (requserdata) => api.create(url.GET_CHANGE_LEAVE_MANAGEMENT_STATUS, requserdata);
+
 export const TestimoniallistApi = (requserdata) => api.get(url.GET_TESTIMONIAL_LIST, requserdata);
 export const AddTestimoniallistApi = (requserdata) => api.postMultipart(url.ADD_TESTIMONIAL_LIST, requserdata);
 export const DelTestimoniallistApi = (requserdata) => api.delete(url.DELETE_TESTIMONIAL_LIST, requserdata);
@@ -266,3 +271,5 @@ export const UpdateKanbanTaskApi = (requserdata) => api.put(url.UPDATE_KANBAN_TA
 export const DelKanbanTaskApi = (requserdata) => api.delete(url.DELETE_KANBAN_TASK, requserdata);
 export const AddSubTaskApi = (requserdata) => api.create(url.ADD_SUBTASK, requserdata);
 export const DelSubTaskApi = (requserdata) => api.delete(url.DELETE_SUBTASK, requserdata);
+
+export const HRDatalistApi = (requserdata) => api.get(url.GET_HR_DASHBOARD_LIST, requserdata);

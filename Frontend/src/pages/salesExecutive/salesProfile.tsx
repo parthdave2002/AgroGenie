@@ -2,7 +2,7 @@ import { lazy, FC, useEffect, useMemo, useState } from 'react';
 import { Button } from "flowbite-react";
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { getleavelist } from '../../Store/actions';
+import { getleavelist, getleavemanagemenetlist } from '../../Store/actions';
 import { SalesProfilePropsData } from '../../types/types';
 const ChangeProfilePassword = lazy(() => import("../../components/common/profile/changeprofilePassword"));
 const LeaveAdd = lazy(() => import("../../components/salesComponent/leaveAdd"));
@@ -11,7 +11,7 @@ const CommonTable = lazy(() => import("../../components/common/table/commonTable
 
 const SalesProfile : FC <SalesProfilePropsData> = function ()  {
     const dispatch = useDispatch();
-
+    const [SalesLeaveTypeData, setSalesLeaveTypeData] = useState([])
     const [SalesLeaveData, setSalesLeaveData] = useState([])
     const [confirmationModal, setConfirmationModal] = useState(false);
 
@@ -29,13 +29,15 @@ const SalesProfile : FC <SalesProfilePropsData> = function ()  {
     const PageDataList = (data:any) => { setPageNo(data) }
   // ------------- Next button Code End -------------
     const Leavedatalist = useSelector((state: any) => state.Leave.Leavedatalist)
+    const LeaveManagementdatalist = useSelector((state: any) => state.Leave.LeaveManagementdatalist)
 
     useEffect(() => {
         setSalesLeaveData(Leavedatalist?.data?.data);
+        setSalesLeaveTypeData(LeaveManagementdatalist?.data);
         // setRoePerPage(Leavedatalist?.size ? Leavedatalist?.size : null)
         setTotalListData(Leavedatalist?.totalData ? Leavedatalist?.totalData : 0);
         setCurrentPageNo(Leavedatalist?.CurrentPage ? Leavedatalist?.CurrentPage : 1);
-    }, [Leavedatalist]);
+    }, [Leavedatalist, LeaveManagementdatalist]);
 
     useEffect(() => {
         let requserdata: { page: number; size: number; } = {
@@ -43,6 +45,7 @@ const SalesProfile : FC <SalesProfilePropsData> = function ()  {
         size: RoePerPage
       };
         dispatch(getleavelist(requserdata));
+        dispatch(getleavemanagemenetlist())
     }, [dispatch, PageNo, RoePerPage]);
 
     const RequestLeave = () => {
@@ -77,9 +80,28 @@ const SalesProfile : FC <SalesProfilePropsData> = function ()  {
         },
     ],[]);
 
+    const LeaveBalanceColumns  = useMemo(() => [
+        { key: "leave_type",  label: "Leave Type"},
+        { key: "total_leave",  label: "Leave Total"},
+        { key: "used_leave",  label: "Leave Used"},
+        { key: "remaining_leave",  label: "Remaining Leave"},
+    ],[]);
+
   return (
     <>
-        <div> <ChangeProfilePassword />  </div>
+        <div className='flex gap-x-3'>
+          <div className="flex-1 mt-[4rem]">
+            <div className='flex justify-between mb-6 self-center'>
+              <h3 className="self-center text-2xl font-bold leading-none text-DarkBackground dark:text-White"> Leave Balance </h3>
+            </div>
+
+            {SalesLeaveTypeData && SalesLeaveTypeData.length > 0 ?
+              <CommonTable columns={LeaveBalanceColumns} data={SalesLeaveTypeData || []} />
+            : null}
+          </div>
+
+          <div className='flex-1'> <ChangeProfilePassword />  </div>
+        </div>
     
         <div className="mt-[4rem]">
           <div className='flex justify-between mb-6 self-center'>

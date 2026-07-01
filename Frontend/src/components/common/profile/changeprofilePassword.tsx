@@ -49,7 +49,7 @@ const ChangeProfilePassword = () => {
               <h2 className="text-2xl font-semibold mb-1 text-DarkBackground dark:text-TitaniumWhite">Update Your Password</h2>
               <div className="flex flex-col gap-5 mt-3">
 
-                    <div className="flex justify-between gap-4">
+                    <div className="flex flex-col gap-y-4">
                         <div className='flex-1'>
                             <EyeInputbox
                                 id="current_password"

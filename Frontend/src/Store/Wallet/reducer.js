@@ -1,4 +1,8 @@
 import {
+  GET_WALLET_HISTORY_LIST,
+  GET_WALLET_HISTORY_LIST_SUCCESS,
+  GET_WALLET_HISTORY_LIST_ERROR,
+
   GET_WALLET_RULES_LIST,
   GET_WALLET_RULES_LIST_SUCCESS,
   GET_WALLET_RULES_LIST_ERROR,
@@ -17,6 +21,9 @@ import {
 } from "./actionType";
 
 const INIT_STATE = {
+  WalletHistorylist:[],
+  WalletHistorylistSize:[],
+  TotalWalletHistoryData : 0,
   WalletRulelist: [],
   WalletRulelistSize:0,
   AddWalletRulelist: [],
@@ -28,6 +35,30 @@ const INIT_STATE = {
 
 const Wallet = (state = INIT_STATE, action) => {
   switch (action.type) {
+
+    case GET_WALLET_HISTORY_LIST_SUCCESS:
+      switch (action.payload.actionType) {
+        case GET_WALLET_HISTORY_LIST:
+          return {
+            ...state,
+            WalletHistorylist: action.payload.data.data,
+            WalletHistorylistSize: action.payload.data.size,
+            TotalWalletHistoryData: action.payload.data.totalData,
+            CurrentPage: action.payload.data.page,
+          };
+      }
+    case GET_WALLET_HISTORY_LIST_ERROR:
+      switch (action.payload.actionType) {
+        case GET_WALLET_HISTORY_LIST:
+          return {
+            ...state,
+            error: action.payload,
+          };
+
+        default:
+          return { ...state };
+      }
+
     case GET_WALLET_RULES_LIST_SUCCESS:
       switch (action.payload.actionType) {
         case GET_WALLET_RULES_LIST:
@@ -94,6 +125,9 @@ const Wallet = (state = INIT_STATE, action) => {
           case REST_WALLET_RULES_LIST:
             return {
               ...state,
+              WalletHistorylist:[],
+              WalletHistorylistSize:[],
+              TotalWalletHistoryData : 0,
               WalletRulelist: [],
               WalletRulelistSize:0,
               AddWalletRulelist: [],

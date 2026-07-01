@@ -14,4 +14,4 @@ const noticeBoardSchema = new schema({
   is_active: { type: Boolean }
 }, { timestamps: true });
 
-module.exports = board = mongoose.model('board', noticeBoardSchema);
+module.exports = board = mongoose.model('noticeboard', noticeBoardSchema);

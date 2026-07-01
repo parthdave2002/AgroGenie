@@ -134,6 +134,7 @@ export const ADD_COUPON_LIST = "/api/coupon/add-coupon";
 export const DELETE_COUPON_LIST = "/api/coupon/remove-coupon";
 export const CHANGE_STATUS_COUPON_LIST = "/api/coupon/status-coupon";
 
+export const GET_WALLET_HISTORY_LIST = "/api/wallet/get-wallet-history";
 export const GET_WALLET_RULES_LIST = "/api/wallet/get-wallet-rules";
 export const ADD_WALLET_RULES_LIST = "/api/wallet/add-wallet-rules";
 export const DELETE_WALLET_RULES_LIST = "/api/wallet/remove-wallet-rules";
@@ -158,6 +159,9 @@ export const GET_VILLAGE_DATA_LIST = "/api/location/get-village";
 export const GET_LEAVE_LIST = "/api/leave/get-leave";
 export const ADD_LEAVE_LIST = "/api/leave/add-leave";
 export const GET_CHANGE_LEAVE_STATUS = "/api/leave/approve-leave";
+export const GET_LEAVE_MANAGEMENT_LIST = "/api/leave/get-leave-management";
+export const ADD_LEAVE_MANAGEMENT_LIST = "/api/leave/add-leave-management";
+export const GET_CHANGE_LEAVE_MANAGEMENT_STATUS = "/api/leave/changestatus-leave-management";
 
 export const GET_TESTIMONIAL_LIST = "/api/testimonial/get-testimonial";
 export const ADD_TESTIMONIAL_LIST = "/api/testimonial/add-testimonial";
@@ -176,3 +180,5 @@ export const UPDATE_KANBAN_TASK = "/api/kanban/update-task";
 export const DELETE_KANBAN_TASK = "/api/kanban/delete-task";
 export const ADD_SUBTASK = "/api/kanban/add-subtask";
 export const DELETE_SUBTASK = "/api/kanban/delete-subtask";
+
+export const GET_HR_DASHBOARD_LIST =  "/api/hr/detail";
