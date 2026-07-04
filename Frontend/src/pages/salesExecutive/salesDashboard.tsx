@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import { DarkThemeToggle } from "flowbite-react";
-import { FaHandHoldingDollar } from "react-icons/fa6";
+import { FaHandHoldingUsd } from "react-icons/fa";
 import userphoto from "/images/users/roberta-casas.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FaAngleDown, FaRupeeSign, FaUser, FaUserCircle } from "react-icons/fa";
@@ -348,7 +348,7 @@ const SalesDashboardPage : FC <DashboardPropsData> = function ({ setDatactive,  
         data: TotalRevenue,
       },
       {
-        icon: FaHandHoldingDollar,
+        icon: FaHandHoldingUsd,
         title: "Total Order",
         selectedFrame: selectedOrderframe,
         onChange: OrderDropDownCall,

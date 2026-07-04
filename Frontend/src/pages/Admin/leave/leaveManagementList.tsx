@@ -1,4 +1,4 @@
-import { FC, lazy, useEffect, useMemo, useState } from "react";
+import { FC, lazy,Suspense, useEffect, useMemo, useState } from "react";
 import moment from "moment";
 import { Button } from "flowbite-react";
 import { HiOutlinePencilAlt } from "react-icons/hi";
@@ -13,6 +13,7 @@ const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcru
 const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const LoaderPage = lazy(() => import("../../../components/common/loader/loader"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 
 const LeaveManagmentListPage: FC = function () {
   const dispatch = useDispatch();
@@ -70,10 +71,18 @@ const LeaveManagmentListPage: FC = function () {
     navigate("/leave/management/add")
   }
 
-  const ChangestatusFuncall = (id:any) =>{
-    let requserdata = { id: id};
-    dispatch(changeleavestatusmanagementlist(requserdata)); 
-  }
+  const [ confirmationModal, setConfirmationModal ] = useState(false);
+    const [ changeStausid, setChangeStatusid ] = useState("")
+    const ChangestatusFuncall = (id: any) =>{
+      setConfirmationModal(true);
+      setChangeStatusid(id)
+    }
+    const ChangestatusCall = () =>{
+      let requserdata = { id: changeStausid};
+      dispatch(changeleavestatusmanagementlist(requserdata)); 
+      setConfirmationModal(false);
+      setChangeStatusid("")
+    }
 
   let Name = "Leave Management";
   let AddAccess = accessList?.add;
@@ -88,8 +97,8 @@ const LeaveManagmentListPage: FC = function () {
         label: "Actions",
         render: (row: any) => (
           <div className="flex items-center gap-x-3">
-            {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => EditPageCall(row?._id)}  > <div className="flex items-center gap-x-2">  <HiOutlinePencilAlt className="text-lg" />  Edit Leave Management  </div></Button> : null}
-            {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+            {accessList?.edit ? <Button className="PurpleButton" onClick={() => EditPageCall(row?._id)}  > <div className="flex items-center gap-x-2">  <HiOutlinePencilAlt className="text-lg" />  Edit Leave Management  </div></Button> : null}
+            {accessList?.edit ? <Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
           </div>
         ),
       },
@@ -106,6 +115,13 @@ const LeaveManagmentListPage: FC = function () {
           </>
         }
       </NavbarSidebarLayout>
+
+      {confirmationModal && (
+        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+          <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
+        </Suspense>
+      )}
+
       <ToastMessage />
     </>
   );

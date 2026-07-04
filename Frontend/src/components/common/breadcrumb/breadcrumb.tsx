@@ -1,5 +1,5 @@
 import { useRef, useState, type FC ,type PropsWithChildren } from "react";
-import {  Breadcrumb,  Button,} from "flowbite-react";
+import {  Breadcrumb,  BreadcrumbItem,  Button,} from "flowbite-react";
 import { Input } from "reactstrap";
 import {  HiCog, HiDotsVertical, HiExclamationCircle, HiHome,  HiPlus, HiTrash} from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -66,23 +66,23 @@ const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = funct
           <div className="mb-1 w-full">
             <div className="mb-3">
               <Breadcrumb className="mb-4">
-                <Breadcrumb.Item  onClick={handleNavigationdashboard}>
-                    <div className="flex items-center gap-x-3 cursor-pointer">
+                <BreadcrumbItem onClick={handleNavigationdashboard}>
+                    <div className="flex items-center gap-x-3 cursor-pointer dark:text-White">
                       <HiHome className="text-xl" />
                       <span className="dark:text-White">Home</span>
                     </div>
-                </Breadcrumb.Item>
+                </BreadcrumbItem>
 
                 {ParentName && ParentLink ?
-                  <Breadcrumb.Item  onClick={handleNavigation} >
-                    <div className="flex items-center gap-x-3 cursor-pointer">
+                  <BreadcrumbItem  onClick={handleNavigation} >
+                    <div className="flex items-center gap-x-3 cursor-pointer dark:text-White">
                       <span className="dark:text-White">{ParentName}</span>
                     </div>
-                  </Breadcrumb.Item>
+                  </BreadcrumbItem>
                 : null
                 }
                
-                <Breadcrumb.Item>{Name}</Breadcrumb.Item>
+                <BreadcrumbItem className=" dark:text-White">{Name}</BreadcrumbItem>
               </Breadcrumb>
               <h1 className="text-xl font-semibold text-DarkBackground dark:text-White sm:text-2xl"> {Name}  </h1>
             </div>
@@ -139,7 +139,7 @@ const ExampleBreadcrumb: FC<PropsWithChildren<NavbarSidebarLayoutProps>> = funct
               
               <div className="ml-auto flex items-center space-x-2 sm:space-x-3">
                 {AddAccess  ? 
-                  <Button gradientDuoTone="purpleToPink"  onClick={() => OpenAddModel()} ><div className="flex items-center gap-x-3"> <HiPlus className="text-xl " />  Add {Name}  </div> </Button>
+                  <Button className="PurpleButton" onClick={() => OpenAddModel()} ><div className="flex items-center gap-x-3"> <HiPlus className="text-xl " />  Add {Name}  </div> </Button>
                 : null }
               </div>
             </div>

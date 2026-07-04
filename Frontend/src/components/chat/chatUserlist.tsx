@@ -143,7 +143,7 @@ const ChatUserList = ({ socket, OpenUserChat, setOpenChatModal, setOpenProfileMo
               <>
                 {filteredConversations.map((conversation) => (
                   <button key={conversation._id} onClick={() => handleConversationClick(conversation)} className="mb-2 flex w-full items-start gap-3 rounded-3xl border bg-White px-4 py-3 text-left transition hover:border-slate-200 hover:bg-slate-100" >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 text-sm font-semibold text-White shadow-sm">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-3xl GreenButton shadow-sm">
                       <img className="w-10 h-10 rounded-full" src={conversation?.userDetails?.user_pic} alt="advisor photo" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -167,7 +167,7 @@ const ChatUserList = ({ socket, OpenUserChat, setOpenChatModal, setOpenProfileMo
               <>
                 {nonConversationContacts.map((user) => (
                   <button key={user._id} onClick={() => handleUserClick(user)} className="mb-2 flex w-full items-start gap-3 rounded-3xl border bg-White px-4 py-3 text-left transition hover:border-slate-200 hover:bg-slate-100">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 text-sm font-semibold text-White shadow-sm">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-3xl GreenButton shadow-sm">
                       <img className="w-10 h-10 rounded-full" src={user?.user_pic} alt="advisor photo" />
                     </div>
                     <div className="min-w-0 flex-1">

@@ -7,16 +7,18 @@ const warehouseController = {};
 
 warehouseController.getAllWarehouseList = async (req, res, next) => {
   try {
+
+    let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req);
+    searchQuery = { ...searchQuery};
+
     const getid = req.query.id;
     if(getid){
       const warehouse = await warehouseSch.findById(getid);
-      // if(!warehouse) otherHelper.sendResponse(res, httpStatus.OK, true, user, null, 'Warehouse Data Found', null);
-      const products = await productSchema.find({ warehouse : warehouse._id });
-      const sampleProduct = await productSchema.findOne().lean();
-      return otherHelper.sendResponse(res, httpStatus.OK, true, {warehouse, products}, null, 'Warehouse Data Found', null);
+      if (!warehouse) otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Warehouse not found', null);
+      const productFilter = { ...searchQuery, warehouse: mongoose.Types.ObjectId(getid) };
+      const productData = await otherHelper.getQuerySendResponse(productSchema, page, size, sortQuery, productFilter, selectQuery, next, populate);
+      return otherHelper.paginationSendResponse(res, httpStatus.OK, true, { warehouse, products: productData.data }, 'Warehouse Data Found', page, size, productData.totalData);
     }
-    let { page, size, populate, selectQuery, searchQuery, sortQuery } = otherHelper.parseFilters(req, 10);
-    searchQuery = { ...searchQuery};
 
     if (req.query.search && req.query.search !== "null"){
       const searchResults = await warehouseSch.find({

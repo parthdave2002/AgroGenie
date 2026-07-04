@@ -1,12 +1,12 @@
-import { FC, lazy, useEffect, useState } from "react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";;
-import { Button, Modal } from "flowbite-react";
+import { FC, lazy,Suspense, useEffect, useState } from "react";
+import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { ManagerDashboardTabData } from "../../types/dropdown";
 import { getleadlist, MarkasReadLeadlist } from "../../Store/actions";
 const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
 const CommonTable = lazy(() => import("../../components/common/table/commonTable"));
+const ChangeStausModal = lazy(() => import("../../components/common/modal/changeStatusModal"));
 
 const ManagerDashboardPage: FC = function () {
     const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const ManagerDashboardPage: FC = function () {
         setleadCurrentPageNo( LeadDataList?.page)
     },[LeadDataList])
 
-    const DelCall = () =>{
+    const ChangestatusCall = () =>{
         let requser={ status :"completed", _id : LeadeId }
         dispatch(MarkasReadLeadlist(requser))
         setConfirmationModal(false);
@@ -140,23 +140,15 @@ const ManagerDashboardPage: FC = function () {
             </div>   
                   
             {confirmationModal ?
-                    <Modal onClose={() => setConfirmationModal(false)} show={confirmationModal} size="md">
-                        <Modal.Header className="px-6 pt-6 pb-0"> <span className="sr-only"> Change status</span></Modal.Header>
-                        <Modal.Body className="px-6 pt-0 pb-6">
-                        <div className="flex flex-col items-center gap-y-6 text-center"> <HiOutlineExclamationCircle className="text-7xl text-red-500" /> <p className="text-xl text-SharkGray"> Are you sure you want to chnage status ? </p>
-                            <div className="flex items-center gap-x-3">
-                            <Button color="failure" onClick={() => DelCall()}>  Yes, I'm sure </Button>
-                            <Button color="gray" onClick={() => setConfirmationModal(false)}> No, cancel </Button>
-                            </div>
-                        </div>
-                        </Modal.Body>
-                    </Modal>
+                <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+                    <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
+                </Suspense>
             : null}
 
             {ProductModal == true ?
                 <Modal onClose={() => setProductModal(false)} show={ProductModal} size="2xl" className="font-sans" >
-                        <Modal.Header className="px-6 pt-6 pb-2 border-b border-WhiteMarble dark:border-TranquilBlack"> <h2 className="text-lg font-semibold text-DarkBackground dark:text-White"> Product Details </h2> </Modal.Header>
-                        <Modal.Body className="px-6 py-4 space-y-4 bg-White dark:bg-DarkBackground">
+                        <ModalHeader className="px-6 pt-6 pb-2 border-b border-WhiteMarble dark:border-TranquilBlack"> <h2 className="text-lg font-semibold text-DarkBackground dark:text-White"> Product Details </h2> </ModalHeader>
+                        <ModalBody className="px-6 py-4 space-y-4 bg-White dark:bg-DarkBackground">
                             {Array.isArray(ProductItemModal) && ProductItemModal.length > 0 ? (
                                 <div className="divide-y divide-WhiteMarble dark:divide-TranquilBlack">
                                 {ProductItemModal.map((item, k) => (
@@ -171,7 +163,7 @@ const ManagerDashboardPage: FC = function () {
                             ) : (
                                 <p className="text-sm text-SharkGray dark:text-SilverSteel text-center py-4">  No product details available. </p>
                             )}
-                        </Modal.Body>
+                        </ModalBody>
                 </Modal>
             : null}         
         </>

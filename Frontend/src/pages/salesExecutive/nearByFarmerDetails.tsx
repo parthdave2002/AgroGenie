@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { getNearbyFarmerOrder } from '../../Store/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from 'flowbite-react';
+import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import moment from 'moment';
 import { NearByFarmerProps } from '../../types/types';
 import CommonTable from '../../components/common/table/commonTable';
@@ -116,8 +116,8 @@ const NeaByFarmerDetails : FC  <NearByFarmerProps> = ({farmerId,OpenFarmerDetail
   return (
     <>
        <Modal onClose={() => setisOpenConfirmModel()}  show={OpenFarmerDetailsModal} size="6xl">
-        <Modal.Header> NearBy Order Details </Modal.Header>
-        <Modal.Body>
+        <ModalHeader> NearBy Order Details </ModalHeader>
+        <ModalBody>
           <div className='flex flex-col gap-y-3'>
           <div className='flex grid grid-cols-3 gap-4 items-center justify-between dark:bg-Cosmos bg-TitaniumWhite dark:text-White p-3 rounded-md'>
             <p> Name : {SelectedFarmerDetails?.firstname} {SelectedFarmerDetails?.middlename} {SelectedFarmerDetails?.lastname} </p>
@@ -129,7 +129,7 @@ const NeaByFarmerDetails : FC  <NearByFarmerProps> = ({farmerId,OpenFarmerDetail
            <CommonTable columns={orderColumns} data={FarmerDataList || []} />
            <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
           </div>
-        </Modal.Body>
+        </ModalBody>
        </Modal>
     </>
   )

@@ -5,7 +5,7 @@ import { getNoticeBoardlist } from "../../../Store/actions";
 import { useParams } from "react-router";
 import moment from "moment";
 import { FaFilePdf } from "react-icons/fa";
-import { Modal } from "flowbite-react";
+import { Modal, ModalHeader, ModalBody } from "flowbite-react";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
@@ -118,10 +118,10 @@ const NoticeBoardDetailsPage: FC = function () {
         </div>
 
         <Modal onClose={handleCloseModal}  show={isModalOpen} size="2xl">
-           <Modal.Header className="p-2"> <span className="sr-only">   </span></Modal.Header>
-            <Modal.Body className="px-6 pt-0 pb-6 h-[30rem]">
+           <ModalHeader className="p-2"> <span className="sr-only">   </span></ModalHeader>
+            <ModalBody className="px-6 pt-0 pb-6 h-[30rem]">
             <iframe  src={`${Boardlist?.document_pics}#toolbar=0&navpanes=0&scrollbar=0`} title="PDF Preview"  className="w-full h-full border-none" />
-            </Modal.Body>
+            </ModalBody>
         </Modal>
       </NavbarSidebarLayout>
     </>

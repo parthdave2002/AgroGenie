@@ -1,17 +1,17 @@
 import { lazy,FC, Suspense, useEffect, useState, useMemo } from "react";
+import moment from "moment";
 import { Button } from "flowbite-react";
 import { HiTrash} from "react-icons/hi";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import { DeleteBannerlist,  getBannerlist } from "../../../Store/actions";
+import { useDispatch, useSelector } from "react-redux";
 import UseAccessList from "../../../hooks/useAccessList";
-import CommonTable from "../../../components/common/table/commonTable";
-import moment from "moment";
+import { DeleteBannerlist,  getBannerlist } from "../../../Store/actions";
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const BannerListPage: FC = function () {
   const dispatch = useDispatch();
@@ -88,7 +88,7 @@ const BannerListPage: FC = function () {
     navigate("/banner/add")
   }
 
-  let Name = "Banner List";
+  let Name = "Banner";
   let Searchplaceholder = "Search For Banner (Name)";
   let AddAccess = accessList?.add;
 
@@ -103,7 +103,7 @@ const BannerListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.delete && <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Banner </div> </Button>}
+          {accessList?.delete && <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Banner </div> </Button>}
         </div>
       ),
     },

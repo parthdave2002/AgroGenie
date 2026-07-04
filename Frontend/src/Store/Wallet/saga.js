@@ -2,6 +2,8 @@ import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import {
   getWalletHistorylistSuccess,
   getWalletHistorylistFail,
+  AddWalletPointSuccess,
+  AddWalletPointFail,
   getWalletRulelistSuccess,
   getWalletRulelistFail,
   AddWalletRulelistSuccess,
@@ -15,13 +17,14 @@ import {
 } from "./action";
 import {
   GET_WALLET_HISTORY_LIST,
+  ADD_WALLET_POINTS_LIST,
   GET_WALLET_RULES_LIST,
   ADD_WALLET_RULES_LIST,
   CHANGE_STATUS_WALLET_RULES_LIST,
   DELETE_WALLET_RULES_LIST,
   REST_WALLET_RULES_LIST
 } from "./actionType";
-import { WalletHistoryApi, WalletRulesApi, AddWalletRulesApi, DelWalletRulesApi, StatusWalletRulesApi,   } from "../../helper/Demo_helper";
+import { WalletHistoryApi,WalletPointAddApi, WalletRulesApi, AddWalletRulesApi, DelWalletRulesApi, StatusWalletRulesApi,   } from "../../helper/Demo_helper";
 import { toast } from "react-toastify";
 
 function* onGetWalletHistoryList({ payload: requstuser }) {
@@ -31,6 +34,25 @@ function* onGetWalletHistoryList({ payload: requstuser }) {
   } catch (error) {
     toast.error(error?.msg);
     yield put(getWalletHistorylistFail(error));
+  }
+}
+
+function* onAddWalletPoint({ payload: requstuser }) {
+  try {
+    const response = yield call(WalletPointAddApi, requstuser);
+    yield put(AddWalletPointSuccess(ADD_WALLET_POINTS_LIST, response));
+
+    console.log("eeee", response.success,  typeof response.success)
+    if(response.success){
+    console.log("innnnn",response?.msg)
+
+      toast.success(response?.msg);
+      const response = yield call(WalletHistoryApi, requstuser);
+      yield put(getWalletHistorylistSuccess(GET_WALLET_HISTORY_LIST, response));
+    }
+  } catch (error) {
+    toast.error(error?.msg);
+    yield put(AddWalletPointFail(error));
   }
 }
 
@@ -104,5 +126,6 @@ function* WalletSaga() {
   yield takeEvery(CHANGE_STATUS_WALLET_RULES_LIST, onStatusWalletRulesList);
   yield takeEvery(REST_WALLET_RULES_LIST, onResetWalletRulesList);
   yield takeEvery(GET_WALLET_HISTORY_LIST, onGetWalletHistoryList);
+  yield takeEvery(ADD_WALLET_POINTS_LIST, onAddWalletPoint);
 }
 export default WalletSaga;

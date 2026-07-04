@@ -10,6 +10,7 @@ import { ChangeStatusSubTagloglist, DeleteSubTagloglist,  getSubTagloglist } fro
 import UseAccessList from "../../../hooks/useAccessList";
 import LoaderPage from "../../../components/common/loader/loader";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
@@ -94,13 +95,21 @@ const SubTaglogListPage: FC = function () {
       setisOpenDelteModel(false);
     };
   // -------  Delete Code End ---------------
-
-  const ChangestatusFuncall = (data: string) => {
-    let rqeuserdata = { taglog_id : id,   id: data };
-    dispatch(ChangeStatusSubTagloglist(rqeuserdata))
+  
+  const [ confirmationModal, setConfirmationModal ] = useState(false);
+  const [ changeStausid, setChangeStatusid ] = useState("")
+  const ChangestatusFuncall = (id: any) =>{
+    setConfirmationModal(true);
+    setChangeStatusid(id)
+  }
+  const ChangestatusCall = () =>{
+    let requserdata = { id: changeStausid};
+    dispatch(ChangeStatusSubTagloglist(requserdata)); 
+    setConfirmationModal(false);
+    setChangeStatusid("")
   }
 
-  let Name = "Sub-Taglog List";
+  let Name = "Sub-Taglog";
   let Searchplaceholder = "Search For SubTaglog (Name)";
   let ParentName = "Taglog List";
   let ParentLink = "/taglog/list";
@@ -125,13 +134,8 @@ const SubTaglogListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.edit && (
-            <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button>
-          )}
-
-          {accessList?.delete && (
-            <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Sub Taglog </div> </Button>
-          )}
+          {accessList?.edit && (<Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> )}
+          {accessList?.delete && (<Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Sub Taglog </div> </Button> )}
         </div>
       ),
     },
@@ -152,6 +156,12 @@ const SubTaglogListPage: FC = function () {
         {isOpenDelteModel && (
           <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Subtaglog"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DeletepackingType} />
+          </Suspense>
+        )}
+
+        {confirmationModal && (
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+            <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
           </Suspense>
         )}
 

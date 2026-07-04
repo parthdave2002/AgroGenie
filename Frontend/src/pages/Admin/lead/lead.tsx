@@ -2,7 +2,7 @@ import { FC, lazy, useEffect, useState } from "react";
 import moment from "moment";
 import Select from "react-select";
 import { GiCheckMark } from "react-icons/gi";
-import { Button, Modal } from "flowbite-react";
+import { Button, Modal, ModalHeader, ModalBody } from "flowbite-react";
 import { FormFeedback, Input } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getleadlist } from "../../../Store/actions";
@@ -85,7 +85,7 @@ const columnsReferral = [
     }
   };
 
-  const Name = "Lead List";
+  const Name = "Lead";
   const Searchplaceholder = "Search For Lead";
 
   // Modal state and handlers (if needed for future use)
@@ -164,10 +164,10 @@ const columnsReferral = [
       </NavbarSidebarLayout>
 
       <Modal onClose={() => setisOpenCommentModel(false)} show={isOpenDelteModel} size="md">
-        <Modal.Header className="p-2">
+        <ModalHeader className="p-2">
           <div> Closing Comment</div>
-        </Modal.Header>
-        <Modal.Body className="px-2 pt-6 pb-6">
+        </ModalHeader>
+        <ModalBody className="px-2 pt-6 pb-6">
           <div className="flex flex-col items-center gap-y-6 text-center">
 
             <div className="mt-1">
@@ -185,9 +185,9 @@ const columnsReferral = [
                 : null}
             </div>
 
-            <Button gradientDuoTone="greenToBlue" onClick={() => CommentAddCall()}>  <div className="flex items-center gap-x-2"> <GiCheckMark className="text-xl" />  Submit  </div> </Button>
+            <Button className="GreenButton" onClick={() => CommentAddCall()}>  <div className="flex items-center gap-x-2"> <GiCheckMark className="text-xl" />  Submit  </div> </Button>
           </div>
-        </Modal.Body>
+        </ModalBody>
       </Modal>
 
          {ProductModal == true ?
@@ -198,14 +198,14 @@ const columnsReferral = [
                         className="font-sans"
                       >
       {/* Header */}
-                        <Modal.Header className="px-6 pt-6 pb-2 border-b border-WhiteMarble dark:border-TranquilBlack">
+                        <ModalHeader className="px-6 pt-6 pb-2 border-b border-WhiteMarble dark:border-TranquilBlack">
                           <h2 className="text-lg font-semibold text-DarkBackground dark:text-White">
                             Product Details
                           </h2>
-                        </Modal.Header>
+                        </ModalHeader>
 
                         {/* Body */}
-                        <Modal.Body className="px-6 py-4 space-y-4 bg-White dark:bg-DarkBackground">
+                        <ModalBody className="px-6 py-4 space-y-4 bg-White dark:bg-DarkBackground">
                           {Array.isArray(ProductItemModal) && ProductItemModal.length > 0 ? (
                             <div className="divide-y divide-WhiteMarble dark:divide-TranquilBlack">
                               {ProductItemModal.map((item, k) => (
@@ -233,7 +233,7 @@ const columnsReferral = [
                               No product details available.
                             </p>
                           )}
-                        </Modal.Body>
+                        </ModalBody>
 
                       </Modal>
             : null}

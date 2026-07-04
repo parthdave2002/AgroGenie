@@ -1,4 +1,4 @@
-import { Badge,  Modal } from 'flowbite-react';
+import { Badge,  Modal, ModalBody } from 'flowbite-react';
 import React, { FC, useEffect, useState } from 'react'
 import { FaExclamationTriangle, FaPhoneVolume, FaTruck, FaUserAlt, FaWindowClose } from 'react-icons/fa';
 import ComplainCreate from './complainCreate';
@@ -350,7 +350,7 @@ const OrderDetails : FC <OrderDetailsProps> = ({orderId, closeOrderDetail, openD
               }}
               onClick={(e) => e.stopPropagation()} // prevent close on inner click
             >
-           <Modal.Body className="p-6 overflow-auto">
+           <ModalBody className="p-6 overflow-auto">
                 <div >
                           {productChunks.map((productChunk, pageIndex) => {
                             return(
@@ -532,7 +532,7 @@ const OrderDetails : FC <OrderDetailsProps> = ({orderId, closeOrderDetail, openD
                             )
                           })}
                       </div>
-           </Modal.Body>
+           </ModalBody>
            </div>
       </Modal>
     </>

@@ -14,6 +14,7 @@ const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcru
 const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const LoaderPage = lazy(() => import("../../../components/common/loader/loader"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 
 const CompanyListPage: FC = function () {
   const dispatch = useDispatch();
@@ -102,12 +103,20 @@ const CompanyListPage: FC = function () {
     navigate("/company/add")
   }
 
-  const ChangestatusFuncall = (id:any) =>{
-    let requserdata = { id: id};
-    dispatch(ChangeStatusCompanylist(requserdata)); 
-  }
+  const [ confirmationModal, setConfirmationModal ] = useState(false);
+    const [ changeStausid, setChangeStatusid ] = useState("")
+    const ChangestatusFuncall = (id: any) =>{
+      setConfirmationModal(true);
+      setChangeStatusid(id)
+    }
+    const ChangestatusCall = () =>{
+      let requserdata = { id: changeStausid};
+      dispatch(ChangeStatusCompanylist(requserdata)); 
+      setConfirmationModal(false);
+      setChangeStatusid("")
+    }
 
-  let Name = "Company List";
+  let Name = "Company";
   let Searchplaceholder = "Search For Company (Name)";
   let AddAccess = accessList?.add;
 
@@ -122,9 +131,9 @@ const CompanyListPage: FC = function () {
         label: "Actions",
         render: (row: any) => (
           <div className="flex items-center gap-x-3">
-            {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
-            {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Company</div> </Button> : null}
-            <Button gradientDuoTone="purpleToPink" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Company</div> </Button>
+            {accessList?.edit ? <Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+            {accessList?.delete ? <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Company</div> </Button> : null}
+            <Button className="PurpleButton" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Company</div> </Button>
           </div>
         ),
       },
@@ -145,6 +154,12 @@ const CompanyListPage: FC = function () {
         {isOpenDelteModel && (
           <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Company"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DeletepackingType} />
+          </Suspense>
+        )}
+
+        {confirmationModal && (
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+            <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
           </Suspense>
         )}
         

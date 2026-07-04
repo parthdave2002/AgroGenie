@@ -19,7 +19,7 @@ interface Permission {
   useEffect(() => {
     const userType = Cookies.get("userType");
 
-    if (userType === "admin") {
+    if (userType === "superadmin") {
       setAccessList({ add: true, view: true, edit: true, delete: true });
     } else {
       const modulePermissions = permissionsData?.find(

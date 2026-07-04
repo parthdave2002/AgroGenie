@@ -93,7 +93,7 @@ const NoticeBoardListPage: FC = function () {
     navigate(`/notice-board/details/${id}`)
   }
 
-  let Name = "Notice Board List";
+  let Name = "Notice Board";
   // let Searchplaceholder = "Search For Banner (Name)";
   let AddAccess = accessList?.add;
 
@@ -109,8 +109,8 @@ const NoticeBoardListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.delete && <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Notice </div> </Button>}
-          <Button gradientDuoTone="purpleToBlue" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Notice </div> </Button>
+          {accessList?.delete && <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Notice </div> </Button>}
+          <Button className="PurpleButton" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Notice </div> </Button>
         </div>
       ),
     },

@@ -218,7 +218,7 @@ const FarmerHistory : FC <FarmerHistoryProps> = ({setOpenDetailId, setOpenDetail
         render: (row: any) => (
           <>
             {row?.order_type == "future" && row?.status == null ?
-              <Button className='bg-gradient-to-br from-purple-700 to-blue-400 text-White hover:bg-gradient-to-bl focus:ring-blue-300 dark:focus:ring-blue-800 border-0 ' onClick={() => FuturaOrderCall(row?.order_id, row)}> Confirm Order</Button>
+              <Button className='GreenButton border-0 ' onClick={() => FuturaOrderCall(row?.order_id, row)}> Confirm Order</Button>
             : "-"}
           </>
         )

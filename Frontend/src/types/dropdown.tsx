@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { BsCartCheckFill, BsFillStopwatchFill } from "react-icons/bs";
 import { FaRegClock, FaWallet } from "react-icons/fa";
-import { FaCircleCheck } from "react-icons/fa6";
+import { FaCheckCircle } from "react-icons/fa";
 import { MdReport } from "react-icons/md";
 
 export const genderoption = [
@@ -57,7 +57,7 @@ export const isleaveplanoption = [
 
 export const ManagerDashboardTabData = [
   { title: "Pending", icon: <BsFillStopwatchFill size={20} /> },
-  { title: "Completed", icon: <FaCircleCheck size={20} /> },
+  { title: "Completed", icon: <FaCheckCircle size={20} /> },
 ];
 
 export const FarmerDashboardTabData = [
@@ -149,6 +149,10 @@ export const WalletRuletypeoption = [
   {
     label: 'Review Added',
     value: 'REVIEW_ADDED'
+  },
+   {
+    label: 'Admin Added',
+    value: 'ADMIN_ADDED'
   }
 ]
 

@@ -97,7 +97,7 @@ const PackingListPage: FC = function () {
     navigate(`/packing/${id}`)
   }
 
-  let Name = "Packing List";
+  let Name = "Packing";
   let Searchplaceholder = "Search For Packing (Name)";
   let AddAccess = accessList?.add;
 
@@ -123,8 +123,8 @@ const PackingListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Packing </div> </Button> : null}
-          {/* <Button gradientDuoTone="pinkToOrange" onClick={() => DetailsPageCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Details </div> </Button> */}
+          {accessList?.delete ? <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Packing </div> </Button> : null}
+          {/* <Button className="PinkButton" onClick={() => DetailsPageCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Details </div> </Button> */}
         </div>
       ),
     },

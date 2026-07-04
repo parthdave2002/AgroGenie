@@ -1,4 +1,4 @@
-import { Button, Label, Modal,} from "flowbite-react"; 
+import { Button, Modal, ModalBody, ModalHeader,} from "flowbite-react"; 
 import { FC } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Input } from "reactstrap";
@@ -22,8 +22,8 @@ const ConfirmationModalPage: FC<ConfirmationModalProps>= function ({ isOpenConfi
 
     return (
         <Modal onClose={() => setisOpenConfirmModel(false)}  show={isOpenConfirmModel} size="xl">
-            <Modal.Header className="px-6 pt-6 pb-0"> <span className="sr-only"> Confirmation  </span></Modal.Header>
-            <Modal.Body className="px-6 pt-0 pb-6">
+            <ModalHeader className="px-6 pt-6 pb-0"> <span className="sr-only"> Confirmation  </span></ModalHeader>
+            <ModalBody className="px-6 pt-0 pb-6">
                 <div className="flex flex-col items-center gap-y-6 "> <HiOutlineExclamationCircle className="text-7xl text-red-500" /> 
                     <p className="text-xl text-SharkGray"> Are you sure you want to {isOrderStatusModel == "extend" ? "Create future" : isOrderStatusModel} this order ? </p>
 
@@ -49,7 +49,7 @@ const ConfirmationModalPage: FC<ConfirmationModalProps>= function ({ isOpenConfi
                         <Button color="gray"  onClick={() => setisOpenConfirmModel(false)}> No, cancel </Button> 
                     </div>
                 </div>
-            </Modal.Body>
+            </ModalBody>
         </Modal>
     )
 }

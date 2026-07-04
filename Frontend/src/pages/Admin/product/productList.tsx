@@ -104,7 +104,7 @@ const ProductListPage: FC = function () {
     navigate(`/product/edit/${id}`);
    };
 
-  let Name = "Product List";
+  let Name = "Product";
   let Searchplaceholder = "Search For Product (Name)";
   let AddAccess = accessList?.add;
 
@@ -146,9 +146,9 @@ const ProductListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => EditPageCall(row?._id)}  > <div className="flex items-center gap-x-2">  <HiOutlinePencilAlt className="text-lg" />  Edit Product  </div></Button> : null}
-          {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Change Status </div> </Button> : null}
-          <Button gradientDuoTone="purpleToBlue" onClick={() => DetailsPageCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Product </div> </Button>
+          {accessList?.edit ? <Button className="PurpleButton" onClick={() => EditPageCall(row?._id)}  > <div className="flex items-center gap-x-2">  <HiOutlinePencilAlt className="text-lg" />  Edit Product  </div></Button> : null}
+          {accessList?.delete ? <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Change Status </div> </Button> : null}
+          <Button className="PurpleButton" onClick={() => DetailsPageCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Product </div> </Button>
         </div>
       ),
     },

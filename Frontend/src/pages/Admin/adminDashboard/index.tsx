@@ -1,16 +1,16 @@
 import { Badge } from "flowbite-react";
-import { useEffect, useMemo, useState, type FC } from "react";
+import { lazy, useEffect, useMemo, useState, type FC } from "react";
 import { FaUser, FaRupeeSign, FaAsterisk, FaCloud  } from "react-icons/fa";
-import { FaHandHoldingDollar, FaNoteSticky } from "react-icons/fa6";
+import { FaHandHoldingUsd, FaStickyNote } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Cookies from "js-cookie";
 import LoaderPage from "../../../components/common/loader/loader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import {getDashboarddatalist } from "../../../Store/actions";
 import { AccessData, totalCustomer } from "types/types";
-import CommonTable from "../../../components/common/table/commonTable";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 
 const DashboardPage: FC = function () {
 
@@ -205,7 +205,7 @@ const DashboardPage: FC = function () {
               <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaHandHoldingDollar className="text-White w-6 h-6" />
+                    <FaHandHoldingUsd className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
                     <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily" onChange={(e) => OrderDropDownCall(e)}>
@@ -334,7 +334,7 @@ const DashboardPage: FC = function () {
               <div className="h-24 p-3 rounded-xl w-full flex flex-wrap justify-between transition-all bg-red-200 dark:bg-Cosmos dark:text-White">
                 <div className="flex w-full justify-between items-start">
                   <div className="p-3 rounded-full bg-purple-500 self-center">
-                    <FaNoteSticky  className="text-White w-6 h-6" />
+                    <FaStickyNote  className="text-White w-6 h-6" />
                   </div>
                   <div className="self-center">
                     <select className="border border-SoothingBlueGrey rounded-full px-2 py-1 text-sm dark:bg-Cosmos dark:text-White" defaultValue="daily"    onChange={(e) => complainDropDownCall(e)}>

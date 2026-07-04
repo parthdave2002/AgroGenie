@@ -3,6 +3,10 @@ import {
   GET_WALLET_HISTORY_LIST_SUCCESS,
   GET_WALLET_HISTORY_LIST_ERROR,
 
+  ADD_WALLET_POINTS_LIST,
+  ADD_WALLET_POINTS_LIST_SUCCESS,
+  ADD_WALLET_POINTS_LIST_ERROR,
+
   GET_WALLET_RULES_LIST,
   GET_WALLET_RULES_LIST_SUCCESS,
   GET_WALLET_RULES_LIST_ERROR,
@@ -22,6 +26,7 @@ import {
 
 const INIT_STATE = {
   WalletHistorylist:[],
+  AddWalletPointlist:[],
   WalletHistorylistSize:[],
   TotalWalletHistoryData : 0,
   WalletRulelist: [],
@@ -55,6 +60,25 @@ const Wallet = (state = INIT_STATE, action) => {
             error: action.payload,
           };
 
+        default:
+          return { ...state };
+      }
+
+    case ADD_WALLET_POINTS_LIST_SUCCESS:
+      switch (action.payload.actionType) {
+        case ADD_WALLET_POINTS_LIST:
+          return {
+            ...state,
+            AddWalletPointlist: action.payload.data,
+          };
+      }
+    case ADD_WALLET_POINTS_LIST_ERROR:
+      switch (action.payload.actionType) {
+        case ADD_WALLET_POINTS_LIST:
+          return {
+            ...state,
+            error: action.payload,
+          };
         default:
           return { ...state };
       }
@@ -126,6 +150,7 @@ const Wallet = (state = INIT_STATE, action) => {
             return {
               ...state,
               WalletHistorylist:[],
+              AddWalletPointlist:[],
               WalletHistorylistSize:[],
               TotalWalletHistoryData : 0,
               WalletRulelist: [],

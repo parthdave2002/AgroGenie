@@ -8,8 +8,9 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddCouponlist, ResetCouponlist } from "../../../Store/actions";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { isactiveoption } from "../../../types/dropdown";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const AddCouponPage : FC = function () {
@@ -61,15 +62,8 @@ const AddCouponPage : FC = function () {
         },
     });
 
-    const isactiveoption =[
-        { label :"Active",   value : true  },
-        { label :"Inactive",  value : false }
-    ]
-
     // ------------- Get  Data From Reducer Code Start --------------
-        const { AddCoupondatalist } = useSelector((state: any) => ({
-            AddCoupondatalist: state.Coupon.AddCoupondatalist,
-        }));
+        const AddCoupondatalist = useSelector((state: any) => state.Coupon.AddCoupondatalist);
 
         useEffect(() => {  
             if(AddCoupondatalist?.success == true){

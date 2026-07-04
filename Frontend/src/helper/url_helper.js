@@ -135,6 +135,7 @@ export const DELETE_COUPON_LIST = "/api/coupon/remove-coupon";
 export const CHANGE_STATUS_COUPON_LIST = "/api/coupon/status-coupon";
 
 export const GET_WALLET_HISTORY_LIST = "/api/wallet/get-wallet-history";
+export const ADD_WALLET_POINTS_LIST = "/api/wallet/add-wallet-points";
 export const GET_WALLET_RULES_LIST = "/api/wallet/get-wallet-rules";
 export const ADD_WALLET_RULES_LIST = "/api/wallet/add-wallet-rules";
 export const DELETE_WALLET_RULES_LIST = "/api/wallet/remove-wallet-rules";

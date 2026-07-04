@@ -891,7 +891,7 @@ const SalesAddFarmer: FC<ProfileAddModalData> = ({setFarmerAdded, isEditFarmer, 
         </div>
 
           <div className="flex gap-x-3 justify-end flex-end self-end mt-[1rem]">
-            <Button className="bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl  border-0" type="submit" ><div className="flex items-center gap-x-3 text-[1.2rem]"> <FaUser className="text-xl" />  {isEditFarmer == true ? "Update Farmer" : "Add Farmer"} </div> </Button>
+            <Button className="PurpleButton  border-0" type="submit" ><div className="flex items-center gap-x-3 text-[1.2rem]"> <FaUser className="text-xl" />  {isEditFarmer == true ? "Update Farmer" : "Add Farmer"} </div> </Button>
           </div>
       </Form>
       

@@ -1,13 +1,11 @@
 import type { FC, PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { DarkThemeToggle, Navbar } from "flowbite-react";
+import { DarkThemeToggle, Navbar, NavbarBrand } from "flowbite-react";
 import { Menu } from "@headlessui/react";
 import logo from "/images/authentication/logo.webp";
-import { Modal } from "flowbite-react";
 import userphoto from "/images/authentication/logo.webp";
 import { Button } from "reactstrap";
-import { IoIosSearch } from "react-icons/io";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { resetinsertlogin } from "../../../Store/actions";
@@ -21,7 +19,6 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
   function () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [isOpen, setOpen] = useState(false);
 
     const Logoutfun = () => {
       Cookies.remove("token");
@@ -50,19 +47,19 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
      }, [login]);
      
     return (
-      <Navbar fluid className="px-4">
+      <Navbar fluid className="px-4 py-3">
         <div className="w-full ">
           <div className="flex items-center justify-between">
               <div className="flex items-center">
-                  <Navbar.Brand onClick={handleNavigationdashboard}>
+                  <NavbarBrand onClick={handleNavigationdashboard}>
                     <img alt="logo" src={logo} className="mr-3 h-6 sm:h-10 ml-16 cursor-pointer" />
-                  </Navbar.Brand>
+                  </NavbarBrand>
               </div>
 
              
               <div className="flex items-center gap-[1rem]">
 
-                <DarkThemeToggle />
+                <DarkThemeToggle  />
                 <Menu as="div" className="relative">
                   <div>
                     <Menu.Button className="flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-TranquilBlack">
@@ -92,36 +89,7 @@ const ExampleNavbar: FC<PropsWithChildren<NavbarSidebarLayoutProps>> =
           </div>
         </div>
 
-        <Modal
-          className="min-h-full max-h-40 backdrop-blur-sm  bg-black text-blue-500  "
-          onClose={() => setOpen(false)}
-          show={isOpen}
-        >
-          <form>
-            <div className="relative shadow-2xl">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <IoIosSearch  className="w-5 h-5 text-SharkGray dark:text-SilverSteel "   />
-              </div>
-              <input
-                type="search"
-                id="default-search"
-                className="block w-full p-4 pl-10 text-sm text-DarkBackground border border-SoothingBlueGrey rounded-lg bg-White focus:ring-blue-500 focus:border-blue-500 dark:bg-TranquilBlack dark:border-Hydrocarbon dark:placeholder-SilverSteel dark:text-White dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search Mockups, Logos..."
-                required
-              />
-
-              <button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                }}
-                className="text-White absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </Modal>
+       
       </Navbar>
     );
   };

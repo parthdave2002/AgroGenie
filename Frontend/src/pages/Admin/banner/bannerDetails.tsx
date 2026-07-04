@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBannerlist } from "../../../Store/actions";
 import { useParams } from "react-router";
 import moment from "moment";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 
 const BannerDetailsPage: FC = function () {
   const dispatch = useDispatch();

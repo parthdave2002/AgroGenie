@@ -1,5 +1,5 @@
 import {FC, lazy, Suspense, useEffect, useState } from "react";
-import { Accordion, Button } from "flowbite-react";
+import { Accordion, AccordionContent, AccordionPanel, AccordionTitle, Button } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -19,7 +19,7 @@ const LeaveListPage: FC = function () {
   const [leavelist, setLeavelist] = useState<any>([]);
 
   useEffect(() => {
-   setLeavelist(Leavedatalist?.data)
+   setLeavelist(Leavedatalist?.data ? Leavedatalist?.data : [])
   }, [Leavedatalist]);
 
   const nextMonth = () => setCurrentMonth(prev => prev.clone().add(1, "month"));
@@ -68,11 +68,11 @@ const LeaveListPage: FC = function () {
       render: (leave: any) => (
         <div className="flex flex-col space-y-1">
           {leave?.status === "approved" ?
-            <Button gradientDuoTone="greenToBlue" onClick={() => ChangeStatus(leave?._id, "cancel")}>Cancel</Button>
+            <Button className="PinkButton" onClick={() => ChangeStatus(leave?._id, "cancel")}>Cancel</Button>
             : leave?.status === "pending" ?
             <div className="flex gap-x-4">
-              <Button gradientDuoTone="greenToBlue" onClick={() => ChangeStatus(leave?._id, "approved")}>Approve</Button>
-              <Button gradientDuoTone="purpleToPink" onClick={() => ChangeStatus(leave?._id, "rejected")}>Reject</Button>
+              <Button className="GreenButton" onClick={() => ChangeStatus(leave?._id, "approved")}>Approve</Button>
+              <Button className="PinkButton" onClick={() => ChangeStatus(leave?._id, "rejected")}>Reject</Button>
             </div>
             : <div>-</div>
           }
@@ -80,6 +80,8 @@ const LeaveListPage: FC = function () {
       )
     }
   ];
+
+  console.log(typeof leavelist)
 
   return (
     <Suspense fallback={<div className="p-6 text-center"><LoaderPage /></div>}>
@@ -109,7 +111,7 @@ const LeaveListPage: FC = function () {
             </div>
           </div>
           <div className="self-center">
-            <Button gradientDuoTone="purpleToPink" onClick={() => RequestLeave()} > Add Leave Request </Button>
+            <Button className="PurpleButton" onClick={() => RequestLeave()} > Add Leave Request </Button>
           </div>
         </div>
 
@@ -124,14 +126,13 @@ const LeaveListPage: FC = function () {
             </div>
 
             <Accordion alwaysOpen={true}>
-              {leavelist &&
-                leavelist.map((person: any, index: number) => (
-                  <Accordion.Panel key={index}>
-                    <Accordion.Title className="bg-WhiteMarble dark:bg-Cosmos"> {person.name} </Accordion.Title>
-                    <Accordion.Content className="transition-all ease-in-out duration-300 rounded-lg shadow-lg bg-White dark:bg-TranquilBlack">
+              {leavelist && leavelist.lenght !== 0 && leavelist.map((person: any, index: number) => (
+                  <AccordionPanel key={index}>
+                    <AccordionTitle className="bg-WhiteMarble dark:bg-Cosmos"> {person?.name} </AccordionTitle>
+                    <AccordionContent className="transition-all ease-in-out duration-300 rounded-lg shadow-lg bg-White dark:bg-TranquilBlack">
                       <CommonTable columns={leaveColumns} data={person?.leaves}  />
-                    </Accordion.Content>
-                  </Accordion.Panel>
+                    </AccordionContent>
+                  </AccordionPanel>
                 ))}
             </Accordion>
           </>

@@ -69,7 +69,7 @@ const RolesPage: FC = function () {
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
           {accessList?.add && (
-            <Button gradientDuoTone="greenToBlue" className="whitespace-nowrap text-base font-normal text-DarkBackground dark:text-dark" onClick={() => ModuleListFuncall(row?._id)}> <div className="flex items-center gap-x-2"> <HiKey className="text-lg" /> Role Access List </div>  </Button>
+            <Button className="PurpleButton whitespace-nowrap text-base font-normal text-DarkBackground dark:text-dark" onClick={() => ModuleListFuncall(row?._id)}> <div className="flex items-center gap-x-2"> <HiKey className="text-lg" /> Role Access List </div>  </Button>
           )}
         </div>
       ),
@@ -129,7 +129,7 @@ const RolesPage: FC = function () {
     navigate("/roles/add");
   }
 
-  let Name = "Role List";
+  let Name = "Role";
   let Searchplaceholder = "Search For Role (Name)";
   let AddAccess = accessList?.add;
 

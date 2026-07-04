@@ -107,7 +107,7 @@ const UserListPage: FC = function () {
     navigate(`/users/details/${id}`)
   }
 
-  let Name = "Advisor List";
+  let Name = "Advisor";
   let Searchplaceholder = "Search For Advisor (Name)";
   let AddAccess = accessList?.add;
 
@@ -122,9 +122,9 @@ const UserListPage: FC = function () {
     { key: "actions",  label: "Actions",
        render: (row: any) => (
       <div className="flex items-center gap-x-3">
-        {accessList?.edit && ( <Button gradientDuoTone="greenToBlue" onClick={() => getUserData(row._id)}> <div className="flex items-center gap-x-2"> <HiOutlinePencilAlt className="text-lg" /> Edit Advisor </div> </Button>  )}
-        {accessList?.delete && ( <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Advisor </div> </Button>  )}
-        <Button gradientDuoTone="purpleToBlue" onClick={() => DetailsUserCall(row._id)} > <div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Advisor </div> </Button>
+        {accessList?.edit && ( <Button className="PurpleButton" onClick={() => getUserData(row._id)}> <div className="flex items-center gap-x-2"> <HiOutlinePencilAlt className="text-lg" /> Edit Advisor </div> </Button>  )}
+        {accessList?.delete && ( <Button className="PinkButton" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Advisor </div> </Button>  )}
+        <Button className="PurpleButton" onClick={() => DetailsUserCall(row._id)} > <div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Advisor </div> </Button>
       </div>
     ),
     },

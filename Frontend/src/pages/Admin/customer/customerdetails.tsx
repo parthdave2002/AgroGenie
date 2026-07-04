@@ -7,7 +7,11 @@ import moment from "moment";
 import { CustomerDetails } from "../../../types/types";
 import { WalletRuletypeoption } from "../../../types/dropdown";
 import LoaderPage from "../../../components/common/loader/loader";
-import { getCustomerDatalist, getWalletHistorylist } from "../../../Store/actions";
+import { AddWalletPoint, getCustomerDatalist, getWalletHistorylist } from "../../../Store/actions";
+import { Button } from "flowbite-react";
+import { GiTwoCoins } from "react-icons/gi";
+const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
+const AddWalletpointModal = lazy(() => import("../../../components/common/modal/addwalletpointModal"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
@@ -20,6 +24,20 @@ const CustomerDetailsPage: FC = function () {
   const [WalletDataList, setWalletDataList] = useState<CustomerDetails[]>([]);
   const [UserDataList, setUserDataList] = useState<CustomerDetails[]>([]);
   const Customerlist = useSelector((state: any) => state.Customer.Customerlist);
+
+   // ----------- next Button  Code Start -------------
+      const [TotalListData, setTotalListData] = useState(0);
+      const [CurrentPageNo, setCurrentPageNo] = useState(0);
+      const [PageNo, setPageNo] = useState(1);
+      const [RoePerPage, setRoePerPage] = useState(5);
+    
+      const RowPerPage = (event: any) => {
+        const value = Number(event)
+         setRoePerPage(value);
+         setPageNo(1)
+       };
+      const PageDataList = (data:any) =>{ setPageNo(data)}
+  // ------------- Next button Code End -------------
 
   const { WalletHistorylist, WalletHistorylistSize, TotalWalletHistoryData, CurrentPage } = useSelector((state: any) => ({
     WalletHistorylist: state.Wallet.WalletHistorylist,
@@ -42,26 +60,14 @@ const CustomerDetailsPage: FC = function () {
       dispatch(getWalletHistorylist({ customer_id : id, page:PageNo, size :RoePerPage }))
       dispatch(getCustomerDatalist({ id }));
     }
-  }, [dispatch, id]);
+  }, [dispatch, id, PageNo,RoePerPage ]);
 
   useEffect(() => {
     setUserDataList(Customerlist ? Customerlist : []);
     setLoader(false);
   }, [Customerlist]);
 
-  // ----------- next Button  Code Start -------------
-      const [TotalListData, setTotalListData] = useState(0);
-      const [CurrentPageNo, setCurrentPageNo] = useState(0);
-      const [PageNo, setPageNo] = useState(1);
-      const [RoePerPage, setRoePerPage] = useState(5);
-    
-      const RowPerPage = (event: any) => {
-        const value = Number(event)
-         setRoePerPage(value);
-         setPageNo(1)
-       };
-      const PageDataList = (data:any) =>{ setPageNo(data)}
-  // ------------- Next button Code End -------------
+ 
 
   const customerColumns = useMemo(() => [
     { key: "added_at", label: "Created Date", render: (row: any) => ( <div>{moment(row?.added_at).format("DD-MM-YYYY hh:mm:ss")}</div>) },
@@ -72,6 +78,21 @@ const CustomerDetailsPage: FC = function () {
 
   const customer = UserDataList[0] as any;
 
+  const [ OpenWalletAddModal, setOpenWalletAddModal] = useState(false);
+  const [ SelectedWalletAmt, setSelectedWalletAmt] = useState("");
+
+  const AddWalletCall = () =>{
+    setOpenWalletAddModal(true)
+  }
+
+  const WalletAddCall = (amount: string) =>{
+    let requser= {
+      customer_id : id ,
+      points : amount
+    }
+    dispatch(AddWalletPoint(requser))
+  }
+ 
   const customerDetails = [
     { label: "Name", value: [customer?.firstname, customer?.middlename, customer?.lastname].filter(Boolean).join(" ") || "N/A" },
     { label: "Mobile Number", value: customer?.mobile_number || "N/A" },
@@ -112,13 +133,21 @@ const CustomerDetailsPage: FC = function () {
               </div>
 
               <div className="mt-[4rem]">
-                  <h2 className="text-2xl font-semibold mb-1 text-DarkBackground dark:text-TitaniumWhite"> Wallet History </h2>
+                  <div className="flex justify-between">
+                    <h2 className="text-2xl font-semibold mb-1 text-DarkBackground dark:text-TitaniumWhite"> Wallet History </h2>
+                      <Button className="PurpleButton border-0" onClick={() => AddWalletCall()} >
+                        <div className="flex items-center gap-x-3"> <GiTwoCoins className="text-xl" />  Add Wallet Points </div>
+                      </Button>
+                  </div>
                   <CommonTable columns={customerColumns} data={WalletDataList || []} />
                   <ExamplePagination PageData={PageDataList} RowPerPage={RowPerPage} RowsPerPageValue={RoePerPage} PageNo={PageNo} CurrentPageNo={CurrentPageNo} TotalListData={TotalListData} />
-                </div>
+              </div>
             </div>
           </>
         }
+
+        {OpenWalletAddModal && <AddWalletpointModal OpenWalletAddModal={OpenWalletAddModal} PlaceCall ={WalletAddCall} setOpenWalletAddModal={setOpenWalletAddModal}  setSelectedWalletAmt={setSelectedWalletAmt} SelectedWalletAmt={SelectedWalletAmt}/> }
+        <ToastMessage />
       </NavbarSidebarLayout>
     </>
   );

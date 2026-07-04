@@ -1,6 +1,6 @@
 import { FC, lazy, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import logo from "/images/authentication/logo.webp";
-import { Button, Modal} from "flowbite-react";
+import { Button, Modal, ModalBody, ModalHeader} from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import moment from "moment";
@@ -72,7 +72,7 @@ const OrderListPage : FC = function () {
       }, [Orderlist, TotalOrderData, OrderlistSize, CurrentPage]);
   //  ------------- Get  Data From Reducer Code end --------------
 
-    let Name = "Order List";
+    let Name = "Order";
     let Searchplaceholder = "Search For Orders";
 
     const OrderDetailsCall = (data: any) => {
@@ -185,15 +185,15 @@ const OrderListPage : FC = function () {
         </NavbarSidebarLayout>
 
         <Modal onClose={() => setparcelModal(false)} show={parcelModal} size="xl" dismissible>
-          <Modal.Header className="flex justify-between items-center px-6 py-3 border-b border-WhiteMarble ">
+          <ModalHeader className="flex justify-between items-center px-6 py-3 border-b border-WhiteMarble ">
             <div className="flex items-center gap-4">
               <h2 className="text-lg font-semibold">COD Parcel Invoice</h2>
               <button onClick={Downloadcall} className="inline-flex items-center gap-2 bg-blue-600 text-White text-sm font-medium px-3 py-1.5 rounded hover:bg-blue-700 transition" >   Download  </button>
               <button onClick={printPDF} className="inline-flex items-center gap-2 bg-green-600 text-White text-sm font-medium px-6 py-1.5 rounded hover:bg-green-700 transition" >   Print  </button>
             </div>
-          </Modal.Header>
+          </ModalHeader>
 
-          <Modal.Body className="px-6 py-4 bg-White max-h-[30rem] overflow-scroll">
+          <ModalBody className="px-6 py-4 bg-White max-h-[30rem] overflow-scroll">
             <div
               ref={invoiceRef}
               className="bg-White shadow-md rounded-lg overflow-hidden p-6 text-sm text-black font-[sans-serif] mx-auto max-w-2xl"
@@ -247,7 +247,7 @@ const OrderListPage : FC = function () {
                 </div>
               </div>
             </div>
-          </Modal.Body>
+          </ModalBody>
         </Modal>
       </>
     );

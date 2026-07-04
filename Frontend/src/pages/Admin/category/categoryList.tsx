@@ -8,6 +8,7 @@ import moment from "moment";
 import { FaExchangeAlt, FaExclamationCircle } from "react-icons/fa";
 import { ChangeStatusCategorylist, DeleteCategorylist,  getCategorylist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const LoaderPage = lazy(() => import("../../../components/common/loader/loader"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
@@ -101,12 +102,20 @@ const CategoryListPage: FC = function () {
     navigate(`/category/details/${id}`)
   }
 
+  const [ confirmationModal, setConfirmationModal ] = useState(false);
+  const [ changeStausid, setChangeStatusid ] = useState("")
   const ChangestatusFuncall = (id: any) =>{
-    let requserdata = { id: id};
+    setConfirmationModal(true);
+    setChangeStatusid(id)
+  }
+  const ChangestatusCall = () =>{
+    let requserdata = { id: changeStausid};
     dispatch(ChangeStatusCategorylist(requserdata)); 
+    setConfirmationModal(false);
+    setChangeStatusid("")
   }
 
-  let Name = "Category List";
+  let Name = "Category";
   let Searchplaceholder = "Search For Category (Name)";
   let AddAccess = accessList?.add;
 
@@ -128,9 +137,9 @@ const CategoryListPage: FC = function () {
         label: "Actions",
         render: (row: any) => (
           <div className="flex items-center gap-x-3">
-            {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
-            {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Category </div> </Button> : null}
-            {accessList?.view ? <Button gradientDuoTone="purpleToPink" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Category</div> </Button> : null}
+            {accessList?.edit ? <Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+            {accessList?.delete ? <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Category </div> </Button> : null}
+            {accessList?.view ? <Button className="PurpleButton" onClick={() => DetailsFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" />  Details Category</div> </Button> : null}
           </div>
         ),
       },
@@ -152,6 +161,12 @@ const CategoryListPage: FC = function () {
       {isOpenDelteModel && (
         <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
           <DeleteModalPage isOpenDelteModel={isOpenDelteModel} name={"Category"} setisOpenDelteModel={setisOpenDelteModel} DelCall={DeleteCategoryData} />
+        </Suspense>
+      )}
+
+      {confirmationModal && (
+        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+          <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
         </Suspense>
       )}
 

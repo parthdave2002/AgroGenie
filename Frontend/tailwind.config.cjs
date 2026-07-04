@@ -30,8 +30,8 @@ module.exports = {
       Cultured:         "#F5F5FA",
       Red:              "#e71616",
       danger:           "#f87171",
-      deletebutton:     "#ff6969",
-      addbutton:        "#5db55d",
+      deletebutton:     "#c01212",
+      addbutton:        "#3f8e00",
       Platinum:         "#e3e3e3",
     },
     fontFamily: {

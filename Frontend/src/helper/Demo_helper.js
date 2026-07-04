@@ -219,6 +219,7 @@ export const StatusCouponlistApi = async (requserdata) => await api.delete(url.C
 
 //  wallet Rules API
 export const WalletHistoryApi = (requserdata) => api.get(url.GET_WALLET_HISTORY_LIST, requserdata);
+export const WalletPointAddApi = (requserdata) => api.create(url.ADD_WALLET_POINTS_LIST, requserdata);
 export const WalletRulesApi = (requserdata) => api.get(url.GET_WALLET_RULES_LIST, requserdata);
 export const AddWalletRulesApi = async (requserdata) => await api.create(url.ADD_WALLET_RULES_LIST, requserdata);
 export const DelWalletRulesApi = async (requserdata) => await api.delete(url.DELETE_WALLET_RULES_LIST, requserdata);

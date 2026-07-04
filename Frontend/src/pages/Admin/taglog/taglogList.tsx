@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import moment from "moment";
 import { FaExchangeAlt } from "react-icons/fa";
-import { BiSolidAddToQueue } from "react-icons/bi";
+import { BiAddToQueue } from "react-icons/bi";
 import { ChangeStatusTagloglist, DeleteTagloglist,  getTagloglist } from "../../../Store/actions";
 import LoaderPage from "../../../components/common/loader/loader";
 import UseAccessList from "../../../hooks/useAccessList";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
@@ -96,10 +97,18 @@ const TaglogListPage: FC = function () {
   const DetailsPageCall = (id:any) =>{
     navigate(`/taglog/details/${id}`)
   }
-
-  const ChangestatusFuncall = (id: any) => {
-    let rqeuserdata = { id: id };
-    dispatch(ChangeStatusTagloglist(rqeuserdata))
+  
+  const [ confirmationModal, setConfirmationModal ] = useState(false);
+  const [ changeStausid, setChangeStatusid ] = useState("")
+  const ChangestatusFuncall = (id: any) =>{
+    setConfirmationModal(true);
+    setChangeStatusid(id)
+  }
+  const ChangestatusCall = () =>{
+    let requserdata = { id: changeStausid};
+    dispatch(ChangeStatusTagloglist(requserdata)); 
+    setConfirmationModal(false);
+    setChangeStatusid("")
   }
 
   const getEditTaglogData = (id:any) =>{
@@ -110,7 +119,7 @@ const TaglogListPage: FC = function () {
     navigate(`/subtaglog/add/${id}`)
   }
 
-  let Name = "Taglog List";
+  let Name = "Taglog";
   let Searchplaceholder = "Search For Taglog (Name)";
   let AddAccess = accessList?.add;
 
@@ -134,10 +143,10 @@ const TaglogListPage: FC = function () {
       label: "Actions",
        render: (row: any) => (
          <div className="flex items-center gap-x-3">
-           {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
-           {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Taglog </div> </Button> : null}
-           {accessList?.add ? <Button gradientDuoTone="greenToBlue" onClick={() => AddSubTaglogData(row?._id)} > <div className="flex items-center gap-x-2">  <BiSolidAddToQueue className="text-lg" />  Add Sub-Taglog  </div></Button> : null}
-           {accessList?.add ? <Button gradientDuoTone="greenToBlue" onClick={() => getEditTaglogData(row?._id)} > <div className="flex items-center gap-x-2">  <BiSolidAddToQueue className="text-lg" />  Sub-Taglog  </div></Button> : null}
+           {accessList?.edit ? <Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+           {accessList?.delete ? <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Taglog </div> </Button> : null}
+           {accessList?.add ? <Button className="PurpleButton" onClick={() => AddSubTaglogData(row?._id)} > <div className="flex items-center gap-x-2">  <BiAddToQueue className="text-lg" />  Add Sub-Taglog  </div></Button> : null}
+           {accessList?.add ? <Button className="PurpleButton" onClick={() => getEditTaglogData(row?._id)} > <div className="flex items-center gap-x-2">  <BiAddToQueue className="text-lg" />  Sub-Taglog  </div></Button> : null}
          </div>
     ),
     },
@@ -158,6 +167,12 @@ const TaglogListPage: FC = function () {
         {isOpenDelteModel && (
           <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"taglog"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DeletepackingType} />
+          </Suspense>
+        )}
+
+        {confirmationModal && (
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+            <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
           </Suspense>
         )}
 
