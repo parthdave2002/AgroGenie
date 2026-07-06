@@ -360,7 +360,7 @@ export default function KanbanBoard() {
             <div onDragOver={handleDragOver} onDrop={(e) => handleTaskDrop(e, column.id)} className="flex-1 p-4 space-y-3 overflow-y-auto min-h-[400px] max-h-[600px]">
               {column?.tasks.map((task) => (
                 <div key={task.id} draggable onDragStart={(e) => handleTaskDragStart(e, column.id, task.id)} onClick={() => handleTaskClick(task)}
-                  className="bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-xl p-3 cursor-move hover:shadow-md transition-shadow group"
+                  className="PurpleButton border border-slate-200 rounded-xl p-3 cursor-move hover:shadow-md transition-shadow group"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1">

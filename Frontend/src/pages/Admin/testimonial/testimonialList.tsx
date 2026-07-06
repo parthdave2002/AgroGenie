@@ -1,4 +1,4 @@
-import { Button, Table} from "flowbite-react";
+import { Button } from "flowbite-react";
 import type { FC } from "react";
 import { HiTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
@@ -94,7 +94,7 @@ const TestimonialListPage: FC = function () {
     navigate("/testimonial/add")
   },[navigate]);
 
-  let Name = "Testimonial List";
+  let Name = "Testimonial";
   let Searchplaceholder = "Search For Testimonial (Name)";
   let AddAccess = accessList?.add;
 
@@ -146,7 +146,7 @@ const TestimonialListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.delete && ( <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Testimonial </div> </Button> )}
+          {accessList?.delete && ( <Button className="PinkButton" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" /> Delete Testimonial </div> </Button> )}
         </div>
       ),
     },

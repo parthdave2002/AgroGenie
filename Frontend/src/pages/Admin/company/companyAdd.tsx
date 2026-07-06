@@ -6,9 +6,10 @@ import Select from "react-select";
 import { Form, FormFeedback } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { AddCompanylist, ResetCompanylist } from "../../../Store/actions"
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+import { AddCompanylist, ResetCompanylist } from "../../../Store/actions";
+import { isactiveoption } from "../../../types/dropdown";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
@@ -63,11 +64,6 @@ const CompanyAddPage : FC = function () {
           dispatch(AddCompanylist(requserdata));
         },
     });
-
-    const isactiveoption =[
-        { label :"Active", value : true },
-        { label :"Inactive", value : false }
-    ]
 
     // ------------- Get  Data From Reducer Code Start --------------
         const  AddCompanyDatalist  = useSelector((state: any) =>  state.Company.AddCompanylist);

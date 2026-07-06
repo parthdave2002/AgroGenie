@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import {  Dropdown } from "flowbite-react";
+import {  Dropdown, DropdownItem } from "flowbite-react";
 import { saveAs } from "file-saver";
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
@@ -146,8 +146,8 @@ const ExportDataModal: FC<IExportDataModalProps> = ({
   return (
     <>
         <Dropdown inline label="Export">
-          <Dropdown.Item onClick={() => fetchData("csv")}>Export CSV</Dropdown.Item>
-          <Dropdown.Item onClick={() => fetchData("excel")}>Export Excel</Dropdown.Item>  
+          <DropdownItem onClick={() => fetchData("csv")}>Export CSV</DropdownItem>
+          <DropdownItem onClick={() => fetchData("excel")}>Export Excel</DropdownItem>  
         </Dropdown>
     </>
   );

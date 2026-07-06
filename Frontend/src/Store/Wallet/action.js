@@ -3,6 +3,10 @@ import {
   GET_WALLET_HISTORY_LIST_SUCCESS,
   GET_WALLET_HISTORY_LIST_ERROR,
 
+  ADD_WALLET_POINTS_LIST,
+  ADD_WALLET_POINTS_LIST_SUCCESS,
+  ADD_WALLET_POINTS_LIST_ERROR,
+
   GET_WALLET_RULES_LIST,
   GET_WALLET_RULES_LIST_SUCCESS,
   GET_WALLET_RULES_LIST_ERROR,
@@ -39,6 +43,20 @@ export const getWalletHistorylistFail = (actionType, error) => ({
   payload: { actionType, error },
 });
 
+export const AddWalletPoint = (requserdata) => ({
+  type: ADD_WALLET_POINTS_LIST,
+  payload: requserdata,
+});
+
+export const AddWalletPointSuccess = (actionType, data) => ({
+  type: ADD_WALLET_POINTS_LIST_SUCCESS,
+  payload: { actionType, data },
+});
+
+export const AddWalletPointFail = (actionType, error) => ({
+  type: ADD_WALLET_POINTS_LIST_ERROR,
+  payload: { actionType, error },
+});
 
 export const getWalletRulelist = (requserdata) => ({
   type: GET_WALLET_RULES_LIST,

@@ -7,10 +7,10 @@ import { Form, FormFeedback } from "reactstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
 import { AddBannerlist, ResetBannerlist } from "../../../Store/actions";
+const ImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/imageuploader"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const BannerAddPage: FC = function () {

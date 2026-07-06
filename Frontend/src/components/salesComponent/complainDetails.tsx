@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import { Button, Label, Modal } from 'flowbite-react';
+import { Button, Label, Modal, ModalHeader } from 'flowbite-react';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -94,7 +94,7 @@ const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComp
   return (
     <div>
         <Modal onClose={() => setisOpenComplainModel(false)} show={isOpenComplainModel} size="6xl" className="backdrop-blur-sm p-3" >
-            <Modal.Header>   <div className='text-[2rem] dark:text-WhiteMarble font-bold'> Complain Details  </div>   </Modal.Header>
+            <ModalHeader>   <div className='text-[2rem] dark:text-WhiteMarble font-bold'> Complain Details  </div>   </ModalHeader>
             <div className='p-3'>
                 
             {UserComplainDataList?.resolution == "open" ?
@@ -143,9 +143,9 @@ const ComplainDetails : FC <ComplainProps> = ({setisOpenComplainModel,isOpenComp
                               </div>
                           </div>
                           <div className='flex gap-x-3 justify-end'>
-                             <Button type='submit' className='mt-3 mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0' onClick={() => setComplainResolution("open") } ><div className='flex items-center gap-x-3'> <FaQuestionCircle  className="text-xl "  /> Add Comment </div> </Button>
+                             <Button type='submit' className='mt-3 mt-3 PurpleButton border-0' onClick={() => setComplainResolution("open") } ><div className='flex items-center gap-x-3'> <FaQuestionCircle  className="text-xl "  /> Add Comment </div> </Button>
                             {UserComplainDataList?.is_resolved_by == true ?  
-                            <Button type='submit' className='mt-3 mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0' onClick={() => setComplainResolution("close") } ><div className='flex items-center gap-x-3'> <FaPuzzlePiece  className="text-xl "/> Resolved   </div>   </Button> 
+                            <Button type='submit' className='mt-3 mt-3 PurpleButton border-0' onClick={() => setComplainResolution("close") } ><div className='flex items-center gap-x-3'> <FaPuzzlePiece  className="text-xl "/> Resolved   </div>   </Button> 
                               : null  }  
                           </div>                
                       </div>

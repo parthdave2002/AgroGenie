@@ -123,7 +123,7 @@ const ChatingList = ({ socket, UserId, setOpenUserChat }: ChatUserProps) => {
           <p className="text-xs text-slate-500">{isTyping ? "typing..." : "Online"}</p>
         </div>
 
-        <div className="h-12 w-12 rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-White font-semibold shadow-sm">
+        <div className="h-12 w-12 rounded-3xl PurpleButton flex items-center justify-center shadow-sm">
           {UserId?.name?.charAt(0)}
         </div>
       </div>

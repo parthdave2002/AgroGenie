@@ -8,9 +8,9 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddCategorylist, ResetCategorylist } from "../../../Store/actions";
-import ImageUploadPreview from "../../../components/common/inputComponent/imageuploader";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
-import Inputbox from "../../../components/common/inputComponent/inputbox";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const Inputbox = lazy(() => import("../../../components/common/inputComponent/inputbox"));
+const ImageUploadPreview = lazy(() => import("../../../components/common/inputComponent/imageuploader"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 const CategoryAddPage : FC = function () {

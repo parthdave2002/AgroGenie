@@ -32,23 +32,38 @@ const WarehouseDetailsPage: FC = function () {
 
   useEffect(() =>{
     if(id){
-      dispatch(getWarehouselist({ id : id}))   
+      let requser ={
+        id : id,
+        page : PageNo,
+        size : RoePerPage
+      }
+      dispatch(getWarehouselist(requser))   
     }
-  },[id]);
+  },[id, PageNo, RoePerPage]);
   
-  const Warehouselist = useSelector((state: any) => state.Warehouse.Warehouselist);
+
+  const { Warehouselist, WarehouselistSize, TotalWarehouses, CurrentPage } = useSelector((state: any) => ({
+      Warehouselist: state.Warehouse.Warehouselist,
+      WarehouselistSize : state.Warehouse.WarehouselistSize,
+      TotalWarehouses : state.Warehouse.TotalWarehouses,
+      CurrentPage : state.Warehouse.CurrentPage
+  }));
+  
   useEffect(() => {  
     setWarehouselistData(Warehouselist ? Warehouselist : null);
-  }, [Warehouselist]);
+    setProductList(Warehouselist?.products ? Warehouselist?.products : null);
+    setTotalListData(TotalWarehouses ? TotalWarehouses : null);
+    setCurrentPageNo(CurrentPage ? CurrentPage : 1);
+  }, [Warehouselist, WarehouselistSize, TotalWarehouses, CurrentPage]);
 
   let Name = "Warehouse Details";
   let ParentName = "Warehouse List";
   let ParentLink = "/warehouse/list";
 
    const productColumns = useMemo(() => [
+     { key: "image", label : "Image", render:(row:any) =>  <img src={row?.product_pics[0]} alt={row?.name?.englishname} className="h-[3rem] w-[3rem] rounded-md"  />  },
      { key: "name", label: "Name", render: (row: any) => ( <span className="whitespace-nowrap max-w-[35rem] truncate text-ellipsis text-base font-medium text-DarkBackground dark:text-White py-0 cursor-pointer"> {row?.name?.englishname || "-"} </span> ) },
      { key: "categories", label: "Category", render: (row: any) => row?.categories?.name_eng || "-"},
-     { key: "warehouse", label: "warehouse", render: (row: any) => row?.warehouse?.name || "-" },
      { key: "avl_qty", label: "Avl Qty" },
      { key: "price", label: "Price" },
      { key: "is_active", label: "Status", render: (row: any) => row.is_active ? <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-green-400"></div> Active </div> : <div className="flex items-center"> <div className="mr-2 h-2.5 w-2.5 rounded-full bg-red-500"></div> Deactive </div> },

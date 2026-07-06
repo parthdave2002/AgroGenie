@@ -6,7 +6,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import logo from "/images/authentication/logo.webp";
 import { Button } from "flowbite-react";
-import { FaPrint } from "react-icons/fa6";
+import { FaPrint } from "react-icons/fa";
 import { MdFileDownload } from "react-icons/md";
 import { getOrderlist  } from "../../../Store/actions";
 import { OrderDetailsType } from "../../../types/types";

@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const otherHelper = require('../../helper/others.helper');
 const walletSchema = require('../../schema/walletSchema');
+const CustomerSchema = require('../../schema/customerSchema');
 const walletHistorySchema = require('../../schema/walletTransactionSchema');
 const walletController = {};
 
@@ -86,6 +87,26 @@ walletController.getWalletHistory = async (req, res, next) => {
     const pulledData = await otherHelper.getQuerySendResponse(walletHistorySchema, page, size, sortQuery, searchQuery, selectQuery, next, populate);
 
     return otherHelper.paginationSendResponse(res, httpStatus.OK, true, pulledData.data, 'Wallet history get successfully', page, size, pulledData.totalData);
+  } catch (err) {
+    next(err);
+  }
+};
+
+walletController.AddWalletPoints = async (req, res, next) => {
+  try {
+    const { customer_id, points } = req.body;
+    if (!customer_id || !points) return otherHelper.sendResponse(res, httpStatus.BAD_REQUEST, false, null, null, 'Customer ID and points are required', null);
+
+    const customerData = await CustomerSchema.findById(customer_id);
+    if (!customerData) return otherHelper.sendResponse(res, httpStatus.NOT_FOUND, false, null, null, 'Customer not found', null);
+
+    customerData.wallet_points = Number(customerData.wallet_points || 0) + Number(points);
+    await customerData.save();
+
+    const newWalletTransaction = new walletHistorySchema({ customer_id, points, event_type: 'ADMIN_ADDED' });
+    await newWalletTransaction.save();
+    return otherHelper.sendResponse(res, httpStatus.OK, true, newWalletTransaction, null, 'Wallet points added successfully', null);
+  
   } catch (err) {
     next(err);
   }

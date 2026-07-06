@@ -3,8 +3,8 @@ import { FC,  lazy, useEffect, useState, } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import moment from "moment";
-import NavbarSidebarLayout from "../../../layouts/navbar-sidebar";
 import { getPackingTypelist } from "../../../Store/actions";
+const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
 
 
@@ -20,9 +20,7 @@ const CropsDetailsPage: FC = function () {
     }
   },[id]);
   
-  const { Packingtypelist } = useSelector((state: any) => ({
-    Packingtypelist: state.PackingType.Packingtypelist,
-  }));
+  const Packingtypelist = useSelector((state: any) => (state.PackingType.Packingtypelist));
 
   useEffect(() => {  
     setPackingTypeList(Packingtypelist ? Packingtypelist : null);

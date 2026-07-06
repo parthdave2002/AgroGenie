@@ -82,7 +82,7 @@ const CustomerListPage : FC = function () {
       navigate(`/customer/details/${id}`)
     }
 
-    let Name = "Customer List";
+    let Name = "Customer";
     let Searchplaceholder = "Search For Customers (Name)";
 
       const customerColumns = useMemo(() => [
@@ -129,7 +129,8 @@ const CustomerListPage : FC = function () {
           label: "Actions",
           render: (row: any) => (
             <div className="flex items-center gap-x-3">
-              {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => BlockUserCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold">  {row?.is_deleted == true ? <FaUnlock className="text-lg" /> : <FaUserLock className="text-xl" />}  {row?.is_deleted == true ? "Unblock" : "Block"}  </div> </Button> : null} <Button gradientDuoTone="purpleToBlue" onClick={() => DetailsCustomerCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Customer  </div> </Button>
+              {accessList?.delete ? <Button className="PinkButton" onClick={() => BlockUserCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold">  {row?.is_deleted == true ? <FaUnlock className="text-lg" /> : <FaUserLock className="text-xl" />}  {row?.is_deleted == true ? "Unblock" : "Block"}  </div> </Button> : null} 
+              <Button className="PurpleButton" onClick={() => DetailsCustomerCall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Customer  </div> </Button>
             </div>
           ),
         },

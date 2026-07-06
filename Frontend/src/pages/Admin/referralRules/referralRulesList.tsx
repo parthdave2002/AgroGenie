@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getReferralRulelist, DeleteReferralRulelist, ChangeStatusReferralRulelist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
@@ -92,11 +93,20 @@ const ReferralRuleListPage: FC = function () {
   const OpenAddModel = () =>{
     navigate("/referral-rules/add")
   }
-
-  const ChangestatusFuncall = (id:any) =>{
-      let rqeuserdata = { id: id };
-      dispatch(ChangeStatusReferralRulelist(rqeuserdata))
-  }
+  
+    const [ confirmationModal, setConfirmationModal ] = useState(false);
+    const [ changeStausid, setChangeStatusid ] = useState("")
+    const ChangestatusFuncall = (id: any) =>{
+      setConfirmationModal(true);
+      setChangeStatusid(id)
+    }
+    const ChangestatusCall = () =>{
+      let requserdata = { id: changeStausid};
+      dispatch(ChangeStatusReferralRulelist(requserdata)); 
+      setConfirmationModal(false);
+      setChangeStatusid("")
+    }
+  
 
   let Name = "Referral Rules List";
   let Searchplaceholder = "Search For Referral Rules";
@@ -128,8 +138,8 @@ const ReferralRuleListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
-          {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Referral Rules</div> </Button> : null}
+          {accessList?.edit ? <Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+          {accessList?.delete ? <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Referral Rules</div> </Button> : null}
         </div>
       ),
     },
@@ -151,6 +161,12 @@ const ReferralRuleListPage: FC = function () {
         {isOpenDelteModel && (
           <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"> <div className="text-white">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Referral Rule"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DeleteCrop} />
+          </Suspense>
+        )}
+
+        {confirmationModal && (
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+            <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
           </Suspense>
         )}
       <ToastMessage />       

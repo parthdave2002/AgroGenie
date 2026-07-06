@@ -378,3 +378,9 @@ export interface OrderDetailsType {
       is_resolved_by :boolean;
       resolution : string;
   }
+
+  export interface ConfirmationModalProps{
+      confirmationModal: boolean;
+      setConfirmationModal: (value: boolean) => void;
+      ConfirmCall: () => void;
+  }

@@ -9,6 +9,7 @@ import UseAccessList from "../../../hooks/useAccessList";
 import LoaderPage from "../../../components/common/loader/loader";
 import { FaExchangeAlt } from "react-icons/fa";
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../../components/common/breadcrumb/breadcrumb"));
@@ -91,6 +92,19 @@ const UserCategoryListPage: FC = function () {
     setisOpenDelteModel(true);
   }, []);
 
+    const [ confirmationModal, setConfirmationModal ] = useState(false);
+    const [ changeStausid, setChangeStatusid ] = useState("")
+    const ChangestatusFuncall = (id: any) =>{
+      setConfirmationModal(true);
+      setChangeStatusid(id)
+    }
+    const ChangestatusCall = () =>{
+      let requserdata = { id: changeStausid};
+      // dispatch(ChangeStatusCategorylist(requserdata)); 
+      setConfirmationModal(false);
+      setChangeStatusid("")
+    }
+
   const DelAdvCategory = () => {
     let rqeuserdata = { id: Delete_id };
     dispatch(DeleteUserCategorylist(rqeuserdata));
@@ -115,8 +129,8 @@ const UserCategoryListPage: FC = function () {
     { key: "actions",  label: "Actions",
        render: (row: any) => (
       <div className="flex items-center gap-x-3">
-        {accessList?.edit && ( <Button gradientDuoTone="greenToBlue" onClick={() => getUserData(row._id)}> <div className="flex items-center gap-x-2"> <HiOutlinePencilAlt className="text-lg" /> Edit Advisor Category </div> </Button>  )}
-        {accessList?.delete && ( <Button gradientDuoTone="greenToBlue" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"><FaExchangeAlt className="text-lg font-semibold" />  Change status</div> </Button> )}
+        {accessList?.edit && ( <Button className="PurpleButton" onClick={() => getUserData(row._id)}> <div className="flex items-center gap-x-2"> <HiOutlinePencilAlt className="text-lg" /> Edit Advisor Category </div> </Button>  )}
+        {accessList?.delete && ( <Button className="PurpleButton" onClick={() => DeleteFuncall(row._id)}> <div className="flex items-center gap-x-2 deletebutton"><FaExchangeAlt className="text-lg font-semibold" />  Change status</div> </Button> )}
       </div>
     ),
     },
@@ -138,6 +152,12 @@ const UserCategoryListPage: FC = function () {
           <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Advisor category"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DelAdvCategory} />
           </Suspense>
+      )}
+
+      {confirmationModal && (
+        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+          <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
+        </Suspense>
       )}
       
       <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>

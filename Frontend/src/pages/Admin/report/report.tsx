@@ -252,7 +252,7 @@ const farmerColumns = useMemo(() => [
 ], []);
 // ================ Order code end =================
 
-  let Name = "Report Page";
+  let Name = "Reports";
 
   return (
     <>
@@ -301,7 +301,7 @@ const farmerColumns = useMemo(() => [
             </div>
 
             {selectedStatusid != "" ? 
-              <Button  gradientDuoTone="purpleToPink"  onClick={() => GetdataCall()} > <div className="flex items-center gap-x-3 w-[5rem] text-center"> <FaSearch /> Submit </div>  </Button>
+              <Button className="GreenButton" onClick={() => GetdataCall()} > <div className="flex items-center gap-x-3 w-[5rem] text-center"> <FaSearch /> Submit </div>  </Button>
              : null}
 
             {selectedStatusid != ""  && showReportData == true ? 
@@ -315,38 +315,6 @@ const farmerColumns = useMemo(() => [
             ) : showReportData && selectedStatusid == "farmer" ? (
                <CommonTable columns={farmerColumns} data={Customerdata || []}/>
             ) : showReportData && selectedStatusid == "lead" ? 
-              // <Table className="min-w-full divide-y divide-WhiteMarble dark:divide-Hydrocarbon">
-              //   <Table.Head className="bg-TitaniumWhite dark:bg-TranquilBlack">
-              //     <Table.HeadCell> <Checkbox id="select-all" name="select-all" /> </Table.HeadCell>
-              //     <Table.HeadCell>Name</Table.HeadCell>
-              //     <Table.HeadCell>Company</Table.HeadCell>
-              //     <Table.HeadCell>Qty</Table.HeadCell>
-              //     <Table.HeadCell>cgst</Table.HeadCell>
-              //     <Table.HeadCell>sgst</Table.HeadCell>
-              //     <Table.HeadCell>price</Table.HeadCell>
-              //     <Table.HeadCell>discount</Table.HeadCell>
-              //     <Table.HeadCell>caetgory</Table.HeadCell>
-              //     <Table.HeadCell>created at</Table.HeadCell>
-              //   </Table.Head>
-
-              //   <Table.Body className="divide-y divide-WhiteMarble bg-White dark:divide-TranquilBlack dark:bg-Cosmos">
-              //     {Productdata &&
-              //       Productdata.map((item: any, k: any) => (
-              //         <Table.Row  key={k} className="hover:bg-TitaniumWhite dark:hover:bg-TranquilBlack"  >
-              //           <Table.Cell className="w-4 py-0" style={{ paddingTop: "1", paddingBottom: "1" }} >  <Checkbox /> </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.name}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item?.company?.name}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.avl_qty} </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.c_gst}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.s_gst} </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">  {item.price}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">   {item.discount}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">    {item.categories?.name}  </Table.Cell>
-              //           <Table.Cell className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0"> {moment(item.added_at).format("DD-MM-YYYY hh:mm:ss")} </Table.Cell>
-              //         </Table.Row>
-              //       ))}
-              //   </Table.Body>
-              // </Table>
                <CommonTable columns={userColumns} data={Userdata || []}/>
            : showReportData && selectedStatusid == "order" ? (
                <CommonTable columns={orderColumns} data={Orderdata || []}/>

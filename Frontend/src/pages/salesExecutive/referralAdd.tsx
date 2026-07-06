@@ -1,7 +1,7 @@
 import React, { lazy, FC, useState, useEffect, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Button, Modal } from 'flowbite-react';
+import { Button, Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import { Form } from "reactstrap";
 import * as Yup from 'yup';
 import Inputbox from '../../components/common/inputComponent/inputbox';
@@ -122,16 +122,14 @@ const AddReferralFarmer : FC  = () => {
             </div>
 
             <div className="flex gap-x-3 justify-end mt-[1rem]">
-              <Button className="bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0 "  type="submit" > Add Referral </Button>
+              <Button className="PurpleButton border-0 "  type="submit" > Add Referral </Button>
             </div>
           </Form>
       </div>
 
       <Modal onClose={() => setModalReferral(false)} show={modalReferral} size="xl">
-           <Modal.Header className="px-6 pt-6 pb-0"> <span className="sr-only">Delete </span></Modal.Header>
-          <Modal.Body>
-                Close
-          </Modal.Body>
+          <ModalHeader className="px-6 pt-6 pb-0"> <span className="sr-only">Delete </span></ModalHeader>
+          <ModalBody> Close </ModalBody>
       </Modal>
     </>
   )

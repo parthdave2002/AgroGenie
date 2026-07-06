@@ -1,7 +1,5 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import theme from "./flowbite-theme";
-import { Flowbite } from "flowbite-react";
 import { Provider } from "react-redux";
 import { configureStore } from "./Store";
 import App from "./App";
@@ -17,13 +15,11 @@ if (!container) {
 const root = createRoot(container);
 
 root.render(
-    <Flowbite theme={{ theme }}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Autologout>
-            <App />
-          </Autologout>
-        </PersistGate>
-      </Provider>
-    </Flowbite>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <Autologout>
+        <App />
+      </Autologout>
+    </PersistGate>
+  </Provider>
 );

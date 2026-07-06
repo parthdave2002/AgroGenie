@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { lazy,FC, Suspense, useEffect, useState, useCallback, useMemo } from "react";
 import { Button } from "flowbite-react";
-import { HiOutlinePencilAlt, HiTrash} from "react-icons/hi";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 import moment from "moment";
 import { useNavigate } from "react-router";
 import { FaExchangeAlt } from "react-icons/fa";
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWalletRulelist, DeleteWalletRulelist, ChangeStatusWalletRulelist } from "../../../Store/actions";
 import UseAccessList from "../../../hooks/useAccessList";
 const NavbarSidebarLayout = lazy(() => import("../../../layouts/navbar-sidebar"));
+const ChangeStausModal = lazy(() => import("../../../components/common/modal/changeStatusModal"));
 const CommonTable = lazy(() => import("../../../components/common/table/commonTable"));
 const DeleteModalPage = lazy(() => import("../../../components/common/modal/deleteModal"));
 const ToastMessage = lazy(() => import("../../../components/common/toastmessage/ToastMessage"));
@@ -93,10 +94,18 @@ const WalletRuleListPage: FC = function () {
     navigate("/wallet-rules/add")
   }
 
-  const ChangestatusFuncall = (id:any) =>{
-    let rqeuserdata = { id: id };
-    dispatch(ChangeStatusWalletRulelist(rqeuserdata))
-  }
+   const [ confirmationModal, setConfirmationModal ] = useState(false);
+    const [ changeStausid, setChangeStatusid ] = useState("")
+    const ChangestatusFuncall = (id: any) =>{
+      setConfirmationModal(true);
+      setChangeStatusid(id)
+    }
+    const ChangestatusCall = () =>{
+      let requserdata = { id: changeStausid};
+      dispatch(ChangeStatusWalletRulelist(requserdata)); 
+      setConfirmationModal(false);
+      setChangeStatusid("")
+    }
 
   const UpdatestatusFuncall = (id: string) =>{
     navigate(`/wallet-rules/edit/${id}`);
@@ -132,9 +141,9 @@ const WalletRuleListPage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => UpdatestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <HiOutlinePencilAlt className="text-lg font-semibold" />  Update Wallet Rules </div> </Button> : null}
-          {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
-          {/* {accessList?.delete ? <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Wallet Rules</div> </Button> : null} */}
+          {accessList?.edit ? <Button className="PurpleButton" onClick={() => UpdatestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <HiOutlinePencilAlt className="text-lg font-semibold" />  Update Wallet Rules </div> </Button> : null}
+          {accessList?.edit ? <Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+          {/* {accessList?.delete ? <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete Wallet Rules</div> </Button> : null} */}
         </div>
       ),
     },
@@ -156,6 +165,12 @@ const WalletRuleListPage: FC = function () {
         {isOpenDelteModel && (
           <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div> }>
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Referral Rule"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={DeleteCrop} />
+          </Suspense>
+        )}
+
+        {confirmationModal && (
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+            <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
           </Suspense>
         )}
       <ToastMessage />       

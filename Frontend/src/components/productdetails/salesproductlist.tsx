@@ -95,7 +95,7 @@ const Salesproductlist : FC <PorductData> = ({searchData, ProductDetailsCall, is
             { key: "action", label: "Action",
               render: (item: any) => item?.avl_qty !== 0 ? (
                   <span className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White py-0">
-                    <Button className="bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0" onClick={() => AddtoCartCall(item)} >
+                    <Button className="PurpleButton" onClick={() => AddtoCartCall(item)} >
                       <div className="flex items-center gap-x-3"> <FaCartArrowDown className="text-xl" />  Add to Cart </div>
                     </Button>
                   </span>

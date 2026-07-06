@@ -1,12 +1,12 @@
 import React, { FC, lazy, useEffect, useState } from 'react'
-import { Table } from "flowbite-react";
+import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
 import { FaGhost, FaWindowClose } from 'react-icons/fa'
 import moment from 'moment';
 import Cookies from 'js-cookie';
 import { Input } from 'reactstrap';
 import { toast } from 'react-toastify';
 import { HiTrash } from 'react-icons/hi';
-import { FaCartShopping } from 'react-icons/fa6';
+import { FaShoppingCart } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsCartXFill } from 'react-icons/bs';
 import { Cartprops, ProfileInfo } from '../../types/types';
@@ -238,7 +238,7 @@ const CartList : FC<Cartprops> = ({setCartOpen,CartData, handleRemoveCall, setCa
     <>
       <div className='flex justify-between'>
         <div className="text-[2rem] font-semibold text-DarkBackground dark:text-TitaniumWhite"> Cart : {cartOrderid}</div>
-        {cartOrderid ?  <div className="flex border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full gap-3 hover:bg-indigo-800 transition flex text-center cursor-pointer transition-all duration-500 ease-in-out text-center self-center"  onClick={() => setCartOpen(false)} > <FaCartShopping className="self-center h-5 w-5" /> Countine Shopping </div>  :  null}
+        {cartOrderid ?  <div className="flex border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full gap-3 hover:bg-indigo-800 transition flex text-center cursor-pointer transition-all duration-500 ease-in-out text-center self-center"  onClick={() => setCartOpen(false)} > <FaShoppingCart className="self-center h-5 w-5" /> Countine Shopping </div>  :  null}
         <div className="text-[2rem] font-semibold text-DarkBackground dark:text-TitaniumWhite flex self-center cursor-pointer " onClick={() => CloseCall()}> <FaWindowClose /> </div>
       </div>
 
@@ -248,36 +248,36 @@ const CartList : FC<Cartprops> = ({setCartOpen,CartData, handleRemoveCall, setCa
             <div className=" h-full w-full flex gap-x-4 shadow shadow-indigo-500/50 rounded-xl p-3 ">
               <div className="w-full  overflow-y-auto">
                 <Table className="min-w-full divide-y divide-WhiteMarble dark:divide-Hydrocarbon">
-                  <Table.Head className="bg-TitaniumWhite dark:bg-TranquilBlack">
-                    <Table.HeadCell className='text-center'>Item</Table.HeadCell>
-                    <Table.HeadCell className='text-center'>Rate</Table.HeadCell>
-                    <Table.HeadCell className='text-center'>Discount</Table.HeadCell>
-                    <Table.HeadCell className='text-center'>Qty</Table.HeadCell>
-                    <Table.HeadCell className='text-center'>Sub Total</Table.HeadCell>
-                    <Table.HeadCell className='text-center'>GST</Table.HeadCell>
-                    <Table.HeadCell className='text-center'>Total Amount</Table.HeadCell>
-                    <Table.HeadCell className='text-center'>Remove</Table.HeadCell>
-                  </Table.Head>
+                  <TableHead className="bg-TitaniumWhite dark:bg-TranquilBlack">
+                    <TableHeadCell className='text-center'>Item</TableHeadCell>
+                    <TableHeadCell className='text-center'>Rate</TableHeadCell>
+                    <TableHeadCell className='text-center'>Discount</TableHeadCell>
+                    <TableHeadCell className='text-center'>Qty</TableHeadCell>
+                    <TableHeadCell className='text-center'>Sub Total</TableHeadCell>
+                    <TableHeadCell className='text-center'>GST</TableHeadCell>
+                    <TableHeadCell className='text-center'>Total Amount</TableHeadCell>
+                    <TableHeadCell className='text-center'>Remove</TableHeadCell>
+                  </TableHead>
 
-                  <Table.Body className="divide-y divide-WhiteMarble bg-White dark:divide-TranquilBlack dark:bg-Cosmos">
+                  <TableBody className="divide-y divide-WhiteMarble bg-White dark:divide-TranquilBlack dark:bg-Cosmos">
                     {cartItems && cartItems.map((item: any, k: any) => (
-                      <Table.Row key={k} className="hover:bg-TitaniumWhite dark:hover:bg-TranquilBlack py-2">
-                        <Table.Cell style={{ padding: "10px" }} className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White w-[18rem] max-w-[18rem] truncate">
+                      <TableRow key={k} className="hover:bg-TitaniumWhite dark:hover:bg-TranquilBlack py-2">
+                        <TableCell style={{ padding: "10px" }} className="whitespace-nowrap text-base font-medium text-DarkBackground dark:text-White w-[18rem] max-w-[18rem] truncate">
                           <div> {item?.name?.englishname}  </div>
                           <div className='text-[0.8rem] mt-1'>( {item?.packaging} {item?.packagingtype?.type_eng} ) </div>
-                        </Table.Cell>
-                        <Table.Cell style={{ padding: "10px" }} className="whitespace-nowrap font-normal text-DarkBackground dark:text-White text-center"> {item?.price} </Table.Cell>
-                        <Table.Cell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {item?.discount} </Table.Cell>
-                        <Table.Cell style={{ padding: "10px" }} className="whitespace-nowrap font-normal text-DarkBackground dark:text-White text-center"> 
+                        </TableCell>
+                        <TableCell style={{ padding: "10px" }} className="whitespace-nowrap font-normal text-DarkBackground dark:text-White text-center"> {item?.price} </TableCell>
+                        <TableCell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {item?.discount} </TableCell>
+                        <TableCell style={{ padding: "10px" }} className="whitespace-nowrap font-normal text-DarkBackground dark:text-White text-center"> 
                           <Input className='w-[3rem] px-2 py-2 rounded-xl dark:bg-Cosmos' value={productQty[item._id] ?? "1"} defaultValue={1} onChange={(e) => ProductQtychange(item._id, e.target.value)}  onBlur={() => handleQtyBlur(item._id)}  inputMode="numeric" />   
-                          </Table.Cell>
-                        <Table.Cell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {Math.round((item.price - item.discount) * (Number(productQty[item._id] || 1)))}  </Table.Cell>
-                        <Table.Cell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {Math.round(((item.price - item.discount) * (Number(productQty[item._id] || 1))) * (item?.s_gst * 2 / 100))}  </Table.Cell>
-                        <Table.Cell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {Math.round((((item.price - item.discount) * (Number(productQty[item._id] || 1))) + (((item.price - item.discount) * (Number(productQty[item._id] || 1))) * (item?.s_gst * 2 / 100))))} </Table.Cell>
-                        <Table.Cell style={{ padding: "10px" }} className="space-x-2 whitespace-nowrap"> <div className="flex items-center gap-x-2 bg-red-500 hover:bg-red-600 text-WhiteMarble px-1 py-1 rounded-lg cursor-pointer" onClick={() => handleRemoveCall(item?._id)}>  <HiTrash className="text-lg" /> Remove </div>  </Table.Cell>
-                      </Table.Row>
+                          </TableCell>
+                        <TableCell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {Math.round((item.price - item.discount) * (Number(productQty[item._id] || 1)))}  </TableCell>
+                        <TableCell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {Math.round(((item.price - item.discount) * (Number(productQty[item._id] || 1))) * (item?.s_gst * 2 / 100))}  </TableCell>
+                        <TableCell style={{ padding: "10px" }} className="whitespace-nowrap font-medium text-DarkBackground dark:text-White text-center"> {Math.round((((item.price - item.discount) * (Number(productQty[item._id] || 1))) + (((item.price - item.discount) * (Number(productQty[item._id] || 1))) * (item?.s_gst * 2 / 100))))} </TableCell>
+                        <TableCell style={{ padding: "10px" }} className="space-x-2 whitespace-nowrap"> <div className="flex items-center gap-x-2 bg-red-500 hover:bg-red-600 text-WhiteMarble px-1 py-1 rounded-lg cursor-pointer" onClick={() => handleRemoveCall(item?._id)}>  <HiTrash className="text-lg" /> Remove </div>  </TableCell>
+                      </TableRow>
                     ))}
-                  </Table.Body>
+                  </TableBody>
                 </Table>
               </div>
 
@@ -320,7 +320,7 @@ const CartList : FC<Cartprops> = ({setCartOpen,CartData, handleRemoveCall, setCa
                   <div className="border border-SoothingBlueGrey dark:border-Hydrocarbon dark:bg-Cosmos p-4 rounded-xl flex flex-col gap-y-4">
                     {cartOrderid ?<div className="border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full gap-3 hover:bg-indigo-800 transition flex text-center cursor-pointer transition-all duration-500 ease-in-out" onClick={() => OrderplaceCall("cancel", "future" )}> <BsCartXFill   className="self-center h-5 w-5" /> Cancel Order </div> : null}
                     <div className="border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full gap-3 hover:bg-indigo-800 transition flex  cursor-pointer transition-all duration-500 ease-in-out" onClick={() => OrderplaceCall("extend",  "future" )}> <FaGhost className="self-center h-5 w-5" /> Future Order </div>
-                    <div className="border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full gap-3 hover:bg-indigo-800 transition flex  cursor-pointer transition-all duration-500 ease-in-out" onClick={() => OrderplaceCall("confirm", "confirm" )}> <FaCartShopping className="self-center h-5 w-5" /> Place Order </div>
+                    <div className="border border-indigo-500 text-indigo-500 dark:text-White hover:text-TitaniumWhite font-semibold px-6 py-2 rounded-full gap-3 hover:bg-indigo-800 transition flex  cursor-pointer transition-all duration-500 ease-in-out" onClick={() => OrderplaceCall("confirm", "confirm" )}> <FaShoppingCart className="self-center h-5 w-5" /> Place Order </div>
                   </div>
                 </div>
               </div>

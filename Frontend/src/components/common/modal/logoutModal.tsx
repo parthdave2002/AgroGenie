@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Button, Label, Modal } from "flowbite-react";
+import { Button, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "flowbite-react";
 import Select from "react-select";
 import { Form, FormFeedback, Input } from 'reactstrap';
 import { useFormik } from "formik";
@@ -140,8 +140,8 @@ const LogoutModal : FC <PoropsData> = ({openModal, handleClose, handleAccept}) =
             onSubmit={(e) => { e.preventDefault(); 
             validation.handleSubmit(); 
             }} >   
-              <Modal.Header className='text-[1rem] font-bold'>Add Taglog</Modal.Header>
-              <Modal.Body>
+              <ModalHeader className='text-[1rem] font-bold'>Add Taglog</ModalHeader>
+              <ModalBody>
                     <div className="space-y-6">
                        <div className='flex-1'>
                                     <Label htmlFor="taglog"> Taglog <span className='text-red-500'>*</span></Label>
@@ -205,11 +205,11 @@ const LogoutModal : FC <PoropsData> = ({openModal, handleClose, handleAccept}) =
                                     </div>
                                   </div>
                     </div>
-              </Modal.Body>
-              <Modal.Footer className='py-2 flex gapx-3 justify-end'>
-                <Button type='submit' className='w-[8rem] bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0'> <div className="flex items-center gap-x-3 text-[1.2rem]">  <FaUserTag  className='text-xl'  />  Submit  </div> </Button>
-                <Button color="gray" className='w-[8rem]' onClick={() => handleClose()}> Close  </Button>
-              </Modal.Footer>
+              </ModalBody>
+              <ModalFooter className='py-2 flex gapx-3 justify-end'>
+                <Button type='submit' className='w-[8rem] PinkButton border-0'> <div className="flex items-center gap-x-3 text-[1.2rem]">  <FaUserTag  className='text-xl'  />  Submit  </div> </Button>
+                <Button color="gray"  className='w-[8rem]' onClick={() => handleClose()}> Close  </Button>
+              </ModalFooter>
             </Form>
       </Modal>
     </>

@@ -7,6 +7,7 @@ import { DeleteWarehouselist,  getWarehouselist } from "../../Store/actions";
 import UseAccessList from "../../hooks/useAccessList";
 import { FaExchangeAlt, FaExclamationCircle } from "react-icons/fa";
 const DeleteModalPage = lazy(() => import("../../components/common/modal/deleteModal"));
+const ChangeStausModal = lazy(() => import("../../components/common/modal/changeStatusModal"));
 const ToastMessage = lazy(() => import("../../components/common/toastmessage/ToastMessage"));
 const ExamplePagination = lazy(() => import("../../components/common/pagination/pagination"));
 const ExampleBreadcrumb = lazy(() => import("../../components/common/breadcrumb/breadcrumb"));
@@ -84,10 +85,18 @@ const WarehousePage: FC = function () {
     };
   // -------  Delete Code End ---------------
 
-  const ChangestatusFuncall = (id:any) =>{
-    let requserdata = { id: id};
-    dispatch(DeleteWarehouselist(requserdata)); 
-  }
+    const [ confirmationModal, setConfirmationModal ] = useState(false);
+    const [ changeStausid, setChangeStatusid ] = useState("")
+    const ChangestatusFuncall = (id: any) =>{
+      setConfirmationModal(true);
+      setChangeStatusid(id)
+    }
+    const ChangestatusCall = () =>{
+      let requserdata = { id: changeStausid};
+      dispatch(DeleteWarehouselist(requserdata)); 
+      setConfirmationModal(false);
+      setChangeStatusid("")
+    }
 
   const OpenAddModel = () =>{
     navigate("/warehouse/add")
@@ -97,7 +106,7 @@ const WarehousePage: FC = function () {
     navigate(`/warehouse/details/${id}`)
   }
 
-  let Name = "Warehouse List";
+  let Name = "Warehouse";
   let Searchplaceholder = "Search For Warehouse (Name)";
   let AddAccess = accessList?.add;
 
@@ -112,9 +121,9 @@ const WarehousePage: FC = function () {
       label: "Actions",
       render: (row: any) => (
         <div className="flex items-center gap-x-3">
-          {accessList?.edit ? <Button gradientDuoTone="greenToBlue" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
-          {/* {accessList?.delete && <Button gradientDuoTone="purpleToPink" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Warehouse </div> </Button>} */}
-           <Button gradientDuoTone="purpleToBlue" onClick={() => DetailsWarehouseCall(row._id)} > <div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Warehouse </div> </Button>
+          {accessList?.edit ? <Button className="PurpleButton" onClick={() => ChangestatusFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton min-w-[5rem] text-center font-semibold"> <FaExchangeAlt className="text-lg font-semibold" />  Change status </div> </Button> : null}
+          {/* {accessList?.delete && <Button className="PinkButton" onClick={() => DeleteFuncall(row?._id)}><div className="flex items-center gap-x-2 deletebutton"> <HiTrash className="text-lg" />  Delete  Warehouse </div> </Button>} */}
+           <Button className="PurpleButton" onClick={() => DetailsWarehouseCall(row._id)} > <div className="flex items-center gap-x-2 deletebutton"> <FaExclamationCircle className="text-lg" /> Detail Warehouse </div> </Button>
         </div>
       ),
     },
@@ -133,6 +142,13 @@ const WarehousePage: FC = function () {
             <DeleteModalPage  isOpenDelteModel={isOpenDelteModel}  name={"Warehouse"} setisOpenDelteModel={setisOpenDelteModel}  DelCall={Deletewarehouse} />
           </Suspense>
         )}
+
+        {confirmationModal && (
+          <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-Cosmos bg-opacity-75 z-50"> <div className="text-White">Loading...</div> </div>}>
+            <ChangeStausModal confirmationModal={confirmationModal} setConfirmationModal={setConfirmationModal} ConfirmCall={ChangestatusCall} />
+          </Suspense>
+        )}
+
         <ToastMessage />           
     </>
   );

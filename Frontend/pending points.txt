@@ -5,9 +5,10 @@
 => add module in accessbase
 => Chating app ( for sales and admin)  // inprogress
 => Payment gateway for online Order  
+=> role list page and do that accessbase  ( Admin -> Role List )
+=> Animation modal after profile completed, order, referral, 
 
-============================== Admin panel Task =========================
-=> Add noticeboard in role list page and do that accessbase  ( Admin -> Role List )
+usercateogrylist check change status Modal
 
 ============================ Add new role : =============================== 
 Team Leader 
@@ -50,29 +51,31 @@ Wallet  :   Wallet Design : Done
 			wallet amount deduction : Done 
 			when point amount more then order amount. customer wallet point deduction : Done
 			after success order update cookies data of wallet.
+                  Admin panel	admin can add referral point 
+                  Admin customer list: show wallet history. 
+                  same as in farmer dashboard show wallet history.
 
 Referral Lead Show in Admin panel.
 Referral Lead show on lead manager.
 
-184 file Changes ================
+Warehouse : Product link with warehouse
+            Warehouse deatils page show available product in warehouse
+
+Update frontend packages and update design changes
+change status :  add Confirmation modal for all pages when change status 
+
+=========================================================================
 
 =================== file changes ===================
-Backend : helper, modules (customer, lead, order, wallet) , schema(customer,lead, order, wallet), routes
-Frontend : src , tailwind.config.cjs
-Website  : src , tailwind.config.cjs
+Backend :  modules, middleware , schema, routes
+Frontend : src, 
 
 ================================================ Changes Pending  =================================
 
 Offer	"Dist, Taluka, Village, State, Land, Crop, Referral, Total confirm Order Amount, Successfull order, 
 Complain, New Farmer (0$ purchase)"
 
-Wallet : how to add wallet points 
-		 wallet rules manage ( single or both). ( referee and referrer)	
-
 Farmer Dashboard show Offers list beside Referral
-	
-Admin panel	admin can add referral point 
-	admin can add offers based on filters
 
 ===========================Flow ========================
 Flow : 

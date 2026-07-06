@@ -1,5 +1,5 @@
 import { lazy, FC, useEffect, useState } from "react";
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckCustomerExist, getSalesComplainlist, ResetComplainlist } from "../../Store/actions";
 import moment from "moment";

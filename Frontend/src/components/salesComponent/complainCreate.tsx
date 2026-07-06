@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Button, Label, Modal } from 'flowbite-react';
+import { Button, Label, Modal, ModalHeader } from 'flowbite-react';
 import { Form, Input, FormFeedback } from "reactstrap";
 import Select from "react-select";
 import { useFormik } from 'formik';
@@ -161,7 +161,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
   return (
     <>
         <Modal onClose={() => setisOpenComplainCreateModel(false)} show={isOpenComplainCreateModel} size="6xl" className="backdrop-blur-sm p-3" >
-            <Modal.Header> <div className='text-[2rem] dark:text-WhiteMarble font-bold'> Complain Create  </div>   </Modal.Header>
+            <ModalHeader> <div className='text-[2rem] dark:text-WhiteMarble font-bold'> Complain Create  </div>   </ModalHeader>
             <div className='p-3'>
                 <Form onSubmit={(e) => { e.preventDefault(); validation.handleSubmit(); return false; }} >
                     <div className='my-[2rem] mx-[1rem] '>
@@ -253,7 +253,7 @@ const ComplainCreate : FC <ComplainCreateProps> = ({setisOpenComplainCreateModel
                                 </div>
                             </div>
 
-                        <div className=' justify-end flex'><Button type='submit' className='mt-3 bg-gradient-to-br from-green-400 to-blue-600 text-White hover:bg-gradient-to-bl border-0 text-[1.2rem]' > <div className="flex items-center gap-x-3"> <FaAddressCard className="text-xl" /> Create Complain  </div></Button> </div>
+                        <div className=' justify-end flex'><Button type='submit' className='mt-3 GreenButton border-0 text-[1.2rem]' > <div className="flex items-center gap-x-3"> <FaAddressCard className="text-xl" /> Create Complain  </div></Button> </div>
                     </div>
                 </Form>
             </div>

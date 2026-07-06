@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Button, Card, Checkbox, Label, Modal } from "flowbite-react";
+import { Button, Card, Checkbox, Label, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import type { FC } from "react";
 import LOGO from "/images/authentication/logo.webp";
 import { useEffect, useState } from "react";
@@ -79,12 +79,10 @@ const SignInPage: FC = function () {
     setisLoading(false)
     if (Login == true) {  
       validation.resetForm();
-      if(LoginRols !== "admin" ){
+      if(!["admin", "superadmin"].includes(LoginRols)){
         navigate("/sales-crm");
-        location.reload();
       }
       else if( LoginRols == "admin"){
-        console.log(LoginUserRole)
         switch (LoginUserRole) {
           case "6a06c4b734e0d36b60eb13f3":
             navigate("/team-leader");
@@ -96,10 +94,12 @@ const SignInPage: FC = function () {
 
           default:
             navigate("/dashboard");
+            break;
         }
+      }else {
         navigate("/dashboard");
-        location.reload();
       }
+      location.reload();
     }else if(error){
         validation.resetForm();
         dispatch(resetinsertlogin());
@@ -128,7 +128,7 @@ const SignInPage: FC = function () {
     useEffect(()=>{
       const role = Cookies.get("userType");
       const token = Cookies.get("token");
-      if(token  && role  == "admin" || token  && role == "subadmin"){
+      if(token  && role  == "admin" || token  && role == "subadmin" || token && role == "superadmin"){
           navigate("/dashboard");
       }else if(token  && role == "csr" || token  && role == "sales_executive" || token  && role == "lead_manager"){
         navigate("/sales-crm");
@@ -229,15 +229,15 @@ const SignInPage: FC = function () {
         </Card>
 
         <Modal onClose={() => setisOpenDelteModel(false)}  show={isOpenDelteModel} size="md">
-            <Modal.Header className="px-6 pt-6 pb-0"> <span className="sr-only"> Send Email to admin</span></Modal.Header>
-              <Modal.Body className="px-6 pt-0 pb-6">
+            <ModalHeader className="px-6 pt-6 pb-0"> <span className="sr-only"> Send Email to admin</span></ModalHeader>
+              <ModalBody className="px-6 pt-0 pb-6">
                   <div className="flex flex-col items-center gap-y-6 text-center">  <p className="text-xl text-SharkGray"> Are you sure? You want  to send email to admin? </p>
                       <div className="flex items-center gap-x-3">
                           <Button color="failure"   onClick={() => LostPassword()}>  Yes, I'm sure </Button> 
                           <Button color="gray"  onClick={() => setisOpenDelteModel(false)}> No, cancel </Button> 
                       </div>
                   </div>
-              </Modal.Body>
+              </ModalBody>
         </Modal>
         <ToastMessage />
       </div>

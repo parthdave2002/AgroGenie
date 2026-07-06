@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import Select from "react-select";
-import { Label, Modal, Button } from "flowbite-react";
+import { Label, Modal, Button, ModalHeader, ModalBody } from "flowbite-react";
 import { Form, FormFeedback } from "reactstrap";
 import { addleavelist, getUserlist } from '../../Store/actions';
 import * as Yup from "yup";
@@ -145,10 +145,10 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
   return (
     <div>
       <Modal onClose={() => CloseProfile()} show={confirmationModal} size="2xl">
-        <Modal.Header className="px-6 pt-3 pb-0">
+        <ModalHeader className="px-6 pt-3 pb-0">
           <div> Request Leave </div>
-        </Modal.Header>
-        <Modal.Body className="px-6 pt-0 pb-6">
+        </ModalHeader>
+        <ModalBody className="px-6 pt-0 pb-6">
           <Form
             onSubmit={(e) => {
               e.preventDefault();
@@ -289,7 +289,7 @@ const LeaveAdd: FC<LeavePropsData>= ({CloseProfile, confirmationModal, type}) =>
               <Button className="bg-deletebutton hover:bg-deletebutton dark:bg-deletebutton dark:hover:bg-deletebutton" onClick={() => CloseProfile()}> Close </Button>
             </div>
           </Form>
-        </Modal.Body>
+        </ModalBody>
       </Modal>
     </div>
   );

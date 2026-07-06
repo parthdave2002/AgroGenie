@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const walletRulesSchema = new Schema({
-    event_type: { type: String, enum: [ 'CUSTOMER_REGISTERED', 'REFERRAL_SUCCESS', 'ORDER_COMPLETED', 'FIRST_ORDER_COMPLETED', 'PROFILE_COMPLETED', 'BIRTHDAY_REWARD', 'REVIEW_ADDED'],  required: true},
+    event_type: { type: String, enum: [ 'CUSTOMER_REGISTERED', 'REFERRAL_SUCCESS', 'ORDER_COMPLETED', 'FIRST_ORDER_COMPLETED', 'PROFILE_COMPLETED', 'BIRTHDAY_REWARD', 'REVIEW_ADDED', 'ADMIN_ADDED' ],  required: true},
     reward_receiver: { type: String, enum: [ 'CUSTOMER', 'REFERRER', 'REFERRED_USER',  'BOTH' ]},
     reward_type: { type: String,enum: ['FIXED','PERCENTAGE' ], default: 'FIXED'},
     min_order_amount: { type: Number, default: 0},
